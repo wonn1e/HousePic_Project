@@ -22,6 +22,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".room.UserRoomInfoActivity"
+            android:label="@string/title_activity_room_info" >
+        </activity>
+        <activity
+            android:name="com.tacademy.penthouse.room.MyRoomInfoActivity"
+            android:label="@string/title_activity_my_room_info" >
+        </activity>
     </application>
 
 </manifest>
