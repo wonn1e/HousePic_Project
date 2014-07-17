@@ -3,5 +3,7 @@
 
     <string name="app_name">PentHouse</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_room_info">RoomInfoActivity</string>
+    <string name="title_activity_my_room_info">MyRoomInfoActivity</string>
 
 </resources>
