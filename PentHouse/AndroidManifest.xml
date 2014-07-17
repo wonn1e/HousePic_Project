@@ -30,6 +30,7 @@
             android:name="com.tacademy.penthouse.room.MyRoomInfoActivity"
             android:label="@string/title_activity_my_room_info" >
         </activity>
+        <activity android:name=".house.HouseActivity"></activity>
     </application>
 
 </manifest>
