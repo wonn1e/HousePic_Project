@@ -9,6 +9,8 @@ public class ItemData {
 	String brand;
 	String price;
 	String material;
-	String theme;
+	String[] theme;
 	int likeCnt;
+	String sort_category;
+	String []item_img;
 }
