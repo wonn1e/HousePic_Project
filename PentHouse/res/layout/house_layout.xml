@@ -10,7 +10,7 @@
         android:layout_height="wrap_content" >
 
         <TextView
-            android:id="@+id/nickname_textview"
+            android:id="@+id/user_nickname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
@@ -28,7 +28,7 @@
             android:src="@drawable/ic_launcher" />
 
         <TextView
-            android:id="@+id/housename_textview"
+            android:id="@+id/house_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="280dp"
@@ -38,7 +38,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
-            android:id="@+id/houseinfo_textview"
+            android:id="@+id/house_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
@@ -49,7 +49,7 @@
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <Button
-            android:id="@+id/setting_btn"
+            android:id="@+id/edit_btn"
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
