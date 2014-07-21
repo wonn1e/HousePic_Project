@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.tacademy.penthouse.R;
 import com.tacademy.penthouse.entity.ItemData;
 
@@ -36,11 +35,11 @@ public class RankItemView extends FrameLayout {
 
 	public void setRankItemData(ItemData data){
 		iData = data;
-		item_img.setImageResource(resId);
+//		item_img.setImageResource(resId);
 		item_rank.setImageResource(R.drawable.ic_launcher);
 		item_name.setText(data.item_name);
 		item_price.setText(data.price);
 		item_like_num.setText(data.likeCnt);
-		item_like.setImageResource(resId);
+//		item_like.setImageResource(resId);
 	}
 }

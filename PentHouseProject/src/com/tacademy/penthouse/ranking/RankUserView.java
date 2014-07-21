@@ -36,7 +36,7 @@ public class RankUserView extends FrameLayout {
 	
 	public void setRankUserData(UserData data){
 		uData = data;
-		user_img.setImageResource(data.user_img);
+//		user_img.setImageResource(data.user_img);
 		show_rank.setImageResource(R.drawable.ic_launcher);
 		user_nickname.setText(data.user_nickname);
 		follower_num.setText(data.follower_cnt);

@@ -15,7 +15,6 @@ public class RoomData implements Parcelable{
 	public String room_img;
 	public String room_info;
 	public Date passedtime;
-	public String time;
 	public boolean isPublic;
 	
 	public RoomData(){}
@@ -27,22 +26,23 @@ public class RoomData implements Parcelable{
 		room_img = p.readString();
 		room_info = p.readString();
 		passedtime = new Date(p.readLong());
-		passedtime.toString() = p.readString();
-		time
-		isPublic = p.readBooleanArray(val)
-		p.
+		isPublic = p.readByte() != 0;
 	}
 
 	@Override
 	public int describeContents() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
-		// TODO Auto-generated method stub
+		dest.writeInt(house_num);
+		dest.writeInt(room_num);
+		dest.writeString(room_name);
+		dest.writeString(room_img);
+		dest.writeString(room_info);
 		dest.writeLong(passedtime.getTime());
+		dest.writeByte((byte)(isPublic ? 1:0));
 	}
 	
 	public static Parcelable.Creator<UserData> CREATOR = new Parcelable.Creator<UserData>() {
