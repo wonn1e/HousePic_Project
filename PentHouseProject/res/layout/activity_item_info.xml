@@ -7,7 +7,7 @@
     tools:context="${relativePackage}.${activityClass}" >
 
     <com.meetme.android.horizontallistview.HorizontalListView
-        android:id="@+id/horizontalListView1"
+        android:id="@+id/item_hlv"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_marginLeft="5dp"
@@ -26,14 +26,14 @@
             android:layout_height="wrap_content" >
 
             <TextView
-                android:id="@+id/textView1"
+                android:id="@+id/item_name_brand"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="100"
                 android:text="제품명/브랜드" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/item_like_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
@@ -42,7 +42,7 @@
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
             <ImageView
-                android:id="@+id/imageView1"
+                android:id="@+id/item_like"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
@@ -56,21 +56,21 @@
             android:layout_height="wrap_content" >
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/item_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="100"
-                android:text="TextView" />
+                android:text="Price" />
 
             <Button
-                android:id="@+id/button1"
+                android:id="@+id/item_share_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="100"
                 android:text="공유" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/item_buy_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="100"
@@ -78,13 +78,13 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/item_material"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="소재" />
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/item_size"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="사이즈" />
@@ -93,7 +93,7 @@
             android:id="@+id/textView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="유사상품" />
+            android:text="유사상품  더보기" />
 
     </LinearLayout>
 

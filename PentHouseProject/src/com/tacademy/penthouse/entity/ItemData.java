@@ -4,17 +4,17 @@ public class ItemData{
 	//RoomData rd = new RoomData();
 	//int room = rd.room_num;
 	
-	int room_num;
+	public int room_num;
 	
-	int item_code;
-	String sort_code;
-	String item_name;
+	public int item_code;
+	public String sort_code;
+	public String item_name;
 	//String item_url;
-	String brand;
-	String price;
-	String material;
-	String[]theme;
-	int likeCnt;
-	String sort_category;
-	String []item_img;
+	public String brand;
+	public String price;
+	public String material;
+	public String[]theme;
+	public int likeCnt;
+	public String sort_category;
+	public int []item_img;
 }
