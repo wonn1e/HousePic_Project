@@ -16,7 +16,7 @@ public class EditUserNickname extends DialogFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setStyle(DialogFragment.STYLE_NO_TITLE, R.style.UserNickname);
+		setStyle(android.app.DialogFragment.STYLE_NO_TITLE, R.style.UserNickname);
 	}
 	
 	@Override
