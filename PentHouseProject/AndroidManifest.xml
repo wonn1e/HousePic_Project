@@ -24,6 +24,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ranking.RankingActivity"></activity>
+        <activity android:name=".house.HouseActivity"></activity>
         <activity
             android:name=".search.SearchActivity"
             android:label="@string/title_activity_search" >
