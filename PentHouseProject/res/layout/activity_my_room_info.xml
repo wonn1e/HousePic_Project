@@ -7,7 +7,7 @@
     tools:context="${relativePackage}.${activityClass}" >
 
     <ImageView
-        android:id="@+id/imageView1"
+        android:id="@+id/room_img"
         android:layout_width="match_parent"
         android:layout_height="200dp"
 
@@ -25,21 +25,21 @@
             android:orientation="vertical" >
 
             <TextView
-                android:id="@+id/textView1"
+                android:id="@+id/room_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="RoomName"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/room_update_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Update time"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/room_intro"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Intro" />
@@ -49,13 +49,13 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/room_product_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="ProductList" />
 
     <GridView
-        android:id="@+id/gridView1"
+        android:id="@+id/room_item_gridview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:numColumns="2" >

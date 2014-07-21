@@ -1,4 +1,4 @@
-package com.tacademy.penthouse.item;
+package com.tacademy.penthouse.room;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,9 +9,9 @@ import android.widget.TextView;
 import com.tacademy.penthouse.R;
 import com.tacademy.penthouse.entity.ItemData;
 
-public class ItemDetailView extends FrameLayout{
+public class ItemView extends FrameLayout{
 
-	public ItemDetailView(Context context) {
+	public ItemView(Context context) {
 		super(context);
 		init();
 	}
@@ -21,15 +21,16 @@ public class ItemDetailView extends FrameLayout{
 	TextView item_name;
 	ImageView item_like;
 	TextView item_price;
+	
 	private void init(){
-		LayoutInflater.from(getContext()).inflate(R.layout.item_detail_view, this);
+		LayoutInflater.from(getContext()).inflate(R.layout.item_view, this);
 		item_img = (ImageView)findViewById(R.id.item_img);
 		item_name = (TextView)findViewById(R.id.item_name);
 		item_like = (ImageView)findViewById(R.id.item_like);
 		item_price = (TextView)findViewById(R.id.item_price);		
 	}
 	
-	public void setData(ItemData data){
+	public void setItemData(ItemData data){
 	
 		
 	}
