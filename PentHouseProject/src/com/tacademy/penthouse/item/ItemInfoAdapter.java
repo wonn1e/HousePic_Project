@@ -9,11 +9,11 @@ import android.widget.BaseAdapter;
 
 import com.tacademy.penthouse.entity.ItemData;
 
-public class ItemImageAdapter extends BaseAdapter{
+public class ItemInfoAdapter extends BaseAdapter{
 
 	ArrayList<ItemData> items = new ArrayList<ItemData>();
 	Context mContext;
-	public ItemImageAdapter(Context context){
+	public ItemInfoAdapter(Context context){
 		mContext = context;
 	}
 	public void add(ItemData data){
@@ -40,15 +40,14 @@ public class ItemImageAdapter extends BaseAdapter{
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		ItemImageView v;
+		ItemInfoView v;
 		if(convertView == null){
-			v = new ItemImageView(mContext);	
+			v = new ItemInfoView(mContext);	
 		}else{
-			v = (ItemImageView)convertView;
+			v = (ItemInfoView)convertView;
 		}
 		v.setItemImageData(items.get(position));
 		return v;
 	}
 
-	
 }
