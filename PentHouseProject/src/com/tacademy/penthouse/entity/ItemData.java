@@ -1,8 +1,9 @@
 package com.tacademy.penthouse.entity;
 
-public class ItemData{
-	//RoomData rd = new RoomData();
-	//int room = rd.room_num;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class ItemData implements Parcelable {
 	
 	public int room_num;
 	
@@ -17,4 +18,58 @@ public class ItemData{
 	public int likeCnt;
 	public String sort_category;
 	public int []item_img;
+	
+	public ItemData(){}
+	
+	public ItemData(Parcel p){
+		room_num = p.readInt();
+		item_code = p.readInt();
+		sort_code = p.readString();
+		item_name = p.readString();
+		brand = p.readString();
+		price = p.readString();
+		material = p.readString();
+		int length = p.readInt();
+		theme = new String[length];
+		p.readStringArray(theme);
+		likeCnt = p.readInt();
+		sort_category = p.readString();
+		int item_cnt = p.readInt();
+		item_img = new int[item_cnt];
+		p.readIntArray(item_img);
+	}
+
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeInt(room_num);
+		dest.writeInt(item_code);
+		dest.writeString(sort_code);
+		dest.writeString(item_name);
+		dest.writeString(brand);
+		dest.writeString(price);
+		dest.writeString(material);
+		dest.writeInt(theme.length);
+		dest.writeStringArray(theme);
+		dest.writeInt(likeCnt);
+		dest.writeString(sort_category);
+		dest.writeInt(item_img.length);
+		dest.writeIntArray(item_img);
+	}
+	public static Parcelable.Creator<ItemData> CREATOR = new Parcelable.Creator<ItemData>() {
+		@Override
+		public ItemData[] newArray(int size) {
+			return new ItemData[size];
+		}
+
+		@Override
+		public ItemData createFromParcel(Parcel source) {
+			// TODO Auto-generated method stub
+			return new ItemData(source);
+		}
+	};
 }
