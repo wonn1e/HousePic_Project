@@ -2,6 +2,7 @@ package com.tacademy.penthouse.item;
 
 import com.meetme.android.horizontallistview.HorizontalListView;
 import com.tacademy.penthouse.R;
+import com.tacademy.penthouse.R.id;
 import com.tacademy.penthouse.R.layout;
 
 import android.app.Activity;
@@ -18,7 +19,7 @@ public class ItemInfoActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_item_info);
-		HorizontalListView hlv_item;
+		
 		HorizontalListView hlv_s_item;
 		
 		TextView item_name_brand;
@@ -29,5 +30,17 @@ public class ItemInfoActivity extends Activity {
 		Button item_buy_btn;
 		TextView item_material;
 		TextView item_size;
+		
+		item_name_brand = (TextView) findViewById(R.id.item_name);
+		item_like_count = (TextView) findViewById(R.id.item_like_count);
+		item_like = (ImageView)findViewById(R.id.item_like);
+		item_price = (TextView)findViewById(R.id.item_price);
+		item_share_btn = (Button)findViewById(R.id.item_share_btn);
+		item_buy_btn = (Button)findViewById(R.id.item_buy_btn);
+		item_material = (TextView)findViewById(R.id.item_material);
+		item_size = (TextView)findViewById(R.id.item_size);
+		
+		
+		
 	}
 }

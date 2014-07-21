@@ -6,5 +6,7 @@
     <string name="title_activity_room_info">RoomInfoActivity</string>
     <string name="title_activity_my_room_info">MyRoomInfoActivity</string>
     <string name="title_activity_item_info">ItemInfoActivity</string>
+    <string name="title_activity_search">SearchActivity</string>
+    <string name="title_activity_category_search">CategorySearchActivity</string>
 
 </resources>

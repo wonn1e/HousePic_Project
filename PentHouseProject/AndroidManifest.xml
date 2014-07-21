@@ -9,10 +9,11 @@
         android:targetSdkVersion="21" />
 
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" android:name="MyApplication">
+        android:theme="@style/AppTheme" >
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name" >
@@ -23,6 +24,14 @@
             </intent-filter>
         </activity>
         <activity android:name=".ranking.RankingActivity"></activity>
+        <activity
+            android:name=".search.SearchActivity"
+            android:label="@string/title_activity_search" >
+        </activity>
+        <activity
+            android:name="com.tacademy.penthouse.search.CategorySearchActivity"
+            android:label="@string/title_activity_category_search" >
+        </activity>
     </application>
 
 </manifest>
