@@ -3,7 +3,6 @@ package com.tacademy.penthouse.ranking;
 import java.util.ArrayList;
 
 import com.tacademy.penthouse.entity.UserData;
-import com.tacademy.penthouse.house.RankUserView;
 
 import android.content.Context;
 import android.view.View;

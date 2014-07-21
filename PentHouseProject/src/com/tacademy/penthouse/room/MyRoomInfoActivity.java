@@ -23,6 +23,14 @@ public class MyRoomInfoActivity extends Activity {
 		TextView room_product_list;
 		GridView room_item_gridview;
 		
+		room_img = (ImageView)findViewById(R.id.room_img);
+		room_name = (TextView)findViewById(R.id.room_name);
+		room_update_time = (TextView)findViewById(R.id.room_update_time); 
+		room_intro = (TextView)findViewById(R.id.room_intro);
+		room_product_list = (TextView)findViewById(R.id.room_product_list);
+		room_item_gridview = (GridView)findViewById(R.id.room_item_gridview);
+		
+		
 		
 		
 	}

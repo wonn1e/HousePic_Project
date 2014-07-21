@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.tacademy.penthouse.entity.ItemData;
-import com.tacademy.penthouse.house.RankItemView;
 
 public class RankItemAdapter extends BaseAdapter {
 	ArrayList<ItemData> list = new ArrayList<ItemData>();

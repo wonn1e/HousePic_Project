@@ -1,4 +1,4 @@
-package com.tacademy.penthouse.house;
+package com.tacademy.penthouse.ranking;
 
 import android.content.Context;
 import android.view.LayoutInflater;
