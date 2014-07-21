@@ -8,9 +8,9 @@ import android.widget.ImageView;
 import com.tacademy.penthouse.R;
 import com.tacademy.penthouse.entity.ItemData;
 
-public class ItemInfoView extends FrameLayout{
+public class SimillarInfoView extends FrameLayout{
 
-	public ItemInfoView(Context context) {
+	public SimillarInfoView(Context context) {
 		super(context);
 		init();
 	}
