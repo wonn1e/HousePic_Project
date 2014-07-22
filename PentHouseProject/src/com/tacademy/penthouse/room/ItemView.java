@@ -42,7 +42,7 @@ public class ItemView extends FrameLayout{
 	
 	
 	public void setItemData(ItemData data){
-	
+		
 		
 	}
 }
