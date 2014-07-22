@@ -14,6 +14,14 @@ public class HouseData implements Parcelable{
 	
 	public HouseData(){}
 	
+	public HouseData(int u_n, int h_num, String h_name, String h_intro, String h_img){
+		this.user_num = u_n;
+		this.house_num = h_num;
+		this.house_name = h_name;
+		this.house_intro = h_intro;
+		this.house_img = h_img;
+	}
+	
 	public HouseData(Parcel p){
 		user_num = p.readInt();
 		house_num = p.readInt();

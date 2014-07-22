@@ -1,39 +1,50 @@
 package com.tacademy.penthouse.house;
 
+import java.util.ArrayList;
+
+import com.tacademy.penthouse.entity.RoomData;
+
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 public class HouseRoomAdapter extends BaseAdapter {
-	
+	ArrayList<RoomData> list = new ArrayList<RoomData>();
 	Context mContext;
 	
 	public HouseRoomAdapter(Context c){
 		mContext = c;
 	}
+	
+	public void add(RoomData d){
+		list.add(d);
+		notifyDataSetChanged();
+	}
 
+	public void delete(RoomData d){
+		list.remove(d);
+		notifyDataSetChanged();
+	}
+	
 	@Override
 	public int getCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return list.size();
 	}
 
 	@Override
 	public Object getItem(int position) {
-		// TODO Auto-generated method stub
-		return null;
+		return list.get(position);
 	}
 
 	@Override
 	public long getItemId(int position) {
-		// TODO Auto-generated method stub
-		return 0;
+		return position;
 	}
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		// TODO Auto-generated method stub
+		//////////////////////////////////
 		return null;
 	}
 

@@ -4,7 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class UserData implements Parcelable{
-	int user_num;
+	public int user_num;
 	
 	public String user_id;
 	public String user_nickname;
@@ -13,7 +13,17 @@ public class UserData implements Parcelable{
 	public int follower_cnt;
 	public String user_img;
 	
-	public UserData(){}
+	public UserData(){	}
+	
+	public UserData(int user_num, String user_id, String user_nickname, String user_password, int following_cnt, int follower_cnt, String user_img){
+		this.user_id = user_id;
+		this.user_img = user_img;
+		this.user_nickname = user_nickname;
+		this.user_num = user_num;
+		this.user_password = user_password;
+		this.follower_cnt = follower_cnt;
+		this.following_cnt = following_cnt;
+	}
 	
 	public UserData(Parcel p){
 		user_num = p.readInt();
