@@ -15,7 +15,7 @@ public class MenuFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater,
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.menu_frame, container, false);
+		View v = inflater.inflate(R.layout.menu_fragment, container, false);
 		
 		TextView tv = (TextView)v.findViewById(R.id.my_page);
 		tv.setOnClickListener(new View.OnClickListener() {
