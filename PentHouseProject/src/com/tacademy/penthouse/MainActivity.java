@@ -1,8 +1,10 @@
 package com.tacademy.penthouse;
 
+
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 import com.tacademy.penthouse.slidingmenu.MenuFragment;
+
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -14,14 +16,12 @@ public class MainActivity extends SlidingFragmentActivity{
         setContentView(R.layout.activity_main);
         setBehindContentView(R.layout.menu_frame);
         if(savedInstanceState == null){
-        	getSupportFragmentManager().beginTransaction().replace(R.id.container,
-        			new MainFragment()).commit();
         	getSupportFragmentManager().beginTransaction().replace(R.id.menu_container, 
         			new MenuFragment()).commit();
         }
         
         SlidingMenu sm = getSlidingMenu();
-		sm.setMode(SlidingMenu.LEFT_RIGHT);
+		sm.setMode(SlidingMenu.LEFT);
 		sm.setShadowWidthRes(R.dimen.shadow_width);
 		sm.setShadowDrawable(R.drawable.shadow);
 		sm.setBehindOffsetRes(R.dimen.slidingmenu_offset);
@@ -32,6 +32,7 @@ public class MainActivity extends SlidingFragmentActivity{
 		setSlidingActionBarEnabled(false);
     }
     
+  
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
     	switch(item.getItemId()){
