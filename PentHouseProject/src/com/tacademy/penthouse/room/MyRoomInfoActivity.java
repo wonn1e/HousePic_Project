@@ -2,6 +2,9 @@ package com.tacademy.penthouse.room;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -32,6 +35,14 @@ public class MyRoomInfoActivity extends Activity {
 		
 		
 		
+		room_item_gridview.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				//Item의 상세정보 Activity로 이동!
+			}
+		});
 		
 	}
 }

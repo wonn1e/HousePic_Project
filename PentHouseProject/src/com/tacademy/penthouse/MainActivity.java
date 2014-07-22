@@ -30,8 +30,9 @@ public class MainActivity extends SlidingFragmentActivity{
 		
 		getSupportActionBar().setHomeButtonEnabled(true);
 		setSlidingActionBarEnabled(false);
+   
     }
-    
+
   
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -42,4 +43,5 @@ public class MainActivity extends SlidingFragmentActivity{
     	}
     	return super.onOptionsItemSelected(item);
     }
+
 }

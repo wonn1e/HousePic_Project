@@ -23,19 +23,19 @@ public class MenuFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 			//	((MainActivity)getActivity()).switchTwoFragment();
-				Toast.makeText(getActivity(), "to my page", Toast.LENGTH_SHORT).show();
+				//Toast.makeText(getActivity(), "to my page", Toast.LENGTH_SHORT).show();
 			}
 		});
 		
-		tv = (TextView)v.findViewById(R.id.show_recommendation); //to home page
-		tv.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				Toast.makeText(getActivity(), "to home page", Toast.LENGTH_SHORT).show();
-			}
-		});
-		
+//		tv = (TextView)v.findViewById(R.id.show_recommendation); //to home page
+//		tv.setOnClickListener(new View.OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				Toast.makeText(getActivity(), "to home page", Toast.LENGTH_SHORT).show();
+//			}
+//		});
+//		
 		
 		return v;
 	}
