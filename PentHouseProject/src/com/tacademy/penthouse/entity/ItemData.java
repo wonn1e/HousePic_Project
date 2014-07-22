@@ -1,16 +1,17 @@
 package com.tacademy.penthouse.entity;
 
+
 import android.os.Parcel;
 import android.os.Parcelable;
 
+
 public class ItemData implements Parcelable {
 	
-	public int room_num;
+	public int room_num ;
 	
 	public int item_code;
 	public String sort_code;
 	public String item_name;
-	//String item_url;
 	public String brand;
 	public String price;
 	public String material;
@@ -18,9 +19,29 @@ public class ItemData implements Parcelable {
 	public int likeCnt;
 	public String sort_category;
 	public int []item_img;
-	
+	//String item_url;
 	public ItemData(){}
-	
+	public ItemData(int room_num,int item_code,           
+	String sort_code ,     
+	String item_name ,     
+	String brand ,         
+	String price,          
+	String material,       
+	String[]theme,  
+	int likeCnt ,             
+	String sort_category,int []item_img  ){
+		this.room_num = room_num;
+		this.item_code = item_code ;           
+		this.sort_code = sort_code;     
+		this.item_name = item_name;     
+		this.brand = brand;         
+		this.price = price;          
+		this.material = material;       
+		this.theme = theme;  
+		this.likeCnt = likeCnt;             
+		this.sort_category = sort_category; 
+		this.item_img = item_img ; 
+	}
 	public ItemData(Parcel p){
 		room_num = p.readInt();
 		item_code = p.readInt();
