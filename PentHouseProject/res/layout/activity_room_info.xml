@@ -52,7 +52,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
-                android:id="@+id/u_room_updat_time"
+                android:id="@+id/u_room_update_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Update time"
@@ -75,7 +75,7 @@
         android:text="ProductList" />
 
     <GridView
-        android:id="@+id/u_room_time_gridview"
+        android:id="@+id/u_room_item_gridview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:numColumns="2" >
