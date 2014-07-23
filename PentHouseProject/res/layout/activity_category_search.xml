@@ -5,15 +5,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="${relativePackage}.${activityClass}" >
-
-    <TextView
+ <TextView
         android:id="@+id/textView1"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="카테고리" />
-
     <ListView
-        android:id="@+id/category_search_listview"
+        android:id="@+id/category_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
     </ListView>

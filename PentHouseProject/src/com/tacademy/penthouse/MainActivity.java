@@ -2,14 +2,23 @@ package com.tacademy.penthouse;
 
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTabHost;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.ActionBar;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TabHost;
 
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
+import com.tacademy.penthouse.search.CategorySearchActivity;
+import com.tacademy.penthouse.search.SearchResultActivity;
 import com.tacademy.penthouse.slidingmenu.MenuFragment;
 
 public class MainActivity extends SlidingFragmentActivity{
@@ -78,8 +87,55 @@ public class MainActivity extends SlidingFragmentActivity{
     	case android.R.id.home:
     		toggle();
     		break;
+    	case R.id.menu_search:
+			Intent i = new Intent(MainActivity.this, CategorySearchActivity.class);
+			startActivity(i);
+			//로 보낸다!
+			
+			break;
     	}
     	return super.onOptionsItemSelected(item);
     }
+    
+    ActionBar actionBar;
+	
+	String keyword;
+	EditText query;
+	Button submit;
+	
+	
+    @Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.main_menu, menu);
+		MenuItem item = menu.findItem(R.id.menu_search);
+		View v = (View)MenuItemCompat.getActionView(item);
+		query = (EditText)v.findViewById(R.id.editText1);
+		submit = (Button)v.findViewById(R.id.button1);
+		           
+	
+		
+
+//		view.setOnQueryTextListener(new OnQueryTextListener() {
+//			
+//			@Override
+//			public boolean onQueryTextSubmit(String keyword) {
+//				Toast.makeText(MainActivity.this, "keyword : " + keyword, Toast.LENGTH_SHORT).show();
+//				Intent i = new Intent(MainActivity.this, SearchResultActivity.class);
+//				i.putExtra("keyword", keyword);
+//				startActivity(i);
+//				
+//				return true;
+//			}
+//			
+//			@Override
+//			public boolean onQueryTextChange(String keyword) {
+//				// TODO Auto-generated method stub
+//				return false;
+//			}
+//		});
+		return true;
+	}
+	
+    
 
 }
