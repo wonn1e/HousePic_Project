@@ -12,7 +12,7 @@ public class RoomData implements Parcelable{
 	
 	public int room_num;
 	public String room_name;
-	public String room_img;
+	public int room_img;
 	public String room_info;
 	public Date passedtime;
 	public boolean isPublic;
@@ -23,7 +23,7 @@ public class RoomData implements Parcelable{
 		house_num = p.readInt();
 		room_num = p.readInt();
 		room_name = p.readString();
-		room_img = p.readString();
+		room_img = p.readInt();
 		room_info = p.readString();
 		passedtime = new Date(p.readLong());
 		isPublic = p.readByte() != 0;
@@ -39,7 +39,7 @@ public class RoomData implements Parcelable{
 		dest.writeInt(house_num);
 		dest.writeInt(room_num);
 		dest.writeString(room_name);
-		dest.writeString(room_img);
+		dest.writeInt(room_img);
 		dest.writeString(room_info);
 		dest.writeLong(passedtime.getTime());
 		dest.writeByte((byte)(isPublic ? 1:0));

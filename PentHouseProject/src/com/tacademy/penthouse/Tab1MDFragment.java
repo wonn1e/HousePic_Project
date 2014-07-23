@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 public class Tab1MDFragment extends Fragment {
 	
@@ -15,10 +16,14 @@ public class Tab1MDFragment extends Fragment {
 		
 	}
 	
+	ListView mdListView;
+	MDRoomAdapter mdAdapter;
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater,
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.tab1_md_layout, container, false);
+		mdListView = (ListView)v.findViewById(R.id.md_list);
 		
 		return v;
 	}
