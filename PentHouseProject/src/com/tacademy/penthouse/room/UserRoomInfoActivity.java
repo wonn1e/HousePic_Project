@@ -1,6 +1,7 @@
 package com.tacademy.penthouse.room;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -12,6 +13,8 @@ import android.widget.AdapterView.OnItemClickListener;
 
 import com.meetme.android.horizontallistview.HorizontalListView;
 import com.tacademy.penthouse.R;
+import com.tacademy.penthouse.entity.ItemData;
+import com.tacademy.penthouse.item.ItemInfoActivity;
 
 public class UserRoomInfoActivity extends Activity {
 
@@ -19,7 +22,12 @@ public class UserRoomInfoActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_room_info);
-		
+		//Dummy DAta
+		String[] t = {"aa","bb"};
+		int[] img = {R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher};
+		final ItemData[] iData = {new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img), new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img),new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img),new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img),new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img),
+				new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img),new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img)};
+
 
 		ImageView u_room_img;
 		TextView u_room_name;
@@ -53,6 +61,16 @@ public class UserRoomInfoActivity extends Activity {
 		});
 		
 		//닉네임도 할것인가! 두둥치
+		ItemAdapter iAdapter;
+		iAdapter = new ItemAdapter(this);
+		u_room_item_gridview.setAdapter(iAdapter);
+		for(int i = 0; i < iData.length; i++){
+			iAdapter.add(iData[i]);	
+		}
+		
+		
+		
+		
 		
 		u_room_item_gridview.setOnItemClickListener(new OnItemClickListener() {
 
@@ -60,7 +78,12 @@ public class UserRoomInfoActivity extends Activity {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				//Item의 상세정보 Activity로 이동!
+				Intent i = new Intent(UserRoomInfoActivity.this, ItemInfoActivity.class);
+				i.putExtra("iData", iData[position]);
+				startActivityForResult(i, 0);
+				
 			}
 		});
+
 	}
 }
