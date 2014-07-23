@@ -1,5 +1,6 @@
 package com.tacademy.penthouse.house;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
@@ -7,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.tacademy.penthouse.R;
+import com.tacademy.penthouse.editimgdialog.EditImgActivity;
 import com.tacademy.penthouse.entity.HouseData;
 import com.tacademy.penthouse.entity.UserData;
 
@@ -17,7 +19,7 @@ public class HouseActivity extends FragmentActivity {
 	public static final String TAG_NICKNAME = "nickname";
 	public static final String TAG_HOUSENAME = "housename";
 	public static final String TAG_HOUSEINTRO = "houseintro";
-
+	public static final int REQUEST_CODE_EDITIMG = 0;
 	
 	TextView user_nickname, house_name, house_intro;
 	ImageView user_img, house_img, edit_btn;
@@ -150,8 +152,8 @@ public class HouseActivity extends FragmentActivity {
 
 							@Override
 							public void onClick(View v) {
-								// TODO Auto-generated method stub
-
+								Intent i = new Intent(HouseActivity.this, EditImgActivity.class);
+								startActivityForResult(i, REQUEST_CODE_EDITIMG);
 							}
 						});
 						house_img.setEnabled(true);
@@ -178,5 +180,16 @@ public class HouseActivity extends FragmentActivity {
 		}else{
 			edit_btn.setVisibility(View.GONE);
 		}
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		
+		if(requestCode == REQUEST_CODE_EDITIMG && resultCode == EditImgActivity.RESULT_OK){
+			String imgBitmap = data.getStringExtra(EditImgActivity.PARAM_RESULT);
+			Toast.makeText(HouseActivity.this, "new img: " + imgBitmap, Toast.LENGTH_SHORT).show();
+		}
+		
 	}
 }
