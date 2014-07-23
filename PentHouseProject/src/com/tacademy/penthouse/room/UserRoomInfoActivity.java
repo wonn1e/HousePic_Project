@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
+import com.etsy.android.grid.StaggeredGridView;
 import com.meetme.android.horizontallistview.HorizontalListView;
 import com.tacademy.penthouse.R;
 import com.tacademy.penthouse.entity.ItemData;
@@ -28,7 +29,7 @@ public class UserRoomInfoActivity extends Activity {
 		final ItemData[] iData = {new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img), new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img),new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img),new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img),new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img),
 				new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img),new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img)};
 
-
+		
 		ImageView u_room_img;
 		TextView u_room_name;
 		TextView u_room_update_time;
@@ -37,26 +38,26 @@ public class UserRoomInfoActivity extends Activity {
 		TextView u_room_nickname;
 		
 		TextView u_room_product_list;
-		GridView u_room_item_gridview;
+		StaggeredGridView u_room_item_gridview;
+		View v = getLayoutInflater().inflate(R.layout.header_view_room_layout, null);
 		
-		
-		u_room_img = (ImageView)findViewById(R.id.u_room_img);
-		u_room_name = (TextView)findViewById(R.id.u_room_name);
-		u_room_update_time = (TextView)findViewById(R.id.u_room_update_time); 
-		u_room_intro = (TextView)findViewById(R.id.u_room_intro);
-		u_room_my_img = (ImageView)findViewById(R.id.u_room_my_img);
-		u_room_nickname = (TextView)findViewById(R.id.u_room_nickname);
-		u_room_product_list = (TextView)findViewById(R.id.u_room_product_list);
-		u_room_item_gridview = (GridView)findViewById(R.id.u_room_item_gridview);
-		
-		
-		
-		
+		u_room_img = (ImageView)v.findViewById(R.id.u_room_img);
+		u_room_name = (TextView)v.findViewById(R.id.u_room_name);
+		u_room_update_time = (TextView)v.findViewById(R.id.u_room_update_time); 
+		u_room_intro = (TextView)v.findViewById(R.id.u_room_intro);
+		u_room_my_img = (ImageView)v.findViewById(R.id.u_room_my_img);
+		u_room_nickname = (TextView)v.findViewById(R.id.u_room_nickname);
+		u_room_product_list = (TextView)v.findViewById(R.id.u_room_product_list);
+		u_room_item_gridview = (StaggeredGridView)findViewById(R.id.gridView_room);
+	
+		//누른 사용자의 Activity로 이동!
 		u_room_my_img.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				//누른 사용자의 Activity로 이동!
+				///////////
+				
+				
 			}
 		});
 		
@@ -80,7 +81,7 @@ public class UserRoomInfoActivity extends Activity {
 				//Item의 상세정보 Activity로 이동!
 				Intent i = new Intent(UserRoomInfoActivity.this, ItemInfoActivity.class);
 				i.putExtra("iData", iData[position]);
-				startActivityForResult(i, 0);
+				startActivity(i);
 				
 			}
 		});

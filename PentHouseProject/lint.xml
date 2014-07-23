@@ -1,3 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <lint>
+    <issue id="NewApi">
+        <ignore path="src/com/tacademy/penthouse/house/HouseActivity.java" />
+        <ignore path="src/com/tacademy/penthouse/house/MyRoomAdapter.java" />
+        <ignore path="src/com/tacademy/penthouse/room/MyRoomInfoActivity.java" />
+        <ignore path="src/com/tacademy/penthouse/room/UserRoomInfoActivity.java" />
+    </issue>
 </lint>
