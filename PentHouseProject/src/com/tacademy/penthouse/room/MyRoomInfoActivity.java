@@ -10,7 +10,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.tacademy.penthouse.MainActivity;
+import com.etsy.android.grid.StaggeredGridView;
 import com.tacademy.penthouse.R;
 import com.tacademy.penthouse.entity.ItemData;
 import com.tacademy.penthouse.item.ItemInfoActivity;
@@ -20,7 +20,9 @@ public class MyRoomInfoActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.activity_my_room_info);
+		
+		StaggeredGridView myroom_item_gridview;
 		
 		//ItemData 积己何盒
 		String[] t = {"aa","bb"};
@@ -30,36 +32,33 @@ public class MyRoomInfoActivity extends Activity {
 		
 		//
 		
-		//Layout Item 急攫, 积己何
+		//Layout Item 急攫, 积己何 
 		ImageView room_img;
 		TextView room_name;
 		TextView room_update_time;
 		TextView room_intro;
-		
 		TextView room_product_list;
-		GridView room_item_gridview;
+	//	GridView room_item_gridview;
 		
-		room_img = (ImageView)findViewById(R.id.room_img);
-		room_name = (TextView)findViewById(R.id.room_name);
-		room_update_time = (TextView)findViewById(R.id.room_update_time); 
-		room_intro = (TextView)findViewById(R.id.room_intro);
-		room_product_list = (TextView)findViewById(R.id.room_product_list);
-		room_item_gridview = (GridView)findViewById(R.id.room_item_gridview);
+		View v = getLayoutInflater().inflate(R.layout.header_view_myroom_layout, null);
+		room_img = (ImageView)v.findViewById(R.id.room_img);
+		room_name = (TextView)v.findViewById(R.id.room_name);
+		room_update_time = (TextView)v.findViewById(R.id.room_update_time); 
+		room_intro = (TextView)v.findViewById(R.id.room_intro);
+		room_product_list = (TextView)v.findViewById(R.id.room_product_list);
+		myroom_item_gridview = (StaggeredGridView)findViewById(R.id.gridView_myroom);
+		myroom_item_gridview.addHeaderView(v);
 		//
 		
 		//Adapter
 		ItemAdapter iAdapter;
 		iAdapter = new ItemAdapter(this);
-		room_item_gridview.setAdapter(iAdapter);
+		myroom_item_gridview.setAdapter(iAdapter);
 		for(int i = 0; i < iData.length; i++){
 			iAdapter.add(iData[i]);	
 		}
 		
-		
-		
-		
-		
-		room_item_gridview.setOnItemClickListener(new OnItemClickListener() {
+		myroom_item_gridview.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
@@ -68,7 +67,6 @@ public class MyRoomInfoActivity extends Activity {
 				Intent i = new Intent(MyRoomInfoActivity.this, ItemInfoActivity.class);
 				i.putExtra("iData", iData[position]);
 				startActivityForResult(i, 0);
-				
 			}
 		});
 		

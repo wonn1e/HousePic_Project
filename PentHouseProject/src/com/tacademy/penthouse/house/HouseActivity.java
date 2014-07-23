@@ -4,27 +4,43 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
+
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.etsy.android.grid.StaggeredGridView;
 import com.tacademy.penthouse.R;
 import com.tacademy.penthouse.editimgdialog.EditImgActivity;
 import com.tacademy.penthouse.entity.HouseData;
+import com.tacademy.penthouse.entity.RoomData;
 import com.tacademy.penthouse.entity.UserData;
+import com.tacademy.penthouse.room.MyRoomInfoActivity;
 
 public class HouseActivity extends FragmentActivity {
-	private static final int FIELD_MINE = 0;
-	private static final int FIELD_OTHER = 1;
-
 	public static final String TAG_NICKNAME = "nickname";
 	public static final String TAG_HOUSENAME = "housename";
 	public static final String TAG_HOUSEINTRO = "houseintro";
 	public static final int REQUEST_CODE_EDITIMG = 0;
-	
+
+	StaggeredGridView house_room_gridView;
+
 	TextView user_nickname, house_name, house_intro;
 	ImageView user_img, house_img, edit_btn;
 	UserData uData = new UserData(10, "asdf", "nickname", "pw", 100, 100, "dddd");
-	HouseData hData = new HouseData(10, 12, "nickname's house", "HOUSE!!", "dddd");
+	HouseData hData = new HouseData(13, 12, "nickname's house", "HOUSE!!", "dddd");
+	RoomAdapter roomAdapter;
+	MyRoomAdapter myRoomAdapter;
+
+	final RoomData[] rData= {new RoomData(10, 1, "A", 1,"aa", true),
+			new RoomData(10, 1, "B", 0, "aa", true),
+			new RoomData(10, 1, "C", 2, "aa", true),
+			new RoomData(10, 1, "D", 3, "aa", true),
+			new RoomData(10, 1, "E", 4, "aa", true),
+			new RoomData(10, 1,"F", 5, "aa", true),
+			new RoomData(10, 1, "G", 6,"aa", true)};
 
 	//수정 시 click인지 아닌지
 	boolean isClicked;
@@ -62,18 +78,35 @@ public class HouseActivity extends FragmentActivity {
 
 		init();
 
-		int code;
-		if(uData.user_num == hData.user_num) code = FIELD_MINE;
-		else code = FIELD_OTHER;
+		View v = getLayoutInflater().inflate(R.layout.header_view_house_layout, null);
+		user_nickname = (TextView)v.findViewById(R.id.user_nickname);
+		house_name = (TextView)v.findViewById(R.id.house_name);
+		house_intro = (TextView)v.findViewById(R.id.house_info);
+		user_img = (ImageView)v.findViewById(R.id.user_img);
+		house_img = (ImageView)v.findViewById(R.id.house_img);
+		edit_btn = (ImageView)v.findViewById(R.id.edit_btn);	
+		house_room_gridView = (StaggeredGridView)findViewById(R.id.gridView);
+		house_room_gridView.addHeaderView(v);
 
-		user_nickname = (TextView)findViewById(R.id.user_nickname);
-		house_name = (TextView)findViewById(R.id.house_name);
-		house_intro = (TextView)findViewById(R.id.house_info);
-		user_img = (ImageView)findViewById(R.id.user_img);
-		house_img = (ImageView)findViewById(R.id.house_img);
-		edit_btn = (ImageView)findViewById(R.id.edit_btn);	
+		if(uData.user_num == hData.user_num){
+			myRoomAdapter = new MyRoomAdapter(this);
+			house_room_gridView.setAdapter(myRoomAdapter);
+			for(int i=0; i<rData.length; i++){
+				myRoomAdapter.add(rData[i]);
+			}
+			house_room_gridView.setOnItemClickListener(new OnItemClickListener() {
 
-		if(code == FIELD_MINE){
+				@Override
+				public void onItemClick(AdapterView<?> parent, View view,
+						int position, long id) {
+					if(position != 0){
+						Intent i = new Intent(HouseActivity.this, MyRoomInfoActivity.class);
+						i.putExtra("rData", rData[position]);
+						startActivity(i);
+					}
+				}				
+			});
+
 			edit_btn.setVisibility(View.VISIBLE);
 			edit_btn.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -113,7 +146,7 @@ public class HouseActivity extends FragmentActivity {
 							public void onClick(View v) {
 								EditHouseName f = new EditHouseName();
 								f.setOnReceiveHousenameListener(new EditHouseName.OnReceiveHousenameListener() {
-									
+
 									@Override
 									public void onReceiveHousename(String name) {
 										if(name != null && !name.equals("")){
@@ -134,7 +167,7 @@ public class HouseActivity extends FragmentActivity {
 							public void onClick(View v) {
 								EditHouseIntro f = new EditHouseIntro();
 								f.setOnReceiveHouseintroListener(new EditHouseIntro.OnReceiveHouseintroListener() {
-									
+
 									@Override
 									public void onReceiveHousename(String intro) {
 										if(intro != null && !intro.equals("")){
@@ -178,18 +211,36 @@ public class HouseActivity extends FragmentActivity {
 				}
 			});
 		}else{
+			roomAdapter = new RoomAdapter(this);
+			house_room_gridView.setAdapter(roomAdapter);
+			for(int i=0; i<rData.length; i++){
+				roomAdapter.add(rData[i]);
+			}
+
+			house_room_gridView.setOnItemClickListener(new OnItemClickListener() {
+				@Override
+				public void onItemClick(AdapterView<?> parent, View view,
+						int position, long id) {
+					if(position != 0){
+						Intent i = new Intent(HouseActivity.this, MyRoomInfoActivity.class);
+						i.putExtra("rData", rData[position]);
+						startActivity(i);
+					}
+				}
+			});
+
 			edit_btn.setVisibility(View.GONE);
 		}
 	}
-	
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		
+
 		if(requestCode == REQUEST_CODE_EDITIMG && resultCode == EditImgActivity.RESULT_OK){
 			String imgBitmap = data.getStringExtra(EditImgActivity.PARAM_RESULT);
 			Toast.makeText(HouseActivity.this, "new img: " + imgBitmap, Toast.LENGTH_SHORT).show();
 		}
-		
+
 	}
 }

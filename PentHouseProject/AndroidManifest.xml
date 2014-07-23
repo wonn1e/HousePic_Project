@@ -18,7 +18,7 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name" android:screenOrientation="portrait">
-             <intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -36,9 +36,14 @@
             android:name=".search.CategorySearchActivity"
             android:label="@string/title_activity_category_search" android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".editimgdialog.EditImgActivity"></activity>
-        <activity android:name=".editimgdialog.CameraActivity"></activity>
-        <activity android:name=".editimgdialog.GalleryActivity"></activity>
+        <activity android:name=".editimgdialog.EditImgActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".editimgdialog.CameraActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".editimgdialog.GalleryActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".room.MyRoomInfoActivity" android:screenOrientation="portrait">
+       
+        </activity>
+        <activity android:name=".item.ItemInfoActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".room.UserRoomInfoActivity" android:screenOrientation="portrait"></activity>
       
     </application>
 

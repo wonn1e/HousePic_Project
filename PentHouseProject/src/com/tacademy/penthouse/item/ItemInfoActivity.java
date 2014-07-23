@@ -18,7 +18,7 @@ public class ItemInfoActivity extends FragmentActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.activity_item_info);
 		ViewPager mPager;
 		HorizontalListView hlv_s_item;
 		ItemFragmentAdapter mAdapter;

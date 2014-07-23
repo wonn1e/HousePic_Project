@@ -14,10 +14,18 @@ public class RoomData implements Parcelable{
 	public String room_name;
 	public int room_img;
 	public String room_info;
-	public Date passedtime;
+	//public Date passedtime;
 	public boolean isPublic;
-	
 	public RoomData(){}
+	
+	public RoomData(int h_n, int r_num, String r_name, int r_img, String r_info, boolean ispublic){
+		this.house_num = h_n;
+		this.room_num = r_num;
+		this.room_name = r_name;
+		this.room_img = r_img;
+		this.room_info = r_info;
+		this.isPublic = ispublic;
+	}
 	
 	public RoomData(Parcel p){
 		house_num = p.readInt();
@@ -25,7 +33,7 @@ public class RoomData implements Parcelable{
 		room_name = p.readString();
 		room_img = p.readInt();
 		room_info = p.readString();
-		passedtime = new Date(p.readLong());
+	//	passedtime = new Date(p.readLong());
 		isPublic = p.readByte() != 0;
 	}
 
@@ -41,20 +49,20 @@ public class RoomData implements Parcelable{
 		dest.writeString(room_name);
 		dest.writeInt(room_img);
 		dest.writeString(room_info);
-		dest.writeLong(passedtime.getTime());
+	//	dest.writeLong(passedtime.getTime());
 		dest.writeByte((byte)(isPublic ? 1:0));
 	}
 	
-	public static Parcelable.Creator<UserData> CREATOR = new Parcelable.Creator<UserData>() {
+	public static Parcelable.Creator<RoomData> CREATOR = new Parcelable.Creator<RoomData>() {
 
 		@Override
-		public UserData createFromParcel(Parcel source) {
-			return new UserData(source);
+		public RoomData createFromParcel(Parcel source) {
+			return new RoomData(source);
 		}
 
 		@Override
-		public UserData[] newArray(int size) {
-			return new UserData[size];
+		public RoomData[] newArray(int size) {
+			return new RoomData[size];
 		}
 	};
 }
