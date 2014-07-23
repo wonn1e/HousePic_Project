@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:text="TextView" />
 
-        <ImageButton
+        <ImageView
             android:id="@+id/item_like"
             android:layout_width="20dp"
             android:layout_height="20dp"
