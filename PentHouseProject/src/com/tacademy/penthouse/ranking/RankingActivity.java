@@ -9,11 +9,15 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.tacademy.penthouse.R;
+import com.tacademy.penthouse.entity.ItemData;
+import com.tacademy.penthouse.entity.UserData;
 
 public class RankingActivity extends Activity{
 	
+	UserData uData;
+	ItemData iData;
 	ListView rankingList;
-	RankUserAdapter pAdapter;
+	RankUserAdapter uAdapter;
 	RankItemAdapter iAdapter;
 	
 	@Override
@@ -25,7 +29,7 @@ public class RankingActivity extends Activity{
 			@Override
 			public void onClick(View v) {
 				rankingList = (ListView)findViewById(R.id.listView_rank);
-				rankingList.setAdapter(pAdapter);
+				rankingList.setAdapter(uAdapter);
 				
 			}
 		});
