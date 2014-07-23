@@ -14,13 +14,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="닉네임 변경하기"
+            android:text="하우스 이름 변경하기"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
     </LinearLayout>
 
     <EditText
-        android:id="@+id/edit_nickname"
+        android:id="@+id/edit_housename"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -31,17 +31,17 @@
     </EditText>
 
     <TextView
-        android:id="@+id/nickname_length"
+        android:id="@+id/housename_length"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
         android:text="TextView" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/name_changed_btn"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="확인" />
+        android:text="변경하기" />
 
 </LinearLayout>

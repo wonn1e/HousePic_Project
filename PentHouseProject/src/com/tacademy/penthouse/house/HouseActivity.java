@@ -1,29 +1,25 @@
 package com.tacademy.penthouse.house;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.tacademy.penthouse.R;
-import com.tacademy.penthouse.dialog.EditUserNickname;
 import com.tacademy.penthouse.entity.HouseData;
 import com.tacademy.penthouse.entity.UserData;
 
 public class HouseActivity extends FragmentActivity {
 	private static final int FIELD_MINE = 0;
 	private static final int FIELD_OTHER = 1;
-	EditUserNickname fragment_nickname;
 
-	public static final String NICKNAME_TAG = "nickname";
+	public static final String TAG_NICKNAME = "nickname";
+	public static final String TAG_HOUSENAME = "housename";
+	public static final String TAG_HOUSEINTRO = "houseintro";
 
-	//public static final int REQUEST_CODE_NEWNICKNAME = 0;
-
-	TextView user_nickname, house_name, house_info;
+	
+	TextView user_nickname, house_name, house_intro;
 	ImageView user_img, house_img, edit_btn;
 	UserData uData = new UserData(10, "asdf", "nickname", "pw", 100, 100, "dddd");
 	HouseData hData = new HouseData(10, 12, "nickname's house", "HOUSE!!", "dddd");
@@ -49,10 +45,20 @@ public class HouseActivity extends FragmentActivity {
 		}
 	}
 
+	private void init(){
+		/*user_nickname.setText(uData.user_nickname);
+		house_name.setText(hData.house_name);
+		house_intro.setText(hData.house_intro);
+		user_img.setImageResource(R.drawable.ic_launcher);	///////
+		house_img.setImageResource(R.drawable.ic_launcher);*/
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.house_layout);
+
+		init();
 
 		int code;
 		if(uData.user_num == hData.user_num) code = FIELD_MINE;
@@ -60,21 +66,11 @@ public class HouseActivity extends FragmentActivity {
 
 		user_nickname = (TextView)findViewById(R.id.user_nickname);
 		house_name = (TextView)findViewById(R.id.house_name);
-		house_info = (TextView)findViewById(R.id.house_info);
+		house_intro = (TextView)findViewById(R.id.house_info);
 		user_img = (ImageView)findViewById(R.id.user_img);
 		house_img = (ImageView)findViewById(R.id.house_img);
-		edit_btn = (ImageView)findViewById(R.id.edit_btn);
+		edit_btn = (ImageView)findViewById(R.id.edit_btn);	
 
-		fragment_nickname = new EditUserNickname();
-		fragment_nickname.setOnReceiveMessageListener(new EditUserNickname.OnReceiveMessageListener() {
-			
-			@Override
-			public void onReceiveMessage(String message) {
-				user_nickname.setText(message);
-				Toast.makeText(HouseActivity.this, "new nickname", Toast.LENGTH_SHORT).show();
-			}
-		});		
-		
 		if(code == FIELD_MINE){
 			edit_btn.setVisibility(View.VISIBLE);
 			edit_btn.setOnClickListener(new View.OnClickListener() {
@@ -85,36 +81,26 @@ public class HouseActivity extends FragmentActivity {
 
 					//edit
 					if(isClicked){
+						Toast.makeText(HouseActivity.this, "수정이 가능합니다", Toast.LENGTH_SHORT).show();
 						user_nickname.setEnabled(true);
 						user_nickname.setOnClickListener(new View.OnClickListener() {
 
 							@Override
 							public void onClick(View v) {
-								Fragment f = getSupportFragmentManager().findFragmentByTag(NICKNAME_TAG);
-								if (f == null) {
-									FragmentTransaction ft = getSupportFragmentManager()
-											.beginTransaction();
-									ft.replace(R.id.container, fragment_nickname, NICKNAME_TAG);
-									ft.commit();
-								}
-								
-								
-							/*	fragment_nickname = (EditUserNickname)getSupportFragmentManager().findFragmentByTag(NICKNAME_TAG);
 
-								fragment_nickname.setOnReceiveMessageListener(new EditUserNickname.OnReceiveMessageListener() {
+								EditUserNickname f = new EditUserNickname();
+								f.setOnReceiveMessageListener(new EditUserNickname.OnReceiveMessageListener() {
 
 									@Override
 									public void onReceiveMessage(String message) {
-										user_nickname.setText(message);
-										Toast.makeText(HouseActivity.this, "new nickname", Toast.LENGTH_SHORT).show();
+										if(message != null && !message.equals("")){
+											user_nickname.setText(message);
+											uData.user_nickname = message;
+											//Toast.makeText(HouseActivity.this, "current nickname: " + uData.user_nickname, Toast.LENGTH_SHORT).show();
+										}
 									}
 								});
-*/
-								/*Intent i = new Intent(HouseActivity.this, EditUserNickname.class);
-								UserData u = new UserData();
-								i.putExtra(EditUserNickname.PARAM_ME, u);
-								startActivityForResult(i, REQUEST_CODE_NEWNICKNAME);
-								 */
+								f.show(getSupportFragmentManager(), TAG_NICKNAME);
 							}
 						});
 
@@ -123,17 +109,40 @@ public class HouseActivity extends FragmentActivity {
 
 							@Override
 							public void onClick(View v) {
-								// TODO Auto-generated method stub
+								EditHouseName f = new EditHouseName();
+								f.setOnReceiveHousenameListener(new EditHouseName.OnReceiveHousenameListener() {
+									
+									@Override
+									public void onReceiveHousename(String name) {
+										if(name != null && !name.equals("")){
+											house_name.setText(name);
+											hData.house_name = name;
+											//Toast.makeText(HouseActivity.this, "current house name: " + hData.house_name, Toast.LENGTH_SHORT).show();
+										}
+									}
+								});
+								f.show(getSupportFragmentManager(), TAG_HOUSENAME);
 
 							}
 						});
-						house_info.setEnabled(true);
-						house_info.setOnClickListener(new View.OnClickListener() {
+						house_intro.setEnabled(true);
+						house_intro.setOnClickListener(new View.OnClickListener() {
 
 							@Override
 							public void onClick(View v) {
-								// TODO Auto-generated method stub
-
+								EditHouseIntro f = new EditHouseIntro();
+								f.setOnReceiveHouseintroListener(new EditHouseIntro.OnReceiveHouseintroListener() {
+									
+									@Override
+									public void onReceiveHousename(String intro) {
+										if(intro != null && !intro.equals("")){
+											house_intro.setText(intro);
+											hData.house_intro = intro;
+											//Toast.makeText(HouseActivity.this, "current house name: " + hData.house_intro, Toast.LENGTH_SHORT).show();
+										}
+									}
+								});
+								f.show(getSupportFragmentManager(), TAG_HOUSEINTRO);
 							}
 						});
 						user_img.setEnabled(true);
@@ -160,7 +169,7 @@ public class HouseActivity extends FragmentActivity {
 					else{
 						user_nickname.setEnabled(false);						
 						house_name.setEnabled(false);
-						house_info.setEnabled(false);
+						house_intro.setEnabled(false);
 						user_img.setEnabled(false);
 						house_img.setEnabled(false);
 					}
@@ -170,6 +179,4 @@ public class HouseActivity extends FragmentActivity {
 			edit_btn.setVisibility(View.GONE);
 		}
 	}
-
-
 }
