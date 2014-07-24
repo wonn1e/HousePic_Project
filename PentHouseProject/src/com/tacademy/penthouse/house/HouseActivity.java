@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.etsy.android.grid.StaggeredGridView;
+import com.tacademy.penthouse.HeaderGridView;
 import com.tacademy.penthouse.R;
 import com.tacademy.penthouse.editimgdialog.EditImgActivity;
 import com.tacademy.penthouse.entity.HouseData;
@@ -25,13 +26,15 @@ public class HouseActivity extends FragmentActivity {
 	public static final String TAG_HOUSEINTRO = "houseintro";
 	public static final int REQUEST_CODE_EDITIMG = 0;
 
-	StaggeredGridView house_room_gridView;
-
+	//StaggeredGridView house_room_gridView;	
+	HeaderGridView house_room_gridView;
+	
 	TextView user_nickname, house_name, house_intro;
 	ImageView user_img, house_img, edit_btn;
-	//UserData uData = new UserData(10, "asdf", "nickname", "pw", 100, 100, R.drawable.ic_launcher);
+	
 	UserData uData;
-	HouseData hData = new HouseData(10, 12, "nickname's house", "HOUSE!!", "dddd");
+	HouseData hData;
+	
 	RoomAdapter roomAdapter;
 	MyRoomAdapter myRoomAdapter;
 
@@ -42,7 +45,6 @@ public class HouseActivity extends FragmentActivity {
 			new RoomData(10, 1, "E", 4, "aa", true),
 			new RoomData(10, 1,"F", 5, "aa", true),
 			new RoomData(10, 1, "G", 6,"aa", true)};
-
 
 		
 	//수정 시 click인지 아닌지
@@ -66,22 +68,16 @@ public class HouseActivity extends FragmentActivity {
 		}
 	}
 
-	private void init(){
-		/*user_nickname.setText(uData.user_nickname);
-		house_name.setText(hData.house_name);
-		house_intro.setText(hData.house_intro);
-		user_img.setImageResource(R.drawable.ic_launcher);	///////
-		house_img.setImageResource(R.drawable.ic_launcher);*/
-	}
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.house_layout);
 		uData = new UserData();
+		//uData = new UserData(10, "a","a","a",1,1,R.drawable.ic_launcher);
+		hData =  new HouseData(10, 12, "nickname's house", "HOUSE!!", "dddd");
+		
 		Intent i = getIntent();
 		uData = i.getParcelableExtra("uData");
-		init();
 
 		View v = getLayoutInflater().inflate(R.layout.header_view_house_layout, null);
 		user_nickname = (TextView)v.findViewById(R.id.user_nickname);
@@ -90,9 +86,11 @@ public class HouseActivity extends FragmentActivity {
 		user_img = (ImageView)v.findViewById(R.id.user_img);
 		house_img = (ImageView)v.findViewById(R.id.house_img);
 		edit_btn = (ImageView)v.findViewById(R.id.edit_btn);	
-		house_room_gridView = (StaggeredGridView)findViewById(R.id.gridView);
+		//house_room_gridView = (StaggeredGridView)findViewById(R.id.gridView);
+		//house_room_gridView.addHeaderView(v);
+		house_room_gridView = (HeaderGridView)findViewById(R.id.header_grid_view);
 		house_room_gridView.addHeaderView(v);
-
+		
 		if(uData.user_num == hData.user_num){
 			myRoomAdapter = new MyRoomAdapter(this);
 			house_room_gridView.setAdapter(myRoomAdapter);

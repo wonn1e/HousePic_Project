@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
@@ -59,10 +60,8 @@ public class MyRoomAdapter extends BaseAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		if(position == 0){
 			ImageView im = new ImageView(mContext);
-			im.setId(12345667);
-			im.setScaleX(0.1f);
-			im.setScaleY(0.1f);
 			im.setImageResource(R.drawable.penguins);
+			im.setLayoutParams(new AbsListView.LayoutParams(160, 320));
 			return im;
 		}
 		
