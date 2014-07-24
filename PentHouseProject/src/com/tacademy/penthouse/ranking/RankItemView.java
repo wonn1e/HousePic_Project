@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.tacademy.penthouse.R;
 import com.tacademy.penthouse.entity.ItemData;
 
@@ -33,13 +34,21 @@ public class RankItemView extends FrameLayout {
 		item_like = (ImageView)findViewById(R.id.item_like);
 	}
 
-	public void setRankItemData(ItemData data){
+	public void setRankItemData(ItemData data, int position){
 		iData = data;
+		if(position == 0 || position == 1 || position == 2){
+			item_rank.setVisibility(VISIBLE);
+			item_rank.setImageResource(R.drawable.ic_launcher);
+		}
+		else{
+			item_rank.setVisibility(GONE);
+		}
 //		item_img.setImageResource(resId);
 		item_rank.setImageResource(R.drawable.ic_launcher);
 		item_name.setText(data.item_name);
 		item_price.setText(data.price);
-		item_like_num.setText(data.likeCnt);
+		
+		item_like_num.setText(data.likeCnt+"");
 //		item_like.setImageResource(resId);
 	}
 }

@@ -11,6 +11,7 @@ import com.tacademy.penthouse.R;
 import com.tacademy.penthouse.entity.UserData;
 
 
+
 public class RankUserView extends FrameLayout {
 
 	public RankUserView(Context context) {
@@ -31,15 +32,22 @@ public class RankUserView extends FrameLayout {
 		show_rank = (ImageView)findViewById(R.id.show_rank);
 		user_nickname = (TextView)findViewById(R.id.user_nickname);
 		follower_num = (TextView)findViewById(R.id.follower_num);
-		follower_btn = (ImageView)findViewById(R.id.follower_btn);
+		follower_btn = (ImageView)findViewById(R.id.following_btn);
 	}
 	
-	public void setRankUserData(UserData data){
+	public void setRankUserData(UserData data, int position){
 		uData = data;
-//		user_img.setImageResource(data.user_img);
-		show_rank.setImageResource(R.drawable.ic_launcher);
+		if(position == 0 || position == 1 || position == 2){
+			show_rank.setVisibility(VISIBLE);
+			show_rank.setImageResource(R.drawable.ic_launcher);
+		}
+		else{
+			show_rank.setVisibility(GONE);
+		}
+		user_img.setImageResource(data.user_img);
+		
 		user_nickname.setText(data.user_nickname);
-		follower_num.setText(data.follower_cnt);
+		follower_num.setText(data.follower_cnt+"");
 		follower_btn.setImageResource(R.drawable.ic_launcher);
 	}
 }

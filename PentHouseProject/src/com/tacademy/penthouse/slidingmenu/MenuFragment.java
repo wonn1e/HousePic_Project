@@ -17,9 +17,8 @@ public class MenuFragment extends Fragment {
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.menu_fragment, container, false);
 		
-		TextView tv = (TextView)v.findViewById(R.id.my_page);
-		tv.setOnClickListener(new View.OnClickListener() {
-			
+		TextView my_page = (TextView)v.findViewById(R.id.my_page);
+		my_page.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 			//	((MainActivity)getActivity()).switchTwoFragment();
@@ -36,6 +35,14 @@ public class MenuFragment extends Fragment {
 //			}
 //		});
 //		
+		TextView show_ranking = (TextView)v.findViewById(R.id.show_ranking);
+		show_ranking.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				
+			}
+		});
 		
 		return v;
 	}
