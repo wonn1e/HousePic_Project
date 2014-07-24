@@ -44,7 +44,7 @@ public class RankItemAdapter extends BaseAdapter {
 		}else{
 			v = (RankItemView)convertView;
 		}
-		v.setRankItemData(list.get(position));
+		v.setRankItemData(list.get(position), position);
 		return v;
 	}
 

@@ -87,7 +87,8 @@ public class EditImgActivity extends Activity {
 		super.onActivityResult(requestCode, resultCode, data);
 		if(requestCode ==REQUEST_CODE_CROP && resultCode == RESULT_OK){
 			Bitmap bm = BitmapFactory.decodeFile(mSavedFile.getAbsolutePath());
-			(uData.user_img) = bm.toString();
+			//(uData.user_img) = bm.toString();
+			//잠시만 주석^^;;
 		}
 	}
 }

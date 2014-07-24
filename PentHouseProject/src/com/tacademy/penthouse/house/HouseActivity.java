@@ -29,7 +29,7 @@ public class HouseActivity extends FragmentActivity {
 
 	TextView user_nickname, house_name, house_intro;
 	ImageView user_img, house_img, edit_btn;
-	UserData uData = new UserData(10, "asdf", "nickname", "pw", 100, 100, "dddd");
+	UserData uData = new UserData(10, "asdf", "nickname", "pw", 100, 100, R.drawable.ic_launcher);
 	HouseData hData = new HouseData(13, 12, "nickname's house", "HOUSE!!", "dddd");
 	RoomAdapter roomAdapter;
 	MyRoomAdapter myRoomAdapter;
