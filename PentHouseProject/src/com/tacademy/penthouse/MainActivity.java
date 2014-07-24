@@ -109,28 +109,6 @@ public class MainActivity extends SlidingFragmentActivity{
 		View v = (View)MenuItemCompat.getActionView(item);
 		query = (EditText)v.findViewById(R.id.editText1);
 		submit = (Button)v.findViewById(R.id.button1);
-		           
-	
-		
-
-//		view.setOnQueryTextListener(new OnQueryTextListener() {
-//			
-//			@Override
-//			public boolean onQueryTextSubmit(String keyword) {
-//				Toast.makeText(MainActivity.this, "keyword : " + keyword, Toast.LENGTH_SHORT).show();
-//				Intent i = new Intent(MainActivity.this, SearchResultActivity.class);
-//				i.putExtra("keyword", keyword);
-//				startActivity(i);
-//				
-//				return true;
-//			}
-//			
-//			@Override
-//			public boolean onQueryTextChange(String keyword) {
-//				// TODO Auto-generated method stub
-//				return false;
-//			}
-//		});
 		return true;
 	}
 	
