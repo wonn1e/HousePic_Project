@@ -1,6 +1,8 @@
 package com.tacademy.penthouse.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
+
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -16,6 +18,7 @@ public class RoomData implements Parcelable{
 	public String room_info;
 	//public Date passedtime;
 	public boolean isPublic;
+	public ArrayList<ItemData> items = new ArrayList<ItemData>();
 	public RoomData(){}
 	
 	public RoomData(int h_n, int r_num, String r_name, int r_img, String r_info, boolean ispublic){

@@ -8,31 +8,47 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class MDItemView extends FrameLayout {
+public class MDItemView extends FrameLayout{
 
 	public MDItemView(Context context) {
 		super(context);
 		init();
 	}
+//	ItemData riData;
+//	ItemData liData;
+	//...
+	ImageView item_left_img;
+	ImageView item_right_img;
+	TextView item_left_name;
+	TextView item_right_name;
+	TextView item_left_price;
+	TextView item_right_price;
 	
-	ImageView item_like, item_img;
-	TextView item_name, item_price;
-	ItemData iData;
 	
 	private void init(){
-		LayoutInflater.from(getContext()).inflate(R.layout.main_md_item_view, this);
-		item_like = (ImageView)findViewById(R.id.item_like);
-		item_img = (ImageView)findViewById(R.id.item_img);
-		item_name = (TextView)findViewById(R.id.item_name);
-		item_price = (TextView)findViewById(R.id.item_price);
-	}
-	
-	public void setItemData(ItemData d){
-		iData = d;
-		item_like.setImageResource(R.drawable.ic_launcher);
-		item_img.setImageResource(R.drawable.penguins);
-		item_name.setText(d.item_name);
-		item_price.setText(d.price);
+		LayoutInflater.from(getContext()).inflate(R.layout.main_md_double_item_view, this);
+		
+		item_left_img = (ImageView)findViewById(R.id.item_left_img);
+		item_right_img = (ImageView)findViewById(R.id.item_right_img);
+		item_left_name = (TextView)findViewById(R.id.item_left_name);
+		item_right_name = (TextView)findViewById(R.id.item_right_name);
+		item_left_price = (TextView)findViewById(R.id.item_left_price);
+		item_right_price = (TextView)findViewById(R.id.item_right_price);
 		
 	}
+	
+	public void setData(ItemData leftData,ItemData rightData){
+		//iData = data;
+		
+		item_left_img.setImageResource(leftData.item_img[0]);
+		item_left_name.setText(leftData.item_name);
+		item_left_price.setText(leftData.price);
+		if(rightData != null ){
+			item_right_img.setImageResource(rightData.item_img[0]);
+			item_right_name.setText(rightData.item_name);
+			item_right_price.setText(rightData.price);
+		}
+	}
+	
+	
 }
