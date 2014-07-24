@@ -27,6 +27,7 @@
         </activity>
         <activity android:name=".ranking.RankingActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".house.HouseActivity" android:screenOrientation="portrait">
+       
         </activity>
         <activity
             android:name=".search.SearchResultActivity"
