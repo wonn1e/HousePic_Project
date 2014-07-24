@@ -1,7 +1,6 @@
 package com.tacademy.penthouse;
 
 
-import com.google.android.gms.wearable.NodeApi.GetConnectedNodesResult;
 import com.tacademy.penthouse.entity.ItemData;
 import com.tacademy.penthouse.entity.RoomData;
 
