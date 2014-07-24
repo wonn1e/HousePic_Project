@@ -8,6 +8,8 @@ import android.support.v4.view.ViewPager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.meetme.android.horizontallistview.HorizontalListView;
 import com.tacademy.penthouse.R;
 import com.tacademy.penthouse.entity.ItemData;
@@ -59,7 +61,7 @@ public class ItemInfoActivity extends FragmentActivity {
 	    }
 	    
 	    
-		item_name_brand = (TextView) findViewById(R.id.item_name);
+		item_name_brand = (TextView) findViewById(R.id.item_name_brand);
 		item_like_count = (TextView) findViewById(R.id.item_like_count);
 		item_like = (ImageView)findViewById(R.id.item_like);
 		item_price = (TextView)findViewById(R.id.item_price);
@@ -67,8 +69,14 @@ public class ItemInfoActivity extends FragmentActivity {
 		item_buy_btn = (Button)findViewById(R.id.item_buy_btn);
 		item_material = (TextView)findViewById(R.id.item_material);
 		item_size = (TextView)findViewById(R.id.item_size);
+		Toast.makeText(ItemInfoActivity.this, "name : " + iData.item_name, Toast.LENGTH_SHORT).show();
 		
-		item_name_brand.setText(iData.item_name+"");
+		
+		item_name_brand.setText(iData.item_name);
+		item_like_count.setText(""+iData.likeCnt);
+		item_price.setText(iData.price);
+		item_material.setText(iData.material);
+//		item_size.setText(iData.)
 		
 	}
 }
