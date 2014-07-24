@@ -8,6 +8,7 @@
         android:minSdkVersion="8"
         android:targetSdkVersion="21" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:name=".MyApplication"
@@ -45,6 +46,7 @@
         </activity>
         <activity android:name=".item.ItemInfoActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".room.UserRoomInfoActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name=".browser.BrowserActivity"></activity>
       
     </application>
 
