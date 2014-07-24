@@ -15,6 +15,7 @@ import android.widget.TabHost;
 
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
+import com.tacademy.penthouse.ranking.RankingActivity;
 import com.tacademy.penthouse.search.CategorySearchActivity;
 import com.tacademy.penthouse.search.SearchResultActivity;
 import com.tacademy.penthouse.slidingmenu.MenuFragment;
@@ -112,6 +113,15 @@ public class MainActivity extends SlidingFragmentActivity{
 		return true;
 	}
 	
-    
+    public void actionMenu(int menuId) {
+    	switch(menuId) {
+    	
+    	case MenuFragment.ID_RANK:
+    		Intent i = new Intent(MainActivity.this, RankingActivity.class);
+			startActivity(i);
+			getSlidingMenu().showContent();
+    		break;
+    	}
+    }
 
 }

@@ -21,25 +21,30 @@ public class MyRoomInfoActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_my_room_info);
-		
+
 		StaggeredGridView myroom_item_gridview;
-		
+
 		//ItemData 积己何盒
 		String[] t = {"aa","bb"};
 		int[] img = {R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher};
-		final ItemData[] iData = {new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img), new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img),new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img),new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img),new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img),
-						new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img),new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img)};
-		
+		final ItemData[] iData = {new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img, "http://www.naver.com"),
+				new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img, "http://www.naver.com"),
+				new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img, "http://www.naver.com"),
+				new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img, "http://www.naver.com"),
+				new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img, "http://www.naver.com"),
+				new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img, "http://www.naver.com"),
+				new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img, "http://www.naver.com")};
+
 		//
-		
+
 		//Layout Item 急攫, 积己何 
 		ImageView room_img;
 		TextView room_name;
 		TextView room_update_time;
 		TextView room_intro;
 		TextView room_product_list;
-	//	GridView room_item_gridview;
-		
+		//	GridView room_item_gridview;
+
 		View v = getLayoutInflater().inflate(R.layout.header_view_myroom_layout, null);
 		room_img = (ImageView)v.findViewById(R.id.room_img);
 		room_name = (TextView)v.findViewById(R.id.room_name);
@@ -49,7 +54,7 @@ public class MyRoomInfoActivity extends Activity {
 		myroom_item_gridview = (StaggeredGridView)findViewById(R.id.gridView_myroom);
 		myroom_item_gridview.addHeaderView(v);
 		//
-		
+
 		//Adapter
 		ItemAdapter iAdapter;
 		iAdapter = new ItemAdapter(this);
@@ -57,7 +62,7 @@ public class MyRoomInfoActivity extends Activity {
 		for(int i = 0; i < iData.length; i++){
 			iAdapter.add(iData[i]);	
 		}
-		
+
 		myroom_item_gridview.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -69,6 +74,6 @@ public class MyRoomInfoActivity extends Activity {
 				startActivityForResult(i, 0);
 			}
 		});
-		
+
 	}
 }

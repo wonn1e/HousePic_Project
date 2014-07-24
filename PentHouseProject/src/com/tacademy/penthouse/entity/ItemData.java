@@ -19,6 +19,8 @@ public class ItemData implements Parcelable {
 	public int likeCnt;
 	public String sort_category;
 	public int []item_img;
+	public String link;
+	
 	//String item_url;
 	public ItemData(){}
 	public ItemData(int room_num,int item_code,           
@@ -29,7 +31,7 @@ public class ItemData implements Parcelable {
 	String material,       
 	String[]theme,  
 	int likeCnt ,             
-	String sort_category,int []item_img  ){
+	String sort_category,int []item_img ,String link ){
 		this.room_num = room_num;
 		this.item_code = item_code ;           
 		this.sort_code = sort_code;     
@@ -41,6 +43,7 @@ public class ItemData implements Parcelable {
 		this.likeCnt = likeCnt;             
 		this.sort_category = sort_category; 
 		this.item_img = item_img ; 
+		this.link = link;
 	}
 	public ItemData(Parcel p){
 		room_num = p.readInt();
@@ -58,6 +61,7 @@ public class ItemData implements Parcelable {
 		int item_cnt = p.readInt();
 		item_img = new int[item_cnt];
 		p.readIntArray(item_img);
+		link = p.readString();
 	}
 
 	@Override
@@ -80,6 +84,7 @@ public class ItemData implements Parcelable {
 		dest.writeString(sort_category);
 		dest.writeInt(item_img.length);
 		dest.writeIntArray(item_img);
+		dest.writeString(link);
 	}
 	public static Parcelable.Creator<ItemData> CREATOR = new Parcelable.Creator<ItemData>() {
 		@Override
