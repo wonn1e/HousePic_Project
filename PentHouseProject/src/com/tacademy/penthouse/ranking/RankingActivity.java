@@ -2,20 +2,26 @@ package com.tacademy.penthouse.ranking;
 
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 
 import com.tacademy.penthouse.R;
 import com.tacademy.penthouse.entity.ItemData;
 import com.tacademy.penthouse.entity.UserData;
+import com.tacademy.penthouse.house.HouseActivity;
+import com.tacademy.penthouse.item.ItemInfoActivity;
+import com.tacademy.penthouse.room.MyRoomInfoActivity;
 
 
 public class RankingActivity extends Activity{
 	
-	//UserData uData;
-	//ItemData iData;
+	public static int LIST_TYPE_FLAG = 0;
+	
 	ListView rankingList;
 	RankUserAdapter uAdapter;
 	RankItemAdapter iAdapter;
@@ -29,10 +35,16 @@ public class RankingActivity extends Activity{
 		
 		String[] t = {"aa","bb"};
 		int[] img = {R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher};
-		Integer[] img2= {R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher};
-		final ItemData iData1= new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img);
-		final ItemData[] iData = {new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img), new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img),new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img),new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img),new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img),
-						new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img),new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img)};
+//		Integer[] img2= {R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher};
+		final ItemData[] iData = {new ItemData(1,1,"aa","i1","aa","aa","aa",t,1,"aa",img),
+								new ItemData(2,2,"bb","i2","fdsf","dsf","fd",t,1,"dfs",img),
+								new ItemData(3,3,"12321","i3","1213","1231","12321",t,1,"12312",img),
+								new ItemData(4,4,"dd","i4","dddd","ddd","ddd",t,1,"dddd",img),
+								new ItemData(5,5,"eeeee","i5","eeee","eee","ee",t,1,"ee",img),
+								new ItemData(6,6,"zxxzxc","i6","zcxczx","zczcx","zcxcxz",t,1,"zcxx",img),
+								new ItemData(7,7,"jhjh","i7","hjhj","hjhj","hjhj",t,1,"hjhj",img),
+								new ItemData(7,7,"jhjh","i8","hjhj","hjhj","hjhj",t,1,"hjhj",img)
+		};
 		int uimg = R.drawable.ic_launcher;
 		final UserData[] uData = {new UserData(1, "a","a","a",1,1,uimg),
 							new UserData(2, "b","b","b",2,2,uimg),
@@ -70,6 +82,7 @@ public class RankingActivity extends Activity{
 		btn.setOnClickListener(new View.OnClickListener() {			
 			@Override
 			public void onClick(View v) {
+				LIST_TYPE_FLAG = 0;
 				rankingList.setAdapter(uAdapter);
 				for(int i = 0; i < uData.length; i++){
 					uAdapter.add(uData[i]);
@@ -83,6 +96,7 @@ public class RankingActivity extends Activity{
 			
 			@Override
 			public void onClick(View v) {
+				LIST_TYPE_FLAG = 1;
 				rankingList = (ListView)findViewById(R.id.listView_rank);
 				rankingList.setAdapter(iAdapter);
 				for(int i = 0; i < iData.length; i++){
@@ -92,7 +106,22 @@ public class RankingActivity extends Activity{
 			}
 		});
 		
-		
+		rankingList.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				if(LIST_TYPE_FLAG == 0){
+					Intent i = new Intent(RankingActivity.this, HouseActivity.class);
+					i.putExtra("uData", uData[position]);
+					startActivityForResult(i, 0);
+				}else if(LIST_TYPE_FLAG == 1){
+					Intent i = new Intent(RankingActivity.this, ItemInfoActivity.class);
+					i.putExtra("iData", iData[position]);
+					startActivityForResult(i, 0);
+				}
+			}
+		});
 		
 	}
 
