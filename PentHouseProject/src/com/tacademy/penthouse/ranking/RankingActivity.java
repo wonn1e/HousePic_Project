@@ -36,14 +36,14 @@ public class RankingActivity extends Activity{
 		String[] t = {"aa","bb"};
 		int[] img = {R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher};
 //		Integer[] img2= {R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher};
-		final ItemData[] iData = {new ItemData(1,1,"aa","i1","aa","aa","aa",t,1,"aa",img),
-								new ItemData(2,2,"bb","i2","fdsf","dsf","fd",t,1,"dfs",img),
-								new ItemData(3,3,"12321","i3","1213","1231","12321",t,1,"12312",img),
-								new ItemData(4,4,"dd","i4","dddd","ddd","ddd",t,1,"dddd",img),
-								new ItemData(5,5,"eeeee","i5","eeee","eee","ee",t,1,"ee",img),
-								new ItemData(6,6,"zxxzxc","i6","zcxczx","zczcx","zcxcxz",t,1,"zcxx",img),
-								new ItemData(7,7,"jhjh","i7","hjhj","hjhj","hjhj",t,1,"hjhj",img),
-								new ItemData(7,7,"jhjh","i8","hjhj","hjhj","hjhj",t,1,"hjhj",img)
+		final ItemData[] iData = {new ItemData(1,1,"aa","i1","aa","aa","aa",t,1,"aa",img, "http://www.naver.com"),
+								new ItemData(2,2,"bb","i2","fdsf","dsf","fd",t,1,"dfs",img, "http://www.naver.com"),
+								new ItemData(3,3,"12321","i3","1213","1231","12321",t,1,"12312",img, "http://www.naver.com"),
+								new ItemData(4,4,"dd","i4","dddd","ddd","ddd",t,1,"dddd",img, "http://www.naver.com"),
+								new ItemData(5,5,"eeeee","i5","eeee","eee","ee",t,1,"ee",img, "http://www.naver.com"),
+								new ItemData(6,6,"zxxzxc","i6","zcxczx","zczcx","zcxcxz",t,1,"zcxx",img, "http://www.naver.com"),
+								new ItemData(7,7,"jhjh","i7","hjhj","hjhj","hjhj",t,1,"hjhj",img, "http://www.naver.com"),
+								new ItemData(7,7,"jhjh","i8","hjhj","hjhj","hjhj",t,1,"hjhj",img, "http://www.naver.com")
 		};
 		int uimg = R.drawable.ic_launcher;
 		final UserData[] uData = {new UserData(1, "a","a","a",1,1,uimg),

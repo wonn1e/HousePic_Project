@@ -1,6 +1,5 @@
 package com.tacademy.penthouse.slidingmenu;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,11 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
+import com.tacademy.penthouse.MainActivity;
 import com.tacademy.penthouse.R;
-import com.tacademy.penthouse.ranking.RankingActivity;
 
 public class MenuFragment extends Fragment {
+	
+	public static final int ID_RANK = 3;
 	@Override
 	public View onCreateView(LayoutInflater inflater,
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -41,8 +41,7 @@ public class MenuFragment extends Fragment {
 			
 			@Override
 			public void onClick(View v) {
-				Intent i = new Intent(getActivity(), RankingActivity.class);
-				startActivity(i);
+				((MainActivity)getActivity()).actionMenu(ID_RANK);
 			}
 		});
 		

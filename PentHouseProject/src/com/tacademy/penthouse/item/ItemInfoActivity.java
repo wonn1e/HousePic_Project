@@ -2,9 +2,11 @@ package com.tacademy.penthouse.item;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,12 +14,14 @@ import android.widget.Toast;
 
 import com.meetme.android.horizontallistview.HorizontalListView;
 import com.tacademy.penthouse.R;
+import com.tacademy.penthouse.browser.BrowserActivity;
 import com.tacademy.penthouse.entity.ItemData;
 import com.viewpagerindicator.CirclePageIndicator;
 import com.viewpagerindicator.PageIndicator;
 
 public class ItemInfoActivity extends FragmentActivity {
 
+	ItemData iData;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -28,19 +32,15 @@ public class ItemInfoActivity extends FragmentActivity {
 		ItemRecommandAdapter iAdapter;
 	    PageIndicator mIndicator;
 	    
-		TextView item_name_brand;
-		TextView item_like_count;
+		TextView item_name_brand,  item_like_count, item_price, item_material, item_size;
 		ImageView item_like;
-		TextView item_price;
 		Button item_share_btn;
 		Button item_buy_btn;
-		TextView item_material;
-		TextView item_size;
 //		String[] t = {"aa","bb"};
 //		int[] img = {R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher};
 //		Integer[] img2= {R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher};
 //		ItemData iData= new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img);
-		ItemData iData = new ItemData();
+		iData = new ItemData();
 		Intent i = getIntent();
 		iData = i.getParcelableExtra("iData");
 		
@@ -66,7 +66,20 @@ public class ItemInfoActivity extends FragmentActivity {
 		item_like = (ImageView)findViewById(R.id.item_like);
 		item_price = (TextView)findViewById(R.id.item_price);
 		item_share_btn = (Button)findViewById(R.id.item_share_btn);
+		
 		item_buy_btn = (Button)findViewById(R.id.item_buy_btn);
+		item_buy_btn.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if(iData.link != null && !iData.link.equals("")){
+					Intent i = new Intent(ItemInfoActivity.this, BrowserActivity.class);
+					i.setData(Uri.parse(iData.link));
+					startActivity(i);
+				}
+			}
+		});
+		
 		item_material = (TextView)findViewById(R.id.item_material);
 		item_size = (TextView)findViewById(R.id.item_size);
 		Toast.makeText(ItemInfoActivity.this, "name : " + iData.item_name, Toast.LENGTH_SHORT).show();
