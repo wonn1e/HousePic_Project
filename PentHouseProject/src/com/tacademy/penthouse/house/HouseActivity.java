@@ -29,8 +29,9 @@ public class HouseActivity extends FragmentActivity {
 
 	TextView user_nickname, house_name, house_intro;
 	ImageView user_img, house_img, edit_btn;
-	UserData uData = new UserData(10, "asdf", "nickname", "pw", 100, 100, R.drawable.ic_launcher);
-	HouseData hData = new HouseData(13, 12, "nickname's house", "HOUSE!!", "dddd");
+	//UserData uData = new UserData(10, "asdf", "nickname", "pw", 100, 100, R.drawable.ic_launcher);
+	UserData uData;
+	HouseData hData = new HouseData(10, 12, "nickname's house", "HOUSE!!", "dddd");
 	RoomAdapter roomAdapter;
 	MyRoomAdapter myRoomAdapter;
 
@@ -42,6 +43,8 @@ public class HouseActivity extends FragmentActivity {
 			new RoomData(10, 1,"F", 5, "aa", true),
 			new RoomData(10, 1, "G", 6,"aa", true)};
 
+
+		
 	//수정 시 click인지 아닌지
 	boolean isClicked;
 	private void setClicked(boolean clicked){
@@ -75,7 +78,9 @@ public class HouseActivity extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.house_layout);
-
+		uData = new UserData();
+		Intent i = getIntent();
+		uData = i.getParcelableExtra("uData");
 		init();
 
 		View v = getLayoutInflater().inflate(R.layout.header_view_house_layout, null);
@@ -91,8 +96,8 @@ public class HouseActivity extends FragmentActivity {
 		if(uData.user_num == hData.user_num){
 			myRoomAdapter = new MyRoomAdapter(this);
 			house_room_gridView.setAdapter(myRoomAdapter);
-			for(int i=0; i<rData.length; i++){
-				myRoomAdapter.add(rData[i]);
+			for(int j=0; j<rData.length; j++){
+				myRoomAdapter.add(rData[j]);
 			}
 			house_room_gridView.setOnItemClickListener(new OnItemClickListener() {
 
@@ -213,8 +218,8 @@ public class HouseActivity extends FragmentActivity {
 		}else{
 			roomAdapter = new RoomAdapter(this);
 			house_room_gridView.setAdapter(roomAdapter);
-			for(int i=0; i<rData.length; i++){
-				roomAdapter.add(rData[i]);
+			for(int j=0; j<rData.length; j++){
+				roomAdapter.add(rData[j]);
 			}
 
 			house_room_gridView.setOnItemClickListener(new OnItemClickListener() {
