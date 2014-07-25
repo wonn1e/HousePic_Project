@@ -84,6 +84,13 @@
                     android:text="Follower" />
             </LinearLayout>
 
-            <TextView android:id="@+id/textView4" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginLeft="5dp" android:layout_marginRight="5dp" android:text="나의 방 목록" android:textAppearance="?android:attr/textAppearanceMedium" />
+            <TextView
+                android:id="@+id/house_room_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:text="나의 방 목록"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
  
 </LinearLayout>

@@ -25,16 +25,16 @@ public class HouseActivity extends FragmentActivity {
 	public static final String TAG_HOUSENAME = "housename";
 	public static final String TAG_HOUSEINTRO = "houseintro";
 	public static final int REQUEST_CODE_EDITIMG = 0;
+	
+	public static final int ID_MYHOUSE = 0;
 
 	//StaggeredGridView house_room_gridView;	
-	HeaderGridView house_room_gridView;
-	
-	TextView user_nickname, house_name, house_intro;
+	HeaderGridView house_room_gridView;	
+	TextView user_nickname, house_name, house_intro, house_room_list;
 	ImageView user_img, house_img, edit_btn;
 	
 	UserData uData;
 	HouseData hData;
-	
 	RoomAdapter roomAdapter;
 	MyRoomAdapter myRoomAdapter;
 
@@ -73,11 +73,13 @@ public class HouseActivity extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.house_layout);
 		uData = new UserData();
-		//uData = new UserData(10, "a","a","a",1,1,R.drawable.ic_launcher);
 		hData =  new HouseData(10, 12, "nickname's house", "HOUSE!!", "dddd");
+	//	hData = new HouseData();
+		
 		
 		Intent i = getIntent();
 		uData = i.getParcelableExtra("uData");
+	//	hData = i.getParcelableExtra("hData");
 
 		View v = getLayoutInflater().inflate(R.layout.header_view_house_layout, null);
 		user_nickname = (TextView)v.findViewById(R.id.user_nickname);
@@ -86,10 +88,12 @@ public class HouseActivity extends FragmentActivity {
 		user_img = (ImageView)v.findViewById(R.id.user_img);
 		house_img = (ImageView)v.findViewById(R.id.house_img);
 		edit_btn = (ImageView)v.findViewById(R.id.edit_btn);	
+		house_room_list = (TextView)v.findViewById(R.id.house_room_list);
 		//house_room_gridView = (StaggeredGridView)findViewById(R.id.gridView);
 		//house_room_gridView.addHeaderView(v);
 		house_room_gridView = (HeaderGridView)findViewById(R.id.header_grid_view);
 		house_room_gridView.addHeaderView(v);
+		initData();
 		
 		if(uData.user_num == hData.user_num){
 			myRoomAdapter = new MyRoomAdapter(this);
@@ -233,6 +237,19 @@ public class HouseActivity extends FragmentActivity {
 			});
 
 			edit_btn.setVisibility(View.GONE);
+		}
+	}
+	
+	private void initData(){
+		user_nickname.setText(uData.user_nickname);
+		house_name.setText(hData.house_name);
+		house_intro.setText(hData.house_intro);
+		user_img.setImageResource(uData.user_img);
+		//house_img.setImageResource(hData.house_img);
+		if(uData.user_num == hData.user_num){
+			house_room_list.setText("나의 방 목록");
+		}else{
+			house_room_list.setText(uData.user_nickname + "의 방 목록");
 		}
 	}
 

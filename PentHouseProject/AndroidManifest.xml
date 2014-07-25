@@ -46,6 +46,7 @@
         <activity android:name=".item.ItemInfoActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".room.UserRoomInfoActivity" android:screenOrientation="portrait"></activity>
         <activity android:name=".browser.BrowserActivity"></activity>
+        <activity android:name=".item.ItemShareActivity" android:screenOrientation="portrait"></activity>
       
     </application>
 

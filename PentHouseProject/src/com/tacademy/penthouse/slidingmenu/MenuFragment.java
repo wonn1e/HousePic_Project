@@ -12,6 +12,7 @@ import com.tacademy.penthouse.R;
 
 public class MenuFragment extends Fragment {
 	
+	public static final int ID_MYHOUSE = 1;
 	public static final int ID_RANK = 3;
 	@Override
 	public View onCreateView(LayoutInflater inflater,
@@ -22,7 +23,7 @@ public class MenuFragment extends Fragment {
 		my_page.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-			//	((MainActivity)getActivity()).switchTwoFragment();
+				((MainActivity)getActivity()).actionMenu(ID_MYHOUSE);
 				//Toast.makeText(getActivity(), "to my page", Toast.LENGTH_SHORT).show();
 			}
 		});

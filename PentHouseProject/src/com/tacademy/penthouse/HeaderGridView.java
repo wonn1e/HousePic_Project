@@ -16,8 +16,6 @@ import android.widget.ListAdapter;
 import android.widget.WrapperListAdapter;
 
 public class HeaderGridView extends GridView {
-	private static final String TAG = "HeaderGridView";
-
 	private static class FixedViewInfo {
 		/** The view to add to the grid */
 		public View view;
