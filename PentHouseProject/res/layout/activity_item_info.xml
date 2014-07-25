@@ -6,15 +6,37 @@
     android:orientation="vertical"
     tools:context="${relativePackage}.${activityClass}" >
 
- 
-<android.support.v4.view.ViewPager
-        android:id="@+id/pager"
-        android:layout_width="fill_parent"
-        android:layout_height="150dp"
-         android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="5dp"
-        />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/pager"
+            android:layout_width="fill_parent"
+            android:layout_height="150dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp" >
+        </android.support.v4.view.ViewPager>
+
+        <ImageView
+            android:id="@+id/item_like"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:src="@drawable/abc_ab_solid_dark_holo" />
+
+        <TextView
+            android:id="@+id/item_like_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_weight="1"
+            android:text="Num"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    </FrameLayout>
 <com.viewpagerindicator.CirclePageIndicator
         android:id="@+id/indicator"
         android:padding="10dip"
@@ -37,24 +59,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="100"
                 android:text="제품명/브랜드" />
-
-            <TextView
-                android:id="@+id/item_like_count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:layout_weight="1"
-                android:text="Num"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
-
-            <ImageView
-                android:id="@+id/item_like"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
-                android:src="@drawable/abc_ab_solid_dark_holo" />
         </LinearLayout>
 
         <LinearLayout

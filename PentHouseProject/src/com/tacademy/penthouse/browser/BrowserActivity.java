@@ -89,6 +89,7 @@ public class BrowserActivity extends ActionBarActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				webView.reload();
 				
 			}
 		});

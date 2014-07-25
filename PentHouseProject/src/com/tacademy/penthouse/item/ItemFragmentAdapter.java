@@ -28,6 +28,7 @@ public class ItemFragmentAdapter extends FragmentPagerAdapter{
 		Fragment f = new ItemFragment();
 		Bundle b = new Bundle();
 		b.putInt("img", item.item_img[position]);
+		b.putBoolean("item_like", item.item_like);
 		f.setArguments(b);
 		return f;
 	}
