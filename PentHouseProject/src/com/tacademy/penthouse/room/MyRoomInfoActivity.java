@@ -51,10 +51,10 @@ public class MyRoomInfoActivity extends Activity {
 		room_update_time = (TextView)v.findViewById(R.id.room_update_time); 
 		room_intro = (TextView)v.findViewById(R.id.room_intro);
 		room_product_list = (TextView)v.findViewById(R.id.room_product_list);
-		
+
 		myroom_item_gridview = (StaggeredGridView)findViewById(R.id.gridView_myroom);
 		myroom_item_gridview.addHeaderView(v);
-		
+
 		//Adapter
 		ItemAdapter iAdapter;
 		iAdapter = new ItemAdapter(this);
@@ -69,9 +69,11 @@ public class MyRoomInfoActivity extends Activity {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				//Item의 상세정보 Activity로 이동!
-				Intent i = new Intent(MyRoomInfoActivity.this, ItemInfoActivity.class);
-				i.putExtra("iData", iData[position]);
-				startActivityForResult(i, 0);
+				if(position != 0){
+					Intent i = new Intent(MyRoomInfoActivity.this, ItemInfoActivity.class);
+					i.putExtra("iData", iData[position]);
+					startActivityForResult(i, 0);
+				}
 			}
 		});
 

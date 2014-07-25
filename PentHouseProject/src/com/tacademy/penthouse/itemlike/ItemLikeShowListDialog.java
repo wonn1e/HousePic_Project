@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
@@ -17,8 +18,11 @@ import android.widget.ListView;
 import com.tacademy.penthouse.R;
 import com.tacademy.penthouse.entity.ItemData;
 import com.tacademy.penthouse.entity.RoomData;
+import com.tacademy.penthouse.item.ItemInfoActivity;
 
 public class ItemLikeShowListDialog extends DialogFragment {
+	public static final String PARAM_ITEM_DATA = "item data";
+	public static final String PARAM_ROOM_DATA = "room data";
 
 	ListView room_list;
 	RoomData[] rData;
@@ -33,8 +37,8 @@ public class ItemLikeShowListDialog extends DialogFragment {
 		//item data & room data 받아오기
 		Bundle iB = getArguments();
 		if(iB != null){
-			iData = (ItemData) iB.getParcelable("iData");
-			rData = (RoomData[]) iB.getParcelableArray("rData");
+			iData = (ItemData) iB.getParcelable(PARAM_ITEM_DATA);
+			rData = (RoomData[]) iB.getParcelableArray(PARAM_ROOM_DATA);
 		}
 		//
 		rAdapter = new RoomNameAdapter(getActivity());
@@ -63,10 +67,18 @@ public class ItemLikeShowListDialog extends DialogFragment {
 					iData.item_like = true;
 					iData.likeCnt++;
 					rData[position].items.add(iData);
-					Toast.makeText(parent.getContext(), "item in room "+ rData[position].room_name, Toast.LENGTH_SHORT).show();
 				}
 				
 				dismiss();
+			}
+		});
+		
+		Button btn = (Button)v.findViewById(R.id.create_room_btn);
+		btn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(getActivity(), CreateNewRoomDialog.class);
+				startActivity(i);
 			}
 		});
 		return v;
