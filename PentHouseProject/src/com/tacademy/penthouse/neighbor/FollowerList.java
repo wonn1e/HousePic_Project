@@ -44,10 +44,10 @@ public class FollowerList extends PagerFragment {
 	}
 	
 	private void initData(){
-		UserData u0 = new UserData(0, "a", "a", "skdj", 10, 10, 1000);
-		UserData u1 = new UserData(1, "ab", "aa", "skdj", 10, 10, 1000);
-		UserData u2 = new UserData(2, "abc", "aaa", "skdj", 10, 10, 1000);
-		UserData u3 = new UserData(3, "abd", "aaaa", "skdj", 10, 10, 1000);
+		UserData u0 = new UserData(0, "a", "aaa", "skdj", 10, 10, 1000,"YYY11's House","Welcome","bb");
+		UserData u1 = new UserData(1, "ab", "aaa", "skdj", 10, 10, 1000,"YYY11's House","Welcome","bb");
+		UserData u2 = new UserData(2, "abc", "aaa", "skdj", 10, 10, 1000,"YYY11's House","Welcome","bb");
+		UserData u3 = new UserData(3, "abd", "aaa", "skdj", 10, 10, 1000,"YYY11's House","Welcome","bb");
 		
 		nAdapter.add(u0);
 		nAdapter.add(u1);

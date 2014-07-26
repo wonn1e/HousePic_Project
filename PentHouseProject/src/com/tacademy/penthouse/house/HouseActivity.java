@@ -10,11 +10,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.tacademy.penthouse.HeaderGridView;
 import com.tacademy.penthouse.R;
 import com.tacademy.penthouse.editimgdialog.EditImgActivity;
-import com.tacademy.penthouse.entity.HouseData;
 import com.tacademy.penthouse.entity.RoomData;
 import com.tacademy.penthouse.entity.UserData;
 import com.tacademy.penthouse.neighbor.NeighborListActivity;
@@ -25,6 +23,8 @@ public class HouseActivity extends FragmentActivity {
 	public static final String TAG_HOUSENAME = "housename";
 	public static final String TAG_HOUSEINTRO = "houseintro";
 	public static final int REQUEST_CODE_EDITIMG = 0;
+	public static final String PARAM_USER_DATA = "uData";
+	public static final String PARAM_MY_DATA = "myData";
 	
 	public static final int ID_MYHOUSE = 0;
 
@@ -34,7 +34,8 @@ public class HouseActivity extends FragmentActivity {
 	ImageView user_img, house_img, edit_btn;
 	
 	UserData uData;
-	HouseData hData;
+	UserData myData;
+	
 	RoomAdapter roomAdapter;
 	MyRoomAdapter myRoomAdapter;
 
@@ -72,13 +73,16 @@ public class HouseActivity extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.house_layout);
-		uData = new UserData();
-		hData =  new HouseData(10, 12, "nickname's house", "HOUSE!!", "dddd");
+		uData = new UserData(1, "aa", "aa", "aa", 1, 1, R.drawable.penguins, "aa", "aa", "aa");
+		myData = new UserData(2, "bb", "bb", "bb", 2, 2, R.drawable.tulips, "bb", "bb", "bb");
+		
+	//	hData =  new HouseData(10, 12, "nickname's house", "HOUSE!!", "dddd");
 	//	hData = new HouseData();
 		
 		
 		Intent i = getIntent();
-		uData = i.getParcelableExtra("uData");
+	//	uData = i.getParcelableExtra(PARAM_USER_DATA);
+	//	myData = i.getParcelableExtra(PARAM_MY_DATA);
 	//	hData = i.getParcelableExtra("hData");
 
 		View v = getLayoutInflater().inflate(R.layout.header_view_house_layout, null);
@@ -94,7 +98,6 @@ public class HouseActivity extends FragmentActivity {
 		house_room_gridView = (HeaderGridView)findViewById(R.id.header_grid_view);
 		house_room_gridView.addHeaderView(v);
 		initData();
-		
 		Button btn = (Button)v.findViewById(R.id.following_btn);
 		btn.setOnClickListener(new View.OnClickListener() {
 			
@@ -119,7 +122,7 @@ public class HouseActivity extends FragmentActivity {
 			}
 		});
 		
-		if(uData.user_num == hData.user_num){
+		if(myData.user_num == uData.user_num){
 			myRoomAdapter = new MyRoomAdapter(this);
 			house_room_gridView.setAdapter(myRoomAdapter);
 			for(int j=0; j<rData.length; j++){
@@ -161,7 +164,7 @@ public class HouseActivity extends FragmentActivity {
 									public void onReceiveMessage(String message) {
 										if(message != null && !message.equals("")){
 											user_nickname.setText(message);
-											uData.user_nickname = message;
+											myData.user_nickname = message;
 											//Toast.makeText(HouseActivity.this, "current nickname: " + uData.user_nickname, Toast.LENGTH_SHORT).show();
 										}
 									}
@@ -182,7 +185,8 @@ public class HouseActivity extends FragmentActivity {
 									public void onReceiveHousename(String name) {
 										if(name != null && !name.equals("")){
 											house_name.setText(name);
-											hData.house_name = name;
+											myData.house_name = name;
+											//hData.house_name = name;
 											//Toast.makeText(HouseActivity.this, "current house name: " + hData.house_name, Toast.LENGTH_SHORT).show();
 										}
 									}
@@ -203,7 +207,7 @@ public class HouseActivity extends FragmentActivity {
 									public void onReceiveHousename(String intro) {
 										if(intro != null && !intro.equals("")){
 											house_intro.setText(intro);
-											hData.house_intro = intro;
+											myData.house_intro = intro;
 											//Toast.makeText(HouseActivity.this, "current house name: " + hData.house_intro, Toast.LENGTH_SHORT).show();
 										}
 									}
@@ -266,11 +270,11 @@ public class HouseActivity extends FragmentActivity {
 	
 	private void initData(){
 		user_nickname.setText(uData.user_nickname);
-		house_name.setText(hData.house_name);
-		house_intro.setText(hData.house_intro);
+		house_name.setText(uData.house_name);
+		house_intro.setText(uData.house_intro);
 		user_img.setImageResource(uData.user_img);
 		//house_img.setImageResource(hData.house_img);
-		if(uData.user_num == hData.user_num){
+		if(uData.user_num == uData.user_num){
 			house_room_list.setText("나의 방 목록");
 		}else{
 			house_room_list.setText(uData.user_nickname + "의 방 목록");

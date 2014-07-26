@@ -45,7 +45,7 @@ public class UserRoomInfoActivity extends FragmentActivity {
 		
 		//Dummy DAta
 		String[] t = {"aa","bb"};
-		final UserData uData = new UserData(100, "aaa", "test user", "zzzz", 10, 12, 123);
+		final UserData uData = new UserData(100, "aaa", "test user", "zzzz", 10, 12, 123,"aa","aa","aa");
 		int[] img = {R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher};
 		final ItemData[] iData = {new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img, "http://www.naver.com", true),
 				new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img, "http://www.naver.com", false),
