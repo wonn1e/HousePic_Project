@@ -76,13 +76,6 @@ public class MyRoomInfoActivity extends FragmentActivity {
 			public void onItemLikeClick(View v, ItemData data) {
 				Toast.makeText(MyRoomInfoActivity.this, "Clicked in MyRoomInfoActivitiy", Toast.LENGTH_SHORT).show();
 
-				/*Bundle b = new Bundle();
-				b.putParcelable(ItemLikeShowListDialog.PARAM_ITEM_DATA, data);
-				b.putParcelableArray(ItemLikeShowListDialog.PARAM_ROOM_DATA, myRoomData);
-				itemLikeDialog.setArguments(b);
-				itemLikeDialog.show(getSupportFragmentManager(), "dialog");*/
-				ItemData dddd = new ItemData();
-				dddd = data;
 				//now unlike!!
 				if(data.item_like){
 					data.item_like = false;

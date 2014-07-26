@@ -14,10 +14,12 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.tacademy.penthouse.R;
 import com.tacademy.penthouse.entity.ItemData;
 import com.tacademy.penthouse.entity.RoomData;
+import com.tacademy.penthouse.search.SearchResultActivity;
 
 public class ItemLikeShowListDialog extends DialogFragment {
 	public static final String PARAM_ITEM_DATA = "item data";
@@ -63,6 +65,7 @@ public class ItemLikeShowListDialog extends DialogFragment {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				if(!iData.item_like){
+					Toast.makeText(getActivity(), "now like and in room", Toast.LENGTH_SHORT).show();
 					iData.item_like = true;
 					iData.likeCnt++;
 					rData[position].items.add(iData);

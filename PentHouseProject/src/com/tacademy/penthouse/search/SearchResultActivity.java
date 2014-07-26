@@ -16,47 +16,53 @@ import android.widget.Toast;
 
 import com.tacademy.penthouse.R;
 import com.tacademy.penthouse.entity.ItemData;
+import com.tacademy.penthouse.entity.RoomData;
+import com.tacademy.penthouse.itemlike.ItemLikeShowListDialog;
 import com.tacademy.penthouse.room.ItemAdapter;
+import com.tacademy.penthouse.room.MyRoomInfoActivity;
 
 public class SearchResultActivity extends ActionBarActivity {
 	//ItemData 생성부분
-			String[] t = {"aa","bb"};
-			int[] img = {R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher};
-			Integer[] img2= {R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher};
-			
-			final ItemData[] iData = {new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img, "http://www.naver.com", true),
-					new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img, "http://www.naver.com", false),
-					new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img, "http://www.naver.com", false),
-					new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img, "http://www.naver.com",true),
-					new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img, "http://www.naver.com", true),
-					new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img, "http://www.naver.com", false),
-					new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img, "http://www.naver.com", false)};
+	String[] t = {"aa","bb"};
+	int[] img = {R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher};
+	Integer[] img2= {R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher};
 	
+	final ItemData[] iData = {new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img, "http://www.naver.com", true),
+			new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img, "http://www.naver.com", false),
+			new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img, "http://www.naver.com", false),
+			new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img, "http://www.naver.com",true),
+			new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img, "http://www.naver.com", true),
+			new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img, "http://www.naver.com", false),
+			new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img, "http://www.naver.com", false)};
+	final RoomData[] myRoomData = {
+			new RoomData(1,1,"house1",R.drawable.ic_launcher,"방설명1",true),
+			new RoomData(2,2,"house2",R.drawable.ic_launcher,"방설명2",true),
+			new RoomData(3,3,"house3",R.drawable.ic_launcher,"방설명3",true)
+	};	
+	
+	ItemLikeShowListDialog itemLikeDialog;
 	Spinner sort_spinner;
 	GridView item_gridview;
-	
+
 	ArrayAdapter<String> sAdapter;
 	ItemAdapter iAdapter;
 	ActionBar actionBar;
 	String title;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_search_result);
-		
+		itemLikeDialog = new ItemLikeShowListDialog();
 		Intent i = getIntent();
 		title = i.getStringExtra("keyword");
-		
-		
-		
+
 		actionBar = getSupportActionBar();
 		actionBar.setTitle(title);
-		
-		
-		
+
+
 		//검색어로 쿼리를 날려서 Item을 받아야한다!!!
-		
+
 		sort_spinner = (Spinner)findViewById(R.id.sort_spinner);
 		sAdapter = new ArrayAdapter(this, android.R.layout.simple_expandable_list_item_1,new ArrayList<String>());
 		sAdapter.add("모두보기");
@@ -69,7 +75,7 @@ public class SearchResultActivity extends ActionBarActivity {
 		sAdapter.add("클래식");
 		sAdapter.add("한국적");
 		sAdapter.add("유니크");
-		
+
 		sAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		sort_spinner.setAdapter(sAdapter);
 		//Spinner 설정
@@ -78,34 +84,66 @@ public class SearchResultActivity extends ActionBarActivity {
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view,
 					int position, long id) {
-					Toast.makeText(SearchResultActivity.this, "selected item : " + position, Toast.LENGTH_SHORT).show();
-					//Sorting에 대한 처리를 해줌!
+				Toast.makeText(SearchResultActivity.this, "selected item : " + position, Toast.LENGTH_SHORT).show();
+				//Sorting에 대한 처리를 해줌!
 			}	
 
 			@Override
 			public void onNothingSelected(AdapterView<?> arg0) {
 				// TODO Auto-generated method stub
-				
+
 			}
 		});
-		
+
 		iAdapter = new ItemAdapter(this);
 		item_gridview = (GridView)findViewById(R.id.item_gridview);
 		item_gridview.setAdapter(iAdapter);
 		for(int j = 0; j < iData.length; j++){
 			iAdapter.add(iData[j]);	
 		}
-		item_gridview.setOnClickListener(new View.OnClickListener() {
+		
+		
+		iAdapter.setOnAdapterItemClickListener(new ItemAdapter.OnAdapterItemClickListener() {
 			
 			@Override
-			public void onClick(View v) {
-				
-				
+			public void onItemLikeClick(View v, ItemData data) {
+				//now unlike!!
+				if(data.item_like){
+					Toast.makeText(SearchResultActivity.this, "now unlike", Toast.LENGTH_SHORT).show();
+					data.item_like = false;
+					data.likeCnt--;
+					//iData.notify();
+				}
+				//now like!!
+				else{
+					Toast.makeText(SearchResultActivity.this, "just like not in room", Toast.LENGTH_SHORT).show();
+				//	data.item_like = true;
+				//	data.likeCnt++;
+					//iData.notify();
+
+					//idata update! (ex. likeCnt, etc)
+
+					Bundle b = new Bundle();
+					b.putParcelable(ItemLikeShowListDialog.PARAM_ITEM_DATA, data);
+					b.putParcelableArray(ItemLikeShowListDialog.PARAM_ROOM_DATA, myRoomData);
+					itemLikeDialog.setArguments(b);
+					itemLikeDialog.show(getSupportFragmentManager(), "dialog");
+
+				}
 			}
 		});
 		
-		
-		
-		
+		/*item_gridview.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+
+
+			}
+		});
+*/
+
+
+
 	}
 }
