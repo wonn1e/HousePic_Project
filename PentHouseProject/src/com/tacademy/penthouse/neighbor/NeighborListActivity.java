@@ -39,7 +39,8 @@ public class NeighborListActivity extends ActionBarActivity {
 		}
 		
 		Intent i = getIntent();
-		int tab = i.getParcelableExtra(PARAM_CURRENT_TAB);
+		int tab =i.getIntExtra(PARAM_CURRENT_TAB, 0);
+		
 		if(tab == 0)
 			tabHost.setCurrentTab(0);
 		else if(tab == 1)

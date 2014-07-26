@@ -79,7 +79,8 @@ public class SearchResultActivity extends ActionBarActivity {
 			public void onItemSelected(AdapterView<?> parent, View view,
 					int position, long id) {
 					Toast.makeText(SearchResultActivity.this, "selected item : " + position, Toast.LENGTH_SHORT).show();
-			}
+					//Sorting에 대한 처리를 해줌!
+			}	
 
 			@Override
 			public void onNothingSelected(AdapterView<?> arg0) {
@@ -94,6 +95,14 @@ public class SearchResultActivity extends ActionBarActivity {
 		for(int j = 0; j < iData.length; j++){
 			iAdapter.add(iData[j]);	
 		}
+		item_gridview.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				
+				
+			}
+		});
 		
 		
 		
