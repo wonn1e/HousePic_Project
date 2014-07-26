@@ -53,7 +53,18 @@ public class Tab1MDFragment extends Fragment {
 		View v = inflater.inflate(R.layout.tab1_md_layout, container, false);
 		mdListView = (ExpandableListView)v.findViewById(R.id.md_list);
 		mdAdapter = new MDAdapter(getActivity());
-		//listView.addHeaderView(v);
+		
+		mdAdapter.setOnAdapterItemClickListener(new MDAdapter.OnAdapterItemClickListener() {
+			
+			@Override
+			public void onItemClick(View v, ItemData data) {
+				Toast.makeText(getActivity(), "dddd", Toast.LENGTH_SHORT).show();
+				Intent i = new Intent(getActivity(), ItemInfoActivity.class);
+				i.putExtra("iData", data);
+				startActivity(i);
+			}
+		});
+		
 		mdListView.setAdapter(mdAdapter);
 		initData();
 		for(int i=0; i<mdAdapter.getGroupCount(); i++){
