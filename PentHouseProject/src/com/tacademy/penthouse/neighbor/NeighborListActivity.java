@@ -1,9 +1,15 @@
 package com.tacademy.penthouse.neighbor;
 
 import com.tacademy.penthouse.R;
+
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
+import android.util.AttributeSet;
+import android.view.View;
 import android.widget.TabHost;
 
 public class NeighborListActivity extends ActionBarActivity {
@@ -32,9 +38,32 @@ public class NeighborListActivity extends ActionBarActivity {
 			tabHost.setCurrentTabByTag(savedInstanceState.getString(PARAM_CURRENT_TAB));
 		}
 		
+		Intent i = getIntent();
+		int tab = i.getParcelableExtra(PARAM_CURRENT_TAB);
+		if(tab == 0)
+			tabHost.setCurrentTab(0);
+		else if(tab == 1)
+			tabHost.setCurrentTab(1);
+		
 		getSupportActionBar().setDisplayShowHomeEnabled(false);
 	}
 	
+	@Override
+	public View onCreateView(String name, @NonNull Context context,
+			@NonNull AttributeSet attrs) {
+		return super.onCreateView(name, context, attrs);
+	}
+	/*
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if(requestCode == 0){
+			tabHost.setCurrentTab(FollowingList.REQUEST_CODE_FOLLOWING);
+		}else if(requestCode == 1){
+			tabHost.setCurrentTab(FollowerList.REQUEST_CODE_FOLLOWER);
+		}
+	}
+	*/
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 

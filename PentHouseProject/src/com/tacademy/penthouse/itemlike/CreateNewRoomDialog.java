@@ -14,6 +14,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.tacademy.penthouse.R;
 import com.tacademy.penthouse.editimgdialog.EditImgActivity;
@@ -76,8 +77,9 @@ public class CreateNewRoomDialog extends DialogFragment {
 
 			@Override
 			public void onClick(View v) {
-				newRoomData = new RoomData();
-				newRoomData.room_name = (String)room_name.toString();
+				Toast.makeText(getActivity(), "new room created", Toast.LENGTH_SHORT).show();
+				//newRoomData = new RoomData();
+				//newRoomData.room_name = (String)room_name.toString();
 				//newRoomData.room_img = new_room_img; from ImageVIew to int
 				
 				///	newRoomData.room_num =
@@ -87,6 +89,7 @@ public class CreateNewRoomDialog extends DialogFragment {
 				else{
 
 				}*/
+				dismiss();
 			}
 		});
 		return v;

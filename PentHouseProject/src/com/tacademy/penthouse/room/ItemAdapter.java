@@ -9,10 +9,11 @@ import android.widget.BaseAdapter;
 
 import com.tacademy.penthouse.entity.ItemData;
 
-public class ItemAdapter extends BaseAdapter {
+public class ItemAdapter extends BaseAdapter implements ItemView.OnItemLikeClickListener{
 
 	ArrayList<ItemData> items = new ArrayList<ItemData>();
 	Context mContext;
+	
 	public ItemAdapter(Context context){
 		mContext = context;
 	}
@@ -41,12 +42,29 @@ public class ItemAdapter extends BaseAdapter {
 		ItemView v;
 		if(convertView == null){
 			v = new ItemView(mContext);
+			v.setOnItemLikeClickListener(this);
 		}else{
 			v = (ItemView)convertView;
 		}
 		v.setItemData(items.get(position));
 		
 		return v;
+	}
+	
+	public interface OnAdapterItemClickListener{
+		public void onItemLikeClick(View v, ItemData iData);
+	}
+	
+	OnAdapterItemClickListener mAdapListener;
+	
+	public void setOnAdapterItemClickListener(OnAdapterItemClickListener l){
+		mAdapListener = l;
+	}
+	
+	@Override
+	public void onLikeClick(View v, ItemData i) {
+		if(mAdapListener != null)
+			mAdapListener.onItemLikeClick(v, i);
 	}
 
 }
