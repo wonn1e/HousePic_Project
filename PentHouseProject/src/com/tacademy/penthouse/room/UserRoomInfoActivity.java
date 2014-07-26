@@ -54,12 +54,12 @@ public class UserRoomInfoActivity extends FragmentActivity {
 				new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img, "http://www.naver.com", true),
 				new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img, "http://www.naver.com", false),
 				new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img, "http://www.naver.com", false)};
-		final RoomData[] myRoomData = {
+		/*final RoomData[] myRoomData = {
 				new RoomData(1,1,"house1",R.drawable.ic_launcher,"방설명1",true),
 				new RoomData(2,2,"house2",R.drawable.ic_launcher,"방설명2",true),
 				new RoomData(3,3,"house3",R.drawable.ic_launcher,"방설명3",true)
 		};
-
+*/
 
 		View v = getLayoutInflater().inflate(R.layout.header_view_room_layout, null);
 		u_room_img = (ImageView)v.findViewById(R.id.u_room_img);
