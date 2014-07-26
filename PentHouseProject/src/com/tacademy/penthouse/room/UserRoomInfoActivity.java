@@ -42,7 +42,7 @@ public class UserRoomInfoActivity extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_room_info);
 		itemLikeDialog = new ItemLikeShowListDialog();
-		
+		Toast.makeText(this, "RoomActivity", Toast.LENGTH_SHORT).show();
 		//Dummy DAta
 		String[] t = {"aa","bb"};
 		final UserData uData = new UserData(100, "aaa", "test user", "zzzz", 10, 12, 123,"aa","aa","aa");

@@ -1,12 +1,15 @@
 package com.tacademy.penthouse;
 
-import com.tacademy.penthouse.entity.ItemData;
-
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.tacademy.penthouse.entity.ItemData;
+import com.tacademy.penthouse.item.ItemInfoActivity;
 
 public class MDItemView extends FrameLayout{
 
@@ -14,8 +17,8 @@ public class MDItemView extends FrameLayout{
 		super(context);
 		init();
 	}
-//	ItemData riData;
-//	ItemData liData;
+	ItemData rData;
+	ItemData lData;
 	//...
 	ImageView item_left_img;
 	ImageView item_right_img;
@@ -38,11 +41,23 @@ public class MDItemView extends FrameLayout{
 	}
 	
 	public void setData(ItemData leftData,ItemData rightData){
-		//iData = data;
+		lData = leftData;
+		rData = rightData;
+		
 		
 		item_left_img.setImageResource(leftData.item_img[0]);
 		item_left_name.setText(leftData.item_name);
 		item_left_price.setText(leftData.price);
+		item_left_img.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+//				Intent i = new Intent(getContext(), ItemInfoActivity.class  );
+//				i.putExtra("iData", lData);
+//				
+//				startActivity(i);
+			}
+		});
 		if(rightData != null ){
 			item_right_img.setImageResource(rightData.item_img[0]);
 			item_right_name.setText(rightData.item_name);
