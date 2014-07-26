@@ -14,10 +14,14 @@ public class UserData implements Parcelable{
 	public int following_cnt;
 	public int follower_cnt;
 	public int user_img;
-	
+	public String house_name;
+	public String house_intro;
+	public String house_img;
 	public UserData(){	}
 	
-	public UserData(int user_num, String user_id, String user_nickname, String user_password, int following_cnt, int follower_cnt, int user_img){
+	public UserData(int user_num, String user_id, String user_nickname, String user_password,
+					int following_cnt, int follower_cnt, int user_img,
+					String house_name,  String house_intro, String house_img){
 		this.user_num = user_num;
 		this.user_id = user_id;
 		this.user_nickname = user_nickname;
@@ -25,6 +29,9 @@ public class UserData implements Parcelable{
 		this.follower_cnt = follower_cnt;
 		this.following_cnt = following_cnt;
 		this.user_img = user_img;
+		this.house_name = house_name;
+		this.house_intro = house_intro;
+		this.house_img = house_img;
 	}
 	
 	public UserData(Parcel p){
@@ -35,6 +42,9 @@ public class UserData implements Parcelable{
 		following_cnt = p.readInt();
 		follower_cnt = p.readInt();
 		user_img = p.readInt();
+		house_name = p.readString();
+		house_intro = p.readString();
+		house_img = p.readString();
 	}
 	@Override
 	public int describeContents() {
@@ -49,6 +59,9 @@ public class UserData implements Parcelable{
 		dest.writeInt(following_cnt);
 		dest.writeInt(follower_cnt);
 		dest.writeInt(user_img);
+		dest.writeString(house_name);
+		dest.writeString(house_intro);
+		dest.writeString(house_img);
 	}
 	
 	public static Parcelable.Creator<UserData> CREATOR = new Parcelable.Creator<UserData>() {

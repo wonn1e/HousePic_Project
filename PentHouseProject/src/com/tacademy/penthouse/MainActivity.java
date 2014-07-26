@@ -15,7 +15,6 @@ import android.widget.TabHost;
 
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
-import com.tacademy.penthouse.entity.HouseData;
 import com.tacademy.penthouse.entity.RoomData;
 import com.tacademy.penthouse.entity.UserData;
 import com.tacademy.penthouse.house.HouseActivity;
@@ -24,7 +23,7 @@ import com.tacademy.penthouse.search.CategorySearchActivity;
 import com.tacademy.penthouse.slidingmenu.MenuFragment;
 
 public class MainActivity extends SlidingFragmentActivity{
-
+	
 	FragmentTabHost tabHost;
 
 	@Override
@@ -32,6 +31,7 @@ public class MainActivity extends SlidingFragmentActivity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		setBehindContentView(R.layout.menu_frame);
+		//startActivity(new Intent(this, SplashActivity.class));
 		if(savedInstanceState == null){
 			getSupportFragmentManager().beginTransaction().replace(R.id.menu_container, 
 					new MenuFragment()).commit();
@@ -127,17 +127,27 @@ public class MainActivity extends SlidingFragmentActivity{
 		return true;
 	}
 
-	final UserData uData = new UserData(1, "a","a","a",1,1, R.drawable.tulips);
-	final HouseData hData = new HouseData(1, 1, "house", "kw's house", "aa");
-
+	final UserData myData = new UserData(1, "a","a","a",1,1, R.drawable.tulips,"XXX's House", "XX의 집에 오신걸 환영", "aa");
+	final UserData uData[] = {	new UserData(2, "b1","b1","b1",2,2,R.drawable.penguins,"YYY1's House","Welcome","bb"),
+							  	new UserData(3, "b2","b2","b2",2,2,R.drawable.penguins,"YYY2's House","Welcome","bb"),
+							  	new UserData(4, "b3","b3","b3",2,2,R.drawable.penguins,"YYY3's House","Welcome","bb"),
+							  	new UserData(5, "b4","b4","b4",2,2,R.drawable.penguins,"YYY4's House","Welcome","bb"),
+							  	new UserData(6, "b5","b5","b5",2,2,R.drawable.penguins,"YYY5's House","Welcome","bb"),
+							  	new UserData(7, "b6","b6","b6",2,2,R.drawable.penguins,"YYY6's House","Welcome","bb"),
+							  	new UserData(8, "b7","b7","b7",2,2,R.drawable.penguins,"YYY7's House","Welcome","bb"),
+							  	new UserData(9, "b8","b8","b8",2,2,R.drawable.penguins,"YYY8's House","Welcome","bb")
+	};
+	
 	public void actionMenu(int menuId) {
 		switch(menuId) {
 		case MenuFragment.ID_MYHOUSE:
-			if(uData.user_num == hData.user_num){
+			//if(uData.user_num == myData.user_num){
 				Intent iMyHouse = new Intent(MainActivity.this, HouseActivity.class);
+				iMyHouse.putExtra(HouseActivity.PARAM_USER_DATA, myData);
+				iMyHouse.putExtra(HouseActivity.PARAM_MY_DATA, myData);
 				startActivity(iMyHouse);
 				getSlidingMenu().showContent();
-			}
+			//}
 			break;
 		case MenuFragment.ID_RANK:
 			Intent iRank = new Intent(MainActivity.this, RankingActivity.class);

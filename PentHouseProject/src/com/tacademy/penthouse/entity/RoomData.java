@@ -10,7 +10,7 @@ import android.os.Parcelable;
 
 public class RoomData implements Parcelable{
 		
-	public int house_num;
+	public int user_num;
 	
 	public int room_num;
 	public String room_name;
@@ -21,8 +21,8 @@ public class RoomData implements Parcelable{
 	public ArrayList<ItemData> items = new ArrayList<ItemData>();
 	public RoomData(){}
 	
-	public RoomData(int h_n, int r_num, String r_name, int r_img, String r_info, boolean ispublic){
-		this.house_num = h_n;
+	public RoomData(int u_n, int r_num, String r_name, int r_img, String r_info, boolean ispublic){
+		this.user_num = u_n;
 		this.room_num = r_num;
 		this.room_name = r_name;
 		this.room_img = r_img;
@@ -31,7 +31,7 @@ public class RoomData implements Parcelable{
 	}
 	
 	public RoomData(Parcel p){
-		house_num = p.readInt();
+		user_num = p.readInt();
 		room_num = p.readInt();
 		room_name = p.readString();
 		room_img = p.readInt();
@@ -47,7 +47,7 @@ public class RoomData implements Parcelable{
 
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeInt(house_num);
+		dest.writeInt(user_num);
 		dest.writeInt(room_num);
 		dest.writeString(room_name);
 		dest.writeInt(room_img);
