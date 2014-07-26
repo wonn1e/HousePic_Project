@@ -15,7 +15,7 @@ import com.tacademy.penthouse.R;
 import com.tacademy.penthouse.entity.UserData;
 
 public class FollowerList extends PagerFragment {
-	public static final int REQUEST_CODE_FOLLOWING= 0;
+	public static final int REQUEST_CODE_FOLLOWER= 0;
 	ListView listview_follower;
 	NeighborAdapter nAdapter;
 	String name, message;
@@ -26,7 +26,7 @@ public class FollowerList extends PagerFragment {
 	public View onCreateView(LayoutInflater inflater,
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-		View v = inflater.inflate(R.layout.neighbor_layout, container, false);
+		View v = inflater.inflate(R.layout.neighbor_list_layout, container, false);
 		listview_follower = (ListView)v.findViewById(R.id.listview_neighbor);
 		nAdapter = new NeighborAdapter(getActivity());
 		listview_follower.setAdapter(nAdapter);
@@ -44,14 +44,15 @@ public class FollowerList extends PagerFragment {
 	}
 	
 	private void initData(){
-		UserData u0 = new UserData(0, "a", "aaa", "skdj", 10, 10, 1000);
-		UserData u1 = new UserData(1, "ab", "aaa", "skdj", 10, 10, 1000);
+		UserData u0 = new UserData(0, "a", "a", "skdj", 10, 10, 1000);
+		UserData u1 = new UserData(1, "ab", "aa", "skdj", 10, 10, 1000);
 		UserData u2 = new UserData(2, "abc", "aaa", "skdj", 10, 10, 1000);
-		UserData u3 = new UserData(3, "abd", "aaa", "skdj", 10, 10, 1000);
+		UserData u3 = new UserData(3, "abd", "aaaa", "skdj", 10, 10, 1000);
 		
 		nAdapter.add(u0);
 		nAdapter.add(u1);
 		nAdapter.add(u2);
+		nAdapter.add(u3);
 	}
 	
 	@Override

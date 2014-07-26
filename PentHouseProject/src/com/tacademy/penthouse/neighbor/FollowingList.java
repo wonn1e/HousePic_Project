@@ -21,13 +21,13 @@ public class FollowingList extends PagerFragment {
 	NeighborAdapter nAdapter;
 	String name, message;
 	int resId;
-	ActionBar actionBar;
+	//ActionBar actionBar;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater,
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-		View v = inflater.inflate(R.layout.neighbor_layout, container, false);
+		View v = inflater.inflate(R.layout.neighbor_list_layout, container, false);
 		listview_following = (ListView)v.findViewById(R.id.listview_neighbor);
 		nAdapter = new NeighborAdapter(getActivity());
 		listview_following.setAdapter(nAdapter);
@@ -45,9 +45,11 @@ public class FollowingList extends PagerFragment {
 	}
 	
 	private void initData(){
-		UserData u0 = new UserData(0, "a", "aaa", "skdj", 10, 10, 1000);
-		UserData u1 = new UserData(0, "ab", "aaa", "skdj", 10, 10, 1000);
-		UserData u2 = new UserData(0, "abc", "aaa", "skdj", 10, 10, 1000);
+		UserData u0 = new UserData(0, "aaa", "a",  "skdj", 10, 10, 1000);
+		UserData u1 = new UserData(0, "ab", "ab", "skdj", 10, 10, 1000);
+		UserData u2 = new UserData(0, "abc", "abc", "skdj", 10, 10, 1000);
+		
+		
 		
 		nAdapter.add(u0);
 		nAdapter.add(u1);

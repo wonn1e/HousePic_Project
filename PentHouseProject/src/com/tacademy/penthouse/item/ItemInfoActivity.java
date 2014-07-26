@@ -28,7 +28,6 @@ import com.viewpagerindicator.PageIndicator;
 public class ItemInfoActivity extends FragmentActivity {
 	ItemData iData;
 	ItemLikeShowListDialog itemLikeDialog;
-	public static final String ITEMLIKE_TAG = "item like";
 
 	TextView item_name_brand, item_like_count, item_price, item_material, item_size;
 	ImageView show_item_like;
@@ -105,7 +104,7 @@ public class ItemInfoActivity extends FragmentActivity {
 					b.putParcelable(ItemLikeShowListDialog.PARAM_ITEM_DATA, iData);
 					b.putParcelableArray(ItemLikeShowListDialog.PARAM_ROOM_DATA, myRoomData);
 					itemLikeDialog.setArguments(b);
-					itemLikeDialog.show(getSupportFragmentManager(), ITEMLIKE_TAG);
+					itemLikeDialog.show(getSupportFragmentManager(), "dialog");
 				}
 			}
 		});

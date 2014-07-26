@@ -1,24 +1,23 @@
 package com.tacademy.penthouse.itemlike;
 
 import android.app.Dialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.tacademy.penthouse.R;
 import com.tacademy.penthouse.entity.ItemData;
 import com.tacademy.penthouse.entity.RoomData;
-import com.tacademy.penthouse.item.ItemInfoActivity;
 
 public class ItemLikeShowListDialog extends DialogFragment {
 	public static final String PARAM_ITEM_DATA = "item data";
@@ -77,8 +76,13 @@ public class ItemLikeShowListDialog extends DialogFragment {
 		btn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent i = new Intent(getActivity(), CreateNewRoomDialog.class);
-				startActivity(i);
+				CreateNewRoomDialog d = new CreateNewRoomDialog();
+				FragmentTransaction ft = getFragmentManager().beginTransaction();
+				Fragment f = getFragmentManager().findFragmentByTag("dialog");
+				if (f != null) {
+					ft.remove(f);
+				}
+				d.show(ft, "dialog");
 			}
 		});
 		return v;

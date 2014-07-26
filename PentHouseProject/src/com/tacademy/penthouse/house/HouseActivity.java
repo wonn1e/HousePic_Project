@@ -4,20 +4,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
-
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.etsy.android.grid.StaggeredGridView;
 import com.tacademy.penthouse.HeaderGridView;
 import com.tacademy.penthouse.R;
 import com.tacademy.penthouse.editimgdialog.EditImgActivity;
 import com.tacademy.penthouse.entity.HouseData;
 import com.tacademy.penthouse.entity.RoomData;
 import com.tacademy.penthouse.entity.UserData;
+import com.tacademy.penthouse.neighbor.NeighborListActivity;
 import com.tacademy.penthouse.room.MyRoomInfoActivity;
 
 public class HouseActivity extends FragmentActivity {
@@ -94,6 +94,30 @@ public class HouseActivity extends FragmentActivity {
 		house_room_gridView = (HeaderGridView)findViewById(R.id.header_grid_view);
 		house_room_gridView.addHeaderView(v);
 		initData();
+		
+		Button btn = (Button)v.findViewById(R.id.following_btn);
+		btn.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(HouseActivity.this, NeighborListActivity.class);
+				i.putExtra(NeighborListActivity.PARAM_CURRENT_TAB, 0);//uData);
+				startActivity(i);
+				//startActivityForResult(i, 0);
+			}
+		});
+		
+		btn = (Button)v.findViewById(R.id.follower_btn);
+		btn.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(HouseActivity.this, NeighborListActivity.class);
+				i.putExtra(NeighborListActivity.PARAM_CURRENT_TAB, 1);//uData);
+				startActivity(i);
+				//startActivityForResult(i, 1);
+			}
+		});
 		
 		if(uData.user_num == hData.user_num){
 			myRoomAdapter = new MyRoomAdapter(this);

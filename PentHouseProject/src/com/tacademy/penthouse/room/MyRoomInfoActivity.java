@@ -1,48 +1,56 @@
 package com.tacademy.penthouse.room;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.etsy.android.grid.StaggeredGridView;
 import com.tacademy.penthouse.R;
 import com.tacademy.penthouse.entity.ItemData;
+import com.tacademy.penthouse.entity.RoomData;
 import com.tacademy.penthouse.item.ItemInfoActivity;
+import com.tacademy.penthouse.itemlike.ItemLikeShowListDialog;
 
-public class MyRoomInfoActivity extends Activity {
-
+public class MyRoomInfoActivity extends FragmentActivity {
+	ItemLikeShowListDialog itemLikeDialog;
+	ItemAdapter iAdapter;
+	
+	ImageView room_img;
+	TextView room_name;
+	TextView room_update_time;
+	TextView room_intro;
+	TextView room_product_list;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_my_room_info);
 
 		StaggeredGridView myroom_item_gridview;
+		itemLikeDialog = new ItemLikeShowListDialog();
 
 		//ItemData 积己何盒
 		String[] t = {"aa","bb"};
 		int[] img = {R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher};
-		final ItemData[] iData = {new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img, "http://www.naver.com", true),
-				new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img, "http://www.naver.com", false),
-				new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img, "http://www.naver.com", false),
-				new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img, "http://www.naver.com",true),
-				new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img, "http://www.naver.com", true),
-				new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img, "http://www.naver.com", false),
-				new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img, "http://www.naver.com", false)};
-
+		final ItemData[] iData = {new ItemData(1,1,"aa","a1","aa","aa","aa",t,1,"aa",img, "http://www.naver.com", true),
+				new ItemData(1,1,"aa","a2","aa","aa","aa",t,1,"aa",img, "http://www.naver.com", false),
+				new ItemData(1,1,"aa","a3","aa","aa","aa",t,1,"aa",img, "http://www.naver.com", false),
+				new ItemData(1,1,"aa","a4","aa","aa","aa",t,1,"aa",img, "http://www.naver.com",true),
+				new ItemData(1,1,"aa","a5","aa","aa","aa",t,1,"aa",img, "http://www.naver.com", true),
+				new ItemData(1,1,"aa","a6","aa","aa","aa",t,1,"aa",img, "http://www.naver.com", false),
+				new ItemData(1,1,"aa","a7","aa","aa","aa",t,1,"aa",img, "http://www.naver.com", false)};
+		final RoomData[] myRoomData = {
+				new RoomData(1,1,"house1",R.drawable.ic_launcher,"规汲疙1",true),
+				new RoomData(2,2,"house2",R.drawable.ic_launcher,"规汲疙2",true),
+				new RoomData(3,3,"house3",R.drawable.ic_launcher,"规汲疙3",true)
+		};
 		//
 
-		//Layout Item 急攫, 积己何 
-		ImageView room_img;
-		TextView room_name;
-		TextView room_update_time;
-		TextView room_intro;
-		TextView room_product_list;
 		//	GridView room_item_gridview;
 
 		View v = getLayoutInflater().inflate(R.layout.header_view_myroom_layout, null);
@@ -56,12 +64,50 @@ public class MyRoomInfoActivity extends Activity {
 		myroom_item_gridview.addHeaderView(v);
 
 		//Adapter
-		ItemAdapter iAdapter;
 		iAdapter = new ItemAdapter(this);
 		myroom_item_gridview.setAdapter(iAdapter);
 		for(int i = 0; i < iData.length; i++){
 			iAdapter.add(iData[i]);	
 		}
+
+		iAdapter.setOnAdapterItemClickListener(new ItemAdapter.OnAdapterItemClickListener() {
+
+			@Override
+			public void onItemLikeClick(View v, ItemData data) {
+				Toast.makeText(MyRoomInfoActivity.this, "Clicked in MyRoomInfoActivitiy", Toast.LENGTH_SHORT).show();
+
+				/*Bundle b = new Bundle();
+				b.putParcelable(ItemLikeShowListDialog.PARAM_ITEM_DATA, data);
+				b.putParcelableArray(ItemLikeShowListDialog.PARAM_ROOM_DATA, myRoomData);
+				itemLikeDialog.setArguments(b);
+				itemLikeDialog.show(getSupportFragmentManager(), "dialog");*/
+				ItemData dddd = new ItemData();
+				dddd = data;
+				//now unlike!!
+				if(data.item_like){
+					data.item_like = false;
+					data.likeCnt--;
+					//iData.notify();
+				}
+				//now like!!
+				else{
+					Toast.makeText(MyRoomInfoActivity.this, "like true", Toast.LENGTH_SHORT).show();
+					data.item_like = true;
+					data.likeCnt++;
+					//iData.notify();
+
+					//idata update! (ex. likeCnt, etc)
+
+					Bundle b = new Bundle();
+					b.putParcelable(ItemLikeShowListDialog.PARAM_ITEM_DATA, data);
+					b.putParcelableArray(ItemLikeShowListDialog.PARAM_ROOM_DATA, myRoomData);
+					itemLikeDialog.setArguments(b);
+					itemLikeDialog.show(getSupportFragmentManager(), "dialog");
+
+				}
+
+			}
+		});
 
 		myroom_item_gridview.setOnItemClickListener(new OnItemClickListener() {
 
