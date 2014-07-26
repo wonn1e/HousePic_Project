@@ -1,7 +1,6 @@
 package com.tacademy.penthouse;
 
-import com.tacademy.penthouse.entity.ItemData;
-import com.tacademy.penthouse.entity.RoomData;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,6 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnGroupCollapseListener;
+import android.widget.Toast;
+
+import com.tacademy.penthouse.entity.ItemData;
+import com.tacademy.penthouse.entity.RoomData;
+import com.tacademy.penthouse.item.ItemInfoActivity;
+import com.tacademy.penthouse.room.MyRoomInfoActivity;
+import com.tacademy.penthouse.room.UserRoomInfoActivity;
 
 public class Tab1MDFragment extends Fragment {
 	
@@ -61,6 +67,23 @@ public class Tab1MDFragment extends Fragment {
 				
 			}
 		});
+		
+		mdListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+			
+			@Override
+			public boolean onGroupClick(ExpandableListView parent, View v,
+					int groupPosition, long id) {
+				Toast.makeText(getActivity(), "this Position : " + groupPosition, Toast.LENGTH_SHORT).show();
+				//my room인지 user룸인지 판단!
+				Intent i = new Intent(getActivity(), MyRoomInfoActivity.class);
+				
+				i.putExtra("iData", rData[groupPosition]);
+				startActivityForResult(i, 0);
+				return false;
+			}
+		});
+		
+			
 		return v;
 	}
 	private void initData(){
