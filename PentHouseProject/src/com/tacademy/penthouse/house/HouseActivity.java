@@ -74,9 +74,9 @@ public class HouseActivity extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.house_layout);
-		uData = new UserData(1, "aa", "aa", "aa", 1, 1, R.drawable.penguins, "aa", "aa", "aa");
+		//uData = new UserData(1, "aa", "aa", "aa", 1, 1, R.drawable.penguins, "aa", "aa", "aa");
 		myData = new UserData(2, "bb", "bb", "bb", 2, 2, R.drawable.tulips, "bb", "bb", "bb");
-		//uData = new UserData(2, "bb", "bb", "bb", 2, 2, R.drawable.tulips, "bb", "bb", "bb");
+		uData = new UserData(2, "bb", "bb", "bb", 2, 2, R.drawable.tulips, "bb", "bb", "bb");
 		
 	//	hData =  new HouseData(10, 12, "nickname's house", "HOUSE!!", "dddd");
 	//	hData = new HouseData();
