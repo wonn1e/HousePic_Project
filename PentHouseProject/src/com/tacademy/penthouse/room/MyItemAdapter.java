@@ -44,6 +44,7 @@ public class MyItemAdapter extends BaseAdapter implements MyItemView.OnItemLikeC
 		if(convertView == null){
 			v = new MyItemView(mContext);
 			v.setOnItemLikeClickListener(this);
+			v.setOnItemMoveClickListener(this);
 		}else{
 			v = (MyItemView)convertView;
 		}
