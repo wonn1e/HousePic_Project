@@ -32,7 +32,8 @@ public class Tab1MDFragment extends Fragment {
 	ExpandableListView mdListView;
 	MDRoomAdapter mdAdapter;
 	String[] t = {"aa","bb"};
-	int[] img = {R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher};
+	int[] img = {R.drawable.tulips,R.drawable.tulips,R.drawable.tulips,R.drawable.tulips,R.drawable.tulips};
+	int[] recmd_img = {R.drawable.tulips,R.drawable.tulips,R.drawable.tulips,R.drawable.tulips,R.drawable.tulips};
 	ItemData[] iData = {new ItemData(1,1,"aa","i1","aa","aa","aa",t,1,"aa",img,"http://www.naver.com", true),
 			new ItemData(2,2,"bb","i2","fdsf","dsf","fd",t,1,"dfs",img,"http://www.naver.com", true),
 			new ItemData(3,3,"12321","i3","1213","1231","12321",t,1,"12312",img,"http://www.naver.com", false),

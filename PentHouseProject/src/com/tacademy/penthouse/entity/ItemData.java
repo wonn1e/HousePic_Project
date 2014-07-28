@@ -22,10 +22,18 @@ public class ItemData implements Parcelable {
 	public String link;
 	public boolean item_like;
 	
+	
 	//String item_url;
 	public ItemData(){}
-	public ItemData(int room_num,int item_code, String sort_code , String item_name , String brand ,  String price,          
-			String material, String[]theme, int likeCnt , String sort_category,int []item_img ,String link , boolean item_like ){
+	public ItemData(int room_num,int item_code,           
+	String sort_code ,     
+	String item_name ,     
+	String brand ,         
+	String price,          
+	String material,       
+	String[]theme,  
+	int likeCnt ,             
+	String sort_category,int []item_img ,String link , boolean item_like){
 		this.room_num = room_num;
 		this.item_code = item_code ;           
 		this.sort_code = sort_code;     
@@ -39,6 +47,7 @@ public class ItemData implements Parcelable {
 		this.item_img = item_img ; 
 		this.link = link;
 		this.item_like = item_like;
+	
 	}
 	public ItemData(Parcel p){
 		room_num = p.readInt();

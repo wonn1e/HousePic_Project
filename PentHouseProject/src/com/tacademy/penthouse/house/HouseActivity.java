@@ -17,6 +17,7 @@ import com.tacademy.penthouse.entity.RoomData;
 import com.tacademy.penthouse.entity.UserData;
 import com.tacademy.penthouse.neighbor.NeighborListActivity;
 import com.tacademy.penthouse.room.MyRoomInfoActivity;
+import com.tacademy.penthouse.room.UserRoomInfoActivity;
 
 public class HouseActivity extends FragmentActivity {
 	public static final String TAG_NICKNAME = "nickname";
@@ -75,6 +76,7 @@ public class HouseActivity extends FragmentActivity {
 		setContentView(R.layout.house_layout);
 		uData = new UserData(1, "aa", "aa", "aa", 1, 1, R.drawable.penguins, "aa", "aa", "aa");
 		myData = new UserData(2, "bb", "bb", "bb", 2, 2, R.drawable.tulips, "bb", "bb", "bb");
+		//uData = new UserData(2, "bb", "bb", "bb", 2, 2, R.drawable.tulips, "bb", "bb", "bb");
 		
 	//	hData =  new HouseData(10, 12, "nickname's house", "HOUSE!!", "dddd");
 	//	hData = new HouseData();
@@ -121,6 +123,9 @@ public class HouseActivity extends FragmentActivity {
 				//startActivityForResult(i, 1);
 			}
 		});
+		
+		
+		
 		
 		if(myData.user_num == uData.user_num){
 			myRoomAdapter = new MyRoomAdapter(this);
@@ -245,7 +250,8 @@ public class HouseActivity extends FragmentActivity {
 					}
 				}
 			});
-		}else{
+		}else{//User != My
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			roomAdapter = new RoomAdapter(this);
 			house_room_gridView.setAdapter(roomAdapter);
 			for(int j=0; j<rData.length; j++){
@@ -257,7 +263,7 @@ public class HouseActivity extends FragmentActivity {
 				public void onItemClick(AdapterView<?> parent, View view,
 						int position, long id) {
 					if(position != 0){
-						Intent i = new Intent(HouseActivity.this, MyRoomInfoActivity.class);
+						Intent i = new Intent(HouseActivity.this, UserRoomInfoActivity.class);
 						i.putExtra("rData", rData[position]);
 						startActivity(i);
 					}

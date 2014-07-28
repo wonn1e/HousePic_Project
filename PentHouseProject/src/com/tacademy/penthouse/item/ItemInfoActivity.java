@@ -8,6 +8,8 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -51,10 +53,6 @@ public class ItemInfoActivity extends FragmentActivity {
 		itemLikeDialog = new ItemLikeShowListDialog();
 		Button item_share_btn;
 		Button item_buy_btn;
-		//		String[] t = {"aa","bb"};
-		//		int[] img = {R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher};
-		//		Integer[] img2= {R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher};
-		//		ItemData iData= new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img);
 		iData = new ItemData();
 		Intent i = getIntent();
 		iData = i.getParcelableExtra("iData");
@@ -133,7 +131,16 @@ public class ItemInfoActivity extends FragmentActivity {
 			}
 		});
 
-		initData();
+		hlv_s_item.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				//initData(iData.recommand_items[position]);
+				//서버에서 iData를 받아서 넘긴다!
+			}
+		});
+		initData(iData);
 		
 	}
 
@@ -147,19 +154,21 @@ public class ItemInfoActivity extends FragmentActivity {
 		}
 	}*/
 	
-	private void initData(){
+	private void initData(ItemData data){
 		item_material = (TextView)findViewById(R.id.item_material);
 		item_size = (TextView)findViewById(R.id.item_size);
-		Toast.makeText(ItemInfoActivity.this, "name : " + iData.item_name, Toast.LENGTH_SHORT).show();
-		item_name_brand.setText(iData.item_name);
-		item_like_count.setText(""+iData.likeCnt);
-		item_price.setText(iData.price);
-		item_material.setText(iData.material);
-		if(iData.item_like)
+		Toast.makeText(ItemInfoActivity.this, "name : " + data.item_name, Toast.LENGTH_SHORT).show();
+		item_name_brand.setText(data.item_name);
+		item_like_count.setText(""+data.likeCnt);
+		item_price.setText(data.price);
+		item_material.setText(data.material);
+		if(data.item_like)
 			show_item_like.setImageResource(R.drawable.ic_launcher);
 		else
 			show_item_like.setImageResource(R.drawable.tulips);
-		//		item_size.setText(iData.)
+		//		item_size.setText(data.)
 
 	}
+	
+	
 }
