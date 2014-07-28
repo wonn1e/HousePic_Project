@@ -74,35 +74,35 @@ public class Tab1MDFragment extends Fragment {
 			}
 		});
 
-//		mdAdapter.setOnAdapterItemLikeClickListener(new MDRoomAdapter.OnAdapterItemLikeClickListener() {
-//
-//			@Override
-//			public void onItemLikeClick(View v, ItemData data) {
-//				//now unlike!!
-//				if(data.item_like){
-//					Toast.makeText(getActivity(), "now unlike", Toast.LENGTH_SHORT).show();
-//					data.item_like = false;
-//					data.likeCnt--;
-//					
-//					//iData.notify();
-//				}
-//				//now like!!
-//				else{
-//					Toast.makeText(getActivity(), "just like not in room", Toast.LENGTH_SHORT).show();
-//					//	data.item_like = true;
-//					//	data.likeCnt++;
-//					//iData.notify();
-//
-//					//idata update! (ex. likeCnt, etc)
-//				
-//					Bundle b = new Bundle();
-//					b.putParcelable(ItemLikeShowListDialog.PARAM_ITEM_DATA, data);
-//					b.putParcelableArray(ItemLikeShowListDialog.PARAM_ROOM_DATA, myRoomData);
-//					itemLikeDialog.setArguments(b);
-//					itemLikeDialog.show(getFragmentManager(), "dialog");
-//				}
-//			}
-//		});
+		mdAdapter.setOnAdapterItemLikeClickListener(new MDRoomAdapter.OnAdapterItemLikeClickListener() {
+
+			@Override
+			public void onItemLikeClick(View v, ItemData data) {
+				//now unlike!!
+				if(data.item_like){
+					Toast.makeText(getActivity(), "now unlike", Toast.LENGTH_SHORT).show();
+					data.item_like = false;
+					data.likeCnt--;
+					
+					//iData.notify();
+				}
+				//now like!!
+				else{
+					Toast.makeText(getActivity(), "just like not in room", Toast.LENGTH_SHORT).show();
+					//	data.item_like = true;
+					//	data.likeCnt++;
+					//iData.notify();
+
+					//idata update! (ex. likeCnt, etc)
+				
+					Bundle b = new Bundle();
+					b.putParcelable(ItemLikeShowListDialog.PARAM_ITEM_DATA, data);
+					b.putParcelableArray(ItemLikeShowListDialog.PARAM_ROOM_DATA, myRoomData);
+					itemLikeDialog.setArguments(b);
+					itemLikeDialog.show(getFragmentManager(), "dialog");
+				}
+			}
+		});
 
 
 		mdListView.setAdapter(mdAdapter);
