@@ -44,12 +44,12 @@ public class MDRoomAdapter extends BaseExpandableListAdapter implements MDItemVi
 		return item.items.get(childPosition);
 	}
 
+	
+
 	@Override
 	public long getChildId(int groupPosition, int childPosition) {
 		return (((long)groupPosition) << 32 | ((long)childPosition));
 	}
-
-	
 
 	@Override
 	public int getChildrenCount(int groupPosition) {
@@ -158,23 +158,28 @@ public class MDRoomAdapter extends BaseExpandableListAdapter implements MDItemVi
 			mAdapterListener.onItemClick(v, data);
 		}
 	}
+	
 	public interface OnAdapterItemLikeClickListener{
 		public void onItemLikeClick(View v, ItemData data);
 	}
+	
 	OnAdapterItemLikeClickListener lAdapterListener;
+	
 	public void setOnAdapterItemLikeClickListener(OnAdapterItemLikeClickListener listener){
 		lAdapterListener = listener;
 	}
+	
+	public void updateData(ItemData data, boolean isLike, int likeCnt) {
+		data.item_like = isLike;
+		data.likeCnt = likeCnt;
+		notifyDataSetChanged();
+	}
+	
 	@Override
 	public void onItemDataLikeClick(View v, ItemData data) {
 		if(lAdapterListener != null){
 			lAdapterListener.onItemLikeClick(v, data);
 		}
 	}
-
-	
-	
-	
-
 	
 }

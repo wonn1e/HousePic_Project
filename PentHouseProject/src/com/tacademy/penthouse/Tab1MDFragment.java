@@ -2,6 +2,7 @@ package com.tacademy.penthouse;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -14,10 +15,9 @@ import android.widget.Toast;
 import com.tacademy.penthouse.entity.ItemData;
 import com.tacademy.penthouse.entity.RoomData;
 import com.tacademy.penthouse.item.ItemInfoActivity;
+import com.tacademy.penthouse.itemlike.CreateNewRoomDialog;
 import com.tacademy.penthouse.itemlike.ItemLikeShowListDialog;
 import com.tacademy.penthouse.room.MyRoomInfoActivity;
-import com.tacademy.penthouse.room.UserRoomInfoActivity;
-import com.tacademy.penthouse.search.SearchResultActivity;
 
 public class Tab1MDFragment extends Fragment {
 
@@ -28,6 +28,7 @@ public class Tab1MDFragment extends Fragment {
 	}
 	
 	ItemLikeShowListDialog itemLikeDialog;
+	CreateNewRoomDialog createRoomDialog;
 	ExpandableListView mdListView;
 	MDRoomAdapter mdAdapter;
 	String[] t = {"aa","bb"};
@@ -59,6 +60,7 @@ public class Tab1MDFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater,
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		itemLikeDialog = new ItemLikeShowListDialog();
+		createRoomDialog = new CreateNewRoomDialog();
 		View v = inflater.inflate(R.layout.tab1_md_layout, container, false);
 		mdListView = (ExpandableListView)v.findViewById(R.id.md_list);
 		mdAdapter = new MDRoomAdapter(getActivity());
@@ -81,18 +83,13 @@ public class Tab1MDFragment extends Fragment {
 				//now unlike!!
 				if(data.item_like){
 					Toast.makeText(getActivity(), "now unlike", Toast.LENGTH_SHORT).show();
-					data.item_like = false;
+					mdAdapter.updateData(data, false, data.likeCnt--);
 					data.likeCnt--;
 					
-					//iData.notify();
 				}
 				//now like!!
 				else{
-					Toast.makeText(getActivity(), "just like not in room", Toast.LENGTH_SHORT).show();
-					//	data.item_like = true;
-					//	data.likeCnt++;
-					//iData.notify();
-
+					
 					//idata update! (ex. likeCnt, etc)
 				
 					Bundle b = new Bundle();
@@ -100,6 +97,30 @@ public class Tab1MDFragment extends Fragment {
 					b.putParcelableArray(ItemLikeShowListDialog.PARAM_ROOM_DATA, myRoomData);
 					itemLikeDialog.setArguments(b);
 					itemLikeDialog.show(getFragmentManager(), "dialog");
+					
+					final ItemData itemData = data;
+					itemLikeDialog.setOnRoomSelectedListener(new ItemLikeShowListDialog.OnRoomSelectedListener() {
+						
+						@Override
+						public void onRoomSelected(boolean roomSelected) {
+							Toast.makeText(getActivity(), "item in room!!", Toast.LENGTH_SHORT).show();
+							mdAdapter.updateData(itemData, true, itemData.likeCnt++);
+						}
+					});
+					
+					//Bundle b1 = new Bundle();
+					//b1.putParcelable(CreateNewRoomDialog.PARAM_ITEM_NEW_ROOM, data);
+					//createRoomDialog.setArguments(b1);
+					createRoomDialog.setArguments(b);
+					createRoomDialog.setOnRoomCreatedListener(new CreateNewRoomDialog.OnRoomCreatedListener() {
+						
+						@Override
+						public void onRoomCreated(boolean roomCreated) {
+							Toast.makeText(getActivity(), "item in new room!!", Toast.LENGTH_SHORT).show();
+							mdAdapter.updateData(itemData, true, itemData.likeCnt++);
+						}
+					});
+					
 				}
 			}
 		});

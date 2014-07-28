@@ -32,8 +32,6 @@ public class MDRoomView extends FrameLayout {
 		
 		
 		
-		
-		
 	}
 
 }

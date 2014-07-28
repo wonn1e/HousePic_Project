@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.tacademy.penthouse.MDRoomAdapter;
 import com.tacademy.penthouse.R;
 import com.tacademy.penthouse.entity.ItemData;
 import com.tacademy.penthouse.entity.RoomData;
@@ -28,7 +29,16 @@ public class ItemLikeShowListDialog extends DialogFragment {
 	ListView room_list;
 	RoomData[] rData;
 	ItemData iData;
-	RoomNameAdapter rAdapter;
+	RoomNameAdapter rAdapter;	
+	public interface OnRoomSelectedListener{
+		public void onRoomSelected(boolean roomSelected);
+	}
+	
+	OnRoomSelectedListener rListener;
+	
+	public void setOnRoomSelectedListener(OnRoomSelectedListener listener){
+		rListener = listener;
+	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -41,8 +51,8 @@ public class ItemLikeShowListDialog extends DialogFragment {
 			iData = (ItemData) iB.getParcelable(PARAM_ITEM_DATA);
 			rData = (RoomData[]) iB.getParcelableArray(PARAM_ROOM_DATA);
 		}
-		//
 		rAdapter = new RoomNameAdapter(getActivity());
+		
 	}
 
 	@Override
@@ -64,13 +74,11 @@ public class ItemLikeShowListDialog extends DialogFragment {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				if(!iData.item_like){
-					Toast.makeText(getActivity(), "now like and in room", Toast.LENGTH_SHORT).show();
-					iData.item_like = true;
-					iData.likeCnt++;
-					rData[position].items.add(iData);
-				}
 				
+				if(rListener != null){
+					rListener.onRoomSelected(true);
+				}
+
 				dismiss();
 			}
 		});
