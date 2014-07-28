@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 
-public class MDRoomAdapter extends BaseExpandableListAdapter implements MDItemView.OnItemDataClickListener{
+public class MDRoomAdapter extends BaseExpandableListAdapter implements MDItemView.OnItemDataClickListener, MDItemView.OnItemDataLikeClickListener{
 
 	Context mContext;
 	ArrayList<RoomData> items = new ArrayList<RoomData>();
@@ -119,6 +119,7 @@ public class MDRoomAdapter extends BaseExpandableListAdapter implements MDItemVi
 			v = (MDRoomView)convertView;
 		}
 		v.setData(items.get(groupPosition));
+
 		return v;
 	}
 	@Override
@@ -129,6 +130,7 @@ public class MDRoomAdapter extends BaseExpandableListAdapter implements MDItemVi
 		if(convertView == null){
 			v = new MDItemView(mContext);
 			v.setOnItemDataClickListener(this);
+			v.setOnItemDataLikeClickListener(this);
 		}else{
 			v = (MDItemView)convertView;
 		}		
@@ -156,6 +158,20 @@ public class MDRoomAdapter extends BaseExpandableListAdapter implements MDItemVi
 			mAdapterListener.onItemClick(v, data);
 		}
 	}
+	public interface OnAdapterItemLikeClickListener{
+		public void onItemLikeClick(View v, ItemData data);
+	}
+	OnAdapterItemLikeClickListener lAdapterListener;
+	public void setOnAdapterItemLikeClickListener(OnAdapterItemLikeClickListener listener){
+		lAdapterListener = listener;
+	}
+	@Override
+	public void onItemDataLikeClick(View v, ItemData data) {
+		if(lAdapterListener != null){
+			lAdapterListener.onItemLikeClick(v, data);
+		}
+	}
+
 	
 	
 	
