@@ -19,7 +19,7 @@ import com.tacademy.penthouse.itemlike.ItemLikeShowListDialog;
 
 public class MyRoomInfoActivity extends FragmentActivity {
 	ItemLikeShowListDialog itemLikeDialog;
-	ItemAdapter iAdapter;
+	MyItemAdapter iAdapter;
 	
 	ImageView room_img;
 	TextView room_name;
@@ -64,13 +64,13 @@ public class MyRoomInfoActivity extends FragmentActivity {
 		myroom_item_gridview.addHeaderView(v);
 
 		//Adapter
-		iAdapter = new ItemAdapter(this);
+		iAdapter = new MyItemAdapter(this);
 		myroom_item_gridview.setAdapter(iAdapter);
 		for(int i = 0; i < iData.length; i++){
 			iAdapter.add(iData[i]);	
 		}
 
-		iAdapter.setOnAdapterItemClickListener(new ItemAdapter.OnAdapterItemClickListener() {
+		iAdapter.setOnAdapterItemClickListener(new MyItemAdapter.OnAdapterItemClickListener() {
 
 			@Override
 			public void onItemLikeClick(View v, ItemData data) {
@@ -99,6 +99,17 @@ public class MyRoomInfoActivity extends FragmentActivity {
 
 				}
 
+			}
+
+			@Override
+			public void onItemMoveClick(View v, ItemData data) {
+				Bundle b = new Bundle();
+				b.putParcelable(ItemLikeShowListDialog.PARAM_ITEM_DATA, data);
+				b.putParcelableArray(ItemLikeShowListDialog.PARAM_ROOM_DATA, myRoomData);
+				itemLikeDialog.setArguments(b);
+				itemLikeDialog.show(getSupportFragmentManager(), "dialog");
+				
+				//방을 선택 후 그 방안의 아이템을 삭제!
 			}
 		});
 
