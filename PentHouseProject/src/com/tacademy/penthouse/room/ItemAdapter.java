@@ -55,6 +55,10 @@ public class ItemAdapter extends BaseAdapter implements ItemView.OnItemLikeClick
 		public void onItemLikeClick(View v, ItemData iData);
 	}
 	
+	public void updateData(ItemData data, boolean isLike){
+		
+	}
+	
 	OnAdapterItemClickListener mAdapListener;
 	
 	public void setOnAdapterItemClickListener(OnAdapterItemClickListener l){

@@ -24,15 +24,8 @@ public class ItemData implements Parcelable {
 	
 	//String item_url;
 	public ItemData(){}
-	public ItemData(int room_num,int item_code,           
-	String sort_code ,     
-	String item_name ,     
-	String brand ,         
-	String price,          
-	String material,       
-	String[]theme,  
-	int likeCnt ,             
-	String sort_category,int []item_img ,String link , boolean item_like ){
+	public ItemData(int room_num,int item_code, String sort_code , String item_name , String brand ,  String price,          
+			String material, String[]theme, int likeCnt , String sort_category,int []item_img ,String link , boolean item_like ){
 		this.room_num = room_num;
 		this.item_code = item_code ;           
 		this.sort_code = sort_code;     

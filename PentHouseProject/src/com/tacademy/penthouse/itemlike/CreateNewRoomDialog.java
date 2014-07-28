@@ -34,6 +34,16 @@ public class CreateNewRoomDialog extends DialogFragment {
 	TextView roomname_length;
 	EditText room_name;
 	CheckBox isPublic;
+	
+	public interface OnRoomCreatedListener{
+		public void onRoomCreated(boolean roomCreated);
+	}
+	
+	OnRoomCreatedListener cListener;
+	
+	public void setOnRoomCreatedListener(OnRoomCreatedListener listener){
+		cListener = listener;
+	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -42,7 +52,8 @@ public class CreateNewRoomDialog extends DialogFragment {
 
 		Bundle iB = getArguments();
 		if(iB != null){
-			iData = (ItemData)iB.getParcelable(PARAM_ITEM_NEW_ROOM);                                                              
+			//iData = (ItemData)iB.getParcelable(PARAM_ITEM_NEW_ROOM);     
+			iData = (ItemData)iB.getParcelable(ItemLikeShowListDialog.PARAM_ITEM_DATA);
 		}
 	}
 
@@ -72,7 +83,7 @@ public class CreateNewRoomDialog extends DialogFragment {
 		isPublic = (CheckBox)v.findViewById(R.id.check_public);
 		//if()
 
-		Button btn = (Button)v.findViewById(R.id.button1);
+		Button btn = (Button)v.findViewById(R.id.room_create_btn);
 		btn.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -88,6 +99,8 @@ public class CreateNewRoomDialog extends DialogFragment {
 				else{
 
 				}*/
+				if(cListener != null)
+					cListener.onRoomCreated(true);
 				
 				dismiss();
 				

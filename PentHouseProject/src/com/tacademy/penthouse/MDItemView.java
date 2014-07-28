@@ -98,7 +98,7 @@ public class MDItemView extends FrameLayout{
 			@Override
 			public void onClick(View v) {
 				if(lListener != null){
-					lListener.onItemDataLikeClick(MDItemView.this, lData);
+					lListener.onItemDataLikeClick(MDItemView.this, rData);
 				}
 			}
 		});

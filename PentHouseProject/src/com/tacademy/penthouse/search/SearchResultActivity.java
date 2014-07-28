@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.tacademy.penthouse.R;
 import com.tacademy.penthouse.entity.ItemData;
 import com.tacademy.penthouse.entity.RoomData;
+import com.tacademy.penthouse.item.ItemInfoActivity;
 import com.tacademy.penthouse.itemlike.ItemLikeShowListDialog;
 import com.tacademy.penthouse.room.ItemAdapter;
 import com.tacademy.penthouse.room.MyRoomInfoActivity;
@@ -133,17 +134,16 @@ public class SearchResultActivity extends ActionBarActivity {
 			}
 		});
 		
-		/*item_gridview.setOnClickListener(new View.OnClickListener() {
+		item_gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 			@Override
-			public void onClick(View v) {
-
-
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				Intent i = new Intent(SearchResultActivity.this, ItemInfoActivity.class);
+				i.putExtra("iData", iData[position]);
+				startActivity(i);
 			}
 		});
-*/
-
-
 
 	}
 }
