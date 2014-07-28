@@ -93,9 +93,9 @@ public class ItemInfoActivity extends FragmentActivity {
 				}
 				//now like!!
 				else{
-					iData.item_like = true;
-					iData.likeCnt++;
-					show_item_like.setImageResource(R.drawable.ic_launcher);
+					//iData.item_like = true;
+					//iData.likeCnt++;
+					//show_item_like.setImageResource(R.drawable.ic_launcher);
 					//iData.notify();
 					
 					//idata update! (ex. likeCnt, etc)

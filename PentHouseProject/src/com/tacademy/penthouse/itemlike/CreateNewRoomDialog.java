@@ -77,7 +77,6 @@ public class CreateNewRoomDialog extends DialogFragment {
 
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(getActivity(), "new room created", Toast.LENGTH_SHORT).show();
 				//newRoomData = new RoomData();
 				//newRoomData.room_name = (String)room_name.toString();
 				//newRoomData.room_img = new_room_img; from ImageVIew to int
@@ -89,7 +88,19 @@ public class CreateNewRoomDialog extends DialogFragment {
 				else{
 
 				}*/
+				
 				dismiss();
+				
+				/*String name = (String)room_name.getText().toString();
+				if(name != null && !name.equals("")){
+					Toast.makeText(getActivity(), "new room created", Toast.LENGTH_SHORT).show();
+					newRoomData.room_name = name;
+					/////////
+					dismiss();
+				}
+				else{
+					Toast.makeText(getActivity(), "방 이름을 입력하세요", Toast.LENGTH_SHORT).show();
+				}*/
 			}
 		});
 		return v;

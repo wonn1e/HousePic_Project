@@ -23,16 +23,25 @@ public class MDItemView extends FrameLayout{
 		public void onItemClick(View v,ItemData data);
 	}
 	
+	public interface OnItemDataLikeClickListener{
+		public void onItemDataLikeClick(View v, ItemData data);
+	}
+	
 	OnItemDataClickListener mListener;
 	public void setOnItemDataClickListener(OnItemDataClickListener listener) {
 		mListener = listener;
 	}
 	
+	OnItemDataLikeClickListener lListener;
+	public void setOnItemDataLikeClickListener(OnItemDataLikeClickListener listener){
+		lListener = listener;
+	}
+	
 	
 	ItemData rData;
 	ItemData lData;
-	ImageView item_left_img;
-	ImageView item_right_img;
+	ImageView item_left_img, item_left_like;
+	ImageView item_right_img, item_right_like;
 	TextView item_left_name;
 	TextView item_right_name;
 	TextView item_left_price;
@@ -43,7 +52,9 @@ public class MDItemView extends FrameLayout{
 		LayoutInflater.from(getContext()).inflate(R.layout.main_md_double_item_view, this);
 		
 		item_left_img = (ImageView)findViewById(R.id.item_left_img);
+		item_left_like = (ImageView)findViewById(R.id.item_left_like);
 		item_right_img = (ImageView)findViewById(R.id.item_right_img);
+		item_right_like = (ImageView)findViewById(R.id.item_right_like);
 		item_left_name = (TextView)findViewById(R.id.item_left_name);
 		item_right_name = (TextView)findViewById(R.id.item_right_name);
 		item_left_price = (TextView)findViewById(R.id.item_left_price);
@@ -73,21 +84,48 @@ public class MDItemView extends FrameLayout{
 				}
 			}
 		});
+		item_left_like.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if(lListener != null){
+					lListener.onItemDataLikeClick(MDItemView.this, lData);
+				}
+			}
+		});
+		item_right_like.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if(lListener != null){
+					lListener.onItemDataLikeClick(MDItemView.this, lData);
+				}
+			}
+		});
 	}
 	
 	public void setData(ItemData leftData,ItemData rightData){
 		lData = leftData;
-		rData = rightData;
-		
+		rData = rightData;		
 		
 		item_left_img.setImageResource(leftData.item_img[0]);
 		item_left_name.setText(leftData.item_name);
 		item_left_price.setText(leftData.price);
+		if(leftData.item_like){
+			item_left_like.setImageResource(R.drawable.ic_launcher);
+		}else{
+			item_left_like.setImageResource(R.drawable.tulips);
+		}
 		
 		if(rightData != null ){
 			item_right_img.setImageResource(rightData.item_img[0]);
 			item_right_name.setText(rightData.item_name);
 			item_right_price.setText(rightData.price);
+			if(rightData.item_like){
+				item_right_like.setImageResource(R.drawable.ic_launcher);
+			}else{
+				item_right_like.setImageResource(R.drawable.tulips);
+			}
 			
 		}
 	}

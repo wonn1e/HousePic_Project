@@ -14,17 +14,20 @@ import android.widget.Toast;
 import com.tacademy.penthouse.entity.ItemData;
 import com.tacademy.penthouse.entity.RoomData;
 import com.tacademy.penthouse.item.ItemInfoActivity;
+import com.tacademy.penthouse.itemlike.ItemLikeShowListDialog;
 import com.tacademy.penthouse.room.MyRoomInfoActivity;
 import com.tacademy.penthouse.room.UserRoomInfoActivity;
+import com.tacademy.penthouse.search.SearchResultActivity;
 
 public class Tab1MDFragment extends Fragment {
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 	}
 	
+	ItemLikeShowListDialog itemLikeDialog;
 	ExpandableListView mdListView;
 	MDAdapter mdAdapter;
 	String[] t = {"aa","bb"};
@@ -46,16 +49,22 @@ public class Tab1MDFragment extends Fragment {
 			new RoomData(2,2,"house2",R.drawable.ic_launcher,"방설명2",true),
 			new RoomData(3,3,"house3",R.drawable.ic_launcher,"방설명3",true)
 	};
-	
+	final RoomData[] myRoomData = {
+			new RoomData(1,1,"house1",R.drawable.penguins,"방설명1",true),
+			new RoomData(2,2,"house2",R.drawable.penguins,"방설명2",true),
+			new RoomData(3,3,"house3",R.drawable.penguins,"방설명3",true)
+	};
+
 	@Override
 	public View onCreateView(LayoutInflater inflater,
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		itemLikeDialog = new ItemLikeShowListDialog();
 		View v = inflater.inflate(R.layout.tab1_md_layout, container, false);
 		mdListView = (ExpandableListView)v.findViewById(R.id.md_list);
 		mdAdapter = new MDAdapter(getActivity());
-		
+
 		mdAdapter.setOnAdapterItemClickListener(new MDAdapter.OnAdapterItemClickListener() {
-			
+
 			@Override
 			public void onItemClick(View v, ItemData data) {
 				Toast.makeText(getActivity(), "dddd", Toast.LENGTH_SHORT).show();
@@ -64,45 +73,74 @@ public class Tab1MDFragment extends Fragment {
 				startActivity(i);
 			}
 		});
-		
+
+		mdAdapter.setOnAdapterItemLikeClickListener(new MDAdapter.OnAdapterItemLikeClickListener() {
+
+			@Override
+			public void onItemLikeClick(View v, ItemData data) {
+				//now unlike!!
+				if(data.item_like){
+					Toast.makeText(getActivity(), "now unlike", Toast.LENGTH_SHORT).show();
+					data.item_like = false;
+					data.likeCnt--;
+					
+					//iData.notify();
+				}
+				//now like!!
+				else{
+					Toast.makeText(getActivity(), "just like not in room", Toast.LENGTH_SHORT).show();
+					//	data.item_like = true;
+					//	data.likeCnt++;
+					//iData.notify();
+
+					//idata update! (ex. likeCnt, etc)
+				
+					Bundle b = new Bundle();
+					b.putParcelable(ItemLikeShowListDialog.PARAM_ITEM_DATA, data);
+					b.putParcelableArray(ItemLikeShowListDialog.PARAM_ROOM_DATA, myRoomData);
+					itemLikeDialog.setArguments(b);
+					itemLikeDialog.show(getFragmentManager(), "dialog");
+				}
+			}
+		});
+
+
 		mdListView.setAdapter(mdAdapter);
 		initData();
 		for(int i=0; i<mdAdapter.getGroupCount(); i++){
 			mdListView.expandGroup(i);
 		}
 		mdListView.setOnGroupCollapseListener(new OnGroupCollapseListener() {
-			
 			@Override
 			public void onGroupCollapse(int groupPosition) {
 				mdListView.expandGroup(groupPosition);
-				
+
 			}
 		});
-		
+
 		mdListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
-			
+
 			@Override
-			public boolean onGroupClick(ExpandableListView parent, View v,
-					int groupPosition, long id) {
+			public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
 				Toast.makeText(getActivity(), "this Position : " + groupPosition, Toast.LENGTH_SHORT).show();
 				//my room인지 user룸인지 판단!
 				Intent i = new Intent(getActivity(), MyRoomInfoActivity.class);
-				
+
 				i.putExtra("iData", rData[groupPosition]);
 				startActivityForResult(i, 0);
 				return false;
 			}
 		});
-		
-			
+
+
 		return v;
 	}
 	private void initData(){
 		for(int i = 0; i < rData.length; i++){
 			int j = 0;
 			while (j < iData.length){
-				
-					//mAdapter.put( rData[i], iData[j],iData[j+1] );
+
+				//mAdapter.put( rData[i], iData[j],iData[j+1] );
 				if(iData.length - j != 1){
 					mdAdapter.put( rData[i], iData[j],iData[j+1] );
 					if(iData.length - j != 1){
@@ -110,7 +148,7 @@ public class Tab1MDFragment extends Fragment {
 					}else{
 						j++;
 					}
-					
+
 				}else{
 					mdAdapter.put( rData[i], iData[j],null);
 					j++;
