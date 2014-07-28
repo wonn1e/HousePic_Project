@@ -34,6 +34,7 @@ public class FindPasswordFragment extends DialogFragment {
 			@Override
 			public void onClick(View v) {
 				Toast.makeText(getActivity(), "입력하신 주소로 임시 비밀번호를 보내드렸습니다.", Toast.LENGTH_SHORT).show();
+				dismiss();
 			}
 		});
 		return v;
