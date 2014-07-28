@@ -5,10 +5,10 @@
     android:layout_height="match_parent" >
 
     <ImageView
-        android:id="@+id/imageView1"
+        android:id="@+id/room_img"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/abc_list_longpressed_holo" />
+         />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,13 +21,7 @@
             android:layout_height="60dp"
             android:text="방설명방설명방설명" />
 
-        <ImageView
-            android:id="@+id/room_img"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right|bottom"
-            android:src="@drawable/ic_launcher" />
-
+       
     </LinearLayout>
 
 </FrameLayout>

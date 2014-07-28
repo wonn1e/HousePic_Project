@@ -29,7 +29,7 @@ public class Tab1MDFragment extends Fragment {
 	
 	ItemLikeShowListDialog itemLikeDialog;
 	ExpandableListView mdListView;
-	MDAdapter mdAdapter;
+	MDRoomAdapter mdAdapter;
 	String[] t = {"aa","bb"};
 	int[] img = {R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher};
 	ItemData[] iData = {new ItemData(1,1,"aa","i1","aa","aa","aa",t,1,"aa",img,"http://www.naver.com", true),
@@ -45,9 +45,9 @@ public class Tab1MDFragment extends Fragment {
 			new ItemData(11,11,"jhjh","i11","hjhj","hjhj","hjhj",t,1,"hjhj",img,"http://www.naver.com", false)
 	};
 	RoomData[] rData = {
-			new RoomData(1,1,"house1",R.drawable.ic_launcher,"방설명1",true),
-			new RoomData(2,2,"house2",R.drawable.ic_launcher,"방설명2",true),
-			new RoomData(3,3,"house3",R.drawable.ic_launcher,"방설명3",true)
+			new RoomData(1,1,"house1",R.drawable.tulips,"방설명1",true),
+			new RoomData(2,2,"house2",R.drawable.penguins,"방설명2",true),
+			new RoomData(3,3,"house3",R.drawable.tulips,"방설명3",true)
 	};
 	final RoomData[] myRoomData = {
 			new RoomData(1,1,"house1",R.drawable.penguins,"방설명1",true),
@@ -61,9 +61,9 @@ public class Tab1MDFragment extends Fragment {
 		itemLikeDialog = new ItemLikeShowListDialog();
 		View v = inflater.inflate(R.layout.tab1_md_layout, container, false);
 		mdListView = (ExpandableListView)v.findViewById(R.id.md_list);
-		mdAdapter = new MDAdapter(getActivity());
+		mdAdapter = new MDRoomAdapter(getActivity());
 
-		mdAdapter.setOnAdapterItemClickListener(new MDAdapter.OnAdapterItemClickListener() {
+		mdAdapter.setOnAdapterItemClickListener(new MDRoomAdapter.OnAdapterItemClickListener() {
 
 			@Override
 			public void onItemClick(View v, ItemData data) {
@@ -74,35 +74,35 @@ public class Tab1MDFragment extends Fragment {
 			}
 		});
 
-		mdAdapter.setOnAdapterItemLikeClickListener(new MDAdapter.OnAdapterItemLikeClickListener() {
-
-			@Override
-			public void onItemLikeClick(View v, ItemData data) {
-				//now unlike!!
-				if(data.item_like){
-					Toast.makeText(getActivity(), "now unlike", Toast.LENGTH_SHORT).show();
-					data.item_like = false;
-					data.likeCnt--;
-					
-					//iData.notify();
-				}
-				//now like!!
-				else{
-					Toast.makeText(getActivity(), "just like not in room", Toast.LENGTH_SHORT).show();
-					//	data.item_like = true;
-					//	data.likeCnt++;
-					//iData.notify();
-
-					//idata update! (ex. likeCnt, etc)
-				
-					Bundle b = new Bundle();
-					b.putParcelable(ItemLikeShowListDialog.PARAM_ITEM_DATA, data);
-					b.putParcelableArray(ItemLikeShowListDialog.PARAM_ROOM_DATA, myRoomData);
-					itemLikeDialog.setArguments(b);
-					itemLikeDialog.show(getFragmentManager(), "dialog");
-				}
-			}
-		});
+//		mdAdapter.setOnAdapterItemLikeClickListener(new MDRoomAdapter.OnAdapterItemLikeClickListener() {
+//
+//			@Override
+//			public void onItemLikeClick(View v, ItemData data) {
+//				//now unlike!!
+//				if(data.item_like){
+//					Toast.makeText(getActivity(), "now unlike", Toast.LENGTH_SHORT).show();
+//					data.item_like = false;
+//					data.likeCnt--;
+//					
+//					//iData.notify();
+//				}
+//				//now like!!
+//				else{
+//					Toast.makeText(getActivity(), "just like not in room", Toast.LENGTH_SHORT).show();
+//					//	data.item_like = true;
+//					//	data.likeCnt++;
+//					//iData.notify();
+//
+//					//idata update! (ex. likeCnt, etc)
+//				
+//					Bundle b = new Bundle();
+//					b.putParcelable(ItemLikeShowListDialog.PARAM_ITEM_DATA, data);
+//					b.putParcelableArray(ItemLikeShowListDialog.PARAM_ROOM_DATA, myRoomData);
+//					itemLikeDialog.setArguments(b);
+//					itemLikeDialog.show(getFragmentManager(), "dialog");
+//				}
+//			}
+//		});
 
 
 		mdListView.setAdapter(mdAdapter);
