@@ -17,7 +17,6 @@ public class ItemData implements Parcelable {
 	public String[]theme;
 	public int likeCnt;
 	public int sort_category;
-	//public int []item_img;
 	public String link;
 	public boolean item_like;
 	public String[] item_img_url;
