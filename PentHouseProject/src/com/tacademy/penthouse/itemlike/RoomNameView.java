@@ -26,6 +26,8 @@ public class RoomNameView extends FrameLayout{
 	public void setItemImageData(RoomData r){
 		rData = r;
 		room_name.setText(r.room_name);
+		//해당 방 색깔로
+	//	setBackgroundColor(color);
 	}
 
 }

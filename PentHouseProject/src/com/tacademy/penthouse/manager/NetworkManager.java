@@ -1,5 +1,7 @@
 package com.tacademy.penthouse.manager;
 
+import java.util.ArrayList;
+
 import org.apache.http.Header;
 
 import android.content.Context;
@@ -13,9 +15,13 @@ import com.loopj.android.http.PersistentCookieStore;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
 import com.tacademy.penthouse.MyApplication;
+import com.tacademy.penthouse.entity.ItemData;
+import com.tacademy.penthouse.entity.ItemInfoResult;
+import com.tacademy.penthouse.entity.ItemResult;
 import com.tacademy.penthouse.entity.ResultData;
 import com.tacademy.penthouse.entity.RoomResult;
 import com.tacademy.penthouse.entity.UserData;
+import com.tacademy.penthouse.entity.UserResult;
 
 public class NetworkManager {
 	public static final String PARAM_COUNT = "COUNT";
@@ -33,12 +39,14 @@ public class NetworkManager {
 	public static final String PARAM_ROOM_NAME = "ROOM_NAME";
 	public static final String PARAM_ROOM_IMG = "ROOM_IMG";
 	public static final String PARAM_ROOM_COLOR = "ROOM_COLOR";
-	public static final String PARAM_ROOM_PUBLIC = "ROOM_OPEN_CLOSE";
+	public static final String PARAM_ROOM_ISPUBLIC = "ROOM_OPEN_CLOSE";
 	public static final String PARAM_ROOM_NO = "ROOM_NO";
 
 	public static final String PARAM_ITEM_NO = "PRODUCT_NO";
 	public static final String PARAM_CATEGORY_NO = "CATEGORY_NO";
-	//	public static final String PARAM_SEARCH_QUERY = ""
+
+	public static final String PARAM_SEARCH_QUERY = "QUERY";	//json규격에서!
+
 
 	private static NetworkManager instance;
 	AsyncHttpClient client;
@@ -147,6 +155,114 @@ public class NetworkManager {
 		});
 
 	}
+	
+	public static final String ItemRanking_URL = " ";
+	public void getItemRankingResultData(Context context, final OnResultListener<ItemResult> listener){
+		client.get(context, ItemRanking_URL, new TextHttpResponseHandler() {
+			
+			@Override
+			public void onSuccess(int statusCode, Header[] headers,
+					String responseString) {
+				ItemResult rankingResult = gson.fromJson(responseString, ItemResult.class);
+				listener.onSuccess(rankingResult);
+			}
+			
+			@Override
+			public void onFailure(int statusCode, Header[] headers,
+					String responseString, Throwable throwable) {
+				listener.onFail(statusCode);
+			}
+		});
+	}
+	
+	public static final String Following_URL = " ";
+	public void getFollowingResultData(Context context, String user_id, final OnResultListener<UserResult> listener){
+		client.get(context, Following_URL, new TextHttpResponseHandler() {
+			
+			@Override
+			public void onSuccess(int statusCode, Header[] headers,
+					String responseString) {
+				UserResult following_users = gson.fromJson(responseString, UserResult.class);
+				listener.onSuccess(following_users);
+			}
+			
+			@Override
+			public void onFailure(int statusCode, Header[] headers,
+					String responseString, Throwable throwable) {
+				listener.onFail(statusCode);
+			}
+		});
+	}
+	
+	public static final String ItemInfo_URL = " ";
+	public void getItemInfoResultData(Context context, String item_num, final OnResultListener<ItemInfoResult> listener){
+		RequestParams params = new RequestParams();
+		params.put(PARAM_USER_ID, item_num);
+		
+		client.get(context, ItemInfo_URL, new TextHttpResponseHandler() {
+			
+			@Override
+			public void onSuccess(int statusCode, Header[] headers,
+					String responseString) {
+				ItemInfoResult result = gson.fromJson(responseString, ItemInfoResult.class);
+				listener.onSuccess(result);
+			}
+			
+			@Override
+			public void onFailure(int statusCode, Header[] headers,
+					String responseString, Throwable throwable) {
+				listener.onFail(statusCode);
+			}
+		});
+	}
+
+	public static final String CategorySearch_URL = " ";
+	public void getCategorySearchResultData(Context context, String keyword, final OnResultListener<ItemResult> listener){
+		RequestParams params = new RequestParams();
+		params.put(PARAM_SEARCH_QUERY, keyword);
+		client.get(context, TextSearch_URL, new TextHttpResponseHandler() {
+
+			@Override
+			public void onSuccess(int statusCode, Header[] headers,
+					String responseString) {
+				ItemResult category_result = gson.fromJson(responseString, ItemResult.class);
+				listener.onSuccess(category_result);
+			}
+			
+			@Override
+			public void onFailure(int statusCode, Header[] headers,
+				String responseString, Throwable throwable) {
+				listener.onFail(statusCode);
+
+			}
+			
+		});
+	}
+	
+	public static final String TextSearch_URL = " ";
+	public void getTextSearchResultData(Context context, String keyword, final OnResultListener<ItemResult> listener){
+		RequestParams params = new RequestParams();
+		params.put(PARAM_SEARCH_QUERY, keyword);
+		client.get(context, TextSearch_URL, new TextHttpResponseHandler() {
+			
+			@Override
+			public void onSuccess(int statusCode, Header[] headers,
+					String responseString) {
+				ItemResult item_result = gson.fromJson(responseString, ItemResult.class);
+				listener.onSuccess(item_result);
+				
+			}
+			
+			@Override
+			public void onFailure(int statusCode, Header[] headers,
+					String responseString, Throwable throwable) {
+				listener.onFail(statusCode);
+			}
+		});
+	}
+
+	//static class DataTask extends AsyncTask...
+
 	
 	public static final String EveryoneRoomData = "";
 	public void getEveryoneRoomData(Context context, final OnResultListener<RoomResult> listener){
