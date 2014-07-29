@@ -22,12 +22,14 @@ public class MDRoomView extends FrameLayout {
 	TextView md_room_info;
 	ImageView md_room_img;
 	ImageLoader loader;
+	
 	DisplayImageOptions options;
 	
 	private void init(){
 		LayoutInflater.from(getContext()).inflate(R.layout.main_md_header_view, this);
 		md_room_info = (TextView)findViewById(R.id.room_info);
 		md_room_img = (ImageView)findViewById(R.id.room_img);
+		
 		loader = ImageLoader.getInstance();
 		options = new DisplayImageOptions.Builder()
 		.showImageOnLoading(R.drawable.ic_stub)
@@ -45,6 +47,7 @@ public class MDRoomView extends FrameLayout {
 		//md_room_img.setImageResource(data.room_img);
 		loader.displayImage(data.room_img_url,md_room_img,options);
 		md_room_info.setText(data.room_info);
+		
 		
 		
 		

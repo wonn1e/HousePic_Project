@@ -49,6 +49,8 @@ public class MDItemView extends FrameLayout{
 	TextView item_right_name;
 	TextView item_left_price;
 	TextView item_right_price;
+	TextView md_cnt;
+	TextView md_more;
 	ImageLoader loader;
 	DisplayImageOptions options;
 	
@@ -63,7 +65,8 @@ public class MDItemView extends FrameLayout{
 		item_right_name = (TextView)findViewById(R.id.item_right_name);
 		item_left_price = (TextView)findViewById(R.id.item_left_price);
 		item_right_price = (TextView)findViewById(R.id.item_right_price);
-		
+		md_cnt = (TextView)findViewById(R.id.cnt);
+		md_more = (TextView)findViewById(R.id.more);
 		loader = ImageLoader.getInstance();
 		options = new DisplayImageOptions.Builder()
 		.showImageOnLoading(R.drawable.ic_stub)

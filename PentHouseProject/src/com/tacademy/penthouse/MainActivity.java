@@ -2,6 +2,8 @@ package com.tacademy.penthouse;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v4.view.MenuItemCompat;
@@ -12,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TabHost;
+import android.widget.Toast;
 
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
@@ -24,9 +27,34 @@ import com.tacademy.penthouse.search.CategorySearchActivity;
 import com.tacademy.penthouse.slidingmenu.MenuFragment;
 
 public class MainActivity extends SlidingFragmentActivity{
-	
 	FragmentTabHost tabHost;
-
+/////////////////////////////////////////////////////////////////	
+	private static final int MESSAGE_FINISH_TIMEOUT = 0;
+	private static final int BACK_PRESS_TIMEOUT = 2000;
+	boolean isBackPressed = false;
+	Handler mHandler = new Handler() {
+		@Override
+		public void handleMessage(Message msg) {
+			switch(msg.what) {
+			case MESSAGE_FINISH_TIMEOUT :
+				isBackPressed = false;
+				break;
+			}
+		}
+	};
+	
+	@Override
+	public void onBackPressed() {
+		if (!isBackPressed) {
+			isBackPressed = true;
+			Toast.makeText(this, "한번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT).show();
+			mHandler.sendMessageDelayed(mHandler.obtainMessage(MESSAGE_FINISH_TIMEOUT), BACK_PRESS_TIMEOUT);			
+		} else {
+			mHandler.removeMessages(MESSAGE_FINISH_TIMEOUT);
+			finish();
+		}
+	}
+//Implement Back key///////////////////////////////////////////////////////////
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

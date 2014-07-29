@@ -55,18 +55,14 @@ public class Tab1MDFragment extends Fragment {
 			new ItemData(2,2,"bb","i2","fdsf","dsf","fd",t,1,0,img,"http://www.naver.com", true),
 			new ItemData(3,3,"12321","i3","1213","1231","12321",t,1,2,img,"http://www.naver.com", false),
 			new ItemData(4,4,"dd","i4","dddd","ddd","ddd",t,1,1,img,"http://www.naver.com", false),
-			new ItemData(5,5,"eeeee","i5","eeee","eee","ee",t,1,2, img,"http://www.naver.com", false),
-			new ItemData(6,6,"zxxzxc","i6","zcxczx","zczcx","zcxcxz",t,1,3,img,"http://www.naver.com", true),
-			new ItemData(7,7,"jhjh","i7","hjhj","hjhj","hjhj",t,1,2,img,"http://www.naver.com", true),
-			new ItemData(8,8,"jhjh","i8","hjhj","hjhj","hjhj",t,1,2,img,"http://www.naver.com", true),
-			new ItemData(9,9,"jhjh","i9","hjhj","hjhj","hjhj",t,1,1,img,"http://www.naver.com", false),
-			new ItemData(10,10,"jhjh","i10","hjhj","hjhj","hjhj",t,1,1,img,"http://www.naver.com", true),
-			new ItemData(11,11,"jhjh","i11","hjhj","hjhj","hjhj",t,1,3, img,"http://www.naver.com", false)
+			new ItemData(5,5,"eeeee","i5","eeee","eee","ee",t,1,2, img,"http://www.naver.com", false)
+			//new ItemData(null)
+			
 	};
 	RoomData[] rData = {
 			new RoomData(1,1,"user1 room1", img[1], "room1",true, "red"),
-			new RoomData(2,1,"user2 room1", img[2], "room2",true, "red"),
-			new RoomData(1,3,"user1 room3", img[3], "room3",true, "red"),
+			new RoomData(2,2,"user2 room1", img[0], "room2",true, "red"),
+			new RoomData(3,3,"user1 room3", img[3], "room3",true, "red"),
 	};
 	final RoomData[] myRoomData = {
 			new RoomData(1,1,"house1", img[1], "room1",true, "red"),
