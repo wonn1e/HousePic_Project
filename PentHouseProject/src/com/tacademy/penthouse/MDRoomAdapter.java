@@ -133,12 +133,21 @@ public class MDRoomAdapter extends BaseExpandableListAdapter implements MDItemVi
 			v.setOnItemDataLikeClickListener(this);
 		}else{
 			v = (MDItemView)convertView;
-		}		
+		}
+		
 		if(items.get(groupPosition).items.size() % 2 == 0){
 			v.setData(items.get(groupPosition).items.get(childPosition * 2), items.get(groupPosition).items.get(childPosition * 2 + 1));
 		}else{
 			v.setData(items.get(groupPosition).items.get(childPosition * 2), null);
 		}
+//		if(items.get(groupPosition).items.get(childPosition) == null){
+//			v.item_right_img.setVisibility(View.GONE);
+//			v.item_right_like.setVisibility(View.GONE);
+//			v.item_right_name.setVisibility(View.GONE);
+//			v.item_right_price.setVisibility(View.GONE);
+//			v.md_more.setVisibility(View.VISIBLE);
+//			v.md_cnt.setVisibility(View.VISIBLE);
+//		}
 		
 		
 		return v;
