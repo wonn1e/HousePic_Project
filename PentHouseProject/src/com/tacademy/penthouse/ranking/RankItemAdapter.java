@@ -9,7 +9,7 @@ import android.widget.BaseAdapter;
 
 import com.tacademy.penthouse.entity.ItemData;
 
-public class RankItemAdapter extends BaseAdapter {
+public class RankItemAdapter extends BaseAdapter implements RankItemView.OnPopularItemLikeListener{
 	ArrayList<ItemData> list = new ArrayList<ItemData>();
 	Context mContext;
 	public RankItemAdapter(Context context){
@@ -41,11 +41,33 @@ public class RankItemAdapter extends BaseAdapter {
 		RankItemView v;
 		if(convertView == null){
 			v = new RankItemView(mContext);
+			v.setOnPopularItemLikeListener(this);
 		}else{
 			v = (RankItemView)convertView;
 		}
 		v.setRankItemData(list.get(position), position);
 		return v;
+	}
+
+	public interface OnAdapterPopularItemLikeListener{
+		public void onPopularItemLike(View v, ItemData iData);
+	}
+	OnAdapterPopularItemLikeListener pAdapterListener;
+	public void setOnAdapterPopularItemLikeListener(OnAdapterPopularItemLikeListener l){
+		pAdapterListener = l;
+	}
+	
+	public void updateData(ItemData data, boolean isLike, int likeCnt){
+		data.item_like = isLike;
+		data.likeCnt = likeCnt;
+		notifyDataSetChanged();
+	}
+	
+	@Override
+	public void onPopularItemLikeListener(View v, ItemData iData) {
+		if(pAdapterListener != null){
+			pAdapterListener.onPopularItemLike(v, iData);
+		}
 	}
 
 }

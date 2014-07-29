@@ -1,4 +1,4 @@
-package com.tacademy.penthouse.network;
+package com.tacademy.penthouse.manager;
 
 import android.os.AsyncTask;
 import android.os.Handler;

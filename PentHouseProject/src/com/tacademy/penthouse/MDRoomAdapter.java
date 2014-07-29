@@ -159,6 +159,8 @@ public class MDRoomAdapter extends BaseExpandableListAdapter implements MDItemVi
 		}
 	}
 	
+	
+	
 	public interface OnAdapterItemLikeClickListener{
 		public void onItemLikeClick(View v, ItemData data);
 	}
@@ -181,5 +183,6 @@ public class MDRoomAdapter extends BaseExpandableListAdapter implements MDItemVi
 			lAdapterListener.onItemLikeClick(v, data);
 		}
 	}
+	
 	
 }

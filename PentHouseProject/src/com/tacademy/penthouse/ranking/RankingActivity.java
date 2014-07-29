@@ -4,34 +4,41 @@ package com.tacademy.penthouse.ranking;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.tacademy.penthouse.R;
 import com.tacademy.penthouse.entity.ItemData;
+import com.tacademy.penthouse.entity.RoomData;
 import com.tacademy.penthouse.entity.UserData;
 import com.tacademy.penthouse.house.HouseActivity;
 import com.tacademy.penthouse.item.ItemInfoActivity;
+import com.tacademy.penthouse.itemlike.CreateNewRoomActivity;
+import com.tacademy.penthouse.itemlike.ItemLikeShowListDialog;
 import com.tacademy.penthouse.room.MyRoomInfoActivity;
 
 
-public class RankingActivity extends Activity{
+public class RankingActivity extends FragmentActivity{
 	
 	public static int LIST_TYPE_FLAG = 0;
+	public static final int REQUEST_NEW_ROOM_IN_RANKING = 0;
 	
 	ListView rankingList;
 	RankUserAdapter uAdapter;
 	RankItemAdapter iAdapter;
-	
+	ItemLikeShowListDialog itemLikeDialog;
+	UserData myData;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		setContentView(R.layout.ranking_layout);
 		super.onCreate(savedInstanceState);
-		
+		itemLikeDialog = new ItemLikeShowListDialog();
 		
 		String[] t = {"aa","bb"};
 		int[] img = {R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher};
@@ -46,6 +53,7 @@ public class RankingActivity extends Activity{
 								new ItemData(7,7,"jhjh","i8","hjhj","hjhj","hjhj",t,1,"hjhj",img, "http://www.naver.com", true)
 		};
 		int uimg = R.drawable.ic_launcher;
+		myData = new UserData(10, "www", "kw", "password", 100, 120, 12345,"kw's house", "welcome to kw's home", "aa");
 		final UserData[] uData = {new UserData(1, "a","a","a",1,1,uimg,"YYY1's House","Welcome","bb"),
 							new UserData(2, "b","b","b",2,2,uimg,"YYY1's House","Welcome","bb"),
 							new UserData(3, "c","c","c",3,3,uimg,"YYY1's House","Welcome","bb"),
@@ -67,6 +75,11 @@ public class RankingActivity extends Activity{
 							new UserData(19, "r","r","r",19,19,uimg,"YYY1's House","Welcome","bb"),
 							new UserData(20, "s","s","s",20,20,uimg,"YYY1's House","Welcome","bb")
 		
+		};
+		final RoomData[] myRoomData = {
+				new RoomData(1,1,"room1",R.drawable.penguins,"방설명1",true),
+				new RoomData(2,2,"room2",R.drawable.penguins,"방설명2",true),
+				new RoomData(3,3,"room3",R.drawable.penguins,"방설명3",true)
 		};
 		
 		
@@ -123,5 +136,63 @@ public class RankingActivity extends Activity{
 			}
 		});
 		
+		iAdapter.setOnAdapterPopularItemLikeListener(new RankItemAdapter.OnAdapterPopularItemLikeListener() {
+			
+			@Override
+			public void onPopularItemLike(View v, ItemData data) {
+				//now unlike!!
+				if(data.item_like){
+					Toast.makeText(RankingActivity.this, "now unlike in RankingActivity", Toast.LENGTH_SHORT).show();
+					iAdapter.updateData(data, false, data.likeCnt--);
+					onResume();
+					
+				}
+				//now like!!
+				else{
+					
+					//idata update! (ex. likeCnt, etc)
+				
+					Bundle b = new Bundle();
+					b.putParcelable(ItemLikeShowListDialog.PARAM_ITEM_DATA, data);
+					b.putParcelableArray(ItemLikeShowListDialog.PARAM_ROOM_DATA, myRoomData);
+					itemLikeDialog.setArguments(b);
+					itemLikeDialog.show(getSupportFragmentManager(), "dialog");
+					
+					final ItemData itemData = data;
+					itemLikeDialog.setOnRoomSelectedListener(new ItemLikeShowListDialog.OnRoomSelectedListener() {
+						
+						@Override
+						public void onRoomSelected(boolean roomSelected) {
+							Toast.makeText(RankingActivity.this, "item in room!! (RankingAct)", Toast.LENGTH_SHORT).show();
+							iAdapter.updateData(itemData, true, itemData.likeCnt++);
+						}
+					});
+					
+					itemLikeDialog.setOnCreateSelectedListener(new ItemLikeShowListDialog.OnCreateSelectedListener() {
+						
+						@Override
+						public void onCreateSelected(boolean roomSelected) {
+							Toast.makeText(RankingActivity.this, "create new room RankingActivity", Toast.LENGTH_SHORT).show();
+							Intent i = new Intent(RankingActivity.this , CreateNewRoomActivity.class);
+							i.putExtra("iData", itemData);
+							//pass on myData (UserData) 
+							i.putExtra("myData", myData);
+							startActivityForResult(i, REQUEST_NEW_ROOM_IN_RANKING);
+							onResume();
+							
+						}
+					});
+
+				}
+			}
+		});
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if(requestCode == REQUEST_NEW_ROOM_IN_RANKING && resultCode == Activity.RESULT_OK){
+			Toast.makeText(RankingActivity.this, "item in room from ranking!", Toast.LENGTH_SHORT).show();
+		}
 	}
 }

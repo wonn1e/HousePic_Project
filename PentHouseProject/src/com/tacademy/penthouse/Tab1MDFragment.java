@@ -1,8 +1,8 @@
 package com.tacademy.penthouse;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -14,12 +14,15 @@ import android.widget.Toast;
 
 import com.tacademy.penthouse.entity.ItemData;
 import com.tacademy.penthouse.entity.RoomData;
+import com.tacademy.penthouse.entity.UserData;
 import com.tacademy.penthouse.item.ItemInfoActivity;
-import com.tacademy.penthouse.itemlike.CreateNewRoomDialog;
+import com.tacademy.penthouse.itemlike.CreateNewRoomActivity;
 import com.tacademy.penthouse.itemlike.ItemLikeShowListDialog;
 import com.tacademy.penthouse.room.MyRoomInfoActivity;
 
 public class Tab1MDFragment extends Fragment {
+	
+	public static final int REQEUST_NEW_ROOM = 0;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -28,7 +31,6 @@ public class Tab1MDFragment extends Fragment {
 	}
 	
 	ItemLikeShowListDialog itemLikeDialog;
-	CreateNewRoomDialog createRoomDialog;
 	ExpandableListView mdListView;
 	MDRoomAdapter mdAdapter;
 	String[] t = {"aa","bb"};
@@ -46,22 +48,23 @@ public class Tab1MDFragment extends Fragment {
 			new ItemData(10,10,"jhjh","i10","hjhj","hjhj","hjhj",t,1,"hjhj",img,"http://www.naver.com", true),
 			new ItemData(11,11,"jhjh","i11","hjhj","hjhj","hjhj",t,1,"hjhj",img,"http://www.naver.com", false)
 	};
+	UserData myData = new UserData(10, "www", "kw", "password", 100, 120, 12345,"kw's house", "welcome to kw's home", "aa");
 	RoomData[] rData = {
 			new RoomData(1,1,"house1",R.drawable.tulips,"방설명1",true),
 			new RoomData(2,2,"house2",R.drawable.penguins,"방설명2",true),
 			new RoomData(3,3,"house3",R.drawable.tulips,"방설명3",true)
 	};
 	final RoomData[] myRoomData = {
-			new RoomData(1,1,"house1",R.drawable.penguins,"방설명1",true),
-			new RoomData(2,2,"house2",R.drawable.penguins,"방설명2",true),
-			new RoomData(3,3,"house3",R.drawable.penguins,"방설명3",true)
+			new RoomData(1,1,"room1",R.drawable.penguins,"방설명1",true),
+			new RoomData(2,2,"room2",R.drawable.penguins,"방설명2",true),
+			new RoomData(3,3,"room3",R.drawable.penguins,"방설명3",true)
 	};
 
 	@Override
 	public View onCreateView(LayoutInflater inflater,
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		itemLikeDialog = new ItemLikeShowListDialog();
-		createRoomDialog = new CreateNewRoomDialog();
+		
 		View v = inflater.inflate(R.layout.tab1_md_layout, container, false);
 		mdListView = (ExpandableListView)v.findViewById(R.id.md_list);
 		mdAdapter = new MDRoomAdapter(getActivity());
@@ -70,22 +73,25 @@ public class Tab1MDFragment extends Fragment {
 
 			@Override
 			public void onItemClick(View v, ItemData data) {
-				Toast.makeText(getActivity(), "dddd", Toast.LENGTH_SHORT).show();
 				Intent i = new Intent(getActivity(), ItemInfoActivity.class);
 				i.putExtra("iData", data);
 				startActivity(i);
+				
 			}
 		});
 
+		
+		
+		
 		mdAdapter.setOnAdapterItemLikeClickListener(new MDRoomAdapter.OnAdapterItemLikeClickListener() {
 
 			@Override
-			public void onItemLikeClick(View v, ItemData data) {
+			public void onItemLikeClick(View v, ItemData data) {				
+				
 				//now unlike!!
 				if(data.item_like){
-					Toast.makeText(getActivity(), "now unlike", Toast.LENGTH_SHORT).show();
 					mdAdapter.updateData(data, false, data.likeCnt--);
-					data.likeCnt--;
+					onResume();
 					
 				}
 				//now like!!
@@ -104,24 +110,25 @@ public class Tab1MDFragment extends Fragment {
 						
 						@Override
 						public void onRoomSelected(boolean roomSelected) {
-							Toast.makeText(getActivity(), "item in room!!", Toast.LENGTH_SHORT).show();
+
 							mdAdapter.updateData(itemData, true, itemData.likeCnt++);
 						}
 					});
 					
-					//Bundle b1 = new Bundle();
-					//b1.putParcelable(CreateNewRoomDialog.PARAM_ITEM_NEW_ROOM, data);
-					//createRoomDialog.setArguments(b1);
-					createRoomDialog.setArguments(b);
-					createRoomDialog.setOnRoomCreatedListener(new CreateNewRoomDialog.OnRoomCreatedListener() {
+					itemLikeDialog.setOnCreateSelectedListener(new ItemLikeShowListDialog.OnCreateSelectedListener() {
 						
 						@Override
-						public void onRoomCreated(boolean roomCreated) {
-							Toast.makeText(getActivity(), "item in new room!!", Toast.LENGTH_SHORT).show();
-							mdAdapter.updateData(itemData, true, itemData.likeCnt++);
+						public void onCreateSelected(boolean roomSelected) {
+							Intent i = new Intent(getActivity(), CreateNewRoomActivity.class);
+							i.putExtra("iData", itemData);
+							//pass on myData (UserData) 
+							i.putExtra("myData", myData);
+							startActivityForResult(i, REQEUST_NEW_ROOM);
+							onResume();
+							
 						}
 					});
-					
+
 				}
 			}
 		});
@@ -147,7 +154,6 @@ public class Tab1MDFragment extends Fragment {
 				Toast.makeText(getActivity(), "this Position : " + groupPosition, Toast.LENGTH_SHORT).show();
 				//my room인지 user룸인지 판단!
 				Intent i = new Intent(getActivity(), MyRoomInfoActivity.class);
-
 				i.putExtra("iData", rData[groupPosition]);
 				startActivityForResult(i, 0);
 				return false;
@@ -157,6 +163,16 @@ public class Tab1MDFragment extends Fragment {
 
 		return v;
 	}
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if(requestCode == REQEUST_NEW_ROOM && resultCode == Activity.RESULT_OK){
+			
+			Toast.makeText(getActivity(), "item in new room back in Tab1", Toast.LENGTH_SHORT).show();
+		}
+	}
+	
 	private void initData(){
 		for(int i = 0; i < rData.length; i++){
 			int j = 0;

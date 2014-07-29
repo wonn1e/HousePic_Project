@@ -2,6 +2,8 @@ package com.tacademy.penthouse.ranking;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.AbsListView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,6 +16,15 @@ public class RankItemView extends FrameLayout {
 	public RankItemView(Context context) {
 		super(context);
 		init();
+	}
+	
+	public interface OnPopularItemLikeListener{
+		public void onPopularItemLikeListener(View v, ItemData iData);
+	}
+	
+	OnPopularItemLikeListener likeListener;
+	public void setOnPopularItemLikeListener(OnPopularItemLikeListener l){
+		likeListener  = l;
 	}
 	
 	ItemData iData;
@@ -32,6 +43,16 @@ public class RankItemView extends FrameLayout {
 		item_price = (TextView)findViewById(R.id.item_price);
 		item_like_num = (TextView)findViewById(R.id.item_like_num);
 		item_like = (ImageView)findViewById(R.id.item_like);
+		
+		item_like.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if(likeListener != null){
+					likeListener.onPopularItemLikeListener(RankItemView.this, iData);
+				}
+			}
+		});
 	}
 
 	public void setRankItemData(ItemData data, int position){
@@ -43,6 +64,13 @@ public class RankItemView extends FrameLayout {
 		else{
 			item_rank.setVisibility(GONE);
 		}
+		
+		if(data.item_like){
+			item_like.setImageResource(R.drawable.ic_launcher);
+		}else{
+			item_like.setImageResource(R.drawable.tulips);
+		}
+		
 //		item_img.setImageResource(resId);
 		item_rank.setImageResource(R.drawable.ic_launcher);
 		item_name.setText(data.item_name);
