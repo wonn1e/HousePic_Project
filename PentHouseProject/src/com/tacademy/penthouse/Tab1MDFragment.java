@@ -23,7 +23,10 @@ import com.tacademy.penthouse.room.MyRoomInfoActivity;
 public class Tab1MDFragment extends Fragment {
 	
 	public static final int REQEUST_NEW_ROOM = 0;
-
+	UserData myData;
+	ItemData[] iData;
+	RoomData[] rData;
+	RoomData[] myRoomData;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -33,32 +36,33 @@ public class Tab1MDFragment extends Fragment {
 	ItemLikeShowListDialog itemLikeDialog;
 	ExpandableListView mdListView;
 	MDRoomAdapter mdAdapter;
-	String[] t = {"aa","bb"};
-	int[] img = {R.drawable.tulips,R.drawable.tulips,R.drawable.tulips,R.drawable.tulips,R.drawable.tulips};
-	int[] recmd_img = {R.drawable.tulips,R.drawable.tulips,R.drawable.tulips,R.drawable.tulips,R.drawable.tulips};
-	ItemData[] iData = {new ItemData(1,1,"aa","i1","aa","aa","aa",t,1,"aa",img,"http://www.naver.com", true),
-			new ItemData(2,2,"bb","i2","fdsf","dsf","fd",t,1,"dfs",img,"http://www.naver.com", true),
-			new ItemData(3,3,"12321","i3","1213","1231","12321",t,1,"12312",img,"http://www.naver.com", false),
-			new ItemData(4,4,"dd","i4","dddd","ddd","ddd",t,1,"dddd",img,"http://www.naver.com", false),
-			new ItemData(5,5,"eeeee","i5","eeee","eee","ee",t,1,"ee",img,"http://www.naver.com", false),
-			new ItemData(6,6,"zxxzxc","i6","zcxczx","zczcx","zcxcxz",t,1,"zcxx",img,"http://www.naver.com", true),
-			new ItemData(7,7,"jhjh","i7","hjhj","hjhj","hjhj",t,1,"hjhj",img,"http://www.naver.com", true),
-			new ItemData(8,8,"jhjh","i8","hjhj","hjhj","hjhj",t,1,"hjhj",img,"http://www.naver.com", true),
-			new ItemData(9,9,"jhjh","i9","hjhj","hjhj","hjhj",t,1,"hjhj",img,"http://www.naver.com", false),
-			new ItemData(10,10,"jhjh","i10","hjhj","hjhj","hjhj",t,1,"hjhj",img,"http://www.naver.com", true),
-			new ItemData(11,11,"jhjh","i11","hjhj","hjhj","hjhj",t,1,"hjhj",img,"http://www.naver.com", false)
-	};
-	UserData myData = new UserData(10, "www", "kw", "password", 100, 120, 12345,"kw's house", "welcome to kw's home", "aa");
-	RoomData[] rData = {
-			new RoomData(1,1,"house1",R.drawable.tulips,"방설명1",true),
-			new RoomData(2,2,"house2",R.drawable.penguins,"방설명2",true),
-			new RoomData(3,3,"house3",R.drawable.tulips,"방설명3",true)
-	};
-	final RoomData[] myRoomData = {
-			new RoomData(1,1,"room1",R.drawable.penguins,"방설명1",true),
-			new RoomData(2,2,"room2",R.drawable.penguins,"방설명2",true),
-			new RoomData(3,3,"room3",R.drawable.penguins,"방설명3",true)
-	};
+//	String[] t = {"aa","bb"};
+//	int[] img = {R.drawable.tulips,R.drawable.tulips,R.drawable.tulips,R.drawable.tulips,R.drawable.tulips};
+//	int[] recmd_img = {R.drawable.tulips,R.drawable.tulips,R.drawable.tulips,R.drawable.tulips,R.drawable.tulips};
+//	
+//	
+//	ItemData[] iData = {new ItemData(1,1,"aa","i1","aa","aa","aa",t,1,"aa",img,"http://www.naver.com", true),
+//			new ItemData(2,2,"bb","i2","fdsf","dsf","fd",t,1,"dfs",img,"http://www.naver.com", true),
+//			new ItemData(3,3,"12321","i3","1213","1231","12321",t,1,"12312",img,"http://www.naver.com", false),
+//			new ItemData(4,4,"dd","i4","dddd","ddd","ddd",t,1,"dddd",img,"http://www.naver.com", false),
+//			new ItemData(5,5,"eeeee","i5","eeee","eee","ee",t,1,"ee",img,"http://www.naver.com", false),
+//			new ItemData(6,6,"zxxzxc","i6","zcxczx","zczcx","zcxcxz",t,1,"zcxx",img,"http://www.naver.com", true),
+//			new ItemData(7,7,"jhjh","i7","hjhj","hjhj","hjhj",t,1,"hjhj",img,"http://www.naver.com", true),
+//			new ItemData(8,8,"jhjh","i8","hjhj","hjhj","hjhj",t,1,"hjhj",img,"http://www.naver.com", true),
+//			new ItemData(9,9,"jhjh","i9","hjhj","hjhj","hjhj",t,1,"hjhj",img,"http://www.naver.com", false),
+//			new ItemData(10,10,"jhjh","i10","hjhj","hjhj","hjhj",t,1,"hjhj",img,"http://www.naver.com", true),
+//			new ItemData(11,11,"jhjh","i11","hjhj","hjhj","hjhj",t,1,"hjhj",img,"http://www.naver.com", false)
+//	};
+//	RoomData[] rData = {
+//			new RoomData(1,1,"house1",R.drawable.tulips,"방설명1",true),
+//			new RoomData(2,2,"house2",R.drawable.penguins,"방설명2",true),
+//			new RoomData(3,3,"house3",R.drawable.tulips,"방설명3",true)
+//	};
+//	final RoomData[] myRoomData = {
+//			new RoomData(1,1,"house1",R.drawable.penguins,"방설명1",true),
+//			new RoomData(2,2,"house2",R.drawable.penguins,"방설명2",true),
+//			new RoomData(3,3,"house3",R.drawable.penguins,"방설명3",true)
+//	};
 
 	@Override
 	public View onCreateView(LayoutInflater inflater,

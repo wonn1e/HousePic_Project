@@ -33,17 +33,16 @@ public class ItemInfoActivity extends FragmentActivity {
 
 	TextView item_name_brand, item_like_count, item_price, item_material, item_size;
 	ImageView show_item_like;
-	
+	RoomData[] myRoomData;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_item_info);
-		
-		final RoomData[] myRoomData = {
-				new RoomData(1,1,"house1",R.drawable.ic_launcher,"방설명1",true),
-				new RoomData(2,2,"house2",R.drawable.ic_launcher,"방설명2",true),
-				new RoomData(3,3,"house3",R.drawable.ic_launcher,"방설명3",true)
-		};
+//		final RoomData[] myRoomData = {
+//				new RoomData(1,1,"house1",R.drawable.ic_launcher,"방설명1",true),
+//				new RoomData(2,2,"house2",R.drawable.ic_launcher,"방설명2",true),
+//				new RoomData(3,3,"house3",R.drawable.ic_launcher,"방설명3",true)
+//		};
 		
 		ViewPager mPager;
 		HorizontalListView hlv_s_item;
@@ -67,8 +66,8 @@ public class ItemInfoActivity extends FragmentActivity {
 		iAdapter = new ItemRecommandAdapter(this);
 		hlv_s_item = (HorizontalListView) findViewById(R.id.horizontalListView2);
 		hlv_s_item.setAdapter(iAdapter);
-		for(int j = 0; j < iData.item_img.length; j++){
-			iAdapter.add(iData.item_img[j]);
+		for(int j = 0; j < iData.item_img_url.length; j++){
+			iAdapter.add(iData.item_img_url[j]);
 		}
 
 

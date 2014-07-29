@@ -1,5 +1,4 @@
 package com.tacademy.penthouse.itemlike;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,7 +14,7 @@ import com.tacademy.penthouse.entity.ItemData;
 import com.tacademy.penthouse.entity.RoomData;
 import com.tacademy.penthouse.entity.UserData;
 
-public class CreateNewRoomActivity extends Activity {
+public class CreateNewRoomActivity extends Activity{
 	public final static String PARAM_ITEM_IN_NEW_ROOM ="item in new room";
 
 	UserData myData;
@@ -65,8 +64,8 @@ public class CreateNewRoomActivity extends Activity {
 				//room name is given
 				if((String)room_name.getText().toString()!= null && 
 						!((String)room_name.getText().toString()).equals("")){
-					//					//room img is selected
-					//	if(new_room_img != null){
+					//               //room img is selected
+					//   if(new_room_img != null){
 					//room color is selected;;
 					/*
 					 * 
@@ -80,9 +79,9 @@ public class CreateNewRoomActivity extends Activity {
 					//if(isPrivate.){
 					//newRoomData.isPublic = false;
 					//}
-					//			newRoomData.room_num = 
-					//			newRoomData.room_img = 
-					//			newRoomData.room_color_theme = 
+					//         newRoomData.room_num = 
+					//         newRoomData.room_img = 
+					//         newRoomData.room_color_theme = 
 
 
 					if(iData != null){
@@ -115,5 +114,4 @@ public class CreateNewRoomActivity extends Activity {
 			}
 		});
 	}
-
 }

@@ -126,17 +126,18 @@ public class MainActivity extends SlidingFragmentActivity{
 		submit = (Button)v.findViewById(R.id.button1);
 		return true;
 	}
-
-	final UserData myData = new UserData(1, "a","a","a",1,1, R.drawable.tulips,"XXX's House", "XX의 집에 오신걸 환영", "aa");
-	final UserData uData[] = {	new UserData(2, "b1","b1","b1",2,2,R.drawable.penguins,"YYY1's House","Welcome","bb"),
-							  	new UserData(3, "b2","b2","b2",2,2,R.drawable.penguins,"YYY2's House","Welcome","bb"),
-							  	new UserData(4, "b3","b3","b3",2,2,R.drawable.penguins,"YYY3's House","Welcome","bb"),
-							  	new UserData(5, "b4","b4","b4",2,2,R.drawable.penguins,"YYY4's House","Welcome","bb"),
-							  	new UserData(6, "b5","b5","b5",2,2,R.drawable.penguins,"YYY5's House","Welcome","bb"),
-							  	new UserData(7, "b6","b6","b6",2,2,R.drawable.penguins,"YYY6's House","Welcome","bb"),
-							  	new UserData(8, "b7","b7","b7",2,2,R.drawable.penguins,"YYY7's House","Welcome","bb"),
-							  	new UserData(9, "b8","b8","b8",2,2,R.drawable.penguins,"YYY8's House","Welcome","bb")
-	};
+	UserData myData;
+	UserData uData[];
+//
+//	final UserData myData = 	new UserData(1, "a","a","a",1,1, R.drawable.tulips,"XXX's House", "XX의 집에 오신걸 환영", "aa");
+//	final UserData uData[] = {	new UserData(2, "b1","b1","b1",2,2,R.drawable.penguins,"YYY1's House","Welcome","bb"),
+//							  	new UserData(3, "b2","b2","b2",2,2,R.drawable.penguins,"YYY2's House","Welcome","bb"),
+//							  	new UserData(4, "b3","b3","b3",2,2,R.drawable.penguins,"YYY3's House","Welcome","bb"),
+//							  	new UserData(5, "b4","b4","b4",2,2,R.drawable.penguins,"YYY4's House","Welcome","bb"),
+//							  	new UserData(6, "b5","b5","b5",2,2,R.drawable.penguins,"YYY5's House","Welcome","bb"),
+//							  	new UserData(7, "b6","b6","b6",2,2,R.drawable.penguins,"YYY6's House","Welcome","bb"),
+//							  	new UserData(8, "b7","b7","b7",2,2,R.drawable.penguins,"YYY7's House","Welcome","bb"),
+//							 	new UserData(9, "b8","b8","b8",2,2,R.drawable.penguins,"YYY8's House","Welcome","bb")	};
 	
 	public void actionMenu(int menuId) {
 		switch(menuId) {
