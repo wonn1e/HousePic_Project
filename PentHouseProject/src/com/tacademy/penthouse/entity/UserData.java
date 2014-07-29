@@ -17,6 +17,10 @@ public class UserData implements Parcelable{
 	public String house_name;
 	public String house_intro;
 	public String house_img_url;
+	
+	public String result;
+	public String result_msg;
+	
 	public UserData(){	}
 	
 	public UserData(int user_num, String user_id, String user_nickname, String user_password,

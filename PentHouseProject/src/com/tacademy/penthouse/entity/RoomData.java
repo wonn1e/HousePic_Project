@@ -19,6 +19,10 @@ public class RoomData implements Parcelable{
 	//public Date passedtime;
 	public boolean isPublic;
 	public ArrayList<ItemData> items = new ArrayList<ItemData>();
+	public String result;
+	public String result_msg;
+	
+	
 	public RoomData(){}
 	
 	public RoomData(int u_n, int r_num, String r_name, String r_img, String r_info, boolean ispublic){
