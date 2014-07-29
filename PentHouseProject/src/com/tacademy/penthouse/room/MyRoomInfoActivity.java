@@ -1,5 +1,6 @@
 package com.tacademy.penthouse.room;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -14,12 +15,19 @@ import com.etsy.android.grid.StaggeredGridView;
 import com.tacademy.penthouse.R;
 import com.tacademy.penthouse.entity.ItemData;
 import com.tacademy.penthouse.entity.RoomData;
+import com.tacademy.penthouse.entity.UserData;
 import com.tacademy.penthouse.item.ItemInfoActivity;
+import com.tacademy.penthouse.itemlike.CreateNewRoomActivity;
 import com.tacademy.penthouse.itemlike.ItemLikeShowListDialog;
+import com.tacademy.penthouse.ranking.RankingActivity;
 
 public class MyRoomInfoActivity extends FragmentActivity {
+	public static final int REQUEST_NEW_ROOM_IN_MYROOM = 0;
+	
 	ItemLikeShowListDialog itemLikeDialog;
 	MyItemAdapter iAdapter;
+	
+	UserData myData;
 	
 	ImageView room_img;
 	TextView room_name;
@@ -35,7 +43,6 @@ public class MyRoomInfoActivity extends FragmentActivity {
 
 		StaggeredGridView myroom_item_gridview;
 		itemLikeDialog = new ItemLikeShowListDialog();
-
 //		//ItemData 생성부분
 //		String[] t = {"aa","bb"};
 //		int[] img = {R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher};
@@ -80,25 +87,42 @@ public class MyRoomInfoActivity extends FragmentActivity {
 
 				//now unlike!!
 				if(data.item_like){
-					data.item_like = false;
-					data.likeCnt--;
-					//iData.notify();
+					Toast.makeText(MyRoomInfoActivity.this, "now unlike in MyRoomActivity", Toast.LENGTH_SHORT).show();
+					iAdapter.updateData(data, false, data.likeCnt--);
+					onResume();
 				}
 				//now like!!
 				else{
-					Toast.makeText(MyRoomInfoActivity.this, "like true", Toast.LENGTH_SHORT).show();
-					data.item_like = true;
-					data.likeCnt++;
-					//iData.notify();
-
-					//idata update! (ex. likeCnt, etc)
-
 					Bundle b = new Bundle();
 					b.putParcelable(ItemLikeShowListDialog.PARAM_ITEM_DATA, data);
 					b.putParcelableArray(ItemLikeShowListDialog.PARAM_ROOM_DATA, myRoomData);
 					itemLikeDialog.setArguments(b);
 					itemLikeDialog.show(getSupportFragmentManager(), "dialog");
-
+					
+					final ItemData itemData = data;
+					itemLikeDialog.setOnRoomSelectedListener(new ItemLikeShowListDialog.OnRoomSelectedListener() {
+						
+						@Override
+						public void onRoomSelected(boolean roomSelected) {
+							Toast.makeText(MyRoomInfoActivity.this, "item in room!! (RankingAct)", Toast.LENGTH_SHORT).show();
+							iAdapter.updateData(itemData, true, itemData.likeCnt++);
+						}
+					});
+					
+					itemLikeDialog.setOnCreateSelectedListener(new ItemLikeShowListDialog.OnCreateSelectedListener() {
+						
+						@Override
+						public void onCreateSelected(boolean roomSelected) {
+							Toast.makeText(MyRoomInfoActivity.this, "create new room RankingActivity", Toast.LENGTH_SHORT).show();
+							Intent i = new Intent(MyRoomInfoActivity.this , CreateNewRoomActivity.class);
+							i.putExtra("iData", itemData);
+							//pass on myData (UserData) 
+							i.putExtra("myData", myData);
+							startActivityForResult(i, REQUEST_NEW_ROOM_IN_MYROOM);
+							onResume();
+							
+						}
+					});
 				}
 
 			}
@@ -130,5 +154,13 @@ public class MyRoomInfoActivity extends FragmentActivity {
 			}
 		});
 
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if(requestCode == REQUEST_NEW_ROOM_IN_MYROOM && resultCode == Activity.RESULT_OK){
+			Toast.makeText(MyRoomInfoActivity.this, "item in new room - MyRoomInfoAct!", Toast.LENGTH_SHORT).show();
+		}
 	}
 }

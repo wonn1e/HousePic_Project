@@ -17,13 +17,18 @@ import android.widget.Toast;
 import com.tacademy.penthouse.R;
 import com.tacademy.penthouse.entity.ItemData;
 import com.tacademy.penthouse.entity.RoomData;
+import com.tacademy.penthouse.entity.UserData;
 import com.tacademy.penthouse.item.ItemInfoActivity;
+import com.tacademy.penthouse.itemlike.CreateNewRoomActivity;
 import com.tacademy.penthouse.itemlike.ItemLikeShowListDialog;
 import com.tacademy.penthouse.room.ItemAdapter;
 import com.tacademy.penthouse.room.MyRoomInfoActivity;
 
 public class SearchResultActivity extends ActionBarActivity {
+	public static final int REQUEST_NEW_ROOM_IN_SEARCH = 0;
+	
 	//ItemData 积己何盒
+
 //	String[] t = {"aa","bb"};
 //	int[] img = {R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher};
 //	Integer[] img2= {R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher};
@@ -40,8 +45,10 @@ public class SearchResultActivity extends ActionBarActivity {
 //			new RoomData(2,2,"house2",R.drawable.ic_launcher,"规汲疙2",true),
 //			new RoomData(3,3,"house3",R.drawable.ic_launcher,"规汲疙3",true)
 //	};	
+	UserData myData;
 	ItemData[] iData;
 	RoomData[] myRoomData;
+	
 	ItemLikeShowListDialog itemLikeDialog;
 	Spinner sort_spinner;
 	GridView item_gridview;
@@ -55,6 +62,9 @@ public class SearchResultActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_search_result);
+		
+		//myData = new UserData(10, "www", "kw", "password", 100, 120, 12345,"kw's house", "welcome to kw's home", "aa");
+		
 		itemLikeDialog = new ItemLikeShowListDialog();
 		Intent i = getIntent();
 		title = i.getStringExtra("keyword");
@@ -103,38 +113,58 @@ public class SearchResultActivity extends ActionBarActivity {
 		for(int j = 0; j < iData.length; j++){
 			iAdapter.add(iData[j]);	
 		}
-		
-		
+
+
 		iAdapter.setOnAdapterItemClickListener(new ItemAdapter.OnAdapterItemClickListener() {
-			
+
 			@Override
 			public void onItemLikeClick(View v, ItemData data) {
 				//now unlike!!
 				if(data.item_like){
-					Toast.makeText(SearchResultActivity.this, "now unlike", Toast.LENGTH_SHORT).show();
+					Toast.makeText(SearchResultActivity.this, "unlike in SearchResult" , Toast.LENGTH_SHORT).show();
 					data.item_like = false;
 					data.likeCnt--;
-					//iData.notify();
+					/*
+					 * item data update
+					 */
 				}
+
 				//now like!!
 				else{
-					Toast.makeText(SearchResultActivity.this, "just like not in room", Toast.LENGTH_SHORT).show();
-				//	data.item_like = true;
-				//	data.likeCnt++;
-					//iData.notify();
-
-					//idata update! (ex. likeCnt, etc)
-
 					Bundle b = new Bundle();
 					b.putParcelable(ItemLikeShowListDialog.PARAM_ITEM_DATA, data);
 					b.putParcelableArray(ItemLikeShowListDialog.PARAM_ROOM_DATA, myRoomData);
 					itemLikeDialog.setArguments(b);
 					itemLikeDialog.show(getSupportFragmentManager(), "dialog");
 
+					itemLikeDialog.setOnRoomSelectedListener(new ItemLikeShowListDialog.OnRoomSelectedListener() {
+
+						@Override
+						public void onRoomSelected(boolean roomSelected) {
+							Toast.makeText(SearchResultActivity.this, "item in room!! (SearchResult)", Toast.LENGTH_SHORT).show();
+							/*
+							 * Item Data update
+							 */
+						}
+					});
+
+					itemLikeDialog.setOnCreateSelectedListener(new ItemLikeShowListDialog.OnCreateSelectedListener() {
+
+						@Override
+						public void onCreateSelected(boolean roomSelected) {
+							Toast.makeText(SearchResultActivity.this, "create new room SearchResult", Toast.LENGTH_SHORT).show();
+							Intent i = new Intent(SearchResultActivity.this , CreateNewRoomActivity.class);
+							i.putExtra("iData", iData);
+							//pass on myData (UserData) 
+							i.putExtra("myData", myData);
+							startActivityForResult(i, REQUEST_NEW_ROOM_IN_SEARCH);
+							onResume();
+						}
+					});
 				}
 			}
 		});
-		
+
 		item_gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 			@Override
@@ -146,5 +176,13 @@ public class SearchResultActivity extends ActionBarActivity {
 			}
 		});
 
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if(requestCode == REQUEST_NEW_ROOM_IN_SEARCH && resultCode == Activity.RESULT_OK){
+			Toast.makeText(SearchResultActivity.this, "item in new room from SearchResult!", Toast.LENGTH_SHORT).show();
+		}
 	}
 }
