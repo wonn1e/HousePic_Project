@@ -53,6 +53,12 @@ public class MyItemAdapter extends BaseAdapter implements MyItemView.OnItemLikeC
 		return v;
 	}
 	
+	public void updateData(ItemData data, boolean isLike, int likeCnt){
+		data.item_like = isLike;
+		data.likeCnt = likeCnt;
+		notifyDataSetChanged();
+	}
+	////
 	public interface OnAdapterItemClickListener{
 		public void onItemLikeClick(View v, ItemData iData);
 		public void onItemMoveClick(View v, ItemData iData);
@@ -63,7 +69,7 @@ public class MyItemAdapter extends BaseAdapter implements MyItemView.OnItemLikeC
 	public void setOnAdapterItemClickListener(OnAdapterItemClickListener l){
 		mAdapListener = l;
 	}
-	
+	////
 	@Override
 	public void onLikeClick(View v, ItemData i) {
 		if(mAdapListener != null)
