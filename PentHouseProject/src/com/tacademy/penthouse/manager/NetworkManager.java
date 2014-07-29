@@ -19,6 +19,7 @@ import com.tacademy.penthouse.entity.ItemData;
 import com.tacademy.penthouse.entity.ItemInfoResult;
 import com.tacademy.penthouse.entity.ItemResult;
 import com.tacademy.penthouse.entity.ResultData;
+import com.tacademy.penthouse.entity.RoomInfoResult;
 import com.tacademy.penthouse.entity.RoomResult;
 import com.tacademy.penthouse.entity.UserData;
 import com.tacademy.penthouse.entity.UserResult;
@@ -372,19 +373,94 @@ public class NetworkManager {
 			@Override
 			public void onSuccess(int statusCode, Header[] headers,
 					String responseString) {
-				// TODO Auto-generated method stub
+				ResultData rd = gson.fromJson(responseString, ResultData.class);
+				listener.onSuccess(rd);
+			}
+			
+			@Override
+			public void onFailure(int statusCode, Header[] headers,
+					String responseString, Throwable throwable) {
+				listener.onFail(statusCode);
+			}
+		});
+		
+	}
+	
+	public static final String getRoomInfo_URL = "";
+	public void getRoomInfo(Context context, String user_id, int room_num, final OnResultListener<RoomInfoResult> listener){
+		RequestParams params = new RequestParams();
+		params.put(PARAM_USER_ID, user_id);
+		params.put(PARAM_ROOM_NO, room_num);
+		
+		client.get(context, getRoomInfo_URL,params,new TextHttpResponseHandler() {
+			
+			@Override
+			public void onSuccess(int statusCode, Header[] headers,
+					String responseString) {
+				RoomInfoResult rd = gson.fromJson(responseString, RoomInfoResult.class);
+				listener.onSuccess(rd);
+			}
+			
+			@Override
+			public void onFailure(int statusCode, Header[] headers,
+					String responseString, Throwable throwable) {
+				listener.onFail(statusCode);
+			}
+		});
+	}
+	
+	public static final String getAddItem_URL = "";
+	public void getAddItem(Context context, String user_id, int room_num, int item_num, final OnResultListener<ResultData> listener){
+		RequestParams params = new RequestParams();
+		params.put(PARAM_USER_ID, user_id);
+		params.put(PARAM_ROOM_NO, room_num);
+		params.put(PARAM_ITEM_NO, item_num);
+		
+		client.get(context, getAddItem_URL, params, new TextHttpResponseHandler() {
+			
+			@Override
+			public void onSuccess(int statusCode, Header[] headers,
+					String responseString) {
+				ResultData rd = gson.fromJson(responseString, ResultData.class);
+				listener.onSuccess(rd);
 				
 			}
 			
 			@Override
 			public void onFailure(int statusCode, Header[] headers,
 					String responseString, Throwable throwable) {
-				// TODO Auto-generated method stub
-				
+				listener.onFail(statusCode);
 			}
 		});
-		
 	}
+	
+	public static final String getDeleteItem_URL = "";
+	public void getDeleteItem(Context context, String user_id, int room_num, int item_num, final OnResultListener<ResultData> listener){
+		RequestParams params = new RequestParams();
+		params.put(PARAM_USER_ID, user_id);
+		params.put(PARAM_ROOM_NO, room_num);
+		params.put(PARAM_ITEM_NO, item_num);
+		
+		client.get(context, getDeleteItem_URL, params, new TextHttpResponseHandler() {
+			
+			@Override
+			public void onSuccess(int statusCode, Header[] headers,
+					String responseString) {
+				ResultData rd = gson.fromJson(responseString, ResultData.class);
+				listener.onSuccess(rd);
+				
+			}
+			
+			@Override
+			public void onFailure(int statusCode, Header[] headers,
+					String responseString, Throwable throwable) {
+				listener.onFail(statusCode);
+			}
+		});
+	}
+	
+	
+	
 }
 
 //static class DataTask extends AsyncTask...
