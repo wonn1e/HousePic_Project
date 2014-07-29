@@ -23,20 +23,33 @@
         android:layout_marginTop="5dp"
         android:text="추천보기(홈)"
         android:textAppearance="?android:attr/textAppearanceMedium" />
+    
+    <TextView
+         android:id="@+id/show_search"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_marginBottom="5dp"
+         android:layout_marginLeft="20dp"
+         android:layout_marginTop="5dp"
+         android:text="검색"
+         android:textAppearance="?android:attr/textAppearanceMedium" />
+
      <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="5dp"
-        android:text="소셜"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_marginBottom="5dp"
+         android:layout_marginLeft="20dp"
+         android:layout_marginTop="5dp"
+         android:enabled="false"
+         android:text="소셜"
+         android:textAppearance="?android:attr/textAppearanceMedium" />
+
       <TextView
         android:id="@+id/show_ranking"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="25dp"
         android:layout_marginTop="5dp"
         android:text="랭킹"
         android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -45,10 +58,31 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="25dp"
         android:layout_marginTop="5dp"
         android:text="친구초대"
         android:textAppearance="?android:attr/textAppearanceMedium" />
+       
+        <TextView
+         android:id="@+id/show_setting"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_marginBottom="5dp"
+         android:layout_marginLeft="20dp"
+         android:layout_marginTop="15dp"
+         android:text="설정"
+         android:textAppearance="?android:attr/textAppearanceMedium" />
+       
+         <TextView
+         android:id="@+id/show_guide"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_marginBottom="5dp"
+         android:layout_marginLeft="20dp"
+         android:layout_marginTop="15dp"
+         android:text="안내"
+         android:textAppearance="?android:attr/textAppearanceMedium" />
+        
        
 
 </LinearLayout>
