@@ -264,12 +264,127 @@ public class NetworkManager {
 	//static class DataTask extends AsyncTask...
 
 	
-	public static final String EveryoneRoomData = "";
+	public static final String EveryoneRoomData_URL = "";
 	public void getEveryoneRoomData(Context context, final OnResultListener<RoomResult> listener){
+		client.get(context, EveryoneRoomData_URL,new TextHttpResponseHandler() {
+			
+			@Override
+			public void onSuccess(int statusCode, Header[] headers,
+					String responseString) {
+				RoomResult rrd = gson.fromJson(responseString, RoomResult.class);
+				listener.onSuccess(rrd);
+			}
+			
+			@Override
+			public void onFailure(int statusCode, Header[] headers,
+					String responseString, Throwable throwable) {
+				listener.onFail(statusCode);
+			}
+		});
 		
 	}
+	
+	public static final String FriendRoomData_URL = "";
+	public void getFriendRoomData(Context context,String user_id, final OnResultListener<RoomResult> listener){
+		RequestParams params = new RequestParams();
+		params.put(PARAM_USER_ID, user_id);
+		
+		client.get(context, FriendRoomData_URL, params, new TextHttpResponseHandler() {
+			
+			@Override
+			public void onSuccess(int statusCode, Header[] headers,
+					String responseString) {
+				RoomResult rrd = gson.fromJson(responseString, RoomResult.class);
+				listener.onSuccess(rrd);
+			}
+			
+			@Override
+			public void onFailure(int statusCode, Header[] headers,
+					String responseString, Throwable throwable) {
+				listener.onFail(statusCode);
+			}
+		});
+	}
+	
+	public static final String getMakeRoom_URL = "";
+	public void getMakeRoom(Context context, String user_id, String room_name, String room_img, 
+							String room_color, boolean ispublic, final OnResultListener<ResultData> listener){
+		RequestParams params = new RequestParams();
+		params.put(PARAM_USER_ID, user_id);
+		params.put(PARAM_ROOM_NAME,room_name);
+		params.put(PARAM_ROOM_IMG, room_img);
+		params.put(PARAM_ROOM_COLOR, room_color);
+		params.put(PARAM_ROOM_ISPUBLIC, ispublic);
+		
+		client.get(context, getMakeRoom_URL,params, new TextHttpResponseHandler() {
+			
+			@Override
+			public void onSuccess(int statusCode, Header[] headers,
+					String responseString) {
+				ResultData rd = gson.fromJson(responseString, ResultData.class);
+				listener.onSuccess(rd);
+			}
+			
+			@Override
+			public void onFailure(int statusCode, Header[] headers,
+					String responseString, Throwable throwable) {
+				listener.onFail(statusCode);
+			}
+		});
+	}
 
+	public static final String getDeleteRoom_URL = "";
+	public void getDeleteRoom(Context context, String user_id, int room_num, final OnResultListener<ResultData> listener){
+		RequestParams params = new RequestParams();
+		params.put(PARAM_USER_ID, user_id);
+		params.put(PARAM_ROOM_NO, room_num);
+		
+		client.get(context, getDeleteRoom_URL,params, new TextHttpResponseHandler() {
+			
+			@Override
+			public void onSuccess(int statusCode, Header[] headers,
+					String responseString) {
+				ResultData rd = gson.fromJson(responseString, ResultData.class);
+				listener.onSuccess(rd);
+			}
+			
+			@Override
+			public void onFailure(int statusCode, Header[] headers,
+					String responseString, Throwable throwable) {
+				listener.onFail(statusCode);
+			}
+		});
+	}
 
+	public static final String getEditRoom_URL = "";
+	public void getEditRoom(Context context, String user_id, int room_num, String room_name, String room_img, 
+								String room_color,boolean ispublic,final OnResultListener<ResultData> listener){
+		RequestParams params = new RequestParams();
+		params.put(PARAM_USER_ID, user_id);
+		params.put(PARAM_ROOM_NO, room_num);
+		params.put(PARAM_ROOM_NAME, room_name);
+		params.put(PARAM_ROOM_IMG, room_img);
+		params.put(PARAM_ROOM_COLOR, room_color);
+		params.put(PARAM_ROOM_ISPUBLIC, ispublic);
+		
+		client.get(context,  getEditRoom_URL, params, new TextHttpResponseHandler() {
+			
+			@Override
+			public void onSuccess(int statusCode, Header[] headers,
+					String responseString) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onFailure(int statusCode, Header[] headers,
+					String responseString, Throwable throwable) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+	}
 }
 
 //static class DataTask extends AsyncTask...
