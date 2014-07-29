@@ -8,7 +8,6 @@ import android.os.Parcelable;
 public class ItemData implements Parcelable {
 	
 	public int room_num ;
-	
 	public int item_code;
 	public String sort_code;
 	public String item_name;
@@ -17,11 +16,14 @@ public class ItemData implements Parcelable {
 	public String material;
 	public String[]theme;
 	public int likeCnt;
-	public String sort_category;
+	public int sort_category;
 	//public int []item_img;
 	public String link;
 	public boolean item_like;
 	public String[] item_img_url;
+	
+	public String result;
+	public String result_msg;
 	
 	public ItemData(){}
 	public ItemData(int room_num,int item_code,           
@@ -32,7 +34,7 @@ public class ItemData implements Parcelable {
 	String material,       
 	String[]theme,  
 	int likeCnt ,             
-	String sort_category,String []item_img_url ,String link , boolean item_like){
+	int sort_category,String []item_img_url ,String link , boolean item_like){
 		this.room_num = room_num;
 		this.item_code = item_code ;           
 		this.sort_code = sort_code;     
@@ -60,7 +62,7 @@ public class ItemData implements Parcelable {
 		theme = new String[length];
 		p.readStringArray(theme);
 		likeCnt = p.readInt();
-		sort_category = p.readString();
+		sort_category = p.readInt();
 		int item_cnt = p.readInt();
 		item_img_url = new String[item_cnt];
 		p.readStringArray(item_img_url);
@@ -85,7 +87,7 @@ public class ItemData implements Parcelable {
 		dest.writeInt(theme.length);
 		dest.writeStringArray(theme);
 		dest.writeInt(likeCnt);
-		dest.writeString(sort_category);
+		dest.writeInt(sort_category);
 		dest.writeInt(item_img_url.length);
 		dest.writeStringArray(item_img_url);
 		dest.writeString(link);
