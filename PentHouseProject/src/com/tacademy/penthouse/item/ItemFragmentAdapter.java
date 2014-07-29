@@ -27,7 +27,7 @@ public class ItemFragmentAdapter extends FragmentPagerAdapter{
 	public Fragment getItem(int position) {
 		Fragment f = new ItemFragment();
 		Bundle b = new Bundle();
-		b.putInt("img", item.item_img[position]);
+		b.putString("img", item.item_img_url[position]);
 		b.putBoolean("item_like", item.item_like);
 		f.setArguments(b);
 		return f;
@@ -36,7 +36,7 @@ public class ItemFragmentAdapter extends FragmentPagerAdapter{
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
-		return item.item_img.length;
+		return item.item_img_url.length;
 	}
 
 }

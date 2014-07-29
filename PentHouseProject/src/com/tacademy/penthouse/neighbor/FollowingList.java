@@ -21,6 +21,7 @@ public class FollowingList extends PagerFragment {
 	NeighborAdapter nAdapter;
 	String name, message;
 	int resId;
+	UserData[] uData;
 	//ActionBar actionBar;
 	
 	@Override
@@ -45,15 +46,18 @@ public class FollowingList extends PagerFragment {
 	}
 	
 	private void initData(){
-		UserData u0 = new UserData(0, "a", "aaa", "skdj", 10, 10, 1000,"YYY12's House","Welcome","bb");
-		UserData u1 = new UserData(0, "ab", "aaa", "skdj", 10, 10, 1000,"YYY12's House","Welcome","bb");
-		UserData u2 = new UserData(0, "abc", "aaa", "skdj", 10, 10, 1000,"YYY12's House","Welcome","bb");
-		
-		
-		
-		nAdapter.add(u0);
-		nAdapter.add(u1);
-		nAdapter.add(u2);
+//		UserData u0 = new UserData(0, "a", "aaa", "skdj", 10, 10, 1000,"YYY12's House","Welcome","bb");
+//		UserData u1 = new UserData(0, "ab", "aaa", "skdj", 10, 10, 1000,"YYY12's House","Welcome","bb");
+//		UserData u2 = new UserData(0, "abc", "aaa", "skdj", 10, 10, 1000,"YYY12's House","Welcome","bb");
+//		
+//		
+//		
+//		nAdapter.add(u0);
+//		nAdapter.add(u1);
+//		nAdapter.add(u2);
+		for(int i = 0; i < uData.length; i++){
+			nAdapter.add(uData[i]);
+		}
 	}
 	
 	@Override

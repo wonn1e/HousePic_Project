@@ -18,12 +18,11 @@ public class ItemData implements Parcelable {
 	public String[]theme;
 	public int likeCnt;
 	public String sort_category;
-	public int []item_img;
+	//public int []item_img;
 	public String link;
 	public boolean item_like;
+	public String[] item_img_url;
 	
-	
-	//String item_url;
 	public ItemData(){}
 	public ItemData(int room_num,int item_code,           
 	String sort_code ,     
@@ -33,7 +32,7 @@ public class ItemData implements Parcelable {
 	String material,       
 	String[]theme,  
 	int likeCnt ,             
-	String sort_category,int []item_img ,String link , boolean item_like){
+	String sort_category,String []item_img_url ,String link , boolean item_like){
 		this.room_num = room_num;
 		this.item_code = item_code ;           
 		this.sort_code = sort_code;     
@@ -44,7 +43,7 @@ public class ItemData implements Parcelable {
 		this.theme = theme;  
 		this.likeCnt = likeCnt;             
 		this.sort_category = sort_category; 
-		this.item_img = item_img ; 
+		this.item_img_url = item_img_url ; 
 		this.link = link;
 		this.item_like = item_like;
 	
@@ -63,8 +62,8 @@ public class ItemData implements Parcelable {
 		likeCnt = p.readInt();
 		sort_category = p.readString();
 		int item_cnt = p.readInt();
-		item_img = new int[item_cnt];
-		p.readIntArray(item_img);
+		item_img_url = new String[item_cnt];
+		p.readStringArray(item_img_url);
 		link = p.readString();
 		item_like = p.readByte() != 0;
 	}
@@ -87,8 +86,8 @@ public class ItemData implements Parcelable {
 		dest.writeStringArray(theme);
 		dest.writeInt(likeCnt);
 		dest.writeString(sort_category);
-		dest.writeInt(item_img.length);
-		dest.writeIntArray(item_img);
+		dest.writeInt(item_img_url.length);
+		dest.writeStringArray(item_img_url);
 		dest.writeString(link);
 		dest.writeByte((byte)(item_like ? 1:0));
 	}

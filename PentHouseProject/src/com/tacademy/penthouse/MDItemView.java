@@ -9,6 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 import com.tacademy.penthouse.entity.ItemData;
 import com.tacademy.penthouse.item.ItemInfoActivity;
 
@@ -46,7 +49,8 @@ public class MDItemView extends FrameLayout{
 	TextView item_right_name;
 	TextView item_left_price;
 	TextView item_right_price;
-	
+	ImageLoader loader;
+	DisplayImageOptions options;
 	
 	private void init(){
 		LayoutInflater.from(getContext()).inflate(R.layout.main_md_double_item_view, this);
@@ -59,6 +63,19 @@ public class MDItemView extends FrameLayout{
 		item_right_name = (TextView)findViewById(R.id.item_right_name);
 		item_left_price = (TextView)findViewById(R.id.item_left_price);
 		item_right_price = (TextView)findViewById(R.id.item_right_price);
+		
+		loader = ImageLoader.getInstance();
+		options = new DisplayImageOptions.Builder()
+		.showImageOnLoading(R.drawable.ic_stub)
+		.showImageForEmptyUri(R.drawable.ic_empty)
+		.showImageOnFail(R.drawable.ic_error)
+		.cacheInMemory(true)
+		.cacheOnDisc(true)
+		.considerExifParams(true)
+	//	.displayer(new RoundedBitmapDisplayer(100))
+		.build();
+
+		
 		item_left_img.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -108,7 +125,8 @@ public class MDItemView extends FrameLayout{
 		lData = leftData;
 		rData = rightData;		
 		
-		item_left_img.setImageResource(leftData.item_img[0]);
+		//item_left_img.setImageResource(leftData.item_img[0]);
+		loader.displayImage(leftData.item_img_url[0], item_left_img, options);
 		item_left_name.setText(leftData.item_name);
 		item_left_price.setText(leftData.price);
 		if(leftData.item_like){
@@ -118,7 +136,8 @@ public class MDItemView extends FrameLayout{
 		}
 		
 		if(rightData != null ){
-			item_right_img.setImageResource(rightData.item_img[0]);
+			//item_right_img.setImageResource(rightData.item_img[0]);
+			loader.displayImage(rightData.item_img_url[0], item_right_img, options);
 			item_right_name.setText(rightData.item_name);
 			item_right_price.setText(rightData.price);
 			if(rightData.item_like){

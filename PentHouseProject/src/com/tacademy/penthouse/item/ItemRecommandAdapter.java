@@ -9,14 +9,14 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 public class ItemRecommandAdapter extends BaseAdapter{
-	ArrayList<Integer> items = new ArrayList<Integer>();
+	ArrayList<String> items = new ArrayList<String>();
 	Context mContext;
 	public ItemRecommandAdapter(Context context){
 		mContext = context;
 	}
 	
-	public void add(Integer resId){
-		items.add(resId);
+	public void add(String imageURL){
+		items.add(imageURL);
 		notifyDataSetChanged();
 	}
 	
@@ -27,7 +27,7 @@ public class ItemRecommandAdapter extends BaseAdapter{
 	}
 
 	@Override
-	public Integer getItem(int position) {
+	public String getItem(int position) {
 		// TODO Auto-generated method stub
 		return items.get(position);
 	}

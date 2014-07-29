@@ -26,6 +26,8 @@ public class MyRoomInfoActivity extends FragmentActivity {
 	TextView room_update_time;
 	TextView room_intro;
 	TextView room_product_list;
+	ItemData[] iData;
+	RoomData[] myRoomData;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -34,22 +36,22 @@ public class MyRoomInfoActivity extends FragmentActivity {
 		StaggeredGridView myroom_item_gridview;
 		itemLikeDialog = new ItemLikeShowListDialog();
 
-		//ItemData 생성부분
-		String[] t = {"aa","bb"};
-		int[] img = {R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher};
-		final ItemData[] iData = {new ItemData(1,1,"aa","a1","aa","aa","aa",t,1,"aa",img, "http://www.naver.com", true),
-				new ItemData(1,1,"aa","a2","aa","aa","aa",t,1,"aa",img, "http://www.naver.com", false),
-				new ItemData(1,1,"aa","a3","aa","aa","aa",t,1,"aa",img, "http://www.naver.com", false),
-				new ItemData(1,1,"aa","a4","aa","aa","aa",t,1,"aa",img, "http://www.naver.com",true),
-				new ItemData(1,1,"aa","a5","aa","aa","aa",t,1,"aa",img, "http://www.naver.com", true),
-				new ItemData(1,1,"aa","a6","aa","aa","aa",t,1,"aa",img, "http://www.naver.com", false),
-				new ItemData(1,1,"aa","a7","aa","aa","aa",t,1,"aa",img, "http://www.naver.com", false)};
-		final RoomData[] myRoomData = {
-				new RoomData(1,1,"house1",R.drawable.ic_launcher,"방설명1",true),
-				new RoomData(2,2,"house2",R.drawable.ic_launcher,"방설명2",true),
-				new RoomData(3,3,"house3",R.drawable.ic_launcher,"방설명3",true)
-		};
-		//
+//		//ItemData 생성부분
+//		String[] t = {"aa","bb"};
+//		int[] img = {R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher};
+//		final ItemData[] iData = {new ItemData(1,1,"aa","a1","aa","aa","aa",t,1,"aa",img, "http://www.naver.com", true),
+//				new ItemData(1,1,"aa","a2","aa","aa","aa",t,1,"aa",img, "http://www.naver.com", false),
+//				new ItemData(1,1,"aa","a3","aa","aa","aa",t,1,"aa",img, "http://www.naver.com", false),
+//				new ItemData(1,1,"aa","a4","aa","aa","aa",t,1,"aa",img, "http://www.naver.com",true),
+//				new ItemData(1,1,"aa","a5","aa","aa","aa",t,1,"aa",img, "http://www.naver.com", true),
+//				new ItemData(1,1,"aa","a6","aa","aa","aa",t,1,"aa",img, "http://www.naver.com", false),
+//				new ItemData(1,1,"aa","a7","aa","aa","aa",t,1,"aa",img, "http://www.naver.com", false)};
+//		final RoomData[] myRoomData = {
+//				new RoomData(1,1,"house1",R.drawable.ic_launcher,"방설명1",true),
+//				new RoomData(2,2,"house2",R.drawable.ic_launcher,"방설명2",true),
+//				new RoomData(3,3,"house3",R.drawable.ic_launcher,"방설명3",true)
+//		};
+//		//
 
 		//	GridView room_item_gridview;
 

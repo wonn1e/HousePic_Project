@@ -7,6 +7,9 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 import com.tacademy.penthouse.R;
 import com.tacademy.penthouse.entity.UserData;
 
@@ -25,6 +28,8 @@ public class RankUserView extends FrameLayout {
 	TextView user_nickname;
 	TextView follower_num;
 	ImageView follower_btn;
+	ImageLoader loader;
+	DisplayImageOptions options;
 	
 	private void init(){
 		LayoutInflater.from(getContext()).inflate(R.layout.rank_user_view, this);
@@ -33,6 +38,16 @@ public class RankUserView extends FrameLayout {
 		user_nickname = (TextView)findViewById(R.id.user_nickname);
 		follower_num = (TextView)findViewById(R.id.follower_num);
 		follower_btn = (ImageView)findViewById(R.id.following_btn);
+		loader = ImageLoader.getInstance();
+		options = new DisplayImageOptions.Builder()
+		.showImageOnLoading(R.drawable.ic_stub)
+		.showImageForEmptyUri(R.drawable.ic_empty)
+		.showImageOnFail(R.drawable.ic_error)
+		.cacheInMemory(true)
+		.cacheOnDisc(true)
+		.considerExifParams(true)
+		.displayer(new RoundedBitmapDisplayer(100))
+		.build();
 	}
 	
 	public void setRankUserData(UserData data, int position){
@@ -44,7 +59,8 @@ public class RankUserView extends FrameLayout {
 		else{
 			show_rank.setVisibility(GONE);
 		}
-		user_img.setImageResource(data.user_img);
+		//user_img.setImageResource(data.user_img);
+		loader.displayImage(data.user_img_url, user_img,options);
 		
 		user_nickname.setText(data.user_nickname);
 		follower_num.setText(data.follower_cnt+"");

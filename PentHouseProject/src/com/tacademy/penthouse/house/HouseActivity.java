@@ -42,13 +42,14 @@ public class HouseActivity extends FragmentActivity {
 	RoomAdapter roomAdapter;
 	MyRoomAdapter myRoomAdapter;
 
-	final RoomData[] rData= {new RoomData(10, 1, "A", 1,"aa", true),
-			new RoomData(10, 1, "B", 0, "aa", true),
-			new RoomData(10, 1, "C", 2, "aa", true),
-			new RoomData(10, 1, "D", 3, "aa", true),
-			new RoomData(10, 1, "E", 4, "aa", true),
-			new RoomData(10, 1,"F", 5, "aa", true),
-			new RoomData(10, 1, "G", 6,"aa", true)};
+	RoomData[] rData;
+//	final RoomData[] rData= {new RoomData(10, 1, "A", 1,"aa", true),
+//			new RoomData(10, 1, "B", 0, "aa", true),
+//			new RoomData(10, 1, "C", 2, "aa", true),
+//			new RoomData(10, 1, "D", 3, "aa", true),
+//			new RoomData(10, 1, "E", 4, "aa", true),
+//			new RoomData(10, 1,"F", 5, "aa", true),
+//			new RoomData(10, 1, "G", 6,"aa", true)};
 
 	//수정 시 click인지 아닌지
 	boolean isClicked;
@@ -76,9 +77,8 @@ public class HouseActivity extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.house_layout);
 		//uData = new UserData(1, "aa", "aa", "aa", 1, 1, R.drawable.penguins, "aa", "aa", "aa");
-		myData = new UserData(1, "bb", "bb", "bb", 2, 2, R.drawable.tulips, "bb", "bb", "bb");
-		uData = new UserData(2, "bb", "bb", "bb", 2, 2, R.drawable.tulips, "bb", "bb", "bb");
-		
+		//myData = new UserData(2, "bb", "bb", "bb", 2, 2, R.drawable.tulips, "bb", "bb", "bb");
+		//uData = new UserData(2, "bb", "bb", "bb", 2, 2, R.drawable.tulips, "bb", "bb", "bb");
 	//	hData =  new HouseData(10, 12, "nickname's house", "HOUSE!!", "dddd");
 	//	hData = new HouseData();
 		
@@ -285,7 +285,7 @@ public class HouseActivity extends FragmentActivity {
 		user_nickname.setText(uData.user_nickname);
 		house_name.setText(uData.house_name);
 		house_intro.setText(uData.house_intro);
-		user_img.setImageResource(uData.user_img);
+		//user_img.setImageResource(uData.user_img);
 		//house_img.setImageResource(hData.house_img);
 		if(uData.user_num == uData.user_num){
 			house_room_list.setText("나의 방 목록");

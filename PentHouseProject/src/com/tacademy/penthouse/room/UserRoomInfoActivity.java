@@ -36,7 +36,9 @@ public class UserRoomInfoActivity extends FragmentActivity {
 	TextView u_room_nickname;
 	TextView u_room_product_list;
 	StaggeredGridView u_room_item_gridview;
-	
+	UserData uData;
+	ItemData[] iData;
+	RoomData[] myRoomData;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -44,22 +46,22 @@ public class UserRoomInfoActivity extends FragmentActivity {
 		itemLikeDialog = new ItemLikeShowListDialog();
 		Toast.makeText(this, "RoomActivity", Toast.LENGTH_SHORT).show();
 		//Dummy DAta
-		String[] t = {"aa","bb"};
-		final UserData uData = new UserData(100, "aaa", "test user", "zzzz", 10, 12, 123,"aa","aa","aa");
-		int[] img = {R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher};
-		final ItemData[] iData = {new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img, "http://www.naver.com", true),
-				new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img, "http://www.naver.com", false),
-				new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img, "http://www.naver.com", false),
-				new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img, "http://www.naver.com",true),
-				new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img, "http://www.naver.com", true),
-				new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img, "http://www.naver.com", false),
-				new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img, "http://www.naver.com", false)};
-		/*final RoomData[] myRoomData = {
-				new RoomData(1,1,"house1",R.drawable.ic_launcher,"방설명1",true),
-				new RoomData(2,2,"house2",R.drawable.ic_launcher,"방설명2",true),
-				new RoomData(3,3,"house3",R.drawable.ic_launcher,"방설명3",true)
-		};
-*/
+//		String[] t = {"aa","bb"};
+//		final UserData uData = new UserData(100, "aaa", "test user", "zzzz", 10, 12, 123,"aa","aa","aa");
+//		int[] img = {R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher};
+//		final ItemData[] iData = {new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img, "http://www.naver.com", true),
+//				new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img, "http://www.naver.com", false),
+//				new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img, "http://www.naver.com", false),
+//				new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img, "http://www.naver.com",true),
+//				new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img, "http://www.naver.com", true),
+//				new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img, "http://www.naver.com", false),
+//				new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img, "http://www.naver.com", false)};
+//		/*final RoomData[] myRoomData = {
+//				new RoomData(1,1,"house1",R.drawable.ic_launcher,"방설명1",true),
+//				new RoomData(2,2,"house2",R.drawable.ic_launcher,"방설명2",true),
+//				new RoomData(3,3,"house3",R.drawable.ic_launcher,"방설명3",true)
+//		};
+//*/
 
 		View v = getLayoutInflater().inflate(R.layout.header_view_room_layout, null);
 		u_room_img = (ImageView)v.findViewById(R.id.u_room_img);

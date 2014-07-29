@@ -21,6 +21,7 @@ public class FollowerList extends PagerFragment {
 	String name, message;
 	int resId;
 	ActionBar actionBar;
+	UserData[] uData;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater,
@@ -44,15 +45,16 @@ public class FollowerList extends PagerFragment {
 	}
 	
 	private void initData(){
-		UserData u0 = new UserData(0, "a", "aaa", "skdj", 10, 10, 1000,"YYY11's House","Welcome","bb");
-		UserData u1 = new UserData(1, "ab", "aaa", "skdj", 10, 10, 1000,"YYY11's House","Welcome","bb");
-		UserData u2 = new UserData(2, "abc", "aaa", "skdj", 10, 10, 1000,"YYY11's House","Welcome","bb");
-		UserData u3 = new UserData(3, "abd", "aaa", "skdj", 10, 10, 1000,"YYY11's House","Welcome","bb");
-		
-		nAdapter.add(u0);
-		nAdapter.add(u1);
-		nAdapter.add(u2);
-		nAdapter.add(u3);
+//		UserData u0 = new UserData(0, "a", "aaa", "skdj", 10, 10, 1000,"YYY11's House","Welcome","bb");
+//		UserData u1 = new UserData(1, "ab", "aaa", "skdj", 10, 10, 1000,"YYY11's House","Welcome","bb");
+//		UserData u2 = new UserData(2, "abc", "aaa", "skdj", 10, 10, 1000,"YYY11's House","Welcome","bb");
+//		UserData u3 = new UserData(3, "abd", "aaa", "skdj", 10, 10, 1000,"YYY11's House","Welcome","bb");
+		for(int i = 0; i < uData.length; i++){
+			nAdapter.add(uData[i]);
+		}
+//		nAdapter.add(u1);
+//		nAdapter.add(u2);
+//		nAdapter.add(u3);
 	}
 	
 	@Override
