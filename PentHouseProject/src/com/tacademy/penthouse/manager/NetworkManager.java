@@ -19,7 +19,7 @@ import com.tacademy.penthouse.entity.ResultData;
 import com.tacademy.penthouse.entity.RoomInfoResult;
 import com.tacademy.penthouse.entity.RoomResult;
 import com.tacademy.penthouse.entity.UserData;
-import com.tacademy.penthouse.entity.UserProfileResult;
+import com.tacademy.penthouse.entity.UserInfoResult;
 import com.tacademy.penthouse.entity.UserResult;
 
 public class NetworkManager {
@@ -193,17 +193,17 @@ public class NetworkManager {
 		});
 	}
 	
-	public static final String UserProfileData_URL = " ";
-	public void getUserProfileData(Context context, String user_id, final OnResultListener<UserProfileResult> listener){
+	public static final String UserInfoData_URL = " ";
+	public void getUserInfoData(Context context, String user_id, final OnResultListener<UserInfoResult> listener){
 		RequestParams params = new RequestParams();
 		params.put(PARAM_USER_ID, user_id);
 		
-		client.get(context, UserProfileData_URL, new TextHttpResponseHandler() {
+		client.get(context, UserInfoData_URL, new TextHttpResponseHandler() {
 			
 			@Override
 			public void onSuccess(int statusCode, Header[] headers,
 					String responseString) {
-				UserProfileResult userR = gson.fromJson(responseString, UserProfileResult.class);
+				UserInfoResult userR = gson.fromJson(responseString, UserInfoResult.class);
 				listener.onSuccess(userR);
 			}
 			
