@@ -1,7 +1,5 @@
 package com.tacademy.penthouse.manager;
 
-import java.util.ArrayList;
-
 import org.apache.http.Header;
 
 import android.content.Context;
@@ -15,13 +13,13 @@ import com.loopj.android.http.PersistentCookieStore;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
 import com.tacademy.penthouse.MyApplication;
-import com.tacademy.penthouse.entity.ItemData;
 import com.tacademy.penthouse.entity.ItemInfoResult;
 import com.tacademy.penthouse.entity.ItemResult;
 import com.tacademy.penthouse.entity.ResultData;
 import com.tacademy.penthouse.entity.RoomInfoResult;
 import com.tacademy.penthouse.entity.RoomResult;
 import com.tacademy.penthouse.entity.UserData;
+import com.tacademy.penthouse.entity.UserProfileResult;
 import com.tacademy.penthouse.entity.UserResult;
 
 public class NetworkManager {
@@ -166,6 +164,98 @@ public class NetworkManager {
 					String responseString) {
 				ItemResult rankingResult = gson.fromJson(responseString, ItemResult.class);
 				listener.onSuccess(rankingResult);
+			}
+			
+			@Override
+			public void onFailure(int statusCode, Header[] headers,
+					String responseString, Throwable throwable) {
+				listener.onFail(statusCode);
+			}
+		});
+	}
+	
+	public static final String UserRanking_URL = " ";
+	public void getUserRankingResultData(Context context, final OnResultListener<UserResult> listener){
+		client.get(context, UserRanking_URL, new TextHttpResponseHandler() {
+			
+			@Override
+			public void onSuccess(int statusCode, Header[] headers,
+					String responseString) {
+				UserResult rankingR = gson.fromJson(responseString, UserResult.class);
+				listener.onSuccess(rankingR);
+			}
+			
+			@Override
+			public void onFailure(int statusCode, Header[] headers,
+					String responseString, Throwable throwable) {
+				listener.onFail(statusCode);
+			}
+		});
+	}
+	
+	public static final String UserProfileData_URL = " ";
+	public void getUserProfileData(Context context, String user_id, final OnResultListener<UserProfileResult> listener){
+		RequestParams params = new RequestParams();
+		params.put(PARAM_USER_ID, user_id);
+		
+		client.get(context, UserProfileData_URL, new TextHttpResponseHandler() {
+			
+			@Override
+			public void onSuccess(int statusCode, Header[] headers,
+					String responseString) {
+				UserProfileResult userR = gson.fromJson(responseString, UserProfileResult.class);
+				listener.onSuccess(userR);
+			}
+			
+			@Override
+			public void onFailure(int statusCode, Header[] headers,
+					String responseString, Throwable throwable) {
+				listener.onFail(statusCode);
+			}
+		});
+	}
+	
+	public static final String Edit_MyData_URL = " ";
+	public void getEditMyData(Context context, String user_id, String user_nickname, String user_password,
+				String user_img_url, String house_name, String house_img_url, String house_intro,
+				final OnResultListener<UserData> listener){
+		RequestParams params = new RequestParams();
+		params.put(PARAM_USER_ID, user_id);
+		params.put(PARAM_USER_NICKNAME, user_nickname);
+		params.put(PARAM_USER_PW, user_password);
+		params.put(PARAM_USER_IMG, user_img_url);
+		params.put(PARAM_HOUSE_NAME, house_name);
+		params.put(PARAM_HOUSE_IMG, house_img_url);
+		params.put(PARAM_HOUSE_INTRO, house_intro);
+		
+		client.get(context, Edit_MyData_URL, new TextHttpResponseHandler() {
+			
+			@Override
+			public void onSuccess(int statusCode, Header[] headers,
+					String responseString) {
+				UserData uResult = gson.fromJson(responseString, UserData.class);
+				listener.onSuccess(uResult);
+			}
+			
+			@Override
+			public void onFailure(int statusCode, Header[] headers,
+					String responseString, Throwable throwable) {
+				listener.onFail(statusCode);
+			}
+		});
+	}
+	
+	
+	
+	public static final String Follower_URL = " ";
+	public void getFollowerResultData(Context context, String user_id, final OnResultListener<UserResult> listener){
+		client.get(context, Follower_URL, new TextHttpResponseHandler() {
+			
+			@Override
+			public void onSuccess(int statusCode, Header[] headers,
+					String responseString) {
+				UserResult follower_result= gson.fromJson(responseString, UserResult.class);
+				listener.onSuccess(follower_result);
 			}
 			
 			@Override
