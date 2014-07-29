@@ -24,9 +24,6 @@ import com.tacademy.penthouse.entity.RoomData;
 import com.tacademy.penthouse.item.ItemInfoActivity;
 
 public class CreateNewRoomDialog extends DialogFragment {
-	public static final String PARAM_ITEM_NEW_ROOM = "item data to new room";
-	public static final int ID_IMAGE = 0;
-
 	ItemData iData;
 	RoomData[] myRoomData;
 	RoomData newRoomData;
@@ -52,7 +49,6 @@ public class CreateNewRoomDialog extends DialogFragment {
 
 		Bundle iB = getArguments();
 		if(iB != null){
-			//iData = (ItemData)iB.getParcelable(PARAM_ITEM_NEW_ROOM);     
 			iData = (ItemData)iB.getParcelable(ItemLikeShowListDialog.PARAM_ITEM_DATA);
 		}
 	}
@@ -70,13 +66,13 @@ public class CreateNewRoomDialog extends DialogFragment {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				//////////////new dialog
-				//((ItemInfoActivity)getActivity()).createNewRoom(ID_IMAGE);
+
 				Intent i = new Intent(getActivity(), RegisterNewImageActivity.class);
 				startActivity(i);
 			}
 		});
 
-		roomname_length = (TextView)v.findViewById(R.id.name_length);
+		//roomname_length = (TextView)v.findViewById(R.id.name_length);
 		/////////////how?
 
 		room_name = (EditText)v.findViewById(R.id.room_name);

@@ -39,6 +39,16 @@ public class ItemLikeShowListDialog extends DialogFragment {
 	public void setOnRoomSelectedListener(OnRoomSelectedListener listener){
 		rListener = listener;
 	}
+	
+	public interface OnCreateSelectedListener{
+		public void onCreateSelected(boolean roomSelected);
+	}
+	
+	OnCreateSelectedListener cListener;
+	
+	public void setOnCreateSelectedListener(OnCreateSelectedListener l){
+		cListener = l;
+	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -87,13 +97,17 @@ public class ItemLikeShowListDialog extends DialogFragment {
 		btn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				CreateNewRoomDialog d = new CreateNewRoomDialog();
+				/*CreateNewRoomDialog d = new CreateNewRoomDialog();
 				FragmentTransaction ft = getFragmentManager().beginTransaction();
 				Fragment f = getFragmentManager().findFragmentByTag("dialog");
 				if (f != null) {
 					ft.remove(f);
 				}
-				d.show(ft, "dialog");
+				d.show(ft, "dialog");*/
+				if(cListener != null)
+					cListener.onCreateSelected(true);
+				
+				dismiss();
 			}
 		});
 		return v;

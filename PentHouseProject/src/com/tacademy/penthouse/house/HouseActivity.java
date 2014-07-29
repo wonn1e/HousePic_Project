@@ -15,6 +15,7 @@ import com.tacademy.penthouse.R;
 import com.tacademy.penthouse.editimgdialog.EditImgActivity;
 import com.tacademy.penthouse.entity.RoomData;
 import com.tacademy.penthouse.entity.UserData;
+import com.tacademy.penthouse.itemlike.CreateNewRoomActivity;
 import com.tacademy.penthouse.neighbor.NeighborListActivity;
 import com.tacademy.penthouse.room.MyRoomInfoActivity;
 import com.tacademy.penthouse.room.UserRoomInfoActivity;
@@ -24,6 +25,7 @@ public class HouseActivity extends FragmentActivity {
 	public static final String TAG_HOUSENAME = "housename";
 	public static final String TAG_HOUSEINTRO = "houseintro";
 	public static final int REQUEST_CODE_EDITIMG = 0;
+	public static final int REQEUST_MAKE_NEW_ROOM = 1;
 	public static final String PARAM_USER_DATA = "uData";
 	public static final String PARAM_MY_DATA = "myData";
 	
@@ -48,7 +50,6 @@ public class HouseActivity extends FragmentActivity {
 			new RoomData(10, 1,"F", 5, "aa", true),
 			new RoomData(10, 1, "G", 6,"aa", true)};
 
-		
 	//수정 시 click인지 아닌지
 	boolean isClicked;
 	private void setClicked(boolean clicked){
@@ -75,7 +76,7 @@ public class HouseActivity extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.house_layout);
 		//uData = new UserData(1, "aa", "aa", "aa", 1, 1, R.drawable.penguins, "aa", "aa", "aa");
-		myData = new UserData(2, "bb", "bb", "bb", 2, 2, R.drawable.tulips, "bb", "bb", "bb");
+		myData = new UserData(1, "bb", "bb", "bb", 2, 2, R.drawable.tulips, "bb", "bb", "bb");
 		uData = new UserData(2, "bb", "bb", "bb", 2, 2, R.drawable.tulips, "bb", "bb", "bb");
 		
 	//	hData =  new HouseData(10, 12, "nickname's house", "HOUSE!!", "dddd");
@@ -95,8 +96,6 @@ public class HouseActivity extends FragmentActivity {
 		house_img = (ImageView)v.findViewById(R.id.house_img);
 		edit_btn = (ImageView)v.findViewById(R.id.edit_btn);	
 		house_room_list = (TextView)v.findViewById(R.id.house_room_list);
-		//house_room_gridView = (StaggeredGridView)findViewById(R.id.gridView);
-		//house_room_gridView.addHeaderView(v);
 		house_room_gridView = (HeaderGridView)findViewById(R.id.header_grid_view);
 		house_room_gridView.addHeaderView(v);
 		initData();
@@ -108,7 +107,6 @@ public class HouseActivity extends FragmentActivity {
 				Intent i = new Intent(HouseActivity.this, NeighborListActivity.class);
 				i.putExtra(NeighborListActivity.PARAM_CURRENT_TAB, 0);//uData);
 				startActivity(i);
-				//startActivityForResult(i, 0);
 			}
 		});
 		
@@ -120,7 +118,6 @@ public class HouseActivity extends FragmentActivity {
 				Intent i = new Intent(HouseActivity.this, NeighborListActivity.class);
 				i.putExtra(NeighborListActivity.PARAM_CURRENT_TAB, 1);//uData);
 				startActivity(i);
-				//startActivityForResult(i, 1);
 			}
 		});
 		
@@ -138,7 +135,18 @@ public class HouseActivity extends FragmentActivity {
 				@Override
 				public void onItemClick(AdapterView<?> parent, View view,
 						int position, long id) {
-					if(position != 0){
+					//when it's + img
+					if(myRoomAdapter.getItemViewType(position) == 0){
+						
+						Toast.makeText(HouseActivity.this, "create new room tab1", Toast.LENGTH_SHORT).show();
+						Intent i = new Intent(HouseActivity.this, CreateNewRoomActivity.class);
+						//pass on myData (UserData) 
+						i.putExtra("myData", myData);
+						startActivityForResult(i, REQEUST_MAKE_NEW_ROOM);
+						onResume();
+						
+					}else{
+					
 						Intent i = new Intent(HouseActivity.this, MyRoomInfoActivity.class);
 						i.putExtra("rData", rData[position]);
 						startActivity(i);
@@ -191,8 +199,6 @@ public class HouseActivity extends FragmentActivity {
 										if(name != null && !name.equals("")){
 											house_name.setText(name);
 											myData.house_name = name;
-											//hData.house_name = name;
-											//Toast.makeText(HouseActivity.this, "current house name: " + hData.house_name, Toast.LENGTH_SHORT).show();
 										}
 									}
 								});
@@ -256,8 +262,9 @@ public class HouseActivity extends FragmentActivity {
 			house_room_gridView.setAdapter(roomAdapter);
 			for(int j=0; j<rData.length; j++){
 				roomAdapter.add(rData[j]);
+				
 			}
-
+				roomAdapter.add(null);
 			house_room_gridView.setOnItemClickListener(new OnItemClickListener() {
 				@Override
 				public void onItemClick(AdapterView<?> parent, View view,
@@ -294,6 +301,10 @@ public class HouseActivity extends FragmentActivity {
 		if(requestCode == REQUEST_CODE_EDITIMG && resultCode == EditImgActivity.RESULT_OK){
 			String imgBitmap = data.getStringExtra(EditImgActivity.PARAM_RESULT);
 			Toast.makeText(HouseActivity.this, "new img: " + imgBitmap, Toast.LENGTH_SHORT).show();
+		}
+		
+		if(requestCode == REQEUST_MAKE_NEW_ROOM && resultCode == CreateNewRoomActivity.RESULT_OK){
+			Toast.makeText(HouseActivity.this, "item in new room back in HouseActivity", Toast.LENGTH_SHORT).show();
 		}
 
 	}

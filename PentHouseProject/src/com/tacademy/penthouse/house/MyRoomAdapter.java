@@ -26,28 +26,32 @@ public class MyRoomAdapter extends BaseAdapter {
 	}
 
 	public void remove(int i){
-		items.remove(items.get(i));
+		if(i != getCount()-1 && i!=0)
+			items.remove(items.get(i));
 		notifyDataSetChanged();
 	}
 	
 	@Override
 	public int getCount() {
-		return items.size()+1;
+		return items.size()+2;
 	}
 	
 	@Override
 	public int getViewTypeCount() {
-		return 2;
+		return 3;
 	}
 
 	@Override
 	public int getItemViewType(int position) {
-		if(position == 0) return 0;
+		if(position == 0) return -1;
+		if(position == getCount()-1) return 0;
 		return 1;
 	}
 	
 	@Override
 	public Object getItem(int position) {
+		if(position == getCount()-1) return null;
+		else if(position == 0) return null;
 		return items.get(position);
 	}
 
@@ -55,10 +59,10 @@ public class MyRoomAdapter extends BaseAdapter {
 	public long getItemId(int position) {
 		return position;
 	}
-
+	
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		if(position == 0){
+		if(position == getCount()-1){
 			ImageView im = new ImageView(mContext);
 			im.setImageResource(R.drawable.penguins);
 			im.setLayoutParams(new AbsListView.LayoutParams(160, 320));
@@ -71,7 +75,7 @@ public class MyRoomAdapter extends BaseAdapter {
 		}else{
 			v = (RoomInHouseView)convertView;
 		}
-		v.setHouseRoomData(items.get(position-1));
+		v.setHouseRoomData(items.get(position));
 		return v;
 	}
 
