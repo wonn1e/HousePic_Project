@@ -159,9 +159,16 @@ public class MainActivity extends SlidingFragmentActivity{
 			//}
 			break;
 		case MenuFragment.ID_HOME:
+			/* 맨위로 어떻게???
+			 * 
+			 */
 			toggle();
+			getSlidingMenu().showContent();
 			break;
 		case MenuFragment.ID_SEARCH:
+			Intent i = new Intent(MainActivity.this, CategorySearchActivity.class);
+			startActivity(i);
+			getSlidingMenu().showContent();
 			break;
 		case MenuFragment.ID_RANK:
 			Intent iRank = new Intent(MainActivity.this, RankingActivity.class);
@@ -169,10 +176,19 @@ public class MainActivity extends SlidingFragmentActivity{
 			getSlidingMenu().showContent();
 			break;
 		case MenuFragment.ID_INVITE:
+			/*
+			 * 
+			 */			
 			break;
 		case MenuFragment.ID_SETTING:
+			/*
+			 * 
+			 */
 			break;
 		case MenuFragment.ID_GUIDE:
+			/*
+			 * 
+			 */
 			break;
 		}
 

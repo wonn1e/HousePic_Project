@@ -36,7 +36,7 @@ public class ItemRecommandView extends FrameLayout{
 		.cacheInMemory(true)
 		.cacheOnDisc(true)
 		.considerExifParams(true)
-		.displayer(new RoundedBitmapDisplayer(100))
+		//.displayer(new RoundedBitmapDisplayer(100))
 		.build();
 
 		

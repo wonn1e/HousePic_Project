@@ -39,7 +39,9 @@ public class Tab1MDFragment extends Fragment {
 	
 	/////////////////////////
 	String[] t = {"aa","bb"};
-	String[] img = {"http://tv01.search.naver.net/ugc?q=http://blogfiles.naver.net/20140514_231/jinsoodjdj_1400004009267ylFQB_JPEG/%C8%AD%BA%B8%C0%CC%C1%F8%BF%ED_2.jpg",
+	String[] img = {"http://54.178.158.103:80/room1.jpg",
+			"http://tv02.search.naver.net/ugc?t=r180&q=http://blogfiles.naver.net/20140506_64/hellossophia_1399379324258PGAlK_PNG/1399125535162.png",
+			"http://tv01.search.naver.net/ugc?q=http://blogfiles.naver.net/20140514_231/jinsoodjdj_1400004009267ylFQB_JPEG/%C8%AD%BA%B8%C0%CC%C1%F8%BF%ED_2.jpg",
 					"http://tv01.search.naver.net/ugc?t=r180&q=http://cafefiles.naver.net/20140714_1/leeyuri9487_1405292637586N7eKA_JPEG/news1309847266_253060_1_m.jpg",
 					"http://tv02.search.naver.net/ugc?t=r180&q=http://blogfiles.naver.net/20140506_64/hellossophia_1399379324258PGAlK_PNG/1399125535162.png",
 					"http://tv02.search.naver.net/ugc?t=r180&q=http://blogfiles.naver.net/20140610_57/mmro13_1402385652345TSTEm_JPEG/%C0%CC%C1%F8%BF%ED_%287%29.jpg"};
@@ -49,7 +51,7 @@ public class Tab1MDFragment extends Fragment {
 			"http://tv02.search.naver.net/ugc?t=r180&q=http://blogfiles.naver.net/20140610_57/mmro13_1402385652345TSTEm_JPEG/%C0%CC%C1%F8%BF%ED_%287%29.jpg"};
 	
 	
-	ItemData[] iData = {new ItemData(1,1,"aa","i1","aa","aa","aa",t,1,0,img,"http://www.naver.com", true),
+	ItemData[] iData = {new ItemData(1,1,"aa","Ä§´ë1","aa","aa","aa",t,1,0,img,"http://www.naver.com", true),
 			new ItemData(2,2,"bb","i2","fdsf","dsf","fd",t,1,0,img,"http://www.naver.com", true),
 			new ItemData(3,3,"12321","i3","1213","1231","12321",t,1,2,img,"http://www.naver.com", false),
 			new ItemData(4,4,"dd","i4","dddd","ddd","ddd",t,1,1,img,"http://www.naver.com", false),
@@ -62,12 +64,12 @@ public class Tab1MDFragment extends Fragment {
 			new ItemData(11,11,"jhjh","i11","hjhj","hjhj","hjhj",t,1,3, img,"http://www.naver.com", false)
 	};
 	RoomData[] rData = {
-			new RoomData(1,1,"user1 room1", img[0], "room1",true, "red"),
+			new RoomData(1,1,"user1 room1", img[1], "room1",true, "red"),
 			new RoomData(2,1,"user2 room1", img[2], "room2",true, "red"),
 			new RoomData(1,3,"user1 room3", img[3], "room3",true, "red"),
 	};
 	final RoomData[] myRoomData = {
-			new RoomData(1,1,"house1", img[0], "room1",true, "red"),
+			new RoomData(1,1,"house1", img[1], "room1",true, "red"),
 			new RoomData(1,3,"user1 room3", img[3], "room3",true, "red")
 	};
 	//////////////////////////////

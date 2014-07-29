@@ -42,14 +42,16 @@ public class HouseActivity extends FragmentActivity {
 	RoomAdapter roomAdapter;
 	MyRoomAdapter myRoomAdapter;
 
-	RoomData[] rData;
-//	final RoomData[] rData= {new RoomData(10, 1, "A", 1,"aa", true),
-//			new RoomData(10, 1, "B", 0, "aa", true),
-//			new RoomData(10, 1, "C", 2, "aa", true),
-//			new RoomData(10, 1, "D", 3, "aa", true),
-//			new RoomData(10, 1, "E", 4, "aa", true),
-//			new RoomData(10, 1,"F", 5, "aa", true),
-//			new RoomData(10, 1, "G", 6,"aa", true)};
+//	RoomData[] rData;
+	String[] img = {"http://tv02.search.naver.net/ugc?t=252x448&q=http://imgnews.naver.com/image/022/2014/07/23/20140723003688_0_99_20140723213004.jpg",
+			"http://tv02.search.naver.net/ugc?t=252x448&q=http://blogfiles.naver.net/20140529_81/iys0610_1401366281000HoExC_JPEG/2014-05-29_21%3B12%3B57.jpg",
+			"http://tv02.search.naver.net/ugc?t=252x448&q=http://imgnews.naver.com/image/009/2013/05/30/20130529_1369812840..jpg_59_20130530084634.jpg"};
+	final RoomData[] rData = {
+			new RoomData(1,1,"user1 room1", img[1], "room1",true, "red"),
+			new RoomData(2,1,"user2 room1", img[2], "room2",true, "red"),
+			new RoomData(1,3,"user1 room3", img[3], "room3",true, "red"),
+	};
+
 
 	//수정 시 click인지 아닌지
 	boolean isClicked;
