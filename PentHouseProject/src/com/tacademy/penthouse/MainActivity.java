@@ -15,6 +15,7 @@ import android.widget.TabHost;
 
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
+import com.tacademy.penthouse.browser.BrowserActivity;
 import com.tacademy.penthouse.entity.RoomData;
 import com.tacademy.penthouse.entity.UserData;
 import com.tacademy.penthouse.house.HouseActivity;
@@ -126,18 +127,25 @@ public class MainActivity extends SlidingFragmentActivity{
 		submit = (Button)v.findViewById(R.id.button1);
 		return true;
 	}
-	UserData myData;
-	UserData uData[];
-//
-//	final UserData myData = 	new UserData(1, "a","a","a",1,1, R.drawable.tulips,"XXX's House", "XX의 집에 오신걸 환영", "aa");
-//	final UserData uData[] = {	new UserData(2, "b1","b1","b1",2,2,R.drawable.penguins,"YYY1's House","Welcome","bb"),
-//							  	new UserData(3, "b2","b2","b2",2,2,R.drawable.penguins,"YYY2's House","Welcome","bb"),
-//							  	new UserData(4, "b3","b3","b3",2,2,R.drawable.penguins,"YYY3's House","Welcome","bb"),
-//							  	new UserData(5, "b4","b4","b4",2,2,R.drawable.penguins,"YYY4's House","Welcome","bb"),
-//							  	new UserData(6, "b5","b5","b5",2,2,R.drawable.penguins,"YYY5's House","Welcome","bb"),
-//							  	new UserData(7, "b6","b6","b6",2,2,R.drawable.penguins,"YYY6's House","Welcome","bb"),
-//							  	new UserData(8, "b7","b7","b7",2,2,R.drawable.penguins,"YYY7's House","Welcome","bb"),
-//							 	new UserData(9, "b8","b8","b8",2,2,R.drawable.penguins,"YYY8's House","Welcome","bb")	};
+	//UserData myData;
+	//UserData uData[];
+
+	
+	String[] img = {"http://tv01.search.naver.net/ugc?q=http://blogfiles.naver.net/20140514_231/jinsoodjdj_1400004009267ylFQB_JPEG/%C8%AD%BA%B8%C0%CC%C1%F8%BF%ED_2.jpg",
+			"http://tv01.search.naver.net/ugc?t=r180&q=http://cafefiles.naver.net/20140714_1/leeyuri9487_1405292637586N7eKA_JPEG/news1309847266_253060_1_m.jpg",
+			"http://tv02.search.naver.net/ugc?t=r180&q=http://blogfiles.naver.net/20140506_64/hellossophia_1399379324258PGAlK_PNG/1399125535162.png",
+			"http://tv02.search.naver.net/ugc?t=r180&q=http://blogfiles.naver.net/20140610_57/mmro13_1402385652345TSTEm_JPEG/%C0%CC%C1%F8%BF%ED_%287%29.jpg"};
+	
+	final UserData myData = 	new UserData(1, "a","my nickname","a pw",10,10, "http://tv01.search.naver.net/ugc?t=252x448&q=http://imgnews.naver.com/image/5247/2014/07/23/1406102819_1_59_20140723170802.jpg"
+										,"my House", "내 집에 오신걸 환영", "aa");
+	final UserData uData[] = {	new UserData(2, "b1","b1","b1",2,2,img[1],"YYY1's House","Welcome","bb"),
+							  	new UserData(3, "b2","b2","b2",2,2,img[0],"YYY2's House","Welcome","bb"),
+							  	new UserData(4, "b3","b3","b3",2,2,img[2],"YYY3's House","Welcome","bb"),
+							  	new UserData(5, "b4","b4","b4",2,2,img[3],"YYY4's House","Welcome","bb"),
+							  	new UserData(6, "b5","b5","b5",2,2,img[0],"YYY5's House","Welcome","bb"),
+							  	new UserData(7, "b6","b6","b6",2,2,img[1],"YYY6's House","Welcome","bb"),
+							  	new UserData(8, "b7","b7","b7",2,2,img[2],"YYY7's House","Welcome","bb"),
+							 	new UserData(9, "b8","b8","b8",2,2,img[3],"YYY8's House","Welcome","bb")	};
 	
 	public void actionMenu(int menuId) {
 		switch(menuId) {
@@ -150,12 +158,24 @@ public class MainActivity extends SlidingFragmentActivity{
 				getSlidingMenu().showContent();
 			//}
 			break;
+		case MenuFragment.ID_HOME:
+			toggle();
+			break;
+		case MenuFragment.ID_SEARCH:
+			break;
 		case MenuFragment.ID_RANK:
 			Intent iRank = new Intent(MainActivity.this, RankingActivity.class);
 			startActivity(iRank);
 			getSlidingMenu().showContent();
 			break;
+		case MenuFragment.ID_INVITE:
+			break;
+		case MenuFragment.ID_SETTING:
+			break;
+		case MenuFragment.ID_GUIDE:
+			break;
 		}
+
 	}
 
 }

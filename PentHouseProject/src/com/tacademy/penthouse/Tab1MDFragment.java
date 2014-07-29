@@ -24,9 +24,9 @@ public class Tab1MDFragment extends Fragment {
 	
 	public static final int REQEUST_NEW_ROOM = 0;
 	UserData myData;
-	ItemData[] iData;
-	RoomData[] rData;
-	RoomData[] myRoomData;
+//	ItemData[] iData;
+//	RoomData[] rData;
+//	RoomData[] myRoomData;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -36,34 +36,41 @@ public class Tab1MDFragment extends Fragment {
 	ItemLikeShowListDialog itemLikeDialog;
 	ExpandableListView mdListView;
 	MDRoomAdapter mdAdapter;
-//	String[] t = {"aa","bb"};
-//	int[] img = {R.drawable.tulips,R.drawable.tulips,R.drawable.tulips,R.drawable.tulips,R.drawable.tulips};
-//	int[] recmd_img = {R.drawable.tulips,R.drawable.tulips,R.drawable.tulips,R.drawable.tulips,R.drawable.tulips};
-//	
-//	
-//	ItemData[] iData = {new ItemData(1,1,"aa","i1","aa","aa","aa",t,1,"aa",img,"http://www.naver.com", true),
-//			new ItemData(2,2,"bb","i2","fdsf","dsf","fd",t,1,"dfs",img,"http://www.naver.com", true),
-//			new ItemData(3,3,"12321","i3","1213","1231","12321",t,1,"12312",img,"http://www.naver.com", false),
-//			new ItemData(4,4,"dd","i4","dddd","ddd","ddd",t,1,"dddd",img,"http://www.naver.com", false),
-//			new ItemData(5,5,"eeeee","i5","eeee","eee","ee",t,1,"ee",img,"http://www.naver.com", false),
-//			new ItemData(6,6,"zxxzxc","i6","zcxczx","zczcx","zcxcxz",t,1,"zcxx",img,"http://www.naver.com", true),
-//			new ItemData(7,7,"jhjh","i7","hjhj","hjhj","hjhj",t,1,"hjhj",img,"http://www.naver.com", true),
-//			new ItemData(8,8,"jhjh","i8","hjhj","hjhj","hjhj",t,1,"hjhj",img,"http://www.naver.com", true),
-//			new ItemData(9,9,"jhjh","i9","hjhj","hjhj","hjhj",t,1,"hjhj",img,"http://www.naver.com", false),
-//			new ItemData(10,10,"jhjh","i10","hjhj","hjhj","hjhj",t,1,"hjhj",img,"http://www.naver.com", true),
-//			new ItemData(11,11,"jhjh","i11","hjhj","hjhj","hjhj",t,1,"hjhj",img,"http://www.naver.com", false)
-//	};
-//	RoomData[] rData = {
-//			new RoomData(1,1,"house1",R.drawable.tulips,"방설명1",true),
-//			new RoomData(2,2,"house2",R.drawable.penguins,"방설명2",true),
-//			new RoomData(3,3,"house3",R.drawable.tulips,"방설명3",true)
-//	};
-//	final RoomData[] myRoomData = {
-//			new RoomData(1,1,"house1",R.drawable.penguins,"방설명1",true),
-//			new RoomData(2,2,"house2",R.drawable.penguins,"방설명2",true),
-//			new RoomData(3,3,"house3",R.drawable.penguins,"방설명3",true)
-//	};
-
+	
+	/////////////////////////
+	String[] t = {"aa","bb"};
+	String[] img = {"http://tv01.search.naver.net/ugc?q=http://blogfiles.naver.net/20140514_231/jinsoodjdj_1400004009267ylFQB_JPEG/%C8%AD%BA%B8%C0%CC%C1%F8%BF%ED_2.jpg",
+					"http://tv01.search.naver.net/ugc?t=r180&q=http://cafefiles.naver.net/20140714_1/leeyuri9487_1405292637586N7eKA_JPEG/news1309847266_253060_1_m.jpg",
+					"http://tv02.search.naver.net/ugc?t=r180&q=http://blogfiles.naver.net/20140506_64/hellossophia_1399379324258PGAlK_PNG/1399125535162.png",
+					"http://tv02.search.naver.net/ugc?t=r180&q=http://blogfiles.naver.net/20140610_57/mmro13_1402385652345TSTEm_JPEG/%C0%CC%C1%F8%BF%ED_%287%29.jpg"};
+	String[] recmd_img = {"http://tv01.search.naver.net/ugc?q=http://blogfiles.naver.net/20140514_231/jinsoodjdj_1400004009267ylFQB_JPEG/%C8%AD%BA%B8%C0%CC%C1%F8%BF%ED_2.jpg",
+			"http://tv01.search.naver.net/ugc?t=r180&q=http://cafefiles.naver.net/20140714_1/leeyuri9487_1405292637586N7eKA_JPEG/news1309847266_253060_1_m.jpg",
+			"http://tv02.search.naver.net/ugc?t=r180&q=http://blogfiles.naver.net/20140506_64/hellossophia_1399379324258PGAlK_PNG/1399125535162.png",
+			"http://tv02.search.naver.net/ugc?t=r180&q=http://blogfiles.naver.net/20140610_57/mmro13_1402385652345TSTEm_JPEG/%C0%CC%C1%F8%BF%ED_%287%29.jpg"};
+	
+	
+	ItemData[] iData = {new ItemData(1,1,"aa","i1","aa","aa","aa",t,1,0,img,"http://www.naver.com", true),
+			new ItemData(2,2,"bb","i2","fdsf","dsf","fd",t,1,0,img,"http://www.naver.com", true),
+			new ItemData(3,3,"12321","i3","1213","1231","12321",t,1,2,img,"http://www.naver.com", false),
+			new ItemData(4,4,"dd","i4","dddd","ddd","ddd",t,1,1,img,"http://www.naver.com", false),
+			new ItemData(5,5,"eeeee","i5","eeee","eee","ee",t,1,2, img,"http://www.naver.com", false),
+			new ItemData(6,6,"zxxzxc","i6","zcxczx","zczcx","zcxcxz",t,1,3,img,"http://www.naver.com", true),
+			new ItemData(7,7,"jhjh","i7","hjhj","hjhj","hjhj",t,1,2,img,"http://www.naver.com", true),
+			new ItemData(8,8,"jhjh","i8","hjhj","hjhj","hjhj",t,1,2,img,"http://www.naver.com", true),
+			new ItemData(9,9,"jhjh","i9","hjhj","hjhj","hjhj",t,1,1,img,"http://www.naver.com", false),
+			new ItemData(10,10,"jhjh","i10","hjhj","hjhj","hjhj",t,1,1,img,"http://www.naver.com", true),
+			new ItemData(11,11,"jhjh","i11","hjhj","hjhj","hjhj",t,1,3, img,"http://www.naver.com", false)
+	};
+	RoomData[] rData = {
+			new RoomData(1,1,"user1 room1", img[0], "room1",true, "red"),
+			new RoomData(2,1,"user2 room1", img[2], "room2",true, "red"),
+			new RoomData(1,3,"user1 room3", img[3], "room3",true, "red"),
+	};
+	final RoomData[] myRoomData = {
+			new RoomData(1,1,"house1", img[0], "room1",true, "red"),
+			new RoomData(1,3,"user1 room3", img[3], "room3",true, "red")
+	};
+	//////////////////////////////
 	@Override
 	public View onCreateView(LayoutInflater inflater,
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

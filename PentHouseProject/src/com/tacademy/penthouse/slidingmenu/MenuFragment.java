@@ -11,14 +11,20 @@ import com.tacademy.penthouse.MainActivity;
 import com.tacademy.penthouse.R;
 
 public class MenuFragment extends Fragment {
-	
-	public static final int ID_MYHOUSE = 1;
+
+	public static final int ID_MYHOUSE = 0;
+	public static final int ID_HOME = 1;
 	public static final int ID_RANK = 3;
+	public static final int ID_SEARCH = 2;
+	public static final int ID_INVITE = 4;
+	public static final int ID_SETTING = 5;
+	public static final int ID_GUIDE = 6;
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater,
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.menu_fragment, container, false);
-		
+		//0
 		TextView my_page = (TextView)v.findViewById(R.id.my_page);
 		my_page.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -27,22 +33,58 @@ public class MenuFragment extends Fragment {
 				//Toast.makeText(getActivity(), "to my page", Toast.LENGTH_SHORT).show();
 			}
 		});
-		
-//		tv = (TextView)v.findViewById(R.id.show_recommendation); //to home page
-//		tv.setOnClickListener(new View.OnClickListener() {
-//			
-//			@Override
-//			public void onClick(View v) {
-//				Toast.makeText(getActivity(), "to home page", Toast.LENGTH_SHORT).show();
-//			}
-//		});
-//		
+		//1
+		TextView home = (TextView)v.findViewById(R.id.show_recommendation); //to home page
+		home.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				((MainActivity)getActivity()).actionMenu(ID_HOME);
+			}
+		});
+		//3
 		TextView show_ranking = (TextView)v.findViewById(R.id.show_ranking);
 		show_ranking.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				((MainActivity)getActivity()).actionMenu(ID_RANK);
+			}
+		});
+		//2
+		TextView show_search = (TextView)v.findViewById(R.id.show_search);
+		show_search.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				((MainActivity)getActivity()).actionMenu(ID_SEARCH);
+			}
+		});
+		//4
+		TextView show_invite = (TextView)v.findViewById(R.id.show_invite);
+		show_invite.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				((MainActivity)getActivity()).actionMenu(ID_INVITE);
+			}
+		});
+		//5
+		TextView show_setting = (TextView)v.findViewById(R.id.show_setting);
+		show_setting.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				((MainActivity)getActivity()).actionMenu(ID_SETTING);
+			}
+		});
+		//6
+		TextView show_guide = (TextView)v.findViewById(R.id.show_guide);
+		show_guide.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				((MainActivity)getActivity()).actionMenu(ID_GUIDE);
 			}
 		});
 		
