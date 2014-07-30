@@ -20,6 +20,10 @@ public class ItemData implements Parcelable {
 	public String link;
 	public boolean item_like;
 	public String[] item_img_url;
+	public boolean last_item = false;
+	
+	public String result;
+	public String result_msg;
 	
 	public ItemData(){}
 	public ItemData(int room_num,int item_num,           
@@ -32,7 +36,7 @@ public class ItemData implements Parcelable {
 	int likeCnt ,             
 	int sort_category,String []item_img_url ,String link , boolean item_like){
 		this.room_num = room_num;
-		this.item_num = item_num;           
+		this.item_num = item_num ;           
 		this.sort_code = sort_code;     
 		this.item_name = item_name;     
 		this.brand = brand;         
