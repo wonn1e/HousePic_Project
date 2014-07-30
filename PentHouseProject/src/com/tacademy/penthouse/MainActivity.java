@@ -22,6 +22,7 @@ import com.tacademy.penthouse.browser.BrowserActivity;
 import com.tacademy.penthouse.entity.RoomData;
 import com.tacademy.penthouse.entity.UserData;
 import com.tacademy.penthouse.house.HouseActivity;
+import com.tacademy.penthouse.member.MyPageNotLoggedInActivity;
 import com.tacademy.penthouse.ranking.RankingActivity;
 import com.tacademy.penthouse.search.CategorySearchActivity;
 import com.tacademy.penthouse.slidingmenu.MenuFragment;
@@ -179,9 +180,10 @@ public class MainActivity extends SlidingFragmentActivity{
 		switch(menuId) {
 		case MenuFragment.ID_MYHOUSE:
 			//if(uData.user_num == myData.user_num){
-				Intent iMyHouse = new Intent(MainActivity.this, HouseActivity.class);
+				//Intent iMyHouse = new Intent(MainActivity.this, HouseActivity.class);
+				Intent iMyHouse = new Intent(MainActivity.this, MyPageNotLoggedInActivity.class);
 				iMyHouse.putExtra(HouseActivity.PARAM_USER_DATA, myData);
-				iMyHouse.putExtra(HouseActivity.PARAM_MY_DATA, myData);
+				iMyHouse.putExtra(HouseActivity.PARAM_MY_DATA, uData[0]);
 				startActivity(iMyHouse);
 				getSlidingMenu().showContent();
 			//}
@@ -191,7 +193,7 @@ public class MainActivity extends SlidingFragmentActivity{
 			 * 
 			 */
 			toggle();
-			getSlidingMenu().showContent();
+			//getSlidingMenu().showContent();
 			break;
 		case MenuFragment.ID_SEARCH:
 			Intent i = new Intent(MainActivity.this, CategorySearchActivity.class);

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+     <FrameLayout
+         android:id="@+id/house"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content" >
+
+         <TextView
+             android:id="@+id/textView1"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_marginLeft="0dp"
+             android:padding="70dp"
+             android:text="자신의 방을 꾸며 보세요!" />
+
+         <TextView
+             android:id="@+id/textView3"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_marginTop="210dp"
+             android:text="TextView"
+             android:visibility="invisible" />
+
+         <ImageView
+             android:id="@+id/imageView2"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_gravity="center_horizontal"
+             android:layout_marginTop="120dp"
+             android:src="@drawable/ic_launcher" />
+
+            </FrameLayout>
+
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content" >
+
+         <ImageView
+             android:id="@+id/imageView1"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:src="@drawable/abc_ab_bottom_solid_dark_holo" />
+
+         <TextView
+             android:id="@+id/log_in_btn"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_weight="1"
+             android:text="로그인" />
+
+         <TextView
+             android:id="@+id/sign_up_btn"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_weight="1"
+             android:text="회원가입" />
+
+     </LinearLayout>
+
+     <TextView
+         android:id="@+id/textView2"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_margin="10dp"
+         android:text="TextView"
+         android:visibility="invisible" />
+
+             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp" >
+
+                <Button
+                    android:id="@+id/following_btn"
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Following" />
+
+                <Button
+                    android:id="@+id/follower_btn"
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Follower" />
+
+            </LinearLayout>
+
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content" >
+
+                 <ImageView
+                     android:id="@+id/imageView3"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="center"
+                     android:layout_weight="1"
+                     android:src="@drawable/ic_launcher" />
+
+                 <ImageView
+                     android:id="@+id/imageView4"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:src="@drawable/ic_launcher" />
+
+             </LinearLayout>
+ 
+</LinearLayout>

@@ -20,7 +20,7 @@ public class RoomData implements Parcelable{
 	public long room_date;
 	public String room_color;
 	public boolean isPublic;
-	public String result;
+	public int success;
 	public String result_msg;
 	public ArrayList<ItemData> items = new ArrayList<ItemData>();
 	
