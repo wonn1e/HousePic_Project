@@ -60,8 +60,9 @@
                     android:id="@+id/edit_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="right"
+                    android:layout_gravity="right|center_vertical"
                     android:src="@drawable/abc_ab_solid_dark_holo" />
+
             </FrameLayout>
              <LinearLayout
                 android:layout_width="match_parent"

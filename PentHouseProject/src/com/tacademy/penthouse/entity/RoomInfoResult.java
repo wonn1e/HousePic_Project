@@ -6,6 +6,6 @@ public class RoomInfoResult {
 	public RoomData room = new RoomData();
 	public ArrayList<ItemData> items = new ArrayList<ItemData>();
 
-	public String result;
+	public int success;
 	public String result_msg;
 }

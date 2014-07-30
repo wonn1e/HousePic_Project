@@ -13,11 +13,14 @@ import android.widget.ExpandableListView.OnGroupCollapseListener;
 import android.widget.Toast;
 
 import com.tacademy.penthouse.entity.ItemData;
+import com.tacademy.penthouse.entity.MultiRoomResult;
 import com.tacademy.penthouse.entity.RoomData;
+import com.tacademy.penthouse.entity.RoomInfoResult;
 import com.tacademy.penthouse.entity.UserData;
 import com.tacademy.penthouse.item.ItemInfoActivity;
 import com.tacademy.penthouse.itemlike.CreateNewRoomActivity;
 import com.tacademy.penthouse.itemlike.ItemLikeShowListDialog;
+import com.tacademy.penthouse.manager.NetworkManager;
 import com.tacademy.penthouse.room.MyRoomInfoActivity;
 
 public class Tab1MDFragment extends Fragment {
@@ -73,10 +76,32 @@ public class Tab1MDFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater,
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		itemLikeDialog = new ItemLikeShowListDialog();
-		
 		View v = inflater.inflate(R.layout.tab1_md_layout, container, false);
 		mdListView = (ExpandableListView)v.findViewById(R.id.md_list);
 		mdAdapter = new MDRoomAdapter(getActivity());
+		NetworkManager.getInstance().getMDRoomData(getActivity(), new NetworkManager.OnResultListener<MultiRoomResult>() {
+
+			@Override
+			public void onSuccess(MultiRoomResult result) {
+				for(RoomInfoResult r: result.rooms){
+					RoomData room = r.room;
+					ItemData i1 = r.items.get(0);
+					ItemData i2 = r.items.get(1);
+					ItemData i3 = r.items.get(2);
+					ItemData i4 = r.items.get(3);
+					ItemData i5 = r.items.get(4);
+					
+					mdAdapter.put(room, i1, i2);
+					mdAdapter.put(room, i3, i4);
+					mdAdapter.put(room, i5, null);
+				}
+			}
+
+			@Override
+			public void onFail(int code) {
+				Toast.makeText(getActivity(), "fail to get MD rooms", Toast.LENGTH_SHORT).show();
+			}
+		});
 
 		mdAdapter.setOnAdapterItemClickListener(new MDRoomAdapter.OnAdapterItemClickListener() {
 
