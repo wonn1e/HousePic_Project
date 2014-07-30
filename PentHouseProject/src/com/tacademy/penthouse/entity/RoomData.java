@@ -17,6 +17,7 @@ public class RoomData implements Parcelable{
 	public String room_img_url;
 	public String room_info;
 	//public Date passedtime;
+	public long room_date;
 	public String room_color;
 	public boolean isPublic;
 	public String result;
