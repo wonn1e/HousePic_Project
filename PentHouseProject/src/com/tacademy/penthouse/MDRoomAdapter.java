@@ -2,157 +2,99 @@ package com.tacademy.penthouse;
 
 import java.util.ArrayList;
 
-import com.tacademy.penthouse.entity.ItemData;
-import com.tacademy.penthouse.entity.RoomData;
-
-
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseExpandableListAdapter;
+import android.widget.BaseAdapter;
 
-public class MDRoomAdapter extends BaseExpandableListAdapter implements MDItemView.OnItemDataClickListener, MDItemView.OnItemDataLikeClickListener{
+import com.tacademy.penthouse.entity.ItemData;
+import com.tacademy.penthouse.entity.ResultRooms;
+import com.tacademy.penthouse.entity.RoomData;
+import com.tacademy.penthouse.manager.DataManager;
+import com.tonicartos.widget.stickygridheaders.StickyGridHeadersSimpleAdapter;
 
+public class MDRoomAdapter extends BaseAdapter implements StickyGridHeadersSimpleAdapter ,MDItemView.OnItemDataClickListener, MDItemView.OnItemDataLikeClickListener{
 	Context mContext;
-	ArrayList<RoomData> items = new ArrayList<RoomData>();
+//	MultiRoomResult mrr = new MultiRoomResult();
+	ResultRooms mrr = new ResultRooms();
 	
+	ArrayList<ItemData> items = new ArrayList<ItemData>();
+
 	public MDRoomAdapter(Context context){
 		mContext = context;
 	}
 	
-	public void put(RoomData rd, ItemData id, ItemData id2){
-		RoomData item = null;
-		for(RoomData data :items){
-			if(rd.room_num == data.room_num){
-				item = data;
-				break;
+	public void put(ResultRooms rr){
+		mrr = rr;
+		for(int i = 0; i < rr.rooms.size(); i++){
+			for(int j = 0; j < rr.rooms.get(i).items.size() ; j++){
+				items.add(rr.rooms.get(i).items.get(j));
+			
 			}
-		}
-		if(item == null){
-			item = new RoomData();
-			item = rd;
-			items.add(item);
-		}
-		item.items.add(id);
-		item.items.add(id2);
+			items.add(new ItemData(rr.rooms.get(i).items.get(0).room_num,0,"","","","","",null,0,0, null,"", false));
+		}		
 		notifyDataSetChanged();
 	}
-	
-	@Override
-	public Object getChild(int groupPosition, int childPosition) {
-		RoomData item = items.get(groupPosition);
-		return item.items.get(childPosition);
-	}
-
-	
 
 	@Override
-	public long getChildId(int groupPosition, int childPosition) {
-		return (((long)groupPosition) << 32 | ((long)childPosition));
-	}
-
-	@Override
-	public int getChildrenCount(int groupPosition) {
-		RoomData item = items.get(groupPosition);
-		
-		return (item.items.size() + 1) / 2;
-	}
-
-	@Override
-	public Object getGroup(int groupPosition) {
-		RoomData item = items.get(groupPosition);
-		return item.room_num;
-	}
-
-	@Override
-	public int getGroupCount() {
+	public int getCount() {
+		// TODO Auto-generated method stub
 		return items.size();
 	}
 
 	@Override
-	public long getGroupId(int groupPosition) {
-		return groupPosition;
-	}
-	@Override
-	public boolean hasStableIds() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	
-	@Override
-	public int getGroupTypeCount() {
-		return super.getGroupTypeCount();
-	}
-	
-	@Override
-	public int getGroupType(int groupPosition) {
-		// TODO Auto-generated method stub
-		return super.getGroupType(groupPosition);
-	}
-	
-	@Override
-	public int getChildTypeCount() {
-		// TODO Auto-generated method stub
-		return super.getChildTypeCount();
-	}
-	
-	@Override
-	public int getChildType(int groupPosition, int childPosition) {
-		// TODO Auto-generated method stub
-		return super.getChildType(groupPosition, childPosition);
+	public ItemData getItem(int arg0) {	
+		return items.get(arg0);
 	}
 
 	@Override
-	public boolean isChildSelectable(int groupPosition, int childPosition) {
-		// TODO Auto-generated method stub
-		return true;
+	public long getItemId(int arg0) {
+		
+		return arg0;
+	}
+
+	@Override
+	public long getHeaderId(int position) {
+		
+		return getItem(position).room_num;
 	}
 	
-	
-	
 	@Override
-	public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
+	public View getView(int position, View convertView, ViewGroup parent) {
+		MDItemView v;
+		
+		if(convertView == null){
+			v = new MDItemView(mContext);
+		//	v.setOnItemDataClickListener(this);
+		//	v.setOnItemDataLikeClickListener(this);
+		}else{
+			v = (MDItemView)convertView;
+		}
+		
+		v.setData(items.get(position));
+		
+		
+		return v;
+	}
+
+	@Override
+	public View getHeaderView(int position, View convertView, ViewGroup parent) {
 		MDRoomView v;
+		DataManager dm = new DataManager();
+		RoomData rd = dm.getRoomData(mrr, getItem(position).room_num);
 		if(convertView == null){
 			v = new MDRoomView(mContext);
 		}else{
 			v = (MDRoomView)convertView;
 		}
-		v.setData(items.get(groupPosition));
+		v.setData(rd);
 
 		return v;
 	}
-	@Override
-	public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView,
-			ViewGroup parent) {
-		MDItemView v;
-		
-		if(convertView == null){
-			v = new MDItemView(mContext);
-			v.setOnItemDataClickListener(this);
-			v.setOnItemDataLikeClickListener(this);
-		}else{
-			v = (MDItemView)convertView;
-		}
-		
-		if(items.get(groupPosition).items.size() % 2 == 0){
-			v.setData(items.get(groupPosition).items.get(childPosition * 2), items.get(groupPosition).items.get(childPosition * 2 + 1));
-		}else{
-			v.setData(items.get(groupPosition).items.get(childPosition * 2), null);
-		}
-//		if(items.get(groupPosition).items.get(childPosition) == null){
-//			v.item_right_img.setVisibility(View.GONE);
-//			v.item_right_like.setVisibility(View.GONE);
-//			v.item_right_name.setVisibility(View.GONE);
-//			v.item_right_price.setVisibility(View.GONE);
-//			v.md_more.setVisibility(View.VISIBLE);
-//			v.md_cnt.setVisibility(View.VISIBLE);
-//		}
-		
-		
-		return v;
-	}
-	
+
+
+
+
 	public interface OnAdapterItemClickListener{
 		public void onItemClick(View v, ItemData data);
 	}

@@ -132,7 +132,7 @@ public class NetworkManager {
 
 	}
 
-	public static final String MDRoomData_URL = "https://54.178.158.103/sample/room/viewlist";
+	public static final String MDRoomData_URL = "http://54.178.158.103/sample/room/viewlist";
 	public void getMDRoomData(Context context, final OnResultListener<MultiRoomResult> listener){
 	
 		client.get(context, MDRoomData_URL, new TextHttpResponseHandler() {

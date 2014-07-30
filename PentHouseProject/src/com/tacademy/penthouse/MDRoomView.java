@@ -19,7 +19,7 @@ public class MDRoomView extends FrameLayout {
 	}
 	
 	RoomData rData;
-	TextView md_room_info;
+	TextView md_room_name;
 	ImageView md_room_img;
 	ImageLoader loader;
 	
@@ -27,7 +27,7 @@ public class MDRoomView extends FrameLayout {
 	
 	private void init(){
 		LayoutInflater.from(getContext()).inflate(R.layout.main_md_header_view, this);
-		md_room_info = (TextView)findViewById(R.id.room_info);
+		md_room_name = (TextView)findViewById(R.id.room_info);
 		md_room_img = (ImageView)findViewById(R.id.room_img);
 		
 		loader = ImageLoader.getInstance();
@@ -46,7 +46,7 @@ public class MDRoomView extends FrameLayout {
 		rData = data;
 		//md_room_img.setImageResource(data.room_img);
 		loader.displayImage(data.room_img_url,md_room_img,options);
-		md_room_info.setText(data.room_info);
+		md_room_name.setText(data.room_name);
 		
 		
 		

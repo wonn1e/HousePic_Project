@@ -135,9 +135,9 @@ public class UserRoomAdapter  extends BaseExpandableListAdapter implements MDIte
 			v = (MDItemView)convertView;
 		}		
 		if(items.get(groupPosition).items.size() % 2 == 0){
-			v.setData(items.get(groupPosition).items.get(childPosition * 2), items.get(groupPosition).items.get(childPosition * 2 + 1));
+//			v.setData(items.get(groupPosition).items.get(childPosition * 2), items.get(groupPosition).items.get(childPosition * 2 + 1));
 		}else{
-			v.setData(items.get(groupPosition).items.get(childPosition * 2), null);
+//			v.setData(items.get(groupPosition).items.get(childPosition * 2), null);
 		}
 		
 		
