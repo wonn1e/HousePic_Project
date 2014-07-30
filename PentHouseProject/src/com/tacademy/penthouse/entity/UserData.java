@@ -1,30 +1,19 @@
 package com.tacademy.penthouse.entity;
 
-
-import java.util.ArrayList;
-
 import android.os.Parcel;
 import android.os.Parcelable;
 
-
 public class UserData implements Parcelable{
 	public int user_num;
-	
 	public String user_id;
 	public String user_nickname;
 	public	String user_password;
-	
 	public int following_cnt;
 	public int follower_cnt;
-	
 	public String user_img_url;
 	public String house_name;
 	public String house_intro;
 	public String house_img_url;
-	
-	
-	
-	
 	public String result;
 	public String result_msg;
 	

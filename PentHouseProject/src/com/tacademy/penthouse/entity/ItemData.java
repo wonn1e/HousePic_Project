@@ -8,7 +8,7 @@ import android.os.Parcelable;
 public class ItemData implements Parcelable {
 	
 	public int room_num ;
-	public int item_code;
+	public int item_num;
 	public String sort_code;
 	public String item_name;
 	public String brand;
@@ -25,7 +25,7 @@ public class ItemData implements Parcelable {
 	public String result_msg;
 	
 	public ItemData(){}
-	public ItemData(int room_num,int item_code,           
+	public ItemData(int room_num,int item_num,           
 	String sort_code ,     
 	String item_name ,     
 	String brand ,         
@@ -35,7 +35,7 @@ public class ItemData implements Parcelable {
 	int likeCnt ,             
 	int sort_category,String []item_img_url ,String link , boolean item_like){
 		this.room_num = room_num;
-		this.item_code = item_code ;           
+		this.item_num = item_num;           
 		this.sort_code = sort_code;     
 		this.item_name = item_name;     
 		this.brand = brand;         
@@ -51,7 +51,7 @@ public class ItemData implements Parcelable {
 	}
 	public ItemData(Parcel p){
 		room_num = p.readInt();
-		item_code = p.readInt();
+		item_num = p.readInt();
 		sort_code = p.readString();
 		item_name = p.readString();
 		brand = p.readString();
@@ -77,7 +77,7 @@ public class ItemData implements Parcelable {
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
 		dest.writeInt(room_num);
-		dest.writeInt(item_code);
+		dest.writeInt(item_num);
 		dest.writeString(sort_code);
 		dest.writeString(item_name);
 		dest.writeString(brand);
