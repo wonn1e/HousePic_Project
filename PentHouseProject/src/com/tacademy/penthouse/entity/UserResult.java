@@ -3,7 +3,7 @@ package com.tacademy.penthouse.entity;
 import java.util.ArrayList;
 
 public class UserResult {
-	public ArrayList<UserData> users = new ArrayList<UserData>();
+	public ResultUsers result;
 
 	public int success;
 	public String result_msg;
