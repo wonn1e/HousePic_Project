@@ -96,6 +96,7 @@
         <activity android:name=".itemlike.CreateNewRoomActivity" android:screenOrientation="portrait"></activity>
        
         <activity android:screenOrientation="portrait" android:name=".member.MyPageNotLoggedInActivity"></activity>
+        <activity android:name=".member.LogInActivity" android:screenOrientation="portrait" android:theme="@style/HouseDialog"></activity>
     </application>
 
 </manifest>
