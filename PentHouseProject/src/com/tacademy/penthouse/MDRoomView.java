@@ -46,7 +46,9 @@ public class MDRoomView extends FrameLayout {
 		rData = data;
 		//md_room_img.setImageResource(data.room_img);
 		loader.displayImage(data.room_img_url,md_room_img,options);
+
 		md_room_name.setText(data.room_name);
+
 		
 		
 		

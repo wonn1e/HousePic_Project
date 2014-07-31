@@ -13,13 +13,13 @@ import com.loopj.android.http.PersistentCookieStore;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
 import com.tacademy.penthouse.MyApplication;
-import com.tacademy.penthouse.entity.ItemInfoResult;
-import com.tacademy.penthouse.entity.ItemResult;
-import com.tacademy.penthouse.entity.MultiRoomResult;
+import com.tacademy.penthouse.entity.ItemItemsResult;
+import com.tacademy.penthouse.entity.ItemsResult;
+import com.tacademy.penthouse.entity.RoomsResult;
 import com.tacademy.penthouse.entity.ResultData;
-import com.tacademy.penthouse.entity.RoomInfoResult;
-import com.tacademy.penthouse.entity.UserInfoResult;
-import com.tacademy.penthouse.entity.UserResult;
+import com.tacademy.penthouse.entity.RoomItemsResult;
+import com.tacademy.penthouse.entity.UserRoomsResult;
+import com.tacademy.penthouse.entity.UsersResult;
 
 public class NetworkManager {
 	public static final String PARAM_COUNT = "COUNT";
@@ -64,7 +64,7 @@ public class NetworkManager {
 		mHandler = new Handler(Looper.getMainLooper());
 		client = new AsyncHttpClient();
 		client.setCookieStore(new PersistentCookieStore(MyApplication.getContext()));
-		//	client.setTimeout(30000);
+		//client.setTimeout(30000);
 		gson = new Gson();
 	}
 
@@ -133,14 +133,14 @@ public class NetworkManager {
 	}
 
 	public static final String MDRoomData_URL = "http://54.178.158.103/sample/room/viewlist";
-	public void getMDRoomData(Context context, final OnResultListener<MultiRoomResult> listener){
+	public void getMDRoomData(Context context, final OnResultListener<RoomsResult> listener){
 	
 		client.get(context, MDRoomData_URL, new TextHttpResponseHandler() {
 
 			@Override
 			public void onSuccess(int statusCode, Header[] headers,
 					String responseString) {
-				MultiRoomResult rrd = gson.fromJson(responseString, MultiRoomResult.class);
+				RoomsResult rrd = gson.fromJson(responseString, RoomsResult.class);
 				listener.onSuccess(rrd);
 
 			}
@@ -155,13 +155,13 @@ public class NetworkManager {
 	}
 	
 	public static final String ItemRanking_URL = "상품 랭킹";
-	public void getItemRankingResultData(Context context, final OnResultListener<ItemResult> listener){
+	public void getItemRankingResultData(Context context, final OnResultListener<ItemsResult> listener){
 		client.get(context, ItemRanking_URL, new TextHttpResponseHandler() {
 			
 			@Override
 			public void onSuccess(int statusCode, Header[] headers,
 					String responseString) {
-				ItemResult rankingResult = gson.fromJson(responseString, ItemResult.class);
+				ItemsResult rankingResult = gson.fromJson(responseString, ItemsResult.class);
 				listener.onSuccess(rankingResult);
 			}
 			
@@ -174,13 +174,13 @@ public class NetworkManager {
 	}
 	
 	public static final String userRanking_URL = "사용자 랭킹";
-	public void getUserRankingResultData(Context context, final OnResultListener<UserResult> listener){
+	public void getUserRankingResultData(Context context, final OnResultListener<UsersResult> listener){
 		client.get(context, userRanking_URL, new TextHttpResponseHandler() {
 			
 			@Override
 			public void onSuccess(int statusCode, Header[] headers,
 					String responseString) {
-				UserResult rankingR = gson.fromJson(responseString, UserResult.class);
+				UsersResult rankingR = gson.fromJson(responseString, UsersResult.class);
 				listener.onSuccess(rankingR);
 			}
 			
@@ -193,7 +193,7 @@ public class NetworkManager {
 	}
 	
 	public static final String UserInfoData_URL = "회원 정보";
-	public void getUserInfoData(Context context, String user_id, final OnResultListener<UserInfoResult> listener){
+	public void getUserInfoData(Context context, String user_id, final OnResultListener<UserRoomsResult> listener){
 		RequestParams params = new RequestParams();
 		params.put(PARAM_USER_ID, user_id);
 		
@@ -202,7 +202,7 @@ public class NetworkManager {
 			@Override
 			public void onSuccess(int statusCode, Header[] headers,
 					String responseString) {
-				UserInfoResult userR = gson.fromJson(responseString, UserInfoResult.class);
+				UserRoomsResult userR = gson.fromJson(responseString, UserRoomsResult.class);
 				listener.onSuccess(userR);
 			}
 			
@@ -248,7 +248,7 @@ public class NetworkManager {
 	
 	
 	public static final String Follower_URL = "Follower한 사용자";
-	public void getFollowerResultData(Context context, String user_id, final OnResultListener<UserResult> listener){
+	public void getFollowerResultData(Context context, String user_id, final OnResultListener<UsersResult> listener){
 		RequestParams params = new RequestParams();
 		params.put(PARAM_USER_ID, user_id);
 		
@@ -257,7 +257,7 @@ public class NetworkManager {
 			@Override
 			public void onSuccess(int statusCode, Header[] headers,
 					String responseString) {
-				UserResult follower_result= gson.fromJson(responseString, UserResult.class);
+				UsersResult follower_result= gson.fromJson(responseString, UsersResult.class);
 				listener.onSuccess(follower_result);
 			}
 			
@@ -270,7 +270,7 @@ public class NetworkManager {
 	}
 	
 	public static final String Following_URL = "Following한 사용자";
-	public void getFollowingResultData(Context context, String user_id, final OnResultListener<UserResult> listener){
+	public void getFollowingResultData(Context context, String user_id, final OnResultListener<UsersResult> listener){
 		RequestParams params = new RequestParams();
 		params.put(PARAM_USER_ID, user_id);
 		
@@ -279,7 +279,7 @@ public class NetworkManager {
 			@Override
 			public void onSuccess(int statusCode, Header[] headers,
 					String responseString) {
-				UserResult following_users = gson.fromJson(responseString, UserResult.class);
+				UsersResult following_users = gson.fromJson(responseString, UsersResult.class);
 				listener.onSuccess(following_users);
 			}
 			
@@ -292,7 +292,7 @@ public class NetworkManager {
 	}
 	
 	public static final String ItemInfo_URL = "상품 정보";
-	public void getItemInfoResultData(Context context, String item_num, final OnResultListener<ItemInfoResult> listener){
+	public void getItemInfoResultData(Context context, String item_num, final OnResultListener<ItemItemsResult> listener){
 		RequestParams params = new RequestParams();
 		params.put(PARAM_ITEM_NO, item_num);
 		
@@ -301,7 +301,7 @@ public class NetworkManager {
 			@Override
 			public void onSuccess(int statusCode, Header[] headers,
 					String responseString) {
-				ItemInfoResult result = gson.fromJson(responseString, ItemInfoResult.class);
+				ItemItemsResult result = gson.fromJson(responseString, ItemItemsResult.class);
 				listener.onSuccess(result);
 			}
 			
@@ -314,7 +314,7 @@ public class NetworkManager {
 	}
 
 	public static final String CategorySearch_URL = "카테고리 상품 검색";
-	public void getCategorySearchResultData(Context context, String keyword, final OnResultListener<ItemResult> listener){
+	public void getCategorySearchResultData(Context context, String keyword, final OnResultListener<ItemsResult> listener){
 		RequestParams params = new RequestParams();
 		params.put(PARAM_SEARCH_QUERY, keyword);
 		
@@ -323,7 +323,7 @@ public class NetworkManager {
 			@Override
 			public void onSuccess(int statusCode, Header[] headers,
 					String responseString) {
-				ItemResult category_result = gson.fromJson(responseString, ItemResult.class);
+				ItemsResult category_result = gson.fromJson(responseString, ItemsResult.class);
 				listener.onSuccess(category_result);
 			}
 			
@@ -338,7 +338,7 @@ public class NetworkManager {
 	}
 	
 	public static final String TextSearch_URL = "텍스트 상품 검색";
-	public void getTextSearchResultData(Context context, String keyword, final OnResultListener<ItemResult> listener){
+	public void getTextSearchResultData(Context context, String keyword, final OnResultListener<ItemsResult> listener){
 		RequestParams params = new RequestParams();
 		params.put(PARAM_SEARCH_QUERY, keyword);
 		
@@ -347,7 +347,7 @@ public class NetworkManager {
 			@Override
 			public void onSuccess(int statusCode, Header[] headers,
 					String responseString) {
-				ItemResult item_result = gson.fromJson(responseString, ItemResult.class);
+				ItemsResult item_result = gson.fromJson(responseString, ItemsResult.class);
 				listener.onSuccess(item_result);
 				
 			}
@@ -364,13 +364,13 @@ public class NetworkManager {
 
 	
 	public static final String EveryoneRoomData_URL = "전체 사용자들의 방 구경";
-	public void getEveryoneRoomData(Context context, final OnResultListener<MultiRoomResult> listener){
+	public void getEveryoneRoomData(Context context, final OnResultListener<RoomsResult> listener){
 		client.get(context, EveryoneRoomData_URL,new TextHttpResponseHandler() {
 			
 			@Override
 			public void onSuccess(int statusCode, Header[] headers,
 					String responseString) {
-				MultiRoomResult rrd = gson.fromJson(responseString, MultiRoomResult.class);
+				RoomsResult rrd = gson.fromJson(responseString, RoomsResult.class);
 				listener.onSuccess(rrd);
 			}
 			
@@ -384,7 +384,7 @@ public class NetworkManager {
 	}
 	
 	public static final String FriendsRoomData_URL = "특정 사용자의 친구들 방 구경";
-	public void getFriendRoomData(Context context,String user_id, final OnResultListener<MultiRoomResult> listener){
+	public void getFriendRoomData(Context context,String user_id, final OnResultListener<RoomsResult> listener){
 		RequestParams params = new RequestParams();
 		params.put(PARAM_USER_ID, user_id);
 		
@@ -393,7 +393,7 @@ public class NetworkManager {
 			@Override
 			public void onSuccess(int statusCode, Header[] headers,
 					String responseString) {
-				MultiRoomResult rrd = gson.fromJson(responseString, MultiRoomResult.class);
+				RoomsResult rrd = gson.fromJson(responseString, RoomsResult.class);
 				listener.onSuccess(rrd);
 			}
 			
@@ -485,7 +485,7 @@ public class NetworkManager {
 	}
 	
 	public static final String roomInfo_URL = "방 안에 상품 구경";
-	public void getRoomInfo(Context context, String user_id, int room_num, final OnResultListener<RoomInfoResult> listener){
+	public void getRoomInfo(Context context, String user_id, int room_num, final OnResultListener<RoomItemsResult> listener){
 		RequestParams params = new RequestParams();
 		params.put(PARAM_USER_ID, user_id);
 		params.put(PARAM_ROOM_NO, room_num);
@@ -495,7 +495,7 @@ public class NetworkManager {
 			@Override
 			public void onSuccess(int statusCode, Header[] headers,
 					String responseString) {
-				RoomInfoResult rd = gson.fromJson(responseString, RoomInfoResult.class);
+				RoomItemsResult rd = gson.fromJson(responseString, RoomItemsResult.class);
 				listener.onSuccess(rd);
 			}
 			
