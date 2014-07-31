@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.tacademy.penthouse.R;
 import com.tacademy.penthouse.entity.ItemData;
 
@@ -18,8 +20,10 @@ public class ItemFragment extends Fragment{
 	ImageView item_img;
 	TextView tv;
 	int position;
-	int resId;
+	String resURL;
 	boolean isLiked; 
+	ImageLoader loader;
+	DisplayImageOptions options;
 	
 	public interface OnShowItemLikeClickedListener{
 		public void onShowItemLikeClicked(boolean liked);
@@ -35,8 +39,9 @@ public class ItemFragment extends Fragment{
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Bundle b = getArguments();
-		resId = b.getInt("img");
+		resURL = b.getString("img");
 		isLiked = b.getBoolean("item_like");
+		
 	}
 	
 	@Override
@@ -44,7 +49,20 @@ public class ItemFragment extends Fragment{
 			Bundle savedInstanceState){
 		View v = inflater.inflate(R.layout.item_fragment_layout, container,false);
 		item_img = (ImageView)v.findViewById(R.id.item_img);
-		item_img.setImageResource(resId);
+//		item_img.setImageResource(resId);
+		loader = ImageLoader.getInstance();
+		options = new DisplayImageOptions.Builder()
+		.showImageOnLoading(R.drawable.ic_stub)
+		.showImageForEmptyUri(R.drawable.ic_empty)
+		.showImageOnFail(R.drawable.ic_error)
+		.cacheInMemory(true)
+		.cacheOnDisc(true)
+		.considerExifParams(true)
+	//	.displayer(new RoundedBitmapDisplayer(100))
+		.build();
+		
+		loader.displayImage(resURL,item_img,options);
+		
 		return v;
 		
 	}
