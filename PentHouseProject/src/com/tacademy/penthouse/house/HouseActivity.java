@@ -46,11 +46,11 @@ public class HouseActivity extends FragmentActivity {
 	String[] img = {"http://tv02.search.naver.net/ugc?t=252x448&q=http://imgnews.naver.com/image/022/2014/07/23/20140723003688_0_99_20140723213004.jpg",
 			"http://tv02.search.naver.net/ugc?t=252x448&q=http://blogfiles.naver.net/20140529_81/iys0610_1401366281000HoExC_JPEG/2014-05-29_21%3B12%3B57.jpg",
 			"http://tv02.search.naver.net/ugc?t=252x448&q=http://imgnews.naver.com/image/009/2013/05/30/20130529_1369812840..jpg_59_20130530084634.jpg"};
-	final RoomData[] rData = {
-			new RoomData(1,1,"user1 room1", img[1], "room1",true, "red"),
-			new RoomData(2,1,"user2 room1", img[2], "room2",true, "red"),
-			new RoomData(1,3,"user1 room3", img[3], "room3",true, "red"),
-	};
+//	final RoomData[] rData = {
+//			new RoomData(1,1,"user1 room1", img[1], "room1",true, "red"),
+//			new RoomData(2,1,"user2 room1", img[2], "room2",true, "red"),
+//			new RoomData(1,3,"user1 room3", img[3], "room3",true, "red"),
+//	};
 
 
 	//수정 시 click인지 아닌지
@@ -129,9 +129,9 @@ public class HouseActivity extends FragmentActivity {
 		if(myData.user_num == uData.user_num){
 			myRoomAdapter = new MyRoomAdapter(this);
 			house_room_gridView.setAdapter(myRoomAdapter);
-			for(int j=0; j<rData.length; j++){
-				myRoomAdapter.add(rData[j]);
-			}
+//			for(int j=0; j<rData.length; j++){
+//				myRoomAdapter.add(rData[j]);
+//			}
 			house_room_gridView.setOnItemClickListener(new OnItemClickListener() {
 
 				@Override
@@ -150,7 +150,7 @@ public class HouseActivity extends FragmentActivity {
 					}else{
 					
 						Intent i = new Intent(HouseActivity.this, MyRoomInfoActivity.class);
-						i.putExtra("rData", rData[position]);
+						//i.putExtra("rData", rData[position]);
 						startActivity(i);
 					}
 				}				
@@ -262,10 +262,10 @@ public class HouseActivity extends FragmentActivity {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			roomAdapter = new RoomAdapter(this);
 			house_room_gridView.setAdapter(roomAdapter);
-			for(int j=0; j<rData.length; j++){
-				roomAdapter.add(rData[j]);
-				
-			}
+//			for(int j=0; j<rData.length; j++){
+//				roomAdapter.add(rData[j]);
+//				
+//			}
 				roomAdapter.add(null);
 			house_room_gridView.setOnItemClickListener(new OnItemClickListener() {
 				@Override
@@ -273,7 +273,7 @@ public class HouseActivity extends FragmentActivity {
 						int position, long id) {
 					if(position != 0){
 						Intent i = new Intent(HouseActivity.this, UserRoomInfoActivity.class);
-						i.putExtra("rData", rData[position]);
+//						i.putExtra("rData", rData[position]);
 						startActivity(i);
 					}
 				}
