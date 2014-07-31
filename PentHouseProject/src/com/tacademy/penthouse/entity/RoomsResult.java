@@ -1,16 +1,16 @@
 package com.tacademy.penthouse.entity;
 
-public class MultiRoomResult {
-	public ResultRooms result;
+public class RoomsResult {
+	public RoomsData result;
 	public int success;
 	public String result_msg;
 
-	public MultiRoomResult(ResultRooms result) {
+	public RoomsResult(RoomsData result) {
 		super();
 		this.result = result;
 	}
 
-	public MultiRoomResult() {
+	public RoomsResult() {
 		// TODO Auto-generated constructor stub
 	}
 

@@ -24,7 +24,7 @@ public class MyPageNotLoggedInActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				Intent login = new Intent(MyPageNotLoggedInActivity.this, LogInFragment.class);
+				Intent login = new Intent(MyPageNotLoggedInActivity.this, LogInActivity.class);
 				startActivity(login);
 			}
 		});

@@ -14,10 +14,10 @@ import android.widget.GridView;
 import android.widget.Toast;
 
 import com.tacademy.penthouse.entity.ItemData;
-import com.tacademy.penthouse.entity.MultiRoomResult;
-import com.tacademy.penthouse.entity.ResultRooms;
+import com.tacademy.penthouse.entity.RoomsResult;
+import com.tacademy.penthouse.entity.RoomsData;
 import com.tacademy.penthouse.entity.RoomData;
-import com.tacademy.penthouse.entity.RoomInfoResult;
+import com.tacademy.penthouse.entity.RoomItemsResult;
 import com.tacademy.penthouse.entity.UserData;
 import com.tacademy.penthouse.item.ItemInfoActivity;
 import com.tacademy.penthouse.itemlike.CreateNewRoomActivity;
@@ -31,6 +31,7 @@ public class Tab1MDFragment extends Fragment {
 	public static final int REQEUST_NEW_ROOM = 0;
 	UserData myData;
 	RoomData myRoomData;
+/*	
 	//DUMMYDATA///////////////////////////////////////////////////////////
 	String[] t = {"aa","bb"};
 	String[] img = {"http://54.178.158.103:80/room1.jpg",
@@ -95,20 +96,21 @@ public class Tab1MDFragment extends Fragment {
 		a_id3.add(id15);
 		
 	}
-	RoomInfoResult rir1 = new RoomInfoResult(rData[0], a_id1, "aa", "aa");
-	RoomInfoResult rir2 = new RoomInfoResult(rData[1], a_id2, "bb", "bb");
-	RoomInfoResult rir3 = new RoomInfoResult(rData[2], a_id3, "cc", "cc");
-	ArrayList<RoomInfoResult> a_rir = new ArrayList<RoomInfoResult>();
+	RoomItemsResult rir1 = new RoomItemsResult(rData[0], a_id1, "aa", "aa");
+	RoomItemsResult rir2 = new RoomItemsResult(rData[1], a_id2, "bb", "bb");
+	RoomItemsResult rir3 = new RoomItemsResult(rData[2], a_id3, "cc", "cc");
+	ArrayList<RoomItemsResult> a_rir = new ArrayList<RoomItemsResult>();
 	{
 		a_rir.add(rir1);
 		a_rir.add(rir2);
 		a_rir.add(rir3);
 	}
-	ResultRooms rr = new ResultRooms(a_rir);
-	MultiRoomResult mrr = new MultiRoomResult(rr);
+	
+	RoomsData rr = new RoomsData(a_rir);
+	RoomsResult mrr = new RoomsResult(rr);
 	
 	///////////////////////////////////////////////////////////////////////////////////
-	
+	*/
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -128,11 +130,11 @@ public class Tab1MDFragment extends Fragment {
 		mdGridView = (GridView)v.findViewById(R.id.md_grid);
 		((StickyGridHeadersGridView)mdGridView).setAreHeadersSticky(false);
 		mdAdapter = new MDRoomAdapter(getActivity());
-		NetworkManager.getInstance().getMDRoomData(getActivity(), new NetworkManager.OnResultListener<MultiRoomResult>() {
+		NetworkManager.getInstance().getMDRoomData(getActivity(), new NetworkManager.OnResultListener<RoomsResult>() {
 
 			@Override
-			public void onSuccess(MultiRoomResult result) {
-				
+			public void onSuccess(RoomsResult result) {
+		
 				mdAdapter.put(result.result);
 				
 			

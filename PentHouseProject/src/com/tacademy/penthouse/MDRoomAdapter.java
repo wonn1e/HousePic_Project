@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.tacademy.penthouse.entity.ItemData;
-import com.tacademy.penthouse.entity.ResultRooms;
+import com.tacademy.penthouse.entity.RoomsData;
 import com.tacademy.penthouse.entity.RoomData;
 import com.tacademy.penthouse.manager.DataManager;
 import com.tonicartos.widget.stickygridheaders.StickyGridHeadersSimpleAdapter;
@@ -16,7 +16,7 @@ import com.tonicartos.widget.stickygridheaders.StickyGridHeadersSimpleAdapter;
 public class MDRoomAdapter extends BaseAdapter implements StickyGridHeadersSimpleAdapter ,MDItemView.OnItemDataClickListener, MDItemView.OnItemDataLikeClickListener{
 	Context mContext;
 //	MultiRoomResult mrr = new MultiRoomResult();
-	ResultRooms mrr = new ResultRooms();
+	RoomsData mrr = new RoomsData();
 	
 	ArrayList<ItemData> items = new ArrayList<ItemData>();
 
@@ -24,7 +24,7 @@ public class MDRoomAdapter extends BaseAdapter implements StickyGridHeadersSimpl
 		mContext = context;
 	}
 	
-	public void put(ResultRooms rr){
+	public void put(RoomsData rr){
 		mrr = rr;
 		for(int i = 0; i < rr.rooms.size(); i++){
 			for(int j = 0; j < rr.rooms.get(i).items.size() ; j++){

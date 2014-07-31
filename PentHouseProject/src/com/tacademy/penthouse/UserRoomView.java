@@ -46,7 +46,7 @@ public class UserRoomView extends FrameLayout {
 		rData = data;
 		//user_room_img.setImageResource(rData.room_img);
 		loader.displayImage(data.room_img_url,user_room_img,options);
-		user_room_info.setText(rData.room_info);
+	//	user_room_info.setText(rData.room_info);
 		user_img.setImageResource(userResId);
 		
 		
