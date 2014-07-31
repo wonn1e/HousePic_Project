@@ -164,6 +164,8 @@ public class ItemInfoActivity extends FragmentActivity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
+				iAdapter.clear();
+				initActivity(sData.get(position).item_num);
 				//initData(iData.recommand_items[position]);
 				//서버에서 iData를 받아서 넘긴다!
 			}
@@ -188,6 +190,52 @@ public class ItemInfoActivity extends FragmentActivity {
 
 		
 		NetworkManager.getInstance().getItemInfoResultData(this, i_num, new NetworkManager.OnResultListener<ItemItemsResult>() {
+
+			@Override
+			public void onSuccess(ItemItemsResult result) {
+				iData = result.result.item;
+				sData = result.result.items;
+				item_name_brand.setText(iData.item_name);
+				item_size.setText(iData.item_size);
+				
+				mAdapter = new ItemFragmentAdapter(getSupportFragmentManager(), iData);
+				mPager = (ViewPager)findViewById(R.id.pager);
+				mPager.setAdapter(mAdapter);
+				
+				hlv_s_item.setAdapter(iAdapter);
+				for(int i = 0; i < sData.size(); i++){
+					for(int j = 0; j < sData.get(i).item_img_url.length; j++){
+						iAdapter.add(sData.get(i).item_img_url[j]);
+						//iAdapter.add("http://54.178.158.103:80/sofa5.jpg");
+				}
+				}
+			}
+
+			@Override
+			public void onFail(int code) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+		
+	}
+	private void initActivity(int si_num){
+		item_material = (TextView)findViewById(R.id.item_material);
+		item_size = (TextView)findViewById(R.id.item_size);
+//		Toast.makeText(ItemInfoActivity.this, "name : " + data.item_name, Toast.LENGTH_SHORT).show();
+//		item_name_brand.setText(data.item_name);
+//		item_like_count.setText(""+data.likeCnt);
+//		item_price.setText(data.price);
+//		item_material.setText(data.material);
+		if(iData.item_like)
+			show_item_like.setImageResource(R.drawable.ic_launcher);
+		else
+			show_item_like.setImageResource(R.drawable.tulips);
+		//		item_size.setText(data.)
+
+		
+		NetworkManager.getInstance().getItemInfoResultData(this, si_num, new NetworkManager.OnResultListener<ItemItemsResult>() {
 
 			@Override
 			public void onSuccess(ItemItemsResult result) {
