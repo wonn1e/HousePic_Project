@@ -2,6 +2,6 @@ package com.tacademy.penthouse.entity;
 
 import java.util.ArrayList;
 
-public class ResultItem {
+public class ResultItems {
 	public ArrayList<ItemData> items = new ArrayList<ItemData>();
 }

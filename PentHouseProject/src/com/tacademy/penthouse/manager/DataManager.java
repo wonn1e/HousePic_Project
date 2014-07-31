@@ -6,8 +6,8 @@ import com.tacademy.penthouse.entity.RoomData;
 public class DataManager {
 	public RoomData getRoomData(ResultRooms rr, int r_num){
 		for(int i = 0; i < rr.rooms.size(); i++){
-			if(r_num == rr.rooms.get(i).room.room_num){
-				return rr.rooms.get(i).room;
+			if(r_num == rr.rooms.get(i).result.room.room_num){
+				return rr.rooms.get(i).result.room;
 			}
 		}
 		
