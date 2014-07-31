@@ -56,12 +56,6 @@ public class UserRoomInfoActivity extends FragmentActivity {
 		Intent i = getIntent();
 		r_num = i.getIntExtra("rData", r_num);
 		
-		
-
-		
-		
-		
-		
 		loader = ImageLoader.getInstance();
 		options = new DisplayImageOptions.Builder()
 		.showImageOnLoading(R.drawable.ic_stub)

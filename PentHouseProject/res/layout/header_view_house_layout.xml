@@ -10,7 +10,7 @@
                 android:layout_height="wrap_content" >
 
                 <TextView
-                    android:id="@+id/user_nickname"
+                    android:id="@+id/userNicknameHouse"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
@@ -21,14 +21,14 @@
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 <ImageView
-                    android:id="@+id/house_img"
+                    android:id="@+id/houseImgHouse"
                     android:layout_width="match_parent"
                     android:layout_height="196dp"
                     android:scaleType="fitXY"
                     android:src="@drawable/ic_launcher" />
 
                 <TextView
-                    android:id="@+id/house_name"
+                    android:id="@+id/houseNameHouse"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="280dp"
@@ -38,7 +38,7 @@
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 <TextView
-                    android:id="@+id/house_info"
+                    android:id="@+id/houseInfoHouse"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
@@ -49,7 +49,7 @@
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <ImageView
-                    android:id="@+id/user_img"
+                    android:id="@+id/userImgHouse"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_gravity="center"
@@ -57,7 +57,7 @@
                     android:src="@drawable/ic_launcher" />
 
                 <ImageView
-                    android:id="@+id/edit_btn"
+                    android:id="@+id/editHouseBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right|center_vertical"
@@ -70,7 +70,7 @@
                 android:layout_marginBottom="10dp" >
 
                 <Button
-                    android:id="@+id/following_btn"
+                    android:id="@+id/followingBtnHouse"
                     style="?android:attr/buttonStyleSmall"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -78,7 +78,7 @@
                     android:text="Following" />
 
                 <Button
-                    android:id="@+id/follower_btn"
+                    android:id="@+id/followerBtnHouse"
                     style="?android:attr/buttonStyleSmall"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
