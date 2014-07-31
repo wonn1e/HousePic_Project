@@ -1,6 +1,5 @@
 package com.tacademy.penthouse.house;
 
-import java.util.ArrayList;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,10 +12,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 import com.tacademy.penthouse.HeaderGridView;
 import com.tacademy.penthouse.R;
 import com.tacademy.penthouse.editimgdialog.EditImgActivity;
-import com.tacademy.penthouse.entity.RoomData;
 import com.tacademy.penthouse.entity.UserData;
 import com.tacademy.penthouse.entity.UserRoomsResult;
 import com.tacademy.penthouse.itemlike.CreateNewRoomActivity;
@@ -39,6 +40,8 @@ public class HouseActivity extends FragmentActivity {
 	HeaderGridView house_room_gridView;	
 	TextView user_nickname, house_name, house_intro, house_room_list;
 	ImageView user_img, house_img, edit_btn;
+	ImageLoader loader;
+	DisplayImageOptions userOptions, houseOptions;
 
 	UserData uData;
 	UserData myData;
@@ -84,16 +87,12 @@ public class HouseActivity extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.house_layout);
-		//uData = new UserData(1, "aa", "aa", "aa", 1, 1, R.drawable.penguins, "aa", "aa", "aa");
 		//myData = new UserData(2, "bb", "bb", "bb", 2, 2, R.drawable.tulips, "bb", "bb", "bb");
-		//uData = new UserData(2, "bb", "bb", "bb", 2, 2, R.drawable.tulips, "bb", "bb", "bb");
 		//	hData =  new HouseData(10, 12, "nickname's house", "HOUSE!!", "dddd");
 		//	hData = new HouseData();
-
-
+		
 		Intent i = getIntent();
 		uDataId = i.getStringExtra("uData");
-		//	uData = i.getParcelableExtra(PARAM_USER_DATA);
 		//	myData = i.getParcelableExtra(PARAM_MY_DATA);
 		//	hData = i.getParcelableExtra("hData");
 
@@ -108,6 +107,24 @@ public class HouseActivity extends FragmentActivity {
 		house_room_gridView = (HeaderGridView)findViewById(R.id.header_grid_view);
 		house_room_gridView.addHeaderView(v);
 		roomAdapter = new RoomAdapter(this);
+		loader = ImageLoader.getInstance();
+		userOptions = new DisplayImageOptions.Builder()
+		.showImageOnLoading(R.drawable.ic_stub)
+		.showImageForEmptyUri(R.drawable.ic_empty)
+		.showImageOnFail(R.drawable.ic_error)
+		.cacheInMemory(true)
+		.cacheOnDisc(true)
+		.considerExifParams(true)
+		.displayer(new RoundedBitmapDisplayer(100))
+		.build();
+		houseOptions = new DisplayImageOptions.Builder()
+		.showImageOnLoading(R.drawable.ic_stub)
+		.showImageForEmptyUri(R.drawable.ic_empty)
+		.showImageOnFail(R.drawable.ic_error)
+		.cacheInMemory(true)
+		.cacheOnDisc(true)
+		.considerExifParams(true)
+		.build();
 		
 		Button btn = (Button)v.findViewById(R.id.followingBtnHouse);
 		btn.setOnClickListener(new View.OnClickListener() {
@@ -131,18 +148,13 @@ public class HouseActivity extends FragmentActivity {
 			}
 		});
 
-		//get from network manager
-		/*roomAdapter = new RoomAdapter(this);
-		house_room_gridView.setAdapter(roomAdapter);
 
-		roomAdapter.add(null);*/
 		house_room_gridView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				if(position != userRoomsResult.result.rooms.size()){
 					Intent i = new Intent(HouseActivity.this, UserRoomInfoActivity.class);
-					//					i.putExtra("rData", rData[position]);
 					i.putExtra("rData", userRoomsResult.result.rooms.get(position).room_num);
 					startActivity(i);
 				}
@@ -335,6 +347,8 @@ public class HouseActivity extends FragmentActivity {
 				house_name.setText(uData.house_name);
 				house_intro.setText(uData.house_intro);
 				house_room_list.setText(uData.user_nickname + "의 방 목록");
+				loader.displayImage(result.result.user.user_img_url, user_img, userOptions);
+				loader.displayImage(result.result.user.house_img_url , house_img, houseOptions);
 
 				roomAdapter.put(result.result);
 				house_room_gridView.setAdapter(roomAdapter);

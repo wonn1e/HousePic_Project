@@ -206,7 +206,6 @@ public class ItemInfoActivity extends FragmentActivity {
 				for(int i = 0; i < sData.size(); i++){
 					for(int j = 0; j < sData.get(i).item_img_url.length; j++){
 						iAdapter.add(sData.get(i).item_img_url[j]);
-						//iAdapter.add("http://54.178.158.103:80/sofa5.jpg");
 					}
 				}
 			}
