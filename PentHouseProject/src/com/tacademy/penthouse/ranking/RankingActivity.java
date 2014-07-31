@@ -90,7 +90,8 @@ public class RankingActivity extends FragmentActivity{
 					
 				}else if(LIST_TYPE_FLAG == 1){	//item
 					Intent i = new Intent(RankingActivity.this, ItemInfoActivity.class);
-					i.putExtra("iData", iData[position]);
+					//i.putExtra("iData", iData[position]);
+					i.putExtra("iData", itemsResult.result.items.get(position).item_num);
 					startActivityForResult(i, 0);
 				}
 			}
