@@ -15,13 +15,9 @@ public class RoomData implements Parcelable{
 	public int room_num;
 	public String room_name;
 	public String room_img_url;
-	public String room_info;
-	//public Date passedtime;
 	public String room_date;
 	public String room_color;
 	public boolean isPublic;
-	public int success;
-	public String result_msg;
 	public ArrayList<ItemData> items = new ArrayList<ItemData>();
 	
 	public RoomData(){}
@@ -31,7 +27,6 @@ public class RoomData implements Parcelable{
 		this.room_num = r_num;
 		this.room_name = r_name;
 		this.room_img_url = r_img;
-		this.room_info = r_info;
 		this.room_color = r_color;
 		this.isPublic = ispublic;
 	}
@@ -41,7 +36,6 @@ public class RoomData implements Parcelable{
 		room_num = p.readInt();
 		room_name = p.readString();
 		room_img_url = p.readString();
-		room_info = p.readString();
 	//	passedtime = new Date(p.readLong());
 		isPublic = p.readByte() != 0;
 		room_color = p.readString();
@@ -58,7 +52,6 @@ public class RoomData implements Parcelable{
 		dest.writeInt(room_num);
 		dest.writeString(room_name);
 		dest.writeString(room_img_url);
-		dest.writeString(room_info);
 	//	dest.writeLong(passedtime.getTime());
 		dest.writeByte((byte)(isPublic ? 1:0));
 		dest.writeString(room_color);

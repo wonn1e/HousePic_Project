@@ -22,8 +22,8 @@ public class ItemData implements Parcelable {
 	public String[] item_img_url;
 	public boolean last_item = false;
 	
-	public String result;
-	public String result_msg;
+	//public String result;
+	//public String result_msg;
 	
 	public ItemData(){}
 	public ItemData(int room_num,int item_num,           
