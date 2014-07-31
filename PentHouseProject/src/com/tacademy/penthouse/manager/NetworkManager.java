@@ -291,8 +291,8 @@ public class NetworkManager {
 		});
 	}
 	
-	public static final String ItemInfo_URL = "상품 정보";
-	public void getItemInfoResultData(Context context, String item_num, final OnResultListener<ItemItemsResult> listener){
+	public static final String ItemInfo_URL = "http://54.178.158.103/product/:productNo/viewDetails";
+	public void getItemInfoResultData(Context context, int item_num, final OnResultListener<ItemItemsResult> listener){
 		RequestParams params = new RequestParams();
 		params.put(PARAM_ITEM_NO, item_num);
 		

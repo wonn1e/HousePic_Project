@@ -1,5 +1,7 @@
 package com.tacademy.penthouse.item;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
@@ -23,11 +25,13 @@ import com.tacademy.penthouse.browser.BrowserActivity;
 import com.tacademy.penthouse.editimgdialog.EditImgActivity;
 import com.tacademy.penthouse.editimgdialog.RegisterNewImageActivity;
 import com.tacademy.penthouse.entity.ItemData;
+import com.tacademy.penthouse.entity.ItemItemsResult;
 import com.tacademy.penthouse.entity.RoomData;
 import com.tacademy.penthouse.entity.UserData;
 import com.tacademy.penthouse.itemlike.CreateNewRoomActivity;
 import com.tacademy.penthouse.itemlike.CreateNewRoomDialog;
 import com.tacademy.penthouse.itemlike.ItemLikeShowListDialog;
+import com.tacademy.penthouse.manager.NetworkManager;
 import com.tacademy.penthouse.ranking.RankingActivity;
 import com.viewpagerindicator.CirclePageIndicator;
 import com.viewpagerindicator.PageIndicator;
@@ -37,46 +41,41 @@ public class ItemInfoActivity extends FragmentActivity {
 	public static final int REQUEST_NEW_ROOM_IN_ITEMINFO = 0;
 	
 	ItemData iData;
+	ArrayList<ItemData> sData = new ArrayList<ItemData>();
+	
 	UserData myData;
 	ItemLikeShowListDialog itemLikeDialog;
-
+	ViewPager mPager;
+	HorizontalListView hlv_s_item;
+	ItemFragmentAdapter mAdapter;
+	ItemRecommandAdapter iAdapter;
+	PageIndicator mIndicator;
+	
 	TextView item_name_brand, item_like_count, item_price, item_material, item_size;
 	ImageView show_item_like;
 	RoomData[] myRoomData;
+	int i_num;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_item_info);
-//		final RoomData[] myRoomData = {
-//				new RoomData(1,1,"house1",R.drawable.ic_launcher,"방설명1",true),
-//				new RoomData(2,2,"house2",R.drawable.ic_launcher,"방설명2",true),
-//				new RoomData(3,3,"house3",R.drawable.ic_launcher,"방설명3",true)
-//		};
 		
-		ViewPager mPager;
-		HorizontalListView hlv_s_item;
-		ItemFragmentAdapter mAdapter;
-		ItemRecommandAdapter iAdapter;
-		PageIndicator mIndicator;
+		
 		itemLikeDialog = new ItemLikeShowListDialog();
 		Button item_share_btn;
 		Button item_buy_btn;
 		iData = new ItemData();
 		Intent i = getIntent();
-		iData = i.getParcelableExtra("iData");
+		i_num = i.getIntExtra("iData", 0);
 		
 		//data that is passed to other Fragments!
-		mAdapter = new ItemFragmentAdapter(getSupportFragmentManager(), iData);
-		mPager = (ViewPager)findViewById(R.id.pager);
-		mPager.setAdapter(mAdapter);
+		
+		
 		mIndicator = (CirclePageIndicator)findViewById(R.id.indicator);
 		mIndicator.setViewPager(mPager);
 		iAdapter = new ItemRecommandAdapter(this);
 		hlv_s_item = (HorizontalListView) findViewById(R.id.horizontalListView2);
-		hlv_s_item.setAdapter(iAdapter);
-		for(int j = 0; j < iData.item_img_url.length; j++){
-			iAdapter.add(iData.item_img_url[j]);
-		}
+		
 
 
 		item_name_brand = (TextView) findViewById(R.id.item_name_brand);
@@ -169,24 +168,55 @@ public class ItemInfoActivity extends FragmentActivity {
 				//서버에서 iData를 받아서 넘긴다!
 			}
 		});
-		initData(iData);
+		initData();
 		
 	}
 	
-	private void initData(ItemData data){
+	private void initData(){
 		item_material = (TextView)findViewById(R.id.item_material);
 		item_size = (TextView)findViewById(R.id.item_size);
-		Toast.makeText(ItemInfoActivity.this, "name : " + data.item_name, Toast.LENGTH_SHORT).show();
-		item_name_brand.setText(data.item_name);
-		item_like_count.setText(""+data.likeCnt);
-		item_price.setText(data.price);
-		item_material.setText(data.material);
-		if(data.item_like)
+//		Toast.makeText(ItemInfoActivity.this, "name : " + data.item_name, Toast.LENGTH_SHORT).show();
+//		item_name_brand.setText(data.item_name);
+//		item_like_count.setText(""+data.likeCnt);
+//		item_price.setText(data.price);
+//		item_material.setText(data.material);
+		if(iData.item_like)
 			show_item_like.setImageResource(R.drawable.ic_launcher);
 		else
 			show_item_like.setImageResource(R.drawable.tulips);
 		//		item_size.setText(data.)
 
+		
+		NetworkManager.getInstance().getItemInfoResultData(this, i_num, new NetworkManager.OnResultListener<ItemItemsResult>() {
+
+			@Override
+			public void onSuccess(ItemItemsResult result) {
+				iData = result.result.item;
+				sData = result.result.items;
+				item_name_brand.setText(iData.item_name);
+				item_size.setText(iData.item_size);
+				
+				mAdapter = new ItemFragmentAdapter(getSupportFragmentManager(), iData);
+				mPager = (ViewPager)findViewById(R.id.pager);
+				mPager.setAdapter(mAdapter);
+				
+				hlv_s_item.setAdapter(iAdapter);
+				for(int i = 0; i < sData.size(); i++){
+					for(int j = 0; j < sData.get(i).item_img_url.length; j++){
+						iAdapter.add(sData.get(i).item_img_url[j]);
+						//iAdapter.add("http://54.178.158.103:80/sofa5.jpg");
+				}
+				}
+			}
+
+			@Override
+			public void onFail(int code) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+		
 	}
 	
 	@Override

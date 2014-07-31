@@ -68,6 +68,8 @@ public class MyRoomInfoActivity extends FragmentActivity {
 		room_update_time = (TextView)v.findViewById(R.id.room_update_time); 
 		room_intro = (TextView)v.findViewById(R.id.room_intro);
 		room_product_list = (TextView)v.findViewById(R.id.room_product_list);
+		
+		
 
 		myroom_item_gridview = (StaggeredGridView)findViewById(R.id.gridView_myroom);
 		myroom_item_gridview.addHeaderView(v);

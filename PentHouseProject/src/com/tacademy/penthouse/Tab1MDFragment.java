@@ -235,7 +235,7 @@ public class Tab1MDFragment extends Fragment implements OnItemClickListener,
 	@Override
 	public void onItemClick(AdapterView<?> gridView, View view, int position, long id) {
 		Intent i = new Intent(getActivity(), ItemInfoActivity.class);
-		i.putExtra("iData",rsr.result.rooms.get((int)mdAdapter.getHeaderId(position)).items.get(position) );
+		i.putExtra("iData",rsr.result.rooms.get((int)mdAdapter.getHeaderId(position)).items.get(position).item_num );
 		startActivity(i);		
 	}
 }

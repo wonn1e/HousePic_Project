@@ -74,6 +74,7 @@ public class ItemView extends FrameLayout{
 		iData = data;
 		//첫번째 이미지를 나오게 한다.
 		//item_img.setImageResource(iData.item_img[0]);
+		item_name.setText(data.item_name);
 		loader.displayImage(data.item_img_url[0], item_img,options);
 		if(!data.item_like){
 			item_like.setImageResource(R.drawable.tulips);

@@ -31,7 +31,8 @@ public class MDRoomAdapter extends BaseAdapter implements StickyGridHeadersSimpl
 				items.add(rr.rooms.get(i).items.get(j));
 			
 			}
-			items.add(new ItemData(rr.rooms.get(i).items.get(0).room_num,0,"","","","","",null,0,0, null,"", false));
+			items.add(new ItemData(rr.rooms.get(i).items.get(0).room_num, 0, "", "", "", "", "", null, 0, "", 0, null, "", false));
+			//items.add(new ItemData(rr.rooms.get(i).items.get(0).room_num,0,"","","","","","",0,0, "","", false));
 		}		
 		notifyDataSetChanged();
 	}

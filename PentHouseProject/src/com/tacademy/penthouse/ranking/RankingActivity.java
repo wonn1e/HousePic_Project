@@ -24,44 +24,6 @@ import com.tacademy.penthouse.itemlike.CreateNewRoomActivity;
 import com.tacademy.penthouse.itemlike.ItemLikeShowListDialog;
 import com.tacademy.penthouse.manager.NetworkManager;
 
-/*		
-String[] t = {"aa","bb"};
-int[] img = {R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher};
-Integer[] img2= {R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher};
-final ItemData[] iData = {new ItemData(1,1,"aa","i1","aa","aa","aa",t,1,"aa",img, "http://www.naver.com", true),
-						new ItemData(2,2,"bb","i2","fdsf","dsf","fd",t,1,"dfs",img, "http://www.naver.com", false),
-						new ItemData(3,3,"12321","i3","1213","1231","12321",t,1,"12312",img, "http://www.naver.com", false),
-						new ItemData(4,4,"dd","i4","dddd","ddd","ddd",t,1,"dddd",img, "http://www.naver.com", false),
-						new ItemData(5,5,"eeeee","i5","eeee","eee","ee",t,1,"ee",img, "http://www.naver.com", true),
-						new ItemData(6,6,"zxxzxc","i6","zcxczx","zczcx","zcxcxz",t,1,"zcxx",img, "http://www.naver.com", true),
-						new ItemData(7,7,"jhjh","i7","hjhj","hjhj","hjhj",t,1,"hjhj",img, "http://www.naver.com", false),
-						new ItemData(7,7,"jhjh","i8","hjhj","hjhj","hjhj",t,1,"hjhj",img, "http://www.naver.com", true)
-};
-int uimg = R.drawable.ic_launcher;
-final UserData[] uData = {new UserData(1, "a","a","a",1,1,uimg,"YYY1's House","Welcome","bb"),
-					new UserData(2, "b","b","b",2,2,uimg,"YYY1's House","Welcome","bb"),
-					new UserData(3, "c","c","c",3,3,uimg,"YYY1's House","Welcome","bb"),
-					new UserData(4, "d","d","d",4,4,uimg,"YYY1's House","Welcome","bb"),
-					new UserData(5, "e","e","e",5,5,uimg,"YYY1's House","Welcome","bb"),
-					new UserData(6, "f","f","f",6,6,uimg,"YYY1's House","Welcome","bb"),
-					new UserData(7, "g","g","g",7,7,uimg,"YYY1's House","Welcome","bb"),
-					new UserData(8, "h","h","h",8,8,uimg,"YYY1's House","Welcome","bb"),
-					new UserData(9, "i","i","i",9,9,uimg,"YYY1's House","Welcome","bb"),
-					new UserData(10, "j","j","j",10,10,uimg,"YYY1's House","Welcome","bb"),
-					new UserData(11, "z","z","z",11,11,uimg,"YYY1's House","Welcome","bb"),
-					new UserData(12, "k","k","k",12,12,uimg,"YYY1's House","Welcome","bb"),
-					new UserData(13, "l","l","l",13,13,uimg,"YYY1's House","Welcome","bb"),
-					new UserData(14, "m","m","m",14,14,uimg,"YYY1's House","Welcome","bb"),
-					new UserData(15, "n","n","n",15,15,uimg,"YYY1's House","Welcome","bb"),
-					new UserData(16, "o","o","o",16,16,uimg,"YYY1's House","Welcome","bb"),
-					new UserData(17, "p","p","p",17,17,uimg,"YYY1's House","Welcome","bb"),
-					new UserData(18, "q","q","q",18,18,uimg,"YYY1's House","Welcome","bb"),
-					new UserData(19, "r","r","r",19,19,uimg,"YYY1's House","Welcome","bb"),
-					new UserData(20, "s","s","s",20,20,uimg,"YYY1's House","Welcome","bb")
-
-};
-*/	
-
 public class RankingActivity extends FragmentActivity{
 	
 	public static int LIST_TYPE_FLAG = 0;
