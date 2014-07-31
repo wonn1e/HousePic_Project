@@ -23,7 +23,6 @@ import com.tacademy.penthouse.item.ItemInfoActivity;
 import com.tacademy.penthouse.itemlike.CreateNewRoomActivity;
 import com.tacademy.penthouse.itemlike.ItemLikeShowListDialog;
 import com.tacademy.penthouse.manager.NetworkManager;
-import com.tacademy.penthouse.room.MyRoomInfoActivity;
 
 /*		
 String[] t = {"aa","bb"};
@@ -89,14 +88,13 @@ public class RankingActivity extends FragmentActivity{
 		rankingList = (ListView)findViewById(R.id.listView_rank);
 		uAdapter = new RankUserAdapter(this);
 		iAdapter = new RankItemAdapter(this);
-		rankingList.setAdapter(uAdapter);
+		
 		Button btn = (Button)findViewById(R.id.rank_neighbor_tab);
 		
 		btn.setOnClickListener(new View.OnClickListener() {			
 			@Override
 			public void onClick(View v) {
 				LIST_TYPE_FLAG = 0;
-				rankingList.setAdapter(uAdapter);
 				uAdapter.clear();
 				
 				initUsersData();
@@ -123,11 +121,12 @@ public class RankingActivity extends FragmentActivity{
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				if(LIST_TYPE_FLAG == 0){
+				if(LIST_TYPE_FLAG == 0){		//user
 					Intent i = new Intent(RankingActivity.this, HouseActivity.class);
 					i.putExtra("uData", uData[position]);
 					startActivityForResult(i, 0);
-				}else if(LIST_TYPE_FLAG == 1){
+					
+				}else if(LIST_TYPE_FLAG == 1){	//item
 					Intent i = new Intent(RankingActivity.this, ItemInfoActivity.class);
 					i.putExtra("iData", iData[position]);
 					startActivityForResult(i, 0);
@@ -196,6 +195,7 @@ public class RankingActivity extends FragmentActivity{
 			public void onSuccess(UsersResult result) {
 				usersResult = result;
 				uAdapter.put(result.result);
+				rankingList.setAdapter(uAdapter);
 			}
 
 			@Override

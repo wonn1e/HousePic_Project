@@ -25,7 +25,6 @@ public class RankItemAdapter extends BaseAdapter implements RankItemView.OnPopul
 	public void put(ItemsData iD){
 		iData = iD;
 		for(int i = 0; i<iD.items.size(); i++){
-			
 			list.add(iD.items.get(i));
 		}
 		notifyDataSetChanged();

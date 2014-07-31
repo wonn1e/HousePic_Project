@@ -3,11 +3,12 @@ package com.tacademy.penthouse.ranking;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AbsListView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.tacademy.penthouse.R;
 import com.tacademy.penthouse.entity.ItemData;
 
@@ -34,15 +35,27 @@ public class RankItemView extends FrameLayout {
 	TextView item_price;
 	TextView item_like_num;
 	ImageView item_like;
-	
+	ImageLoader loader;
+	DisplayImageOptions options;
+
 	private void init(){
 		LayoutInflater.from(getContext()).inflate(R.layout.rank_item_view, this);
-		item_img = (ImageView)findViewById(R.id.item_img);
-		item_rank = (ImageView)findViewById(R.id.item_rank);
-		item_name = (TextView)findViewById(R.id.item_name);
-		item_price = (TextView)findViewById(R.id.item_price);
-		item_like_num = (TextView)findViewById(R.id.item_like_num);
-		item_like = (ImageView)findViewById(R.id.item_like);
+		item_img = (ImageView)findViewById(R.id.itemImgRank);
+		item_rank = (ImageView)findViewById(R.id.showItemRank);
+		item_name = (TextView)findViewById(R.id.itemNameRank);
+		item_price = (TextView)findViewById(R.id.itemPriceRank);
+		item_like_num = (TextView)findViewById(R.id.itemLikeNumRank);
+		item_like = (ImageView)findViewById(R.id.likeItemBtnRank);
+		loader = ImageLoader.getInstance();
+		options = new DisplayImageOptions.Builder()
+		.showImageOnLoading(R.drawable.ic_stub)
+		.showImageForEmptyUri(R.drawable.ic_empty)
+		.showImageOnFail(R.drawable.ic_error)
+		.cacheInMemory(true)
+		.cacheOnDisc(true)
+		.considerExifParams(true)
+		//.displayer(new RoundedBitmapDisplayer(100))
+		.build();
 		
 		item_like.setOnClickListener(new View.OnClickListener() {
 			
@@ -53,6 +66,7 @@ public class RankItemView extends FrameLayout {
 				}
 			}
 		});
+		
 	}
 
 	public void setRankItemData(ItemData data, int position){
@@ -71,12 +85,10 @@ public class RankItemView extends FrameLayout {
 			item_like.setImageResource(R.drawable.tulips);
 		}
 		
-//		item_img.setImageResource(resId);
-		item_rank.setImageResource(R.drawable.ic_launcher);
+		loader.displayImage(data.item_img_url[0], item_img, options);
 		item_name.setText(data.item_name);
-		item_price.setText(data.price);
-		
+		item_price.setText(data.price);	
 		item_like_num.setText(data.likeCnt+"");
-//		item_like.setImageResource(resId);
+
 	}
 }
