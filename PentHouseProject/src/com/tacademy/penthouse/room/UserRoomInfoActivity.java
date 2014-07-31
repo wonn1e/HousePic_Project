@@ -54,7 +54,7 @@ public class UserRoomInfoActivity extends FragmentActivity {
 		setContentView(R.layout.activity_room_info);
 		itemLikeDialog = new ItemLikeShowListDialog();
 		Intent i = getIntent();
-		r_num = i.getIntExtra("r_num", r_num);
+		r_num = i.getIntExtra("rData", r_num);
 		
 		
 

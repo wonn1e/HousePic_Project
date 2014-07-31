@@ -19,7 +19,10 @@ public class ItemRecommandAdapter extends BaseAdapter{
 		items.add(imageURL);
 		notifyDataSetChanged();
 	}
-	
+	public void clear(){
+		items.clear();
+		notifyDataSetChanged();
+	}
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub

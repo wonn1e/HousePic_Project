@@ -24,6 +24,9 @@ public class MDRoomAdapter extends BaseAdapter implements StickyGridHeadersSimpl
 		mContext = context;
 	}
 	
+	public ArrayList<ItemData> set(){
+		return items;
+	}
 	public void put(RoomsData rr){
 		mrr = rr;
 		for(int i = 0; i < rr.rooms.size(); i++){
