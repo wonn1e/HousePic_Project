@@ -154,7 +154,7 @@ public class NetworkManager {
 
 	}
 	
-	public static final String ItemRanking_URL = "»óÇ° ·©Å·";
+	public static final String ItemRanking_URL = "http://54.178.158.103/product/rank";
 	public void getItemRankingResultData(Context context, final OnResultListener<ItemsResult> listener){
 		client.get(context, ItemRanking_URL, new TextHttpResponseHandler() {
 			
@@ -173,7 +173,7 @@ public class NetworkManager {
 		});
 	}
 	
-	public static final String userRanking_URL = "»ç¿ëÀÚ ·©Å·";
+	public static final String userRanking_URL = "http://54.178.158.103/user/rank";
 	public void getUserRankingResultData(Context context, final OnResultListener<UsersResult> listener){
 		client.get(context, userRanking_URL, new TextHttpResponseHandler() {
 			
