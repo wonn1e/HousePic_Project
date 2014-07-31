@@ -8,19 +8,34 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.tacademy.penthouse.entity.ItemData;
+import com.tacademy.penthouse.entity.ItemsData;
 
 public class RankItemAdapter extends BaseAdapter implements RankItemView.OnPopularItemLikeListener{
 	ArrayList<ItemData> list = new ArrayList<ItemData>();
 	Context mContext;
+	ItemsData iData;
 	public RankItemAdapter(Context context){
 		mContext = context;
 	}
-	
-	public void add(ItemData d){
+
+	/*public void add(ItemData d){
 		list.add(d);
 		notifyDataSetChanged();
+	}*/
+	public void put(ItemsData iD){
+		iData = iD;
+		for(int i = 0; i<iD.items.size(); i++){
+			
+			list.add(iD.items.get(i));
+		}
+		notifyDataSetChanged();
 	}
-	
+
+	public void clear() {
+		list.clear();
+		notifyDataSetChanged();
+	}
+
 	@Override
 	public int getCount() {
 		return list.size();
@@ -56,13 +71,13 @@ public class RankItemAdapter extends BaseAdapter implements RankItemView.OnPopul
 	public void setOnAdapterPopularItemLikeListener(OnAdapterPopularItemLikeListener l){
 		pAdapterListener = l;
 	}
-	
+
 	public void updateData(ItemData data, boolean isLike, int likeCnt){
 		data.item_like = isLike;
 		data.likeCnt = likeCnt;
 		notifyDataSetChanged();
 	}
-	
+
 	@Override
 	public void onPopularItemLikeListener(View v, ItemData iData) {
 		if(pAdapterListener != null){

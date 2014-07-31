@@ -14,12 +14,15 @@ import android.widget.Toast;
 
 import com.tacademy.penthouse.R;
 import com.tacademy.penthouse.entity.ItemData;
+import com.tacademy.penthouse.entity.ItemsResult;
 import com.tacademy.penthouse.entity.RoomData;
 import com.tacademy.penthouse.entity.UserData;
+import com.tacademy.penthouse.entity.UsersResult;
 import com.tacademy.penthouse.house.HouseActivity;
 import com.tacademy.penthouse.item.ItemInfoActivity;
 import com.tacademy.penthouse.itemlike.CreateNewRoomActivity;
 import com.tacademy.penthouse.itemlike.ItemLikeShowListDialog;
+import com.tacademy.penthouse.manager.NetworkManager;
 import com.tacademy.penthouse.room.MyRoomInfoActivity;
 
 /*		
@@ -74,6 +77,9 @@ public class RankingActivity extends FragmentActivity{
 	UserData myData;
 	RoomData[] myRoomData;
 	
+	UsersResult usersResult;
+	ItemsResult itemsResult;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		setContentView(R.layout.ranking_layout);
@@ -85,18 +91,15 @@ public class RankingActivity extends FragmentActivity{
 		iAdapter = new RankItemAdapter(this);
 		rankingList.setAdapter(uAdapter);
 		Button btn = (Button)findViewById(R.id.rank_neighbor_tab);
-		for(int i = 0; i < uData.length; i++){
-			uAdapter.add(uData[i]);
-		}
 		
 		btn.setOnClickListener(new View.OnClickListener() {			
 			@Override
 			public void onClick(View v) {
 				LIST_TYPE_FLAG = 0;
 				rankingList.setAdapter(uAdapter);
-				for(int i = 0; i < uData.length; i++){
-					uAdapter.add(uData[i]);
-				}
+				uAdapter.clear();
+				
+				initUsersData();
 			}
 		});
 		
@@ -108,11 +111,10 @@ public class RankingActivity extends FragmentActivity{
 			public void onClick(View v) {
 				LIST_TYPE_FLAG = 1;
 				rankingList = (ListView)findViewById(R.id.listView_rank);
+				iAdapter.clear();
 				rankingList.setAdapter(iAdapter);
-				for(int i = 0; i < iData.length; i++){
-					iAdapter.add(iData[i]);
-				}
 				
+				initItemData();
 			}
 		});
 		
@@ -183,6 +185,41 @@ public class RankingActivity extends FragmentActivity{
 				}
 			}
 		});
+		
+		initUsersData();
+	}
+	
+	private void initUsersData(){
+		NetworkManager.getInstance().getUserRankingResultData(RankingActivity.this, new NetworkManager.OnResultListener<UsersResult>() {
+
+			@Override
+			public void onSuccess(UsersResult result) {
+				usersResult = result;
+				uAdapter.put(result.result);
+			}
+
+			@Override
+			public void onFail(int code) {
+				Toast.makeText(RankingActivity.this, "fail to get users ranking", Toast.LENGTH_SHORT).show();
+			}
+		});
+	}
+	
+	private void initItemData(){
+		NetworkManager.getInstance().getItemRankingResultData(RankingActivity.this, new NetworkManager.OnResultListener<ItemsResult>() {
+
+			@Override
+			public void onSuccess(ItemsResult result) {
+				itemsResult = result;
+				iAdapter.put(result.result);
+			}
+
+			@Override
+			public void onFail(int code) {
+				Toast.makeText(RankingActivity.this, "fail to get items ranking", Toast.LENGTH_SHORT).show();
+			}
+		});
+		
 	}
 	
 	@Override

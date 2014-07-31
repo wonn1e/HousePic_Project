@@ -7,7 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import com.tacademy.penthouse.entity.ItemsData;
 import com.tacademy.penthouse.entity.UserData;
+import com.tacademy.penthouse.entity.UsersData;
 
 public class RankUserAdapter extends BaseAdapter {
 
@@ -16,13 +18,28 @@ public class RankUserAdapter extends BaseAdapter {
 	ArrayList<UserData> list = new ArrayList<UserData>();
 	ArrayList<Integer> ranker = new ArrayList<Integer>();
 	Context mContext;
+	UsersData uData;
 	
 	public RankUserAdapter(Context context){
 		mContext = context;
 	}
 	
-	public void add(UserData u){
+	/*public void add(UserData u){
 		list.add(u);
+		notifyDataSetChanged();
+	}
+	*/
+	
+	public void put(UsersData uD){
+		uData = uD;
+		for(int i = 0; i<uD.users.size(); i++){
+			list.add(uD.users.get(i));
+		}
+		notifyDataSetChanged();
+	}
+	
+	public void clear() {
+		list.clear();
 		notifyDataSetChanged();
 	}
 	
