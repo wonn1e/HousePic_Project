@@ -158,9 +158,6 @@ public class UserRoomAdapter  extends BaseExpandableListAdapter implements MDIte
 			mAdapterListener.onItemClick(v, data);
 		}
 	}
-	
-	
-	
 
-	
+		
 }

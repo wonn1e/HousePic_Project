@@ -1,27 +1,26 @@
 package com.tacademy.penthouse.room;
 
-import android.app.Activity;
+import java.util.ArrayList;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.GridView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
 
 import com.etsy.android.grid.StaggeredGridView;
-import com.meetme.android.horizontallistview.HorizontalListView;
 import com.tacademy.penthouse.R;
 import com.tacademy.penthouse.entity.ItemData;
 import com.tacademy.penthouse.entity.RoomData;
+import com.tacademy.penthouse.entity.RoomItemsResult;
 import com.tacademy.penthouse.entity.UserData;
 import com.tacademy.penthouse.house.HouseActivity;
 import com.tacademy.penthouse.item.ItemInfoActivity;
 import com.tacademy.penthouse.itemlike.ItemLikeShowListDialog;
+import com.tacademy.penthouse.manager.NetworkManager;
 
 public class UserRoomInfoActivity extends FragmentActivity {
 	public static final String PARAM_USER = "uData";
@@ -36,18 +35,40 @@ public class UserRoomInfoActivity extends FragmentActivity {
 	TextView u_room_nickname;
 	TextView u_room_product_list;
 	StaggeredGridView u_room_item_gridview;
-	UserData uData;
-	ItemData[] iData;
-	RoomData[] myRoomData;
+	//UserData uData;
+	UserData uData = new UserData(100, "aaa", "test user", "zzzz", 10, 12, "aa","aa","aa","aa");
+	ArrayList<ItemData> iData = new ArrayList<ItemData>();
+	RoomData rData;
+	int r_num = 0;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_room_info);
 		itemLikeDialog = new ItemLikeShowListDialog();
-		Toast.makeText(this, "RoomActivity", Toast.LENGTH_SHORT).show();
-		//Dummy DAta
+		Intent i = getIntent();
+		r_num = i.getIntExtra("r_num", r_num);
+		NetworkManager.getInstance().getRoomInfo(this, uData.user_id, r_num, new NetworkManager.OnResultListener<RoomItemsResult>() {
+
+			@Override
+			public void onSuccess(RoomItemsResult result) {
+				// TODO Auto-generated method stub
+				iData = result.result.items;
+				for(int j = 0; j < iData.size(); j++){
+					iAdapter.add(iData.get(j));
+					//iAdapter.add(rData.items.get(j));
+				}
+			}
+
+			@Override
+			public void onFail(int code) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+/*	
+//Toast.makeText(this, "RoomActivity", Toast.LENGTH_SHORT).show();
+//Dummy DAta
 //		String[] t = {"aa","bb"};
-//		final UserData uData = new UserData(100, "aaa", "test user", "zzzz", 10, 12, 123,"aa","aa","aa");
 //		int[] img = {R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher,R.drawable.ic_launcher};
 //		final ItemData[] iData = {new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img, "http://www.naver.com", true),
 //				new ItemData(1,1,"aa","aa","aa","aa","aa",t,1,"aa",img, "http://www.naver.com", false),
@@ -61,7 +82,9 @@ public class UserRoomInfoActivity extends FragmentActivity {
 //				new RoomData(2,2,"house2",R.drawable.ic_launcher,"방설명2",true),
 //				new RoomData(3,3,"house3",R.drawable.ic_launcher,"방설명3",true)
 //		};
-//*/
+//
+*/
+		
 
 		View v = getLayoutInflater().inflate(R.layout.header_view_room_layout, null);
 		u_room_img = (ImageView)v.findViewById(R.id.u_room_img);
@@ -87,9 +110,7 @@ public class UserRoomInfoActivity extends FragmentActivity {
 		//닉네임도 할것인가! 두둥치
 		iAdapter = new ItemAdapter(this);
 		u_room_item_gridview.setAdapter(iAdapter);
-		for(int i = 0; i < iData.length; i++){
-			iAdapter.add(iData[i]);	
-		}
+		
 
 		iAdapter.setOnAdapterItemClickListener(new ItemAdapter.OnAdapterItemClickListener() {
 
@@ -129,7 +150,7 @@ public class UserRoomInfoActivity extends FragmentActivity {
 					int position, long id) {
 				//Item의 상세정보 Activity로 이동!
 				Intent i = new Intent(UserRoomInfoActivity.this, ItemInfoActivity.class);
-				i.putExtra("iData", iData[position]);
+				i.putExtra("iData", iData.get(position));
 				startActivity(i);
 
 			}

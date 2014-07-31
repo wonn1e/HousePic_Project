@@ -484,7 +484,7 @@ public class NetworkManager {
 		
 	}
 	
-	public static final String roomInfo_URL = "방 안에 상품 구경";
+	public static final String roomInfo_URL = "http://54.178.158.103/user/:userId/room/:roomNo/product/viewlist";
 	public void getRoomInfo(Context context, String user_id, int room_num, final OnResultListener<RoomItemsResult> listener){
 		RequestParams params = new RequestParams();
 		params.put(PARAM_USER_ID, user_id);

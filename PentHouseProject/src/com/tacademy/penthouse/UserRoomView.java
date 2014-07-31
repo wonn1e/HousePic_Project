@@ -19,7 +19,7 @@ public class UserRoomView extends FrameLayout {
 	}
 	
 	RoomData rData;
-	TextView user_room_info;
+	TextView user_room_name;
 	ImageView user_room_img;
 	ImageView user_img;
 	ImageLoader loader;
@@ -27,7 +27,7 @@ public class UserRoomView extends FrameLayout {
 	
 	private void init(){
 		LayoutInflater.from(getContext()).inflate(R.layout.main_user_header_view, this);
-		user_room_info = (TextView)findViewById(R.id.user_room_info);
+		user_room_name = (TextView)findViewById(R.id.user_roomname);
 		user_room_img = (ImageView)findViewById(R.id.user_room_img);
 		user_img = (ImageView)findViewById(R.id.user_img);
 		loader = ImageLoader.getInstance();
@@ -46,9 +46,7 @@ public class UserRoomView extends FrameLayout {
 		rData = data;
 		//user_room_img.setImageResource(rData.room_img);
 		loader.displayImage(data.room_img_url,user_room_img,options);
-	//	user_room_info.setText(rData.room_info);
-		user_img.setImageResource(userResId);
-		
+		user_room_name.setText(rData.room_name);
 		
 		
 		

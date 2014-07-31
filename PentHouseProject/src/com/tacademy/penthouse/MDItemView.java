@@ -42,6 +42,7 @@ public class MDItemView extends FrameLayout{
 	
 	
 	ItemData iData;
+	int iDataNum;
 	ImageView item_img, item_like;
 	TextView item_name;
 	TextView item_price;
@@ -71,21 +72,13 @@ public class MDItemView extends FrameLayout{
 		.build();
 
 		
-		item_img.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				Toast.makeText(getContext(), "LeftItemClick", Toast.LENGTH_SHORT).show();
-				if(mListener != null){
-					mListener.onItemClick(MDItemView.this, iData);
-					
-				}
-//				Intent i = new Intent(getContext(), ItemInfoActivity.class  );
-//				i.putExtra("iData", lData);
-//				
-//				startActivity(i);
-			}
-		});
+//		item_img.setOnClickListener(new View.OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//	
+//			}
+//		});
 		item_like.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -115,7 +108,6 @@ public class MDItemView extends FrameLayout{
 			md_cnt.setVisibility(View.GONE);
 			md_more.setVisibility(View.GONE);
 			loader.displayImage(data.item_img_url[0], item_img, options);
-			//item_img.setImageResource(R.drawable.penguins);
 			item_name.setText(data.item_name);
 			item_price.setText(data.price);
 			if(data.item_like){
