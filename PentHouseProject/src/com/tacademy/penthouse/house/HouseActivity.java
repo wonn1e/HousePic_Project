@@ -1,5 +1,7 @@
 package com.tacademy.penthouse.house;
 
+import java.util.ArrayList;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -10,14 +12,16 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.tacademy.penthouse.HeaderGridView;
 import com.tacademy.penthouse.R;
 import com.tacademy.penthouse.editimgdialog.EditImgActivity;
 import com.tacademy.penthouse.entity.RoomData;
 import com.tacademy.penthouse.entity.UserData;
+import com.tacademy.penthouse.entity.UserRoomsResult;
 import com.tacademy.penthouse.itemlike.CreateNewRoomActivity;
+import com.tacademy.penthouse.manager.NetworkManager;
 import com.tacademy.penthouse.neighbor.NeighborListActivity;
-import com.tacademy.penthouse.room.MyRoomInfoActivity;
 import com.tacademy.penthouse.room.UserRoomInfoActivity;
 
 public class HouseActivity extends FragmentActivity {
@@ -28,30 +32,32 @@ public class HouseActivity extends FragmentActivity {
 	public static final int REQEUST_MAKE_NEW_ROOM = 1;
 	public static final String PARAM_USER_DATA = "uData";
 	public static final String PARAM_MY_DATA = "myData";
-	
+
 	public static final int ID_MYHOUSE = 0;
 
 	//StaggeredGridView house_room_gridView;	
 	HeaderGridView house_room_gridView;	
 	TextView user_nickname, house_name, house_intro, house_room_list;
 	ImageView user_img, house_img, edit_btn;
-	
+
 	UserData uData;
 	UserData myData;
-	
+	String uDataId;
+
 	RoomAdapter roomAdapter;
 	MyRoomAdapter myRoomAdapter;
+//	ArrayList<RoomData> roomsResult;
+	UserRoomsResult userRoomsResult;
 
-//	RoomData[] rData;
-	String[] img = {"http://tv02.search.naver.net/ugc?t=252x448&q=http://imgnews.naver.com/image/022/2014/07/23/20140723003688_0_99_20140723213004.jpg",
+/*	String[] img = {"http://tv02.search.naver.net/ugc?t=252x448&q=http://imgnews.naver.com/image/022/2014/07/23/20140723003688_0_99_20140723213004.jpg",
 			"http://tv02.search.naver.net/ugc?t=252x448&q=http://blogfiles.naver.net/20140529_81/iys0610_1401366281000HoExC_JPEG/2014-05-29_21%3B12%3B57.jpg",
-			"http://tv02.search.naver.net/ugc?t=252x448&q=http://imgnews.naver.com/image/009/2013/05/30/20130529_1369812840..jpg_59_20130530084634.jpg"};
-//	final RoomData[] rData = {
-//			new RoomData(1,1,"user1 room1", img[1], "room1",true, "red"),
-//			new RoomData(2,1,"user2 room1", img[2], "room2",true, "red"),
-//			new RoomData(1,3,"user1 room3", img[3], "room3",true, "red"),
-//	};
-
+	"http://tv02.search.naver.net/ugc?t=252x448&q=http://imgnews.naver.com/image/009/2013/05/30/20130529_1369812840..jpg_59_20130530084634.jpg"};
+	//	final RoomData[] rData = {
+	//			new RoomData(1,1,"user1 room1", img[1], "room1",true, "red"),
+	//			new RoomData(2,1,"user2 room1", img[2], "room2",true, "red"),
+	//			new RoomData(1,3,"user1 room3", img[3], "room3",true, "red"),
+	//	};
+*/
 
 	//수정 시 click인지 아닌지
 	boolean isClicked;
@@ -81,29 +87,31 @@ public class HouseActivity extends FragmentActivity {
 		//uData = new UserData(1, "aa", "aa", "aa", 1, 1, R.drawable.penguins, "aa", "aa", "aa");
 		//myData = new UserData(2, "bb", "bb", "bb", 2, 2, R.drawable.tulips, "bb", "bb", "bb");
 		//uData = new UserData(2, "bb", "bb", "bb", 2, 2, R.drawable.tulips, "bb", "bb", "bb");
-	//	hData =  new HouseData(10, 12, "nickname's house", "HOUSE!!", "dddd");
-	//	hData = new HouseData();
-		
-		
+		//	hData =  new HouseData(10, 12, "nickname's house", "HOUSE!!", "dddd");
+		//	hData = new HouseData();
+
+
 		Intent i = getIntent();
-	//	uData = i.getParcelableExtra(PARAM_USER_DATA);
-	//	myData = i.getParcelableExtra(PARAM_MY_DATA);
-	//	hData = i.getParcelableExtra("hData");
+		uDataId = i.getStringExtra("uData");
+		//	uData = i.getParcelableExtra(PARAM_USER_DATA);
+		//	myData = i.getParcelableExtra(PARAM_MY_DATA);
+		//	hData = i.getParcelableExtra("hData");
 
 		View v = getLayoutInflater().inflate(R.layout.header_view_house_layout, null);
-		user_nickname = (TextView)v.findViewById(R.id.user_nickname);
-		house_name = (TextView)v.findViewById(R.id.house_name);
-		house_intro = (TextView)v.findViewById(R.id.house_info);
-		user_img = (ImageView)v.findViewById(R.id.user_img);
-		house_img = (ImageView)v.findViewById(R.id.house_img);
-		edit_btn = (ImageView)v.findViewById(R.id.edit_btn);	
+		user_nickname = (TextView)v.findViewById(R.id.userNicknameHouse);
+		house_name = (TextView)v.findViewById(R.id.houseNameHouse);
+		house_intro = (TextView)v.findViewById(R.id.houseInfoHouse);
+		user_img = (ImageView)v.findViewById(R.id.userImgHouse);
+		house_img = (ImageView)v.findViewById(R.id.houseImgHouse);
+		edit_btn = (ImageView)v.findViewById(R.id.editHouseBtn);	
 		house_room_list = (TextView)v.findViewById(R.id.house_room_list);
 		house_room_gridView = (HeaderGridView)findViewById(R.id.header_grid_view);
 		house_room_gridView.addHeaderView(v);
-		initData();
-		Button btn = (Button)v.findViewById(R.id.following_btn);
+		roomAdapter = new RoomAdapter(this);
+		
+		Button btn = (Button)v.findViewById(R.id.followingBtnHouse);
 		btn.setOnClickListener(new View.OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(HouseActivity.this, NeighborListActivity.class);
@@ -111,10 +119,10 @@ public class HouseActivity extends FragmentActivity {
 				startActivity(i);
 			}
 		});
-		
-		btn = (Button)v.findViewById(R.id.follower_btn);
+
+		btn = (Button)v.findViewById(R.id.followerBtnHouse);
 		btn.setOnClickListener(new View.OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(HouseActivity.this, NeighborListActivity.class);
@@ -122,10 +130,30 @@ public class HouseActivity extends FragmentActivity {
 				startActivity(i);
 			}
 		});
-		
-		
-		
-		
+
+		//get from network manager
+		/*roomAdapter = new RoomAdapter(this);
+		house_room_gridView.setAdapter(roomAdapter);
+
+		roomAdapter.add(null);*/
+		house_room_gridView.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				if(position != userRoomsResult.result.rooms.size()){
+					Intent i = new Intent(HouseActivity.this, UserRoomInfoActivity.class);
+					//					i.putExtra("rData", rData[position]);
+					i.putExtra("rData", userRoomsResult.result.rooms.get(position).room_num);
+					startActivity(i);
+				}
+			}
+		});
+
+		edit_btn.setVisibility(View.GONE);
+
+
+
+		/*	
 		if(myData.user_num == uData.user_num){
 			myRoomAdapter = new MyRoomAdapter(this);
 			house_room_gridView.setAdapter(myRoomAdapter);
@@ -139,16 +167,16 @@ public class HouseActivity extends FragmentActivity {
 						int position, long id) {
 					//when it's + img
 					if(myRoomAdapter.getItemViewType(position) == 0){
-						
+
 						Toast.makeText(HouseActivity.this, "create new room tab1", Toast.LENGTH_SHORT).show();
 						Intent i = new Intent(HouseActivity.this, CreateNewRoomActivity.class);
 						//pass on myData (UserData) 
 						i.putExtra("myData", myData);
 						startActivityForResult(i, REQEUST_MAKE_NEW_ROOM);
 						onResume();
-						
+
 					}else{
-					
+
 						Intent i = new Intent(HouseActivity.this, MyRoomInfoActivity.class);
 						//i.putExtra("rData", rData[position]);
 						startActivity(i);
@@ -280,20 +308,43 @@ public class HouseActivity extends FragmentActivity {
 			});
 
 			edit_btn.setVisibility(View.GONE);
-		}
+		} */
+		
+		initData();
 	}
-	
+
+
+
 	private void initData(){
-		user_nickname.setText(uData.user_nickname);
-		house_name.setText(uData.house_name);
-		house_intro.setText(uData.house_intro);
 		//user_img.setImageResource(uData.user_img);
 		//house_img.setImageResource(hData.house_img);
-		if(uData.user_num == uData.user_num){
+		/*if(uData.user_num == uData.user_num){
 			house_room_list.setText("나의 방 목록");
 		}else{
 			house_room_list.setText(uData.user_nickname + "의 방 목록");
-		}
+		}*/
+		NetworkManager.getInstance().getUserInfoData(HouseActivity.this, uDataId, new NetworkManager.OnResultListener<UserRoomsResult>() {
+
+			@Override
+			public void onSuccess(UserRoomsResult result) {
+				uData = result.result.user;
+				//roomsResult = result.result.rooms;
+				userRoomsResult = result;
+				
+				user_nickname.setText(uData.user_nickname);
+				house_name.setText(uData.house_name);
+				house_intro.setText(uData.house_intro);
+				house_room_list.setText(uData.user_nickname + "의 방 목록");
+
+				roomAdapter.put(result.result);
+				house_room_gridView.setAdapter(roomAdapter);
+			}
+
+			@Override
+			public void onFail(int code) {
+				Toast.makeText(HouseActivity.this, "fail in ItemInfo", Toast.LENGTH_SHORT).show();
+			}
+		});
 	}
 
 	@Override
@@ -304,7 +355,7 @@ public class HouseActivity extends FragmentActivity {
 			String imgBitmap = data.getStringExtra(EditImgActivity.PARAM_RESULT);
 			Toast.makeText(HouseActivity.this, "new img: " + imgBitmap, Toast.LENGTH_SHORT).show();
 		}
-		
+
 		if(requestCode == REQEUST_MAKE_NEW_ROOM && resultCode == CreateNewRoomActivity.RESULT_OK){
 			Toast.makeText(HouseActivity.this, "item in new room back in HouseActivity", Toast.LENGTH_SHORT).show();
 		}

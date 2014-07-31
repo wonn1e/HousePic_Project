@@ -85,7 +85,8 @@ public class RankingActivity extends FragmentActivity{
 					int position, long id) {
 				if(LIST_TYPE_FLAG == 0){		//user
 					Intent i = new Intent(RankingActivity.this, HouseActivity.class);
-					i.putExtra("uData", uData[position]);
+					//i.putExtra("uData", uData[position]);
+					i.putExtra("uData", usersResult.result.users.get(position).user_id);
 					startActivityForResult(i, 0);
 					
 				}else if(LIST_TYPE_FLAG == 1){	//item

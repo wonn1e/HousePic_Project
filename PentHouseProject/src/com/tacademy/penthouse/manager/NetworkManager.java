@@ -192,7 +192,7 @@ public class NetworkManager {
 		});
 	}
 	
-	public static final String UserInfoData_URL = "회원 정보";
+	public static final String UserInfoData_URL = "http://54.178.158.103/user/:userId/profile";
 	public void getUserInfoData(Context context, String user_id, final OnResultListener<UserRoomsResult> listener){
 		RequestParams params = new RequestParams();
 		params.put(PARAM_USER_ID, user_id);
