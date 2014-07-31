@@ -20,7 +20,6 @@ public class ItemData implements Parcelable {
 	public String link;
 	public boolean item_like;
 	public String[] item_img_url;
-	public boolean last_item = false;
 	
 	//public String result;
 	//public String result_msg;

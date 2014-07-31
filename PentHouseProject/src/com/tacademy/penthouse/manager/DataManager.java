@@ -1,7 +1,8 @@
 package com.tacademy.penthouse.manager;
 
-import com.tacademy.penthouse.entity.RoomsData;
+import com.tacademy.penthouse.entity.ItemData;
 import com.tacademy.penthouse.entity.RoomData;
+import com.tacademy.penthouse.entity.RoomsData;
 
 public class DataManager {
 	public RoomData getRoomData(RoomsData rr, int r_num){
@@ -15,4 +16,9 @@ public class DataManager {
 		
 	}
 
+	public ItemData getRIItemData(RoomsData resultRooms, int roomNum, int itemPos){
+		if(itemPos != 5)
+			return resultRooms.rooms.get(roomNum).items.get(itemPos);
+		return null;
+	}	
 }

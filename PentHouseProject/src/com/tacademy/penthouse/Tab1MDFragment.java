@@ -1,7 +1,5 @@
 package com.tacademy.penthouse;
 
-import java.util.ArrayList;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,30 +8,33 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.Toast;
 
 import com.tacademy.penthouse.entity.ItemData;
-import com.tacademy.penthouse.entity.RoomsResult;
-import com.tacademy.penthouse.entity.RoomsData;
 import com.tacademy.penthouse.entity.RoomData;
-import com.tacademy.penthouse.entity.RoomItemsResult;
+import com.tacademy.penthouse.entity.RoomsResult;
 import com.tacademy.penthouse.entity.UserData;
 import com.tacademy.penthouse.item.ItemInfoActivity;
 import com.tacademy.penthouse.itemlike.CreateNewRoomActivity;
 import com.tacademy.penthouse.itemlike.ItemLikeShowListDialog;
 import com.tacademy.penthouse.manager.NetworkManager;
-import com.tacademy.penthouse.room.MyRoomInfoActivity;
+import com.tacademy.penthouse.room.UserRoomInfoActivity;
 import com.tonicartos.widget.stickygridheaders.StickyGridHeadersGridView;
+import com.tonicartos.widget.stickygridheaders.StickyGridHeadersGridView.OnHeaderClickListener;
 
-public class Tab1MDFragment extends Fragment {
+public class Tab1MDFragment extends Fragment implements OnItemClickListener,
+			OnHeaderClickListener{
 	
 	public static final int REQEUST_NEW_ROOM = 0;
 	UserData myData;
 	RoomData myRoomData;
+	RoomsResult rsr;
 /*	
 	//DUMMYDATA///////////////////////////////////////////////////////////
-	String[] t = {"aa","bb"};
+/*	String[] t = {"aa","bb"};
 	String[] img = {"http://54.178.158.103:80/room1.jpg",
 			"http://tv02.search.naver.net/ugc?t=r180&q=http://blogfiles.naver.net/20140506_64/hellossophia_1399379324258PGAlK_PNG/1399125535162.png",
 			"http://tv01.search.naver.net/ugc?q=http://blogfiles.naver.net/20140514_231/jinsoodjdj_1400004009267ylFQB_JPEG/%C8%AD%BA%B8%C0%CC%C1%F8%BF%ED_2.jpg",
@@ -114,50 +115,45 @@ public class Tab1MDFragment extends Fragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
 	}
 	
 	ItemLikeShowListDialog itemLikeDialog;
 	GridView mdGridView;
 	MDRoomAdapter mdAdapter;
 	
-	/////////////////////////
 	@Override
 	public View onCreateView(LayoutInflater inflater,
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		itemLikeDialog = new ItemLikeShowListDialog();
 		View v = inflater.inflate(R.layout.tab1_md_layout, container, false);
+		//mdGridView = (GridView)v.findViewById(R.id.md_grid);
 		mdGridView = (GridView)v.findViewById(R.id.md_grid);
+		 mdGridView.setOnItemClickListener(this);
+		 ((StickyGridHeadersGridView)mdGridView).setOnHeaderClickListener(this);
 		((StickyGridHeadersGridView)mdGridView).setAreHeadersSticky(false);
 		mdAdapter = new MDRoomAdapter(getActivity());
 		NetworkManager.getInstance().getMDRoomData(getActivity(), new NetworkManager.OnResultListener<RoomsResult>() {
 
 			@Override
 			public void onSuccess(RoomsResult result) {
-		
+				rsr = result;
 				mdAdapter.put(result.result);
-				
-			
 			}
 
 			@Override
 			public void onFail(int code) {
 				Toast.makeText(getActivity(), "fail to get MD rooms", Toast.LENGTH_SHORT).show();
 			}
+
 		});
 
 		mdAdapter.setOnAdapterItemClickListener(new MDRoomAdapter.OnAdapterItemClickListener() {
 
 			@Override
 			public void onItemClick(View v, ItemData data) {
-				Intent i = new Intent(getActivity(), ItemInfoActivity.class);
-				i.putExtra("iData", data);
-				startActivity(i);
-				
+				//DataAdapter를 만들어놓음~ 지금은 안씀 필요하면 쓰기
 			}
 		});
-
-		
 		
 		
 		mdAdapter.setOnAdapterItemLikeClickListener(new MDRoomAdapter.OnAdapterItemLikeClickListener() {
@@ -209,26 +205,8 @@ public class Tab1MDFragment extends Fragment {
 				}
 			}
 		});
-
-
 		mdGridView.setAdapter(mdAdapter);
 		initData();
-
-//		mdGridView.setOnGroupClickListener(new GridView.OnGroupClickListener() {
-//
-//			@Override
-//			public boolean onGroupClick(GridView parent, View v, int groupPosition, long id) {
-//				Toast.makeText(getActivity(), "this Position : " + groupPosition, Toast.LENGTH_SHORT).show();
-//				//my room인지 user룸인지 판단!
-//				Intent i = new Intent(getActivity(), MyRoomInfoActivity.class);
-//				i.putExtra("iData", rData[groupPosition]);
-//				startActivityForResult(i, 0);
-//				return false;
-//			}
-//		});
-//Intent (Move activity)
-
-
 		return v;
 	}
 	
@@ -243,5 +221,21 @@ public class Tab1MDFragment extends Fragment {
 	
 	private void initData(){
 		//mdAdapter.put(mrr);
+	}
+
+	@Override
+	public void onHeaderClick(AdapterView<?> parent, View view, long id) {
+		Intent i = new Intent(getActivity(), UserRoomInfoActivity.class);
+		i.putExtra("r_num", rsr.result.rooms.get((int)id).room.room_num);
+		//i.putExtra("rData", myMRR.result.rooms.get((int)id).room);
+		//i.putExtra("iData", myMRR.result.rooms.get((int)id).items);
+		startActivity(i);
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> gridView, View view, int position, long id) {
+		Intent i = new Intent(getActivity(), ItemInfoActivity.class);
+		i.putExtra("iData",rsr.result.rooms.get((int)mdAdapter.getHeaderId(position)).items.get(position) );
+		startActivity(i);		
 	}
 }

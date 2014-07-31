@@ -65,14 +65,12 @@ public class MDRoomAdapter extends BaseAdapter implements StickyGridHeadersSimpl
 		
 		if(convertView == null){
 			v = new MDItemView(mContext);
-		//	v.setOnItemDataClickListener(this);
-		//	v.setOnItemDataLikeClickListener(this);
+			v.setOnItemDataLikeClickListener(this);
 		}else{
 			v = (MDItemView)convertView;
 		}
 		
 		v.setData(items.get(position));
-		
 		
 		return v;
 	}
