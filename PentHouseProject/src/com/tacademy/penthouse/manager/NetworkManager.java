@@ -13,6 +13,7 @@ import com.loopj.android.http.TextHttpResponseHandler;
 import com.tacademy.penthouse.MyApplication;
 import com.tacademy.penthouse.entity.ItemItemsResult;
 import com.tacademy.penthouse.entity.ItemsResult;
+import com.tacademy.penthouse.entity.MultiUserRoomItemsResult;
 import com.tacademy.penthouse.entity.RoomsResult;
 import com.tacademy.penthouse.entity.ResultData;
 import com.tacademy.penthouse.entity.UserRoomItemsResult;
@@ -131,14 +132,14 @@ public class NetworkManager {
 	}
 
 	public static final String MDRoomData_URL = "http://54.178.158.103/sample/room/viewlist";
-	public void getMDRoomData(Context context, final OnResultListener<UserRoomItemsResult> listener){
+	public void getMDRoomData(Context context, final OnResultListener<MultiUserRoomItemsResult> listener){
 	
 		client.get(context, MDRoomData_URL, new TextHttpResponseHandler() {
 
 			@Override
 			public void onSuccess(int statusCode, Header[] headers,
 					String responseString) {
-				UserRoomItemsResult rrd = gson.fromJson(responseString, UserRoomItemsResult.class);
+				MultiUserRoomItemsResult rrd = gson.fromJson(responseString, MultiUserRoomItemsResult.class);
 				
 				listener.onSuccess(rrd);
 
@@ -363,13 +364,13 @@ public class NetworkManager {
 
 	
 	public static final String EveryoneRoomData_URL = "http://54.178.158.103/user/room/viewlist";
-	public void getEveryoneRoomData(Context context, final OnResultListener<UserRoomItemsResult> listener){
+	public void getEveryoneRoomData(Context context, final OnResultListener<MultiUserRoomItemsResult> listener){
 		client.get(context, EveryoneRoomData_URL,new TextHttpResponseHandler() {
 			
 			@Override
 			public void onSuccess(int statusCode, Header[] headers,
 					String responseString) {
-				UserRoomItemsResult rrd = gson.fromJson(responseString, UserRoomItemsResult.class);
+				MultiUserRoomItemsResult rrd = gson.fromJson(responseString, MultiUserRoomItemsResult.class);
 				listener.onSuccess(rrd);
 			}
 			
@@ -383,7 +384,7 @@ public class NetworkManager {
 	}
 	
 	public static final String FriendsRoomData_URL = "http://54.178.158.103/user/:userNo/friends/room/viewlist";
-	public void getFriendRoomData(Context context, int userNum, final OnResultListener<UserRoomItemsResult> listener){
+	public void getFriendRoomData(Context context, int userNum, final OnResultListener<MultiUserRoomItemsResult> listener){
 		RequestParams params = new RequestParams();
 		params.put(PARAM_USER_NUM, userNum);
 		
@@ -392,7 +393,7 @@ public class NetworkManager {
 			@Override
 			public void onSuccess(int statusCode, Header[] headers,
 					String responseString) {
-				UserRoomItemsResult rrd = gson.fromJson(responseString, UserRoomItemsResult.class);
+				MultiUserRoomItemsResult rrd = gson.fromJson(responseString, MultiUserRoomItemsResult.class);
 				listener.onSuccess(rrd);
 			}
 			
