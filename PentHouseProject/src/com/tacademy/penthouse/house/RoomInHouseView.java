@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -41,8 +42,9 @@ public class RoomInHouseView extends FrameLayout {
 	}
 	
 	public void setHouseRoomData(RoomData d){
+		Toast.makeText(getContext(), "Roomname : " + room_name+"", Toast.LENGTH_SHORT).show();
 		rData = d;
 		loader.displayImage(d.room_img_url ,room_img , options);
-		room_name.setText(d.room_name);
+		room_name.setText(d.room_num+"");
 	}
 }
