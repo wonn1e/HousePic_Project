@@ -112,6 +112,8 @@ public class HouseView extends FrameLayout{
 		//house_room_list.setText(uData.user_nickname + "ÀÇ ¹æ ¸ñ·Ï");
 		loader.displayImage(uData.user_img_url, user_img, userOptions);
 		loader.displayImage(uData.house_img_url , house_img, houseOptions);
+		follower_btn.setText("ÆÈ·Î¿ö  " + uData.follower_cnt);
+		following_btn.setText("ÆÈ·ÎÀ×  " + uData.following_cnt);
 
 	}
 }

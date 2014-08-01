@@ -25,6 +25,7 @@ import com.tacademy.penthouse.house.HouseActivity;
 import com.tacademy.penthouse.member.MyPageNotLoggedInActivity;
 import com.tacademy.penthouse.ranking.RankingActivity;
 import com.tacademy.penthouse.search.CategorySearchActivity;
+import com.tacademy.penthouse.slidingmenu.ConfigInformActivity;
 import com.tacademy.penthouse.slidingmenu.MenuFragment;
 
 public class MainActivity extends SlidingFragmentActivity{
@@ -211,14 +212,9 @@ public class MainActivity extends SlidingFragmentActivity{
 			 */			
 			break;
 		case MenuFragment.ID_SETTING:
-			/*
-			 * 
-			 */
-			break;
-		case MenuFragment.ID_GUIDE:
-			/*
-			 * 
-			 */
+			Intent iSetting = new Intent(MainActivity.this, ConfigInformActivity.class);
+			startActivity(iSetting);
+			getSlidingMenu().showContent();
 			break;
 		}
 
