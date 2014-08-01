@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.tacademy.penthouse.entity.ItemData;
+import com.tacademy.penthouse.entity.MultiUserRoomItemsData;
 import com.tacademy.penthouse.entity.RoomsData;
 import com.tacademy.penthouse.entity.RoomData;
 import com.tacademy.penthouse.entity.UserData;
@@ -17,7 +18,7 @@ import com.tonicartos.widget.stickygridheaders.StickyGridHeadersSimpleAdapter;
 
 public class MDRoomAdapter extends BaseAdapter implements StickyGridHeadersSimpleAdapter ,MDItemView.OnItemDataClickListener, MDItemView.OnItemDataLikeClickListener{
 	Context mContext;
-	UserRoomItemsData userRoomItems = new UserRoomItemsData();
+	MultiUserRoomItemsData userRoomItems = new MultiUserRoomItemsData();
 	
 	ArrayList<ItemData> items = new ArrayList<ItemData>();
 
@@ -29,17 +30,19 @@ public class MDRoomAdapter extends BaseAdapter implements StickyGridHeadersSimpl
 		return items;
 	}
 	
-	public UserData setUser(){
-		return userRoomItems.user;
-	}
-	
-	public void put(UserRoomItemsData rr){
+	public void put(MultiUserRoomItemsData rr){
 		userRoomItems = rr;
-		for(int i=0; i<userRoomItems.items.size(); i++){
-			items.add(userRoomItems.items.get(i));
+		for(int j = 0; j < userRoomItems.users.size(); j++){
+				
+			for(int i=0; i<userRoomItems.users.get(j).items.size(); i++){
+				items.add(userRoomItems.users.get(j).items.get(i));
+				if(i == 4){
+					items.add(new ItemData(userRoomItems.users.get(j).items.get(0).room_num, 0, "", "", "", "", "", null, 0, "", 0, null, "", false));
+					break;
+				}
+			}	
+
 		}
-		if(userRoomItems.items.size() > 5)
-			items.add(new ItemData(userRoomItems.items.get(0).room_num, 0, "", "", "", "", "", null, 0, "", 0, null, "", false));
 		notifyDataSetChanged();
 	}
 
@@ -86,8 +89,8 @@ public class MDRoomAdapter extends BaseAdapter implements StickyGridHeadersSimpl
 	public View getHeaderView(int position, View convertView, ViewGroup parent) {
 		MDRoomView v;
 		DataManager dm = new DataManager();
-		RoomData rd = dm.getRoomData(userRoomItems, getItem(position).room_num);
-		UserData ud = dm.getUserData(userRoomItems, userRoomItems.user.user_num);
+		RoomData rd = userRoomItems.users.get(position).room;//dm.getRoomData(userRoomItems.users.get(position).room, getItem(position).room_num);
+		UserData ud = userRoomItems.users.get(position).user; //dm.getUserData(userRoomItems.users, userRoomItems.users.get(position).user.user_num);
 		if(convertView == null){
 			v = new MDRoomView(mContext);
 		}else{

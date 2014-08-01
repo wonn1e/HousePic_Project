@@ -16,6 +16,7 @@ import android.widget.GridView;
 import android.widget.Toast;
 
 import com.tacademy.penthouse.entity.ItemData;
+import com.tacademy.penthouse.entity.MultiUserRoomItemsResult;
 import com.tacademy.penthouse.entity.RoomData;
 import com.tacademy.penthouse.entity.RoomsResult;
 import com.tacademy.penthouse.entity.UserData;
@@ -32,7 +33,7 @@ public class Tab1MDFragment extends Fragment implements OnItemClickListener,
 OnHeaderClickListener{
 
 	public static final int REQEUST_NEW_ROOM = 0;
-	UserRoomItemsResult roomsResult;
+	MultiUserRoomItemsResult roomsResult;
 	UserData mdData;
 	RoomData myRoomData;
 	ArrayList<ItemData> items = new ArrayList<ItemData>();
@@ -84,7 +85,6 @@ OnHeaderClickListener{
 
 					Bundle b = new Bundle();
 					b.putParcelable(ItemLikeShowListDialog.PARAM_ITEM_DATA, data);
-					//	b.putParcelableArray(ItemLikeShowListDialog.PARAM_ROOM_DATA, myRoomData);
 					itemLikeDialog.setArguments(b);
 					itemLikeDialog.show(getFragmentManager(), "dialog");
 
@@ -130,14 +130,13 @@ OnHeaderClickListener{
 	}
 
 	private void initData(){
-		NetworkManager.getInstance().getMDRoomData(getActivity(), new NetworkManager.OnResultListener<UserRoomItemsResult>() {
+		NetworkManager.getInstance().getMDRoomData(getActivity(), new NetworkManager.OnResultListener<MultiUserRoomItemsResult>() {
 
 			@Override
-			public void onSuccess(UserRoomItemsResult result) {
+			public void onSuccess(MultiUserRoomItemsResult result) {
 				roomsResult = result;
 				mdAdapter.put(result.result);		
 				items = mdAdapter.set();
-				mdData = mdAdapter.setUser();
 			}
 
 			@Override
@@ -146,24 +145,12 @@ OnHeaderClickListener{
 			}			
 
 		});
-
-		/*@Override
-		public void onSuccess(RoomsResult result) {
-			roomsResult = result;
-			mdAdapter.put(result.result);
-			items = mdAdapter.set();
-		}
-
-		@Override
-		public void onFail(int code) {
-			Toast.makeText(getActivity(), "fail to get MD rooms", Toast.LENGTH_SHORT).show();
-		}*/
 	}
 
 	@Override
 	public void onHeaderClick(AdapterView<?> parent, View view, long id) {
 		Intent i = new Intent(getActivity(), UserRoomInfoActivity.class);
-		i.putExtra("rData", roomsResult.result.room.room_num);
+		i.putExtra("rData", roomsResult.result.users.get((int)id).room.room_num);
 		//i.putExtra("uData", roomsResult.result)
 		startActivity(i);
 	}
@@ -174,7 +161,7 @@ OnHeaderClickListener{
 		if(items.get(position).item_num != 0){
 
 			Intent i = new Intent(getActivity(), ItemInfoActivity.class);
-			i.putExtra("iData",roomsResult.result.items.get(position).item_num );
+			i.putExtra("iData",roomsResult.result.users.get(position).items.get(position).item_num );
 			startActivity(i);		
 		}else{
 			Intent i = new Intent(getActivity(), UserRoomInfoActivity.class);

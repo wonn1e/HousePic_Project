@@ -1,6 +1,7 @@
 package com.tacademy.penthouse.manager;
 
 import com.tacademy.penthouse.entity.ItemData;
+import com.tacademy.penthouse.entity.MultiUserRoomItemsData;
 import com.tacademy.penthouse.entity.RoomData;
 import com.tacademy.penthouse.entity.RoomsData;
 import com.tacademy.penthouse.entity.UserData;
@@ -18,6 +19,13 @@ public class DataManager {
 		return null;
 
 	}
+//	public RoomData getRoomData(MultiUserRoomItemsData data, int r_num){
+//		if(r_num == data.users.get(index)room_num){
+//			return data.room;
+//		}
+//
+//		return null;
+//	}
 
 	public RoomData getRoomData(UserRoomItemsData data, int r_num){
 

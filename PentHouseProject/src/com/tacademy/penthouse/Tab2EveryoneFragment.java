@@ -126,7 +126,7 @@ OnHeaderClickListener{
 		
 		*/
 		mdGridView.setAdapter(everyoneAdapter);
-		initData();
+//		initData();
 		return v;
 	}
 
@@ -138,23 +138,23 @@ OnHeaderClickListener{
 			Toast.makeText(getActivity(), "item in new room back in Tab1", Toast.LENGTH_SHORT).show();
 		}
 	}
-
-	private void initData(){
-		NetworkManager.getInstance().getEveryoneRoomData(getActivity(), new NetworkManager.OnResultListener<UserRoomItemsResult>() {
-
-			@Override
-			public void onSuccess(UserRoomItemsResult result) {
-				myrr = result;
-				everyoneAdapter.put(result.result);
-				items = everyoneAdapter.set();
-			}
-
-			@Override
-			public void onFail(int code) {
-				Toast.makeText(getActivity(), "fail to get Everyone's rooms", Toast.LENGTH_SHORT).show();
-			}
-		});
-	}
+//
+//	private void initData(){
+//		NetworkManager.getInstance().getEveryoneRoomData(getActivity(), new NetworkManager.OnResultListener<UserRoomItemsResult>() {
+//
+//			@Override
+//			public void onSuccess(UserRoomItemsResult result) {
+//				myrr = result;
+//				everyoneAdapter.put(result.result);
+//				items = everyoneAdapter.set();
+//			}
+//
+//			@Override
+//			public void onFail(int code) {
+//				Toast.makeText(getActivity(), "fail to get Everyone's rooms", Toast.LENGTH_SHORT).show();
+//			}
+//		});
+//	}
 
 	@Override
 	public void onHeaderClick(AdapterView<?> parent, View view, long id) {
