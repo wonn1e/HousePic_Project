@@ -3,6 +3,8 @@ package com.tacademy.penthouse.manager;
 import com.tacademy.penthouse.entity.ItemData;
 import com.tacademy.penthouse.entity.RoomData;
 import com.tacademy.penthouse.entity.RoomsData;
+import com.tacademy.penthouse.entity.UserData;
+import com.tacademy.penthouse.entity.UserRoomsData;
 
 public class DataManager {
 	public RoomData getRoomData(RoomsData rr, int r_num){
@@ -21,4 +23,13 @@ public class DataManager {
 			return resultRooms.rooms.get(roomNum).items.get(itemPos);
 		return null;
 	}	
+	
+	public UserData getUserData(UserRoomsData data, int u_num){
+		for(int i = 0; i < data.rooms.size(); i++){
+			if(u_num == data.rooms.get(i).user_num){
+				return data.user;
+			}	
+		}
+		return null;
+	}
 }

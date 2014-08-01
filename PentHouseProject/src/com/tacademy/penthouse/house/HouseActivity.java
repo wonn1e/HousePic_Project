@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,7 +16,6 @@ import android.widget.Toast;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
-import com.tacademy.penthouse.HeaderGridView;
 import com.tacademy.penthouse.R;
 import com.tacademy.penthouse.editimgdialog.EditImgActivity;
 import com.tacademy.penthouse.entity.UserData;
@@ -37,11 +37,7 @@ public class HouseActivity extends FragmentActivity {
 	public static final int ID_MYHOUSE = 0;
 
 	//StaggeredGridView house_room_gridView;	
-	HeaderGridView house_room_gridView;	
-	TextView user_nickname, house_name, house_intro, house_room_list;
-	ImageView user_img, house_img, edit_btn;
-	ImageLoader loader;
-	DisplayImageOptions userOptions, houseOptions;
+	GridView house_room_gridView;	
 
 	UserData uData;
 	UserData myData;
@@ -63,25 +59,8 @@ public class HouseActivity extends FragmentActivity {
 */
 
 	//수정 시 click인지 아닌지
-	boolean isClicked;
-	private void setClicked(boolean clicked){
-		if(isClicked != clicked){
-			isClicked = clicked;
-			drawIsClick();
-		}
-		else{
-			isClicked = !clicked;
-			drawIsClick();
-		}
-	}
-	//click일때 아닐때 그림바꾸기
-	private void drawIsClick(){
-		if(isClicked){
-			edit_btn.setImageResource(android.R.drawable.checkbox_on_background);
-		}else{
-			edit_btn.setImageResource(android.R.drawable.checkbox_off_background);
-		}
-	}
+	
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -96,74 +75,70 @@ public class HouseActivity extends FragmentActivity {
 		//	myData = i.getParcelableExtra(PARAM_MY_DATA);
 		//	hData = i.getParcelableExtra("hData");
 
-		View v = getLayoutInflater().inflate(R.layout.header_view_house_layout, null);
-		user_nickname = (TextView)v.findViewById(R.id.userNicknameHouse);
-		house_name = (TextView)v.findViewById(R.id.houseNameHouse);
-		house_intro = (TextView)v.findViewById(R.id.houseInfoHouse);
-		user_img = (ImageView)v.findViewById(R.id.userImgHouse);
-		house_img = (ImageView)v.findViewById(R.id.houseImgHouse);
-		edit_btn = (ImageView)v.findViewById(R.id.editHouseBtn);	
-		house_room_list = (TextView)v.findViewById(R.id.house_room_list);
-		house_room_gridView = (HeaderGridView)findViewById(R.id.header_grid_view);
-		house_room_gridView.addHeaderView(v);
+		house_room_gridView = (GridView)findViewById(R.id.header_grid_view);
 		roomAdapter = new RoomAdapter(this);
-		loader = ImageLoader.getInstance();
-		userOptions = new DisplayImageOptions.Builder()
-		.showImageOnLoading(R.drawable.ic_stub)
-		.showImageForEmptyUri(R.drawable.ic_empty)
-		.showImageOnFail(R.drawable.ic_error)
-		.cacheInMemory(true)
-		.cacheOnDisc(true)
-		.considerExifParams(true)
-		.displayer(new RoundedBitmapDisplayer(100))
-		.build();
-		houseOptions = new DisplayImageOptions.Builder()
-		.showImageOnLoading(R.drawable.ic_stub)
-		.showImageForEmptyUri(R.drawable.ic_empty)
-		.showImageOnFail(R.drawable.ic_error)
-		.cacheInMemory(true)
-		.cacheOnDisc(true)
-		.considerExifParams(true)
-		.build();
 		
-		Button btn = (Button)v.findViewById(R.id.followingBtnHouse);
-		btn.setOnClickListener(new View.OnClickListener() {
+//		house_room_gridView.setOnItemClickListener(new OnItemClickListener() {
+//			@Override
+//			public void onItemClick(AdapterView<?> parent, View view,
+//					int position, long id) {
+//				if(position != userRoomsResult.result.rooms.size()){
+//					Intent i = new Intent(HouseActivity.this, UserRoomInfoActivity.class);
+//					i.putExtra("rData", userRoomsResult.result.rooms.get(position).room_num);
+//					startActivity(i);
+//				}
+//			}
+//		});
+
+
+		house_room_gridView.setAdapter(roomAdapter);
+		initData();
+	}
+
+
+	private void initData(){
+		//user_img.setImageResource(uData.user_img);
+		//house_img.setImageResource(hData.house_img);
+		/*if(uData.user_num == uData.user_num){
+			house_room_list.setText("나의 방 목록");
+		}else{
+			house_room_list.setText(uData.user_nickname + "의 방 목록");
+		}*/
+		NetworkManager.getInstance().getUserInfoData(HouseActivity.this, uDataId, new NetworkManager.OnResultListener<UserRoomsResult>() {
 
 			@Override
-			public void onClick(View v) {
-				Intent i = new Intent(HouseActivity.this, NeighborListActivity.class);
-				i.putExtra(NeighborListActivity.PARAM_CURRENT_TAB, 0);//uData);
-				startActivity(i);
+			public void onSuccess(UserRoomsResult result) {
+				uData = result.result.user;
+				
+				//roomsResult = result.result.rooms;
+				userRoomsResult = result;
+				
+				roomAdapter.put(result.result);
+				
 			}
-		});
-
-		btn = (Button)v.findViewById(R.id.followerBtnHouse);
-		btn.setOnClickListener(new View.OnClickListener() {
 
 			@Override
-			public void onClick(View v) {
-				Intent i = new Intent(HouseActivity.this, NeighborListActivity.class);
-				i.putExtra(NeighborListActivity.PARAM_CURRENT_TAB, 1);//uData);
-				startActivity(i);
+			public void onFail(int code) {
+				Toast.makeText(HouseActivity.this, "fail in ItemInfo", Toast.LENGTH_SHORT).show();
 			}
 		});
+	}
 
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
 
-		house_room_gridView.setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				if(position != userRoomsResult.result.rooms.size()){
-					Intent i = new Intent(HouseActivity.this, UserRoomInfoActivity.class);
-					i.putExtra("rData", userRoomsResult.result.rooms.get(position).room_num);
-					startActivity(i);
-				}
-			}
-		});
+		if(requestCode == REQUEST_CODE_EDITIMG && resultCode == EditImgActivity.RESULT_OK){
+			String imgBitmap = data.getStringExtra(EditImgActivity.PARAM_RESULT);
+			Toast.makeText(HouseActivity.this, "new img: " + imgBitmap, Toast.LENGTH_SHORT).show();
+		}
 
-		edit_btn.setVisibility(View.GONE);
+		if(requestCode == REQEUST_MAKE_NEW_ROOM && resultCode == CreateNewRoomActivity.RESULT_OK){
+			Toast.makeText(HouseActivity.this, "item in new room back in HouseActivity", Toast.LENGTH_SHORT).show();
+		}
 
-
+	}
+}
 
 		/*	
 		if(myData.user_num == uData.user_num){
@@ -321,58 +296,5 @@ public class HouseActivity extends FragmentActivity {
 
 			edit_btn.setVisibility(View.GONE);
 		} */
-		
-		initData();
-	}
+	
 
-
-
-	private void initData(){
-		//user_img.setImageResource(uData.user_img);
-		//house_img.setImageResource(hData.house_img);
-		/*if(uData.user_num == uData.user_num){
-			house_room_list.setText("나의 방 목록");
-		}else{
-			house_room_list.setText(uData.user_nickname + "의 방 목록");
-		}*/
-		NetworkManager.getInstance().getUserInfoData(HouseActivity.this, uDataId, new NetworkManager.OnResultListener<UserRoomsResult>() {
-
-			@Override
-			public void onSuccess(UserRoomsResult result) {
-				uData = result.result.user;
-				//roomsResult = result.result.rooms;
-				userRoomsResult = result;
-				
-				user_nickname.setText(uData.user_nickname);
-				house_name.setText(uData.house_name);
-				house_intro.setText(uData.house_intro);
-				house_room_list.setText(uData.user_nickname + "의 방 목록");
-				loader.displayImage(result.result.user.user_img_url, user_img, userOptions);
-				loader.displayImage(result.result.user.house_img_url , house_img, houseOptions);
-
-				roomAdapter.put(result.result);
-				house_room_gridView.setAdapter(roomAdapter);
-			}
-
-			@Override
-			public void onFail(int code) {
-				Toast.makeText(HouseActivity.this, "fail in ItemInfo", Toast.LENGTH_SHORT).show();
-			}
-		});
-	}
-
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		super.onActivityResult(requestCode, resultCode, data);
-
-		if(requestCode == REQUEST_CODE_EDITIMG && resultCode == EditImgActivity.RESULT_OK){
-			String imgBitmap = data.getStringExtra(EditImgActivity.PARAM_RESULT);
-			Toast.makeText(HouseActivity.this, "new img: " + imgBitmap, Toast.LENGTH_SHORT).show();
-		}
-
-		if(requestCode == REQEUST_MAKE_NEW_ROOM && resultCode == CreateNewRoomActivity.RESULT_OK){
-			Toast.makeText(HouseActivity.this, "item in new room back in HouseActivity", Toast.LENGTH_SHORT).show();
-		}
-
-	}
-}
