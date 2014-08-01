@@ -115,7 +115,7 @@
             android:label="@string/title_activity_config_inform" >
         </activity>
         <activity
-            android:name=".NoticeActivity"
+            android:name="com.tacademy.penthouse.slidingmenu.NoticeActivity"
             android:label="@string/title_activity_notice" >
         </activity>
     </application>
