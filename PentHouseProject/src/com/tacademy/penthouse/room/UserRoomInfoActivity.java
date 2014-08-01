@@ -15,11 +15,13 @@ import android.widget.Toast;
 import com.etsy.android.grid.StaggeredGridView;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 import com.tacademy.penthouse.R;
 import com.tacademy.penthouse.entity.ItemData;
 import com.tacademy.penthouse.entity.RoomData;
 import com.tacademy.penthouse.entity.RoomItemsResult;
 import com.tacademy.penthouse.entity.UserData;
+import com.tacademy.penthouse.entity.UserRoomItemsResult;
 import com.tacademy.penthouse.house.HouseActivity;
 import com.tacademy.penthouse.item.ItemInfoActivity;
 import com.tacademy.penthouse.itemlike.ItemLikeShowListDialog;
@@ -35,19 +37,19 @@ public class UserRoomInfoActivity extends FragmentActivity {
 	TextView u_room_update_time;
 	TextView u_room_intro;
 	ImageView u_room_my_img;
-	TextView u_room_nickname;
 	TextView u_room_product_list;
 	StaggeredGridView u_room_item_gridview;
 	
 
 	ImageLoader loader;
-	DisplayImageOptions options;
+	DisplayImageOptions options, userImgOptions;
 
-	//UserData uData;
-	UserData uData = new UserData(100, "aaa", "test user", "zzzz", 10, 12, "aa","aa","aa","aa");
+	UserData uData = new UserData();
+//	UserData uData = new UserData(100, "aaa", "test user", "zzzz", 10, 12, "aa","aa","aa","aa");
 	ArrayList<ItemData> iData = new ArrayList<ItemData>();
 	RoomData rData = new RoomData();
 	int r_num = 0;
+	int u_num = 0;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -55,6 +57,7 @@ public class UserRoomInfoActivity extends FragmentActivity {
 		itemLikeDialog = new ItemLikeShowListDialog();
 		Intent i = getIntent();
 		r_num = i.getIntExtra("rData", r_num);
+		u_num = i.getIntExtra("uData", u_num);
 		
 		loader = ImageLoader.getInstance();
 		options = new DisplayImageOptions.Builder()
@@ -65,13 +68,21 @@ public class UserRoomInfoActivity extends FragmentActivity {
 		.cacheOnDisc(true)
 		.considerExifParams(true)
 		.build();
+		userImgOptions = new DisplayImageOptions.Builder()
+		.showImageOnLoading(R.drawable.ic_stub)
+		.showImageForEmptyUri(R.drawable.ic_empty)
+		.showImageOnFail(R.drawable.ic_error)
+		.cacheInMemory(true)
+		.cacheOnDisc(true)
+		.considerExifParams(true)
+		.displayer(new RoundedBitmapDisplayer(100))
+		.build();
 		
 		View v = getLayoutInflater().inflate(R.layout.header_view_room_layout, null);
 		u_room_img = (ImageView)v.findViewById(R.id.u_room_img);
 		u_room_name = (TextView)v.findViewById(R.id.u_room_name);
 		u_room_update_time = (TextView)v.findViewById(R.id.u_room_update_time); 
 		u_room_my_img = (ImageView)v.findViewById(R.id.u_room_my_img);
-		u_room_nickname = (TextView)v.findViewById(R.id.u_room_nickname);
 		u_room_product_list = (TextView)v.findViewById(R.id.u_room_product_list);
 		u_room_item_gridview = (StaggeredGridView)findViewById(R.id.gridView_room);
 		
@@ -95,7 +106,6 @@ public class UserRoomInfoActivity extends FragmentActivity {
 		iAdapter = new ItemAdapter(this);
 		u_room_item_gridview.setAdapter(iAdapter);
 		
-
 		iAdapter.setOnAdapterItemClickListener(new ItemAdapter.OnAdapterItemClickListener() {
 
 			@Override
@@ -144,7 +154,7 @@ public class UserRoomInfoActivity extends FragmentActivity {
 	
 	private void initData(){
 
-		NetworkManager.getInstance().getRoomInfo(this, uData.user_id, r_num, new NetworkManager.OnResultListener<RoomItemsResult>() {
+		/*NetworkManager.getInstance().getRoomInfo(this, uData.user_id, r_num, new NetworkManager.OnResultListener<RoomItemsResult>() {
 
 			@Override
 			public void onSuccess(RoomItemsResult result) {
@@ -164,6 +174,28 @@ public class UserRoomInfoActivity extends FragmentActivity {
 			public void onFail(int code) {
 				// TODO Auto-generated method stub
 				
+			}
+		});*/
+		
+		NetworkManager.getInstance().getRoomInfo(this, u_num, r_num, new NetworkManager.OnResultListener<UserRoomItemsResult>() {
+
+			@Override
+			public void onSuccess(UserRoomItemsResult result) {
+				rData = result.result.room;
+				uData = result.result.user;
+				iData = result.result.items;
+				for(int i = 0; i<iData.size(); i++){
+					iAdapter.add(iData.get(i));
+				}
+             	u_room_name.setText(rData.room_name);
+				u_room_update_time.setText(rData.room_date);
+				loader.displayImage(rData.room_img_url, u_room_img ,options);
+				loader.displayImage(rData.room_img_url, u_room_my_img, userImgOptions);	
+			}
+
+			@Override
+			public void onFail(int code) {
+				Toast.makeText(UserRoomInfoActivity.this, "fail to get data in UserRoomInfo", Toast.LENGTH_SHORT).show();
 			}
 		});
 	}

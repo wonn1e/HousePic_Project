@@ -60,7 +60,7 @@ OnHeaderClickListener{
 		((StickyGridHeadersGridView)mdGridView).setOnHeaderClickListener(this);
 		((StickyGridHeadersGridView)mdGridView).setAreHeadersSticky(false);
 		mdAdapter = new MDRoomAdapter(getActivity());
-		NetworkManager.getInstance().getMDRoomData(getActivity(), new NetworkManager.OnResultListener<RoomsResult>() {
+		/*NetworkManager.getInstance().getMDRoomData(getActivity(), new NetworkManager.OnResultListener<RoomsResult>() {
 
 			@Override
 			public void onSuccess(RoomsResult result) {
@@ -72,7 +72,7 @@ OnHeaderClickListener{
 			public void onFail(int code) {
 				Toast.makeText(getActivity(), "fail to get MD rooms", Toast.LENGTH_SHORT).show();
 			}
-		});
+		});*/
 
 		mdAdapter.setOnAdapterItemClickListener(new MDRoomAdapter.OnAdapterItemClickListener() {
 

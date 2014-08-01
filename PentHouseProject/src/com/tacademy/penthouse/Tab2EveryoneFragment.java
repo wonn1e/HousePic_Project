@@ -2,12 +2,15 @@ package com.tacademy.penthouse;
 
 import java.util.ArrayList;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.tacademy.penthouse.entity.ItemData;
 import com.tacademy.penthouse.entity.RoomsResult;
 import com.tacademy.penthouse.entity.RoomsData;
 import com.tacademy.penthouse.entity.RoomData;
 import com.tacademy.penthouse.entity.RoomItemsResult;
 import com.tacademy.penthouse.entity.UserData;
+import com.tacademy.penthouse.entity.UserRoomItemsResult;
 import com.tacademy.penthouse.item.ItemInfoActivity;
 import com.tacademy.penthouse.itemlike.CreateNewRoomActivity;
 import com.tacademy.penthouse.itemlike.ItemLikeShowListDialog;
@@ -36,17 +39,18 @@ public class Tab2EveryoneFragment extends Fragment implements OnItemClickListene
 OnHeaderClickListener{
 
 	public static final int REQEUST_NEW_ROOM = 0;
-	RoomsResult myrr = new RoomsResult();
+	UserRoomItemsResult myrr;
 	UserData myData;
-	RoomData myRoomData;
+	ArrayList<ItemData> items= new ArrayList<ItemData>();
+	
+	ItemLikeShowListDialog itemLikeDialog;
+	GridView mdGridView;
+	UsersRoomAdapter everyoneAdapter;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 	}
-
-	ItemLikeShowListDialog itemLikeDialog;
-	GridView mdGridView;
-	MDRoomAdapter mdAdapter;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater,
@@ -58,38 +62,26 @@ OnHeaderClickListener{
 		mdGridView.setOnItemClickListener(this);
 		((StickyGridHeadersGridView)mdGridView).setOnHeaderClickListener(this);
 		((StickyGridHeadersGridView)mdGridView).setAreHeadersSticky(false);
-		mdAdapter = new MDRoomAdapter(getActivity());
-		NetworkManager.getInstance().getMDRoomData(getActivity(), new NetworkManager.OnResultListener<RoomsResult>() {
+		everyoneAdapter = new UsersRoomAdapter(getActivity());
 
-			@Override
-			public void onSuccess(RoomsResult result) {
-				myrr = result;
-				mdAdapter.put(result.result);
-			}
-
-			@Override
-			public void onFail(int code) {
-				Toast.makeText(getActivity(), "fail to get MD rooms", Toast.LENGTH_SHORT).show();
-			}
-		});
-
-		mdAdapter.setOnAdapterItemClickListener(new MDRoomAdapter.OnAdapterItemClickListener() {
+/*
+		everyoneAdapter.setOnAdapterItemClickListener(new MDRoomAdapter.OnAdapterItemClickListener() {
 
 			@Override
 			public void onItemClick(View v, ItemData data) {
 				//DataAdapter를 만들어놓음~ 지금은 안씀 필요하면 쓰기
 			}
 		});
-
-
-		mdAdapter.setOnAdapterItemLikeClickListener(new MDRoomAdapter.OnAdapterItemLikeClickListener() {
+*/
+/*
+		everyoneAdapter.setOnAdapterItemLikeClickListener(new MDRoomAdapter.OnAdapterItemLikeClickListener() {
 
 			@Override
 			public void onItemLikeClick(View v, ItemData data) {				
 
 				//now unlike!!
 				if(data.item_like){
-					mdAdapter.updateData(data, false, data.likeCnt--);
+					everyoneAdapter.updateData(data, false, data.likeCnt--);
 					onResume();
 
 				}
@@ -110,7 +102,7 @@ OnHeaderClickListener{
 						@Override
 						public void onRoomSelected(boolean roomSelected) {
 
-							mdAdapter.updateData(itemData, true, itemData.likeCnt++);
+							everyoneAdapter.updateData(itemData, true, itemData.likeCnt++);
 						}
 					});
 
@@ -131,7 +123,9 @@ OnHeaderClickListener{
 				}
 			}
 		});
-		mdGridView.setAdapter(mdAdapter);
+		
+		*/
+		mdGridView.setAdapter(everyoneAdapter);
 		initData();
 		return v;
 	}
@@ -146,13 +140,28 @@ OnHeaderClickListener{
 	}
 
 	private void initData(){
-		//mdAdapter.put(mrr);
+		NetworkManager.getInstance().getEveryoneRoomData(getActivity(), new NetworkManager.OnResultListener<UserRoomItemsResult>() {
+
+			@Override
+			public void onSuccess(UserRoomItemsResult result) {
+				myrr = result;
+				everyoneAdapter.put(result.result);
+				items = everyoneAdapter.set();
+			}
+
+			@Override
+			public void onFail(int code) {
+				Toast.makeText(getActivity(), "fail to get Everyone's rooms", Toast.LENGTH_SHORT).show();
+			}
+		});
 	}
 
 	@Override
 	public void onHeaderClick(AdapterView<?> parent, View view, long id) {
 		Intent i = new Intent(getActivity(), UserRoomInfoActivity.class);
-		i.putExtra("r_num", myrr.result.rooms.get((int)id).room.room_num);
+	//	i.putExtra("r_num", myrr.result.rooms.get((int)id).room.room_num);
+		i.putExtra("rData", myrr.result.room.room_num);
+		i.putExtra("uData", myrr.result.user.user_id);
 		//i.putExtra("rData", myMRR.result.rooms.get((int)id).room);
 		//i.putExtra("iData", myMRR.result.rooms.get((int)id).items);
 		startActivity(i);
@@ -160,8 +169,18 @@ OnHeaderClickListener{
 
 	@Override
 	public void onItemClick(AdapterView<?> gridView, View view, int position, long id) {
-		Intent i = new Intent(getActivity(), ItemInfoActivity.class);
-		i.putExtra("iData",myrr.result.rooms.get((int)mdAdapter.getHeaderId(position)).items.get(position) );
-		startActivity(i);		
+		
+		if(items.get(position).item_num != 0){
+
+			Intent i = new Intent(getActivity(), ItemInfoActivity.class);
+			i.putExtra("iData", myrr.result.items.get(position).item_num );
+			startActivity(i);		
+		}else{
+			Intent i = new Intent(getActivity(), UserRoomInfoActivity.class);
+			int num =  items.get(position).room_num;
+			i.putExtra("rData", num);
+			startActivity(i);
+		}
+
 	}
 }
