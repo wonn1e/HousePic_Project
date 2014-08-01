@@ -18,7 +18,6 @@ public class MenuFragment extends Fragment {
 	public static final int ID_SEARCH = 2;
 	public static final int ID_INVITE = 4;
 	public static final int ID_SETTING = 5;
-	public static final int ID_GUIDE = 6;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater,
@@ -78,16 +77,6 @@ public class MenuFragment extends Fragment {
 				((MainActivity)getActivity()).actionMenu(ID_SETTING);
 			}
 		});
-		//6
-		TextView show_guide = (TextView)v.findViewById(R.id.show_guide);
-		show_guide.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				((MainActivity)getActivity()).actionMenu(ID_GUIDE);
-			}
-		});
-		
 		return v;
 	}
 }

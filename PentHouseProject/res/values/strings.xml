@@ -11,5 +11,7 @@
     <string name="title_activity_sign_up">SignUpActivity</string>
     <string name="title_activity_log_in_dialog">LogInDialogActivity</string>
     <string name="title_activity_splash">SplashActivity</string>
+    <string name="title_activity_config_inform">ConfigInformActivity</string>
+    <string name="title_activity_notice">NoticeActivity</string>
 
 </resources>

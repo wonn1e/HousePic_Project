@@ -9,74 +9,129 @@ import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
+import com.tacademy.penthouse.MDItemView;
 import com.tacademy.penthouse.R;
+import com.tacademy.penthouse.entity.ItemData;
 import com.tacademy.penthouse.entity.RoomData;
+import com.tacademy.penthouse.entity.UserData;
+import com.tacademy.penthouse.entity.UserRoomsData;
+import com.tacademy.penthouse.house.RoomAdapter.OnAdapterItemClickListener;
+import com.tacademy.penthouse.house.RoomAdapter.OnAdapterItemLikeClickListener;
+import com.tacademy.penthouse.manager.DataManager;
+import com.tonicartos.widget.stickygridheaders.StickyGridHeadersSimpleAdapter;
 
-public class MyRoomAdapter extends BaseAdapter {
-	ArrayList<RoomData> items = new ArrayList<RoomData>();
+public class MyRoomAdapter extends BaseAdapter implements StickyGridHeadersSimpleAdapter ,MDItemView.OnItemDataClickListener, MDItemView.OnItemDataLikeClickListener{
 	Context mContext;
 	
-	public MyRoomAdapter(Context c){ 
-		mContext = c;
+	UserRoomsData urData = new UserRoomsData();	
+	ArrayList<RoomData> rooms = new ArrayList<RoomData>();
+
+	public MyRoomAdapter(Context context){
+		mContext = context;
 	}
 	
-	public void add(RoomData r){
-		items.add(r);
+	
+	public void put(UserRoomsData rD){
+		urData = rD;
+		for(int i= 0; i<rD.rooms.size(); i++){
+			rooms.add(rD.rooms.get(i));
+		}
 		notifyDataSetChanged();
 	}
 
-	public void remove(int i){
-		if(i != getCount()-1 && i!=0)
-			items.remove(items.get(i));
-		notifyDataSetChanged();
-	}
-	
 	@Override
 	public int getCount() {
-		return items.size()+2;
-	}
-	
-	@Override
-	public int getViewTypeCount() {
-		return 3;
+		// TODO Auto-generated method stub
+		return rooms.size();
 	}
 
 	@Override
-	public int getItemViewType(int position) {
-		if(position == 0) return -1;
-		if(position == getCount()-1) return 0;
-		return 1;
-	}
-	
-	@Override
-	public Object getItem(int position) {
-		if(position == getCount()-1) return null;
-		else if(position == 0) return null;
-		return items.get(position);
+	public RoomData getItem(int arg0) {	
+		return rooms.get(arg0);
 	}
 
 	@Override
-	public long getItemId(int position) {
-		return position;
+	public long getItemId(int arg0) {
+		
+		return arg0;
+	}
+
+	@Override
+	public long getHeaderId(int position) {
+		
+		return getItem(position).user_num;
 	}
 	
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		if(position == getCount()-1){
-			ImageView im = new ImageView(mContext);
-			im.setImageResource(R.drawable.penguins);
-			im.setLayoutParams(new AbsListView.LayoutParams(160, 320));
-			return im;
-		}
-		
 		RoomInHouseView v;
 		if(convertView == null){
 			v = new RoomInHouseView(mContext);
 		}else{
 			v = (RoomInHouseView)convertView;
 		}
-		v.setHouseRoomData(items.get(position));
+		v.setHouseRoomData(rooms.get(position));
+		return v;
+	
+	}
+
+	@Override
+	public View getHeaderView(int position, View convertView, ViewGroup parent) {
+		HouseView v;
+		DataManager dm = new DataManager();
+		UserData ud = dm.getUserData(urData, getItem(position).user_num);
+		if(convertView == null){
+			v = new HouseView(mContext);
+		}else{
+			v = (HouseView)convertView;
+		}
+		v.setData(ud);
+
 		return v;
 	}
 
+
+
+
+	public interface OnAdapterItemClickListener{
+		public void onItemClick(View v, ItemData data);
+	}
+	OnAdapterItemClickListener mAdapterListener;
+	public void setOnAdapterItemClickListener(OnAdapterItemClickListener listener){
+		mAdapterListener = listener;
+	}
+
+	@Override
+	public void onItemClick(View v, ItemData data) {
+		if(mAdapterListener != null){
+			mAdapterListener.onItemClick(v, data);
+		}
+	}
+	
+	
+	
+	public interface OnAdapterItemLikeClickListener{
+		public void onItemLikeClick(View v, ItemData data);
+	}
+	
+	OnAdapterItemLikeClickListener lAdapterListener;
+	
+	public void setOnAdapterItemLikeClickListener(OnAdapterItemLikeClickListener listener){
+		lAdapterListener = listener;
+	}
+	
+	public void updateData(ItemData data, boolean isLike, int likeCnt) {
+		data.item_like = isLike;
+		data.likeCnt = likeCnt;
+		notifyDataSetChanged();
+	}
+	
+	@Override
+	public void onItemDataLikeClick(View v, ItemData data) {
+		if(lAdapterListener != null){
+			lAdapterListener.onItemLikeClick(v, data);
+		}
+	}
+	
+	
 }

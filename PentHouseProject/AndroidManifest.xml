@@ -50,7 +50,6 @@
             android:name=".editimgdialog.EditImgActivity"
             android:screenOrientation="portrait" >
         </activity>
-
         <activity
             android:name=".editimgdialog.CameraActivity"
             android:screenOrientation="portrait" >
@@ -90,13 +89,35 @@
             android:label="@string/title_activity_splash"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
         </activity>
-        <activity android:name=".neighbor.NeighborListActivity" android:screenOrientation="portrait">
+        <activity
+            android:name=".neighbor.NeighborListActivity"
+            android:screenOrientation="portrait" >
         </activity>
-        <activity android:screenOrientation="portrait" android:name=".editimgdialog.RegisterNewImageActivity"></activity>
-        <activity android:name=".itemlike.CreateNewRoomActivity" android:screenOrientation="portrait"></activity>
-       
-        <activity android:screenOrientation="portrait" android:name=".member.MyPageNotLoggedInActivity"></activity>
-        <activity android:name=".member.LogInActivity" android:screenOrientation="portrait" android:theme="@style/HouseDialog"></activity>
+        <activity
+            android:name=".editimgdialog.RegisterNewImageActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".itemlike.CreateNewRoomActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".member.MyPageNotLoggedInActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".member.LogInActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/HouseDialog" >
+        </activity>
+        <activity
+            android:name=".slidingmenu.ConfigInformActivity"
+            android:label="@string/title_activity_config_inform" >
+        </activity>
+        <activity
+            android:name=".NoticeActivity"
+            android:label="@string/title_activity_notice" >
+        </activity>
     </application>
 
 </manifest>
