@@ -18,31 +18,14 @@
             android:layout_marginRight="5dp"
             android:layout_marginTop="5dp" >
         </android.support.v4.view.ViewPager>
-
-        <ImageView
-            android:id="@+id/item_like"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:src="@drawable/abc_ab_solid_dark_holo" />
-
-        <TextView
-            android:id="@+id/item_like_count"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_weight="1"
-            android:text="Num"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-
     </FrameLayout>
-<com.viewpagerindicator.CirclePageIndicator
+
+    <com.viewpagerindicator.CirclePageIndicator
         android:id="@+id/indicator"
-        android:padding="10dip"
-        android:layout_height="wrap_content"
         android:layout_width="fill_parent"
-        />
+        android:layout_height="wrap_content"
+        android:padding="10dip" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -54,58 +37,85 @@
             android:layout_height="wrap_content" >
 
             <TextView
-                android:id="@+id/item_name_brand"
+                android:id="@+id/item_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="100"
-                android:text="제품명/브랜드" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+                android:autoText="true"
+                android:ellipsize="end"
+                android:text="제품명" />
 
             <TextView
-                android:id="@+id/item_price"
+                android:id="@+id/item_like_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="100"
-                android:text="Price" />
+                android:layout_marginLeft="30dp"
+                android:layout_weight="1"
+                android:text="Num"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
 
-            <Button
-                android:id="@+id/item_share_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="100"
-                android:text="공유" />
+            <ImageView
+                android:id="@+id/item_like"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:src="@drawable/abc_ab_solid_dark_holo" />
 
-            <Button
-                android:id="@+id/item_buy_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="100"
-                android:text="구매" />
         </LinearLayout>
 
         <TextView
-            android:id="@+id/item_material"
-            android:layout_width="match_parent"
+            android:id="@+id/item_brand"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="소재" />
+            android:text="브랜드"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/item_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="100"
+            android:text="Price" />
 
         <TextView
             android:id="@+id/item_size"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="사이즈" />
-
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="유사상품  더보기" />
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="사이즈사이즈사이즈사이즈사이즈사이즈사이즈사이즈사이즈사이즈사이즈"
+            android:textSize="10dp" />
 
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/item_share_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="공유" />
+
+        <Button
+            android:id="@+id/item_buy_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="구매" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:text="유사상품 더 보기"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <com.meetme.android.horizontallistview.HorizontalListView
         android:id="@+id/horizontalListView2"
@@ -113,7 +123,6 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:layout_weight="1.56" >
-
     </com.meetme.android.horizontallistview.HorizontalListView>
 
 </LinearLayout>
