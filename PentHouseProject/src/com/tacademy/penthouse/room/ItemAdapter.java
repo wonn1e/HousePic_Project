@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.tacademy.penthouse.entity.ItemData;
+import com.tacademy.penthouse.entity.UserRoomsData;
 
 public class ItemAdapter extends BaseAdapter implements ItemView.OnItemLikeClickListener{
 
@@ -17,6 +18,7 @@ public class ItemAdapter extends BaseAdapter implements ItemView.OnItemLikeClick
 	public ItemAdapter(Context context){
 		mContext = context;
 	}
+
 	public void add(ItemData data){
 		items.add(data);
 		notifyDataSetChanged();

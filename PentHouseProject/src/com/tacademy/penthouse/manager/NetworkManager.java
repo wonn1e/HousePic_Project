@@ -1,12 +1,10 @@
 package com.tacademy.penthouse.manager;
 
 import org.apache.http.Header;
-
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
-
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.PersistentCookieStore;
@@ -17,7 +15,7 @@ import com.tacademy.penthouse.entity.ItemItemsResult;
 import com.tacademy.penthouse.entity.ItemsResult;
 import com.tacademy.penthouse.entity.RoomsResult;
 import com.tacademy.penthouse.entity.ResultData;
-import com.tacademy.penthouse.entity.RoomItemsResult;
+import com.tacademy.penthouse.entity.UserRoomItemsResult;
 import com.tacademy.penthouse.entity.UserRoomsResult;
 import com.tacademy.penthouse.entity.UsersResult;
 
@@ -25,7 +23,7 @@ public class NetworkManager {
 	public static final String PARAM_COUNT = "COUNT";
 	public static final String PARAM_PAGE = "PAGE";
 
-	public static final String PARAM_USER_ID = "USER_ID";
+	public static final String PARAM_USER_NUM = "USER_NUM";
 	public static final String PARAM_USER_PW = "PASSWORD";
 	public static final String PARAM_USER_NICKNAME = "USER_NICKNAME";
 	public static final String PARAM_USER_IMG = "USER_IMG";
@@ -74,9 +72,9 @@ public class NetworkManager {
 	}
 
 	public static final String LOGIN_URL = "로그인";
-	public void getLoginData(Context context, String user_id, String user_password, final OnResultListener<ResultData> listener){
+	public void getLoginData(Context context, int userNum, String user_password, final OnResultListener<ResultData> listener){
 		RequestParams params = new RequestParams();
-		params.put(PARAM_USER_ID, user_id);
+		params.put(PARAM_USER_NUM, userNum);
 		params.put(PARAM_USER_PW, user_password);	
 
 		client.get(context,LOGIN_URL, params,new TextHttpResponseHandler() {
@@ -97,9 +95,9 @@ public class NetworkManager {
 		});
 	}
 	public static final String LOGOUT_URL = "로그아웃";
-	public void getLogoutData(Context context, String user_id, String user_password, final OnResultListener<ResultData> listener){
+	public void getLogoutData(Context context, int userNum, String user_password, final OnResultListener<ResultData> listener){
 		RequestParams params = new RequestParams();
-		params.put(PARAM_USER_ID, user_id);
+		params.put(PARAM_USER_NUM, userNum);
 		params.put(PARAM_USER_PW, user_password);	
 
 		client.get(context,LOGOUT_URL, params,new TextHttpResponseHandler() {
@@ -121,9 +119,9 @@ public class NetworkManager {
 		});
 	}
 	public static final String LostPW_URL ="비밀번호 찾기";
-	public void getLostPWData(Context context, String user_id, final OnResultListener<ResultData> listener){
+	public void getLostPWData(Context context, int userNum, final OnResultListener<ResultData> listener){
 		RequestParams params = new RequestParams();
-		params.put(PARAM_USER_ID, user_id);
+		params.put(PARAM_USER_NUM, userNum);
 		/*
 		 * 비번 
 		 * 
@@ -133,14 +131,15 @@ public class NetworkManager {
 	}
 
 	public static final String MDRoomData_URL = "http://54.178.158.103/sample/room/viewlist";
-	public void getMDRoomData(Context context, final OnResultListener<RoomsResult> listener){
+	public void getMDRoomData(Context context, final OnResultListener<UserRoomItemsResult> listener){
 	
 		client.get(context, MDRoomData_URL, new TextHttpResponseHandler() {
 
 			@Override
 			public void onSuccess(int statusCode, Header[] headers,
 					String responseString) {
-				RoomsResult rrd = gson.fromJson(responseString, RoomsResult.class);
+				UserRoomItemsResult rrd = gson.fromJson(responseString, UserRoomItemsResult.class);
+				
 				listener.onSuccess(rrd);
 
 			}
@@ -193,9 +192,9 @@ public class NetworkManager {
 	}
 	
 	public static final String UserInfoData_URL = "http://54.178.158.103/user/:userId/profile";
-	public void getUserInfoData(Context context, String user_id, final OnResultListener<UserRoomsResult> listener){
+	public void getUserInfoData(Context context, int userNum, final OnResultListener<UserRoomsResult> listener){
 		RequestParams params = new RequestParams();
-		params.put(PARAM_USER_ID, user_id);
+		params.put(PARAM_USER_NUM, userNum);
 		
 		client.get(context, UserInfoData_URL, new TextHttpResponseHandler() {
 			
@@ -215,11 +214,11 @@ public class NetworkManager {
 	}
 	
 	public static final String Edit_MyData_URL = "회원 정보 수정 ";
-	public void getEditMyData(Context context, String user_id, String user_nickname, String user_password,
+	public void getEditMyData(Context context, int userNum, String user_nickname, String user_password,
 				String user_img_url, String house_name, String house_img_url, String house_intro,
 				final OnResultListener<ResultData> listener){
 		RequestParams params = new RequestParams();
-		params.put(PARAM_USER_ID, user_id);
+		params.put(PARAM_USER_NUM, userNum);
 		params.put(PARAM_USER_NICKNAME, user_nickname);
 		params.put(PARAM_USER_PW, user_password);
 		params.put(PARAM_USER_IMG, user_img_url);
@@ -248,9 +247,9 @@ public class NetworkManager {
 	
 	
 	public static final String Follower_URL = "Follower한 사용자";
-	public void getFollowerResultData(Context context, String user_id, final OnResultListener<UsersResult> listener){
+	public void getFollowerResultData(Context context, int userNum, final OnResultListener<UsersResult> listener){
 		RequestParams params = new RequestParams();
-		params.put(PARAM_USER_ID, user_id);
+		params.put(PARAM_USER_NUM, userNum);
 		
 		client.get(context, Follower_URL, new TextHttpResponseHandler() {
 			
@@ -270,9 +269,9 @@ public class NetworkManager {
 	}
 	
 	public static final String Following_URL = "Following한 사용자";
-	public void getFollowingResultData(Context context, String user_id, final OnResultListener<UsersResult> listener){
+	public void getFollowingResultData(Context context, int userNum, final OnResultListener<UsersResult> listener){
 		RequestParams params = new RequestParams();
-		params.put(PARAM_USER_ID, user_id);
+		params.put(PARAM_USER_NUM, userNum);
 		
 		client.get(context, Following_URL, new TextHttpResponseHandler() {
 			
@@ -363,14 +362,14 @@ public class NetworkManager {
 	//static class DataTask extends AsyncTask...
 
 	
-	public static final String EveryoneRoomData_URL = "전체 사용자들의 방 구경";
-	public void getEveryoneRoomData(Context context, final OnResultListener<RoomsResult> listener){
+	public static final String EveryoneRoomData_URL = "http://54.178.158.103/user/room/viewlist";
+	public void getEveryoneRoomData(Context context, final OnResultListener<UserRoomItemsResult> listener){
 		client.get(context, EveryoneRoomData_URL,new TextHttpResponseHandler() {
 			
 			@Override
 			public void onSuccess(int statusCode, Header[] headers,
 					String responseString) {
-				RoomsResult rrd = gson.fromJson(responseString, RoomsResult.class);
+				UserRoomItemsResult rrd = gson.fromJson(responseString, UserRoomItemsResult.class);
 				listener.onSuccess(rrd);
 			}
 			
@@ -383,17 +382,17 @@ public class NetworkManager {
 		
 	}
 	
-	public static final String FriendsRoomData_URL = "특정 사용자의 친구들 방 구경";
-	public void getFriendRoomData(Context context,String user_id, final OnResultListener<RoomsResult> listener){
+	public static final String FriendsRoomData_URL = "http://54.178.158.103/user/:userNo/friends/room/viewlist";
+	public void getFriendRoomData(Context context, int userNum, final OnResultListener<UserRoomItemsResult> listener){
 		RequestParams params = new RequestParams();
-		params.put(PARAM_USER_ID, user_id);
+		params.put(PARAM_USER_NUM, userNum);
 		
 		client.get(context, FriendsRoomData_URL, params, new TextHttpResponseHandler() {
 			
 			@Override
 			public void onSuccess(int statusCode, Header[] headers,
 					String responseString) {
-				RoomsResult rrd = gson.fromJson(responseString, RoomsResult.class);
+				UserRoomItemsResult rrd = gson.fromJson(responseString, UserRoomItemsResult.class);
 				listener.onSuccess(rrd);
 			}
 			
@@ -406,10 +405,10 @@ public class NetworkManager {
 	}
 	
 	public static final String makeRoom_URL = "방 추가";
-	public void getMakeRoom(Context context, String user_id, String room_name, String room_img, 
+	public void getMakeRoom(Context context, int userNum, String room_name, String room_img, 
 							String room_color, boolean ispublic, final OnResultListener<ResultData> listener){
 		RequestParams params = new RequestParams();
-		params.put(PARAM_USER_ID, user_id);
+		params.put(PARAM_USER_NUM, userNum);
 		params.put(PARAM_ROOM_NAME,room_name);
 		params.put(PARAM_ROOM_IMG, room_img);
 		params.put(PARAM_ROOM_COLOR, room_color);
@@ -433,9 +432,9 @@ public class NetworkManager {
 	}
 
 	public static final String getDeleteRoom_URL = "방 삭제";
-	public void getDeleteRoom(Context context, String user_id, int room_num, final OnResultListener<ResultData> listener){
+	public void getDeleteRoom(Context context, int userNum, int room_num, final OnResultListener<ResultData> listener){
 		RequestParams params = new RequestParams();
-		params.put(PARAM_USER_ID, user_id);
+		params.put(PARAM_USER_NUM, userNum);
 		params.put(PARAM_ROOM_NO, room_num);
 		
 		client.get(context, getDeleteRoom_URL,params, new TextHttpResponseHandler() {
@@ -456,10 +455,10 @@ public class NetworkManager {
 	}
 
 	public static final String getEditRoom_URL = "방 수정";
-	public void getEditRoom(Context context, String user_id, int room_num, String room_name, String room_img, 
+	public void getEditRoom(Context context, int userNum, int room_num, String room_name, String room_img, 
 								String room_color,boolean ispublic,final OnResultListener<ResultData> listener){
 		RequestParams params = new RequestParams();
-		params.put(PARAM_USER_ID, user_id);
+		params.put(PARAM_USER_NUM, userNum);
 		params.put(PARAM_ROOM_NO, room_num);
 		params.put(PARAM_ROOM_NAME, room_name);
 		params.put(PARAM_ROOM_IMG, room_img);
@@ -484,10 +483,10 @@ public class NetworkManager {
 		
 	}
 	
-	public static final String roomInfo_URL = "http://54.178.158.103/user/:userId/room/:roomNo/product/viewlist";
-	public void getRoomInfo(Context context, String user_id, int room_num, final OnResultListener<RoomItemsResult> listener){
+	public static final String roomInfo_URL = "http://54.178.158.103/user/:userNo/room/:roomNo/product/viewlist";
+	public void getRoomInfo(Context context, int user_num , int room_num, final OnResultListener<UserRoomItemsResult> listener){
 		RequestParams params = new RequestParams();
-		params.put(PARAM_USER_ID, user_id);
+		params.put(PARAM_USER_NUM, user_num);
 		params.put(PARAM_ROOM_NO, room_num);
 		
 		client.get(context, roomInfo_URL,params,new TextHttpResponseHandler() {
@@ -495,7 +494,7 @@ public class NetworkManager {
 			@Override
 			public void onSuccess(int statusCode, Header[] headers,
 					String responseString) {
-				RoomItemsResult rd = gson.fromJson(responseString, RoomItemsResult.class);
+				UserRoomItemsResult rd = gson.fromJson(responseString, UserRoomItemsResult.class);
 				listener.onSuccess(rd);
 			}
 			
@@ -508,9 +507,9 @@ public class NetworkManager {
 	}
 	
 	public static final String addItem_URL = "방 안에 상품 추가";
-	public void getAddItem(Context context, String user_id, int room_num, int item_num, final OnResultListener<ResultData> listener){
+	public void getAddItem(Context context, int userNum, int room_num, int item_num, final OnResultListener<ResultData> listener){
 		RequestParams params = new RequestParams();
-		params.put(PARAM_USER_ID, user_id);
+		params.put(PARAM_USER_NUM, userNum);
 		params.put(PARAM_ROOM_NO, room_num);
 		params.put(PARAM_ITEM_NO, item_num);
 		
@@ -533,9 +532,9 @@ public class NetworkManager {
 	}
 	
 	public static final String deleteItem_URL = "방 안에 상품 삭제";
-	public void getDeleteItem(Context context, String user_id, int room_num, int item_num, final OnResultListener<ResultData> listener){
+	public void getDeleteItem(Context context, int userNum, int room_num, int item_num, final OnResultListener<ResultData> listener){
 		RequestParams params = new RequestParams();
-		params.put(PARAM_USER_ID, user_id);
+		params.put(PARAM_USER_NUM, userNum);
 		params.put(PARAM_ROOM_NO, room_num);
 		params.put(PARAM_ITEM_NO, item_num);
 		

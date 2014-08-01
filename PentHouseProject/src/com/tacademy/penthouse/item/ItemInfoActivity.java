@@ -51,7 +51,7 @@ public class ItemInfoActivity extends FragmentActivity {
 	ItemRecommandAdapter iAdapter;
 	PageIndicator mIndicator;
 
-	TextView item_name_brand, item_like_count, item_price, item_material, item_size;
+	TextView item_name, item_like_count, item_price, item_size, item_brand;
 	ImageView show_item_like;
 	RoomData[] myRoomData;
 	int i_num;
@@ -78,7 +78,8 @@ public class ItemInfoActivity extends FragmentActivity {
 
 
 
-		item_name_brand = (TextView) findViewById(R.id.item_name_brand);
+		item_name = (TextView) findViewById(R.id.item_name);
+		item_brand = (TextView)findViewById(R.id.item_brand);
 		item_like_count = (TextView) findViewById(R.id.item_like_count);
 
 		show_item_like = (ImageView)findViewById(R.id.item_like);
@@ -175,10 +176,9 @@ public class ItemInfoActivity extends FragmentActivity {
 	}
 
 	private void initData(){
-		item_material = (TextView)findViewById(R.id.item_material);
 		item_size = (TextView)findViewById(R.id.item_size);
 		//		Toast.makeText(ItemInfoActivity.this, "name : " + data.item_name, Toast.LENGTH_SHORT).show();
-		//		item_name_brand.setText(data.item_name);
+		//		item_name.setText(data.item_name);
 		//		item_like_count.setText(""+data.likeCnt);
 		//		item_price.setText(data.price);
 		//		item_material.setText(data.material);
@@ -195,7 +195,8 @@ public class ItemInfoActivity extends FragmentActivity {
 			public void onSuccess(ItemItemsResult result) {
 				iData = result.result.item;
 				sData = result.result.items;
-				item_name_brand.setText(iData.item_name);
+				item_name.setText(iData.item_name);
+				item_brand.setText(iData.brand);
 				item_size.setText(iData.item_size);
 
 				mAdapter = new ItemFragmentAdapter(getSupportFragmentManager(), iData);
@@ -220,52 +221,50 @@ public class ItemInfoActivity extends FragmentActivity {
 	}
 
 	private void initActivity(int si_num){
-		item_material = (TextView)findViewById(R.id.item_material);
 		item_size = (TextView)findViewById(R.id.item_size);
-//		Toast.makeText(ItemInfoActivity.this, "name : " + data.item_name, Toast.LENGTH_SHORT).show();
-//		item_name_brand.setText(data.item_name);
-//		item_like_count.setText(""+data.likeCnt);
-//		item_price.setText(data.price);
-//		item_material.setText(data.material);
+		//		Toast.makeText(ItemInfoActivity.this, "name : " + data.item_name, Toast.LENGTH_SHORT).show();
+		//		item_name.setText(data.item_name);
+		//		item_like_count.setText(""+data.likeCnt);
+		//		item_price.setText(data.price);
+		//		item_material.setText(data.material);
 		if(iData.item_like)
 			show_item_like.setImageResource(R.drawable.ic_launcher);
 		else
 			show_item_like.setImageResource(R.drawable.tulips);
 		//		item_size.setText(data.)
 
-		
+
 		NetworkManager.getInstance().getItemInfoResultData(this, si_num, new NetworkManager.OnResultListener<ItemItemsResult>() {
 
 			@Override
 			public void onSuccess(ItemItemsResult result) {
 				iData = result.result.item;
 				sData = result.result.items;
-				item_name_brand.setText(iData.item_name);
+				item_name.setText(iData.item_name);
+				item_brand.setText(iData.brand);
 				item_size.setText(iData.item_size);
-				
+
 				mAdapter = new ItemFragmentAdapter(getSupportFragmentManager(), iData);
 				mPager = (ViewPager)findViewById(R.id.pager);
 				mPager.setAdapter(mAdapter);
-				
+
 				hlv_s_item.setAdapter(iAdapter);
 				for(int i = 0; i < sData.size(); i++){
 					for(int j = 0; j < sData.get(i).item_img_url.length; j++){
 						iAdapter.add(sData.get(i).item_img_url[j]);
-						//iAdapter.add("http://54.178.158.103:80/sofa5.jpg");
-				}
+					}
 				}
 			}
 
 			@Override
 			public void onFail(int code) {
-				// TODO Auto-generated method stub
-				
+				Toast.makeText(ItemInfoActivity.this, "ItemInfoActivity fail to connect", Toast.LENGTH_SHORT).show();
 			}
 		});
-		
-		
+
+
 	}
-	
+
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
