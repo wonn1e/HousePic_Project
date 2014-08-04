@@ -32,8 +32,19 @@ public class ConfigInformActivity extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				Intent i = new Intent(ConfigInformActivity.this, NoticeActivity.class);
-				startActivity(i);
+				if(position == 0){
+					Intent i = new Intent(ConfigInformActivity.this, NoticeActivity.class);
+					startActivity(i);
+				}
+				else if(position == 1){
+					Intent i = new Intent(ConfigInformActivity.this, RulesActivity.class);
+					startActivity(i);
+				}
+				else if(position == 2){
+					Intent i = new Intent(ConfigInformActivity.this, ContactActivity.class);
+					startActivity(i);
+				}
+				
 			}
 		});
 		

@@ -6,7 +6,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-public class Rules extends Activity {
+public class RulesActivity extends Activity {
 	TextView rules;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
