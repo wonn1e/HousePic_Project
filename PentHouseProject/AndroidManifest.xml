@@ -118,8 +118,9 @@
             android:name="com.tacademy.penthouse.slidingmenu.NoticeActivity"
             android:label="@string/title_activity_notice" >
         </activity>
-        <activity android:name=".slidingmenu.Rules"></activity>
-        <activity android:name=".slidingmenu.Contact"></activity>
+
+        <activity android:name=".slidingmenu.RulesActivity"></activity>
+        <activity android:name=".slidingmenu.ContactActivity"></activity>
     </application>
 
 </manifest>

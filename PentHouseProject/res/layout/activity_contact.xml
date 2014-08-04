@@ -4,27 +4,26 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
+    <EditText
+        android:id="@+id/emailInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="메일 주소를 입력하세요."
+        android:inputType="textEmailAddress"
+        android:singleLine="true" />
+
     <Spinner
         android:id="@+id/contactType"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <EditText
-        android:id="@+id/emailInfo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textEmailAddress"
-        android:singleLine="true" >
-
-        <requestFocus />
-    </EditText>
-
-    <EditText
         android:id="@+id/titleInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="제목을 입력하세요"
         android:singleLine="true" />
 
     <ScrollView
@@ -37,12 +36,13 @@
             android:layout_height="match_parent"
             android:orientation="vertical" >
 
-            <TextView
+            <EditText
                 android:id="@+id/contactInfo"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="268dp"
+                android:gravity="center_vertical|top"
                 android:hint="문의 사항을 입력해주세요."
-                android:text="Medium Text"
+                android:singleLine="false"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
         </LinearLayout>
